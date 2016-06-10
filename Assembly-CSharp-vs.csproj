@@ -343,6 +343,7 @@
      <Compile Include="Assets\Scripts\00.Header\StageInfo.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\PrefapManager.cs" />
+     <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\TapjoyManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\FileSystem.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\GameData.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\GameSystem.cs" />
@@ -393,6 +394,7 @@
      <Compile Include="Assets\Scripts\03. UI\Scene_Main\UI_Playerimg.cs" />
      <Compile Include="Assets\Scripts\03. UI\TextBase.cs" />
      <Compile Include="Assets\Scripts\ObjDisable.cs" />
+     <Compile Include="Assets\Tapjoy\TapjoyCallbacksSample.cs" />
      <Compile Include="Assets\spine_runtime\spine-csharp\Properties\AssemblyInfo.cs" />
      <Compile Include="Assets\spine_runtime\spine-csharp\src\Animation.cs" />
      <Compile Include="Assets\spine_runtime\spine-csharp\src\AnimationState.cs" />
@@ -475,6 +477,7 @@
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-hi\values.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-nl\values.xml" />
+     <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\mraid.js.txt" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-km\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-drive-9.0.2\proguard.txt" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-zh-rTW\values.xml" />
@@ -547,6 +550,7 @@
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-es-rUS\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-pl\values.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 3.shader" />
+     <None Include="Assets\Plugins\Android\TapjoySampleAndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\play-services-nearby-9.0.2\proguard.txt" />
      <None Include="Assets\Resources\Spine\wall\wall.atlas.txt" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-de\values.xml" />
@@ -576,6 +580,7 @@
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\color\common_plus_signin_btn_text_dark.xml" />
      <None Include="Assets\Plugins\Android\play-services-drive-9.0.2\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_plus_signin_btn_icon_light.xml" />
+     <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\WebViewJavascriptBridge.js.txt" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ca\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-pt-rBR\values.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
@@ -709,10 +714,14 @@
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ms\values.xml" />
      <None Include="Assets\Plugins\Android\unityads\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\play-services-nearby-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\revision.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ml\values.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.1/Standalone/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Tapjoy">
+ <HintPath>/Users/a/ProjLeaner/Assets/Tapjoy/Tapjoy.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

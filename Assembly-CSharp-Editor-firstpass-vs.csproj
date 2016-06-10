@@ -330,14 +330,14 @@
  <Reference Include="JarResolverLib">
  <HintPath>/Users/a/ProjLeaner/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.Graphs">
- <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ <Reference Include="Tapjoy">
+ <HintPath>/Users/a/ProjLeaner/Assets/Tapjoy/Tapjoy.dll</HintPath>
  </Reference>
  <Reference Include="TapjoyEditor">
  <HintPath>/Users/a/ProjLeaner/Assets/Tapjoy/Editor/TapjoyEditor.dll</HintPath>
  </Reference>
- <Reference Include="Tapjoy">
- <HintPath>/Users/a/ProjLeaner/Assets/Tapjoy/Tapjoy.dll</HintPath>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

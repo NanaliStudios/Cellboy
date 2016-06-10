@@ -72,8 +72,10 @@ public class TapjoyManager : MonoBehaviour
 	public void ContentsReady(string targetKey)
 	{
 		TJPlacement place = TJPlacement.CreatePlacement(targetKey);
-		if(!place.IsContentReady())
-			place.RequestContent();
+		if (!place.IsContentReady ()) {
+			place.RequestContent ();
+			place.ShowContent();
+		}
 	}
 	
 	//컨텐츠 보기. 만약 컨텐츠가 준비상태가 아니면 준비가 될때까지 대기.

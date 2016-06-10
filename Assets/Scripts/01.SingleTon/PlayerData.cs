@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.Advertisements;
 using GooglePlayGames;
 //using TapjoyUnity;
-//using ChartboostSDK;
+using ChartboostSDK;
 
 public class PlayerData : MonoBehaviour {
 
@@ -77,7 +77,7 @@ public class PlayerData : MonoBehaviour {
 			Debug.Log("PlayerPrefs Initialize");
 		} 
 
-		//Chartboost.cacheInterstitial (CBLocation.Default);
+		//Chartboost.showInterstitial (CBLocation.Default);
 		Social.localUser.Authenticate ((bool bSuccess) => {});
 
 		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;

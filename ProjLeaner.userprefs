@@ -1,27 +1,27 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/MainLabel.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs">
     <Files>
-      <File FileName="Assets/GooglePlayGames/GameInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="160" Column="37" />
-      <File FileName="Assets/Scripts/02.Objects/Item.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/MainLabel.cs" Line="51" Column="11" />
+      <File FileName="Assets/Plugins/Android/ChartboostSDK/AndroidManifest.xml" Line="20" Column="3" />
+      <File FileName="Assets/Plugins/Android/play-services-games-9.0.2/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/Android/play-services-nearby-9.0.2/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/Android/play-services-tasks-9.0.2/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/Android/unityads/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="80" Column="52" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="389" Column="76" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameSystem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameData.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="GooglePlayGames" expanded="True" />
             <Node name="Scripts" expanded="True">
-              <Node name="01.SingleTon" expanded="True" />
-              <Node name="02.Objects" expanded="True" />
               <Node name="03. UI" expanded="True">
-                <Node name="Scene_Game" expanded="True" />
                 <Node name="Scene_Main" expanded="True">
-                  <Node name="BtnManager" expanded="True" />
-                  <Node name="MainLabel.cs" selected="True" />
+                  <Node name="BtnManager" expanded="True">
+                    <Node name="BtnManager.cs" selected="True" />
+                  </Node>
                 </Node>
               </Node>
             </Node>

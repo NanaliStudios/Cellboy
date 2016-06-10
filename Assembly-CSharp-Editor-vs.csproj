@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_7_1;UNITY_4_7;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;HomingBullet_Lv2;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_7_1;UNITY_4_7;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,6 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Chartboost\Editor\CBCleanup.cs" />
+     <Compile Include="Assets\Chartboost\Editor\CBManifestEditor.cs" />
+     <Compile Include="Assets\Chartboost\Editor\CBPostProcess.cs" />
+     <Compile Include="Assets\Chartboost\Editor\CBSettingEditor.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXBuildFile.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXBuildPhase.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXDictionary.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXFileReference.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXGroup.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXList.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXObject.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXParser.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\PBXProject.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCBuildConfiguration.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCConfigurationList.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCFileOperationQueue.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCMod.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCProject.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCSourceFile.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCTarget.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XCodeEditorMenu.cs" />
+     <Compile Include="Assets\Chartboost\Editor\XCodeEditor\XMiniJSON.cs" />
      <Compile Include="Assets\GooglePlayGames\Editor\CocoaPodHelper.cs" />
      <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
      <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
@@ -200,6 +222,7 @@
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ky\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-en-rGB\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-vi\values.xml" />
+     <None Include="Assets\Plugins\Android\ChartboostSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\unityads\build.xml" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-az\values.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
@@ -384,6 +407,7 @@
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Goblins\goblins-mesh.atlas.txt" />
      <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_google_signin_btn_icon_light.xml" />
      <None Include="Assets\Resources\Spine\player\player_atlas.atlas.txt" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-mk\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ne\values.xml" />
      <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-hi\values.xml" />

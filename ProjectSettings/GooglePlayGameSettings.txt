@@ -1,0 +1,10 @@
+lastUpgrade=00934
+proj.pluginVersion=0.9.34
+proj.AppId=963949349371
+and.BundleId=com.Nanali.Cellboy
+proj.classDir=Assets
+proj.ConstantsClassName=Cellboy.cellboyclass
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0a%3c%21--%0aGoogle+Play+game+services+IDs.%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0a--%3e%0a%3cresources%3e%0a++%3cstring+name%3d%22app_id%22%3e963949349371%3c%2fstring%3e%0a++%3cstring+name%3d%22package_name%22%3ecom.Nanali.Cellboy%3c%2fstring%3e%0a++%3cstring+name%3d%22leaderboard_scoreboard%22%3eCgkI-5Pv_oYcEAIQAQ%3c%2fstring%3e%0a%3c%2fresources%3e%0a
+and.ClientId=963949349371-fk9fpj0ii36d3r9brrkjl2l8hukej1s1.apps.googleusercontent.com
+proj.requireGPlus=false
+android.SetupDone=true

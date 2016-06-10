@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{8C54AB7C-5D2D-DC35-07FB-82CE5111BFD9}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_7_1;UNITY_4_7;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;HomingBullet_Lv2</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisement.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\Misc\AsyncExec.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\Misc\MiniJSON.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\Misc\Utils.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\ShowOptionsExtended.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAds.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsAndroid.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsEditor.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsEditorPlaceholder.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsExternal.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsIos.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsIosBridge.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\VideoAds\UnityAdsPlatform.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\ShowOptions.cs" />
+     <Compile Include="Assets\Standard Assets\UnityAds\Scripts\ShowResult.cs" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-es\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-pt-rPT\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_view_video_play.xml" />
+     <None Include="Assets\NGUI\ReadMe - 3.9.4.txt" />
+     <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Eyes\eyes.atlas.txt" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\HiddenPass.shader" />
+     <None Include="Assets\Plugins\Android\unityads\proguard-project.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ta\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-bn\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-uk\values.xml" />
+     <None Include="Assets\Resources\Spine\exp_money\altas.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-hi\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-nl\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-km\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-drive-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-zh-rTW\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ka\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-iw\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-games-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ky\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-en-rGB\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-vi\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\build.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-az\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (TextureClip).shader" />
+     <None Include="Assets\Plugins\Android\play-services-tasks-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-tasks-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-en-rGB\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
+     <None Include="Assets\Plugins\Android\support-v4-23.4.0\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-si\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Gauge\Gauge.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-be\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ur\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-eu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ml\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-hr\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_button_audio_toggle.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-bg\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\FS_White.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-eu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-zh-rHK\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-hu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-bs\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sq\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-mr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-es\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-da\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Hero\hero-mesh.atlas.txt" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Dragon\license.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-pl\values.xml" />
+     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ro\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-zh-rHK\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-hy\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-gu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ar\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-no\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Hero\license.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-it\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-zh-rCN\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-fr-rCA\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ka\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
+     <None Include="Assets\Plugins\Android\play-services-games-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-kn\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-th\values.xml" />
+     <None Include="Assets\Plugins\Android\firebase-common-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-mr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-lo\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-af\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-es-rUS\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-pl\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 3.shader" />
+     <None Include="Assets\Plugins\Android\play-services-nearby-9.0.2\proguard.txt" />
+     <None Include="Assets\Resources\Spine\wall\wall.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-de\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Raptor\raptor.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-az\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-iw\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\color\common_google_signin_btn_text_light.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Spineboy\spineboy.atlas.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-is\values.xml" />
+     <None Include="Assets\Resources\Spine\missile\atlas.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-bn\values.xml" />
+     <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-et\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-fa\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-el\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_background_button_pause.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-uk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-lt\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\R.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\license.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-be\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_plus_signin_btn_text_light.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\color\common_plus_signin_btn_text_dark.xml" />
+     <None Include="Assets\Plugins\Android\play-services-drive-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_plus_signin_btn_icon_light.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ca\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-pt-rBR\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-es-rUS\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-kn\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-da\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_plus_signin_btn_text_dark.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
+     <None Include="Assets\Plugins\Android\firebase-common-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-bs\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-km\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-gu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-tr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-mn\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-auth-base-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-si\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ar\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ru\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Bones.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-fa\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ky\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ur\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_triangle.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sq\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-zh-rTW\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\values\strings.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Ghost\Shaders\SkeletonGhost.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-de\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ro\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-uz\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_waves.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-fi\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-gl\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sl\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-lv\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ne\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-cs\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-mn\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sl\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-bg\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-tr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-nl\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_base.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ms\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-gl\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-kk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ko\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\color\common_plus_signin_btn_text_light.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ja\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-af\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-lo\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-kk\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Dragon\dragon.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-hu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-hr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-th\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-in\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-zu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-am\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-fr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ko\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_google_signin_btn_icon_dark.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-pt-rBR\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_play.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-vi\values.xml" />
+     <None Include="Assets\Plugins\Android\support-v4-23.4.0\aapt\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-auth-base-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ta\values.xml" />
+     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sv\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-it\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-is\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Skeleton.shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_google_signin_btn_text_dark.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ru\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-pt-rPT\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-am\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-my\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-no\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_google_signin_btn_text_light.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-my\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Goblins\goblins-mesh.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_google_signin_btn_icon_light.xml" />
+     <None Include="Assets\Resources\Spine\player\player_atlas.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-mk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ne\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-hi\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ja\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-te\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-in\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\drawable\common_plus_signin_btn_icon_dark.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-el\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-zu\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sv\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-ca\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-uz\values.xml" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-sw\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-pa\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_button_pause.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-te\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-lt\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-fi\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-fr-rCA\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-zh-rCN\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-pa\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_view_video_paused.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\color\common_google_signin_btn_text_dark.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-lv\values.xml" />
+     <None Include="Assets\Resources\Spine\Enemy\Enemy_atlas.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-cs\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-hy\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-et\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\proguard.txt" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-sw\values.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\SkeletonLit.shader" />
+     <None Include="Assets\Plugins\Android\play-services-basement-9.0.2\res\values-fr\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-mk\values.xml" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ms\values.xml" />
+     <None Include="Assets\Plugins\Android\unityads\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\play-services-nearby-9.0.2\AndroidManifest.xml" />
+     <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
+     <None Include="Assets\Plugins\Android\play-services-base-9.0.2\res\values-ml\values.xml" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.1/Standalone/UnityEngine.UI.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

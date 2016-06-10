@@ -1,0 +1,55 @@
+
+altas.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+exp/01/body
+  rotate: false
+  xy: 2, 2
+  size: 105, 106
+  orig: 105, 106
+  offset: 0, 0
+  index: -1
+exp/01/dot
+  rotate: false
+  xy: 109, 36
+  size: 54, 57
+  orig: 54, 57
+  offset: 0, 0
+  index: -1
+exp/02/body
+  rotate: false
+  xy: 145, 157
+  size: 90, 94
+  orig: 90, 94
+  offset: 0, 0
+  index: -1
+exp/02/dot
+  rotate: false
+  xy: 165, 55
+  size: 37, 38
+  orig: 37, 38
+  offset: 0, 0
+  index: -1
+money/01
+  rotate: false
+  xy: 145, 95
+  size: 60, 60
+  orig: 60, 60
+  offset: 0, 0
+  index: -1
+money/02
+  rotate: false
+  xy: 2, 110
+  size: 141, 141
+  orig: 141, 141
+  offset: 0, 0
+  index: -1
+money/03
+  rotate: false
+  xy: 109, 4
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1

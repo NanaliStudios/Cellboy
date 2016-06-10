@@ -1,0 +1,285 @@
+
+Enemy_atlas.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Nomal/body00
+  rotate: false
+  xy: 705, 163
+  size: 298, 291
+  orig: 298, 291
+  offset: 0, 0
+  index: -1
+coin/body_00
+  rotate: false
+  xy: 336, 409
+  size: 294, 300
+  orig: 294, 300
+  offset: 0, 0
+  index: -1
+coin/square
+  rotate: false
+  xy: 310, 28
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+dot
+  rotate: false
+  xy: 167, 358
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+explo_dot_01
+  rotate: false
+  xy: 610, 10
+  size: 139, 151
+  orig: 139, 151
+  offset: 0, 0
+  index: -1
+explo_dot_02
+  rotate: false
+  xy: 751, 10
+  size: 139, 151
+  orig: 139, 151
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 64, 7
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+eye_base
+  rotate: false
+  xy: 632, 385
+  size: 71, 71
+  orig: 71, 71
+  offset: 0, 0
+  index: -1
+guide/body_01
+  rotate: false
+  xy: 329, 711
+  size: 245, 310
+  orig: 245, 310
+  offset: 0, 0
+  index: -1
+immortal/shield_01
+  rotate: true
+  xy: 750, 746
+  size: 275, 271
+  orig: 275, 271
+  offset: 0, 0
+  index: -1
+immortal/shield_02
+  rotate: true
+  xy: 310, 64
+  size: 302, 298
+  orig: 302, 298
+  offset: 0, 0
+  index: -1
+immortal/shield_03
+  rotate: false
+  xy: 750, 456
+  size: 258, 288
+  orig: 258, 288
+  offset: 0, 0
+  index: -1
+speed/01/02
+  rotate: true
+  xy: 2, 3
+  size: 31, 60
+  orig: 31, 60
+  offset: 0, 0
+  index: -1
+speed/01/03
+  rotate: true
+  xy: 632, 458
+  size: 84, 88
+  orig: 84, 88
+  offset: 0, 0
+  index: -1
+speed/03/01
+  rotate: false
+  xy: 632, 544
+  size: 116, 176
+  orig: 116, 176
+  offset: 0, 0
+  index: -1
+speed/body01
+  rotate: false
+  xy: 576, 722
+  size: 172, 299
+  orig: 172, 299
+  offset: 0, 0
+  index: -1
+speed/body02
+  rotate: false
+  xy: 167, 368
+  size: 167, 316
+  orig: 167, 316
+  offset: 0, 0
+  index: -1
+speed/body03
+  rotate: false
+  xy: 2, 354
+  size: 163, 330
+  orig: 163, 330
+  offset: 0, 0
+  index: -1
+split/body_00
+  rotate: false
+  xy: 2, 36
+  size: 306, 316
+  orig: 306, 316
+  offset: 0, 0
+  index: -1
+split/body_01
+  rotate: false
+  xy: 2, 686
+  size: 325, 335
+  orig: 325, 335
+  offset: 0, 0
+  index: -1
+
+Enemy_atlas2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Nomal/body01
+  rotate: true
+  xy: 2, 443
+  size: 297, 246
+  orig: 297, 246
+  offset: 0, 0
+  index: -1
+Nomal/body02
+  rotate: false
+  xy: 722, 587
+  size: 207, 213
+  orig: 207, 213
+  offset: 0, 0
+  index: -1
+Nomal/body03
+  rotate: false
+  xy: 232, 2
+  size: 213, 224
+  orig: 213, 224
+  offset: 0, 0
+  index: -1
+coin/body_01
+  rotate: false
+  xy: 505, 584
+  size: 215, 218
+  orig: 215, 218
+  offset: 0, 0
+  index: -1
+exlpo_dot
+  rotate: false
+  xy: 612, 8
+  size: 135, 147
+  orig: 135, 147
+  offset: 0, 0
+  index: -1
+explo_dot_03
+  rotate: true
+  xy: 250, 230
+  size: 138, 151
+  orig: 138, 151
+  offset: 0, 0
+  index: -1
+guide/body_02
+  rotate: false
+  xy: 2, 742
+  size: 274, 280
+  orig: 274, 280
+  offset: 0, 0
+  index: -1
+guide/body_03
+  rotate: false
+  xy: 460, 362
+  size: 194, 213
+  orig: 194, 213
+  offset: 0, 0
+  index: -1
+guide/body_04
+  rotate: false
+  xy: 656, 374
+  size: 194, 208
+  orig: 194, 208
+  offset: 0, 0
+  index: -1
+immortal/body_01
+  rotate: false
+  xy: 447, 157
+  size: 206, 203
+  orig: 206, 203
+  offset: 0, 0
+  index: -1
+immortal/body_02
+  rotate: false
+  xy: 250, 370
+  size: 208, 205
+  orig: 208, 205
+  offset: 0, 0
+  index: -1
+immortal/body_03
+  rotate: true
+  xy: 278, 577
+  size: 201, 225
+  orig: 201, 225
+  offset: 0, 0
+  index: -1
+speed/01/01
+  rotate: true
+  xy: 447, 30
+  size: 125, 163
+  orig: 125, 163
+  offset: 0, 0
+  index: -1
+speed/02/01
+  rotate: false
+  xy: 852, 419
+  size: 121, 166
+  orig: 121, 166
+  offset: 0, 0
+  index: -1
+split/body_02
+  rotate: false
+  xy: 2, 228
+  size: 246, 213
+  orig: 246, 213
+  offset: 0, 0
+  index: -1
+split/body_03
+  rotate: false
+  xy: 739, 802
+  size: 231, 220
+  orig: 231, 220
+  offset: 0, 0
+  index: -1
+warigari/body_01
+  rotate: false
+  xy: 278, 780
+  size: 220, 242
+  orig: 220, 242
+  offset: 0, 0
+  index: -1
+warigari/body_02
+  rotate: true
+  xy: 2, 2
+  size: 224, 228
+  orig: 224, 228
+  offset: 0, 0
+  index: -1
+warigari/body_03
+  rotate: false
+  xy: 500, 804
+  size: 237, 218
+  orig: 237, 218
+  offset: 0, 0
+  index: -1

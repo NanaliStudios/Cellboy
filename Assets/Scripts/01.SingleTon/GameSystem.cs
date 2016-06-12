@@ -113,7 +113,7 @@ public class GameSystem : MonoBehaviour {
 			if(m_bOnContinue == true)
 			{
 				OnContinueMenu();
-				Check_AdsReward();
+				//Check_AdsReward();
 			}
 			else{
 				Time.timeScale = 1;
@@ -151,9 +151,7 @@ public class GameSystem : MonoBehaviour {
 	{
 		m_PlayerData.m_bWinHighScore = true;
 		//google play
-		Social.ReportScore(m_iCurrent_GameScore, "Score", (bool suc) => {
-			
-		});
+		GooglePlayManager.Instance.SubmitScoreById ("CgkI-5Pv_oYcEAIQAQ", m_iCurrent_GameScore);
 	}
 
 	public void GameOver()
@@ -233,48 +231,48 @@ public class GameSystem : MonoBehaviour {
 	}
 
 	//unityads
-	public void AdsBtnClick()
-	{
-		AdFuctions.ShowUnityAds ();
-		m_bAdsOn = true;
-		
-	}
-	
-	public void Check_AdsReward()
-	{
-		if (m_bAdsOn == true) {
-			
-			if(AdFuctions.m_bAdsComplete == true)
-			{
-				
-				//restart
-				GameObject EnemyCase = GameObject.Find("00_Enemies");
-
-				for(int i = 0; i < EnemyCase.transform.childCount; ++i)
-				{
-					if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
-						Destroy(EnemyCase.transform.GetChild(i).gameObject);
-					else
-					EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
-				}
-
-				m_objPlayer.transform.position = new Vector3(0.0f, -1.5f);
-				m_objPlayer.GetComponent<Player>().Set_AnimIdle();
-
-				m_bAdsOn = false;
-				m_bGameover = false;
-				m_fGameoverTimer = 0.0f;
-				m_bIsGameStart = false;
-				Physics2D.gravity = new Vector3 (0.0f, 0.0f, 0.0f);
-				AdFuctions.m_bAdsComplete = false;
-				m_CanRestart = false;
-				m_bOnContinue = false;
-				gameObject.GetComponent<AudioSource>().enabled = true;
-				OnClickResume();
-			}
-			
-		}
-	}
+//	public void AdsBtnClick()
+//	{
+//		AdFuctions.ShowUnityAds ();
+//		m_bAdsOn = true;
+//		
+//	}
+//	
+//	public void Check_AdsReward()
+//	{
+//		if (m_bAdsOn == true) {
+//			
+//			if(AdFuctions.m_bAdsComplete == true)
+//			{
+//				
+//				//restart
+//				GameObject EnemyCase = GameObject.Find("00_Enemies");
+//
+//				for(int i = 0; i < EnemyCase.transform.childCount; ++i)
+//				{
+//					if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
+//						Destroy(EnemyCase.transform.GetChild(i).gameObject);
+//					else
+//					EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
+//				}
+//
+//				m_objPlayer.transform.position = new Vector3(0.0f, -1.5f);
+//				m_objPlayer.GetComponent<Player>().Set_AnimIdle();
+//
+//				m_bAdsOn = false;
+//				m_bGameover = false;
+//				m_fGameoverTimer = 0.0f;
+//				m_bIsGameStart = false;
+//				Physics2D.gravity = new Vector3 (0.0f, 0.0f, 0.0f);
+//				AdFuctions.m_bAdsComplete = false;
+//				m_CanRestart = false;
+//				m_bOnContinue = false;
+//				gameObject.GetComponent<AudioSource>().enabled = true;
+//				OnClickResume();
+//			}
+//			
+//		}
+//	}
 
 	//<-----End
 

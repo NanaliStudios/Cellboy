@@ -5,13 +5,14 @@ public class Point : Item {
 
 
 	public int m_iAddPoint = 1;
-	private AudioClip m_GetSound;
+	private AudioClip[] m_GetSound = new AudioClip[3];
 
 	// Use this for initialization
 	void Start () {
 		Initialize ();
 
-		m_GetSound = Resources.Load ("Sounds/ogg(96k)/get_exp_01") as AudioClip;
+		for(int i = 0; i < 3; ++i)
+			m_GetSound[i] = Resources.Load ("Sounds/" + string.Format("get_ex_0{0}", i+1)) as AudioClip;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +35,8 @@ public class Point : Item {
 	{
 		if (Coll.gameObject.tag == "Player") {
 
-			m_Audio.clip = m_GetSound;
+			int iRandVal = Random.Range(0, 3);
+			m_Audio.clip = m_GetSound[iRandVal];
 			m_Audio.Play();
 
 			m_Skeleton.state.SetAnimation(0, "die", false);

@@ -60,8 +60,12 @@ public class Player : ObjectBase {
 		m_objParticle = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
 
 
-		for(int i = 0; i < 3; ++i)
-			m_FireSound[i] = Resources.Load ("Sounds/ogg(96k)/" + string.Format("shot_0{0}", i+1)) as AudioClip;
+		if (m_PlayerID == PLAYER_ID.LASER)
+			m_FireSound [0] = Resources.Load ("Sounds/shoot_laser") as AudioClip;
+		else {
+			for (int i = 0; i < 3; ++i)
+				m_FireSound [i] = Resources.Load ("Sounds/" + string.Format ("shoot_bullet_0{0}", i + 1)) as AudioClip;
+		}
 
 		m_LvUpSound = Resources.Load ("Sounds/ogg(96k)/cellboy_levelup") as AudioClip;
 		m_DieSound = Resources.Load ("Sounds/ogg(96k)/score_reset") as AudioClip;
@@ -108,12 +112,18 @@ public class Player : ObjectBase {
 					if(m_iCurrentBullet > 0)
 					{
 						//PlaySound
-						int iRandVal = Random.Range(0, 3);
-						m_Audio.clip = m_FireSound[iRandVal];
+
+						if(m_PlayerID == PLAYER_ID.LASER)
+								m_Audio.clip = m_FireSound[0];
+						else
+						{
+							int iRandVal = Random.Range(0, 3);
+							m_Audio.clip = m_FireSound[iRandVal];
+						}
+
 						m_Audio.Play();
 
-						if(m_PlayerID == PLAYER_ID.LASER
-						   && (m_iCurrentLv > 1))
+						if(m_PlayerID == PLAYER_ID.LASER)
 						{
 							if(m_GameSys.m_PrefapMgr.Get_BulletParent().transform.childCount == 0)
 								m_GameSys.m_PrefapMgr.CreateBullet(transform.position);

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using GooglePlayGames;
-//using ChartboostSDK;
+using ChartboostSDK;
 
 public partial class BtnManager : MonoBehaviour {
 
@@ -91,7 +90,7 @@ public partial class BtnManager : MonoBehaviour {
 
 		//show chartboost ad
 		if (m_PlayerData.m_iPlayCountForAd == 3) {
-			//Chartboost.showInterstitial (CBLocation.Default);
+			Chartboost.showInterstitial (CBLocation.Default);
 			m_PlayerData.m_iPlayCountForAd = 0;
 		}
 	
@@ -387,8 +386,9 @@ public partial class BtnManager : MonoBehaviour {
 	public void LeaderboardBtn_Click()
 	{
 		//((PlayGamesPlatform)Social.Active).ShowLeaderboardUI ("CgkI-5Pv_oYcEAIQAQ");
-		//GooglePlayManager.Instance.LoadLeaderBoards ();
-		GooglePlayManager.Instance.ShowLeaderBoard ("CgkI-5Pv_oYcEAIQAQ");
+		GooglePlayManager.Instance.LoadLeaderBoards ();
+		GooglePlayManager.Instance.ShowLeaderBoard ("Score");
+
 	}
 
 	public void OnBuyMenu()

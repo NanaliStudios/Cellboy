@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEngine.Advertisements;
-//using GooglePlayGames;
+using UnityEngine.Advertisements;
 using TapjoyUnity;
 //using ChartboostSDK;
 
@@ -32,13 +31,12 @@ public class PlayerData : MonoBehaviour {
 	{
 		//GooglePlayGames.PlayGamesPlatform.Activate ();
 		GooglePlayConnection.Instance.Connect ();
-		GooglePlayManager.Instance.LoadLeaderBoards ();
+		//Screen.SetResolution(864, 1536, false); 
 	}
 
 	// Use this for initialization
 	void Start () {
-
-		//Advertisement.Initialize ("1077035", true);
+		Advertisement.Initialize ("1077035", true);
 		Application.targetFrameRate = 60;
 	
 		//fordebug
@@ -78,12 +76,6 @@ public class PlayerData : MonoBehaviour {
 
 			Debug.Log("PlayerPrefs Initialize");
 		} 
-
-		GooglePlayManager.Instance.RetrieveDeviceGoogleAccounts();
-
-		//Chartboost.showInterstitial (CBLocation.Default);
-		TapjoyManager.Instance.ContentsReady ("Notice");
-		//Social.localUser.Authenticate ((bool bSuccess) => {});
 
 		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
 		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;

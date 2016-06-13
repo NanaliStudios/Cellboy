@@ -24,8 +24,8 @@ public class EnemyBase : ObjectBase {
 	public ENEMY_SIZE m_Size = ENEMY_SIZE.SMALL;
 	public ENEMY_ID m_EnemyID = ENEMY_ID.NORMAL_S;
 
-	protected AudioClip m_HitSound = null;
-	protected AudioClip m_DieSound = null;
+	protected AudioClip[] m_HitSound = new AudioClip[3];
+	protected AudioClip[] m_DieSound = new AudioClip[3];
 
 	protected void Initialize()
 	{
@@ -47,8 +47,11 @@ public class EnemyBase : ObjectBase {
 		}
 
 		//Load Sound
-		m_HitSound = Resources.Load ("Sounds/ogg(96k)/enemy_hit") as AudioClip;
-		m_DieSound = Resources.Load ("Sounds/ogg(96k)/enemy_pop") as AudioClip;
+
+		for(int i = 0; i < 3; ++i)
+			m_HitSound[i] = Resources.Load ("Sounds/" + string.Format("hit_0{0}", i+1)) as AudioClip;
+		for(int i = 0; i < 3; ++i)
+			m_DieSound[i] = Resources.Load ("Sounds/" + string.Format("die_0{0}", i+1)) as AudioClip;
 	}
 
 	protected void Progress()
@@ -186,13 +189,15 @@ public class EnemyBase : ObjectBase {
 		{
 			if(m_Audio.clip.name != SoundName)
 			{
+				int iRandVal = Random.Range(0, 3);
+
 				switch(SoundName)
 				{
 				case "enemy_hit":
-					m_Audio.clip = m_HitSound;
+					m_Audio.clip = m_HitSound[iRandVal];
 					break;
 				case "enemy_pop":
-					m_Audio.clip = m_DieSound;
+					m_Audio.clip = m_DieSound[iRandVal];
 					break;
 				}
 			}

@@ -41,7 +41,7 @@ public class TapjoyManager : MonoBehaviour
 				yield return new WaitForFixedUpdate();
 			else
 			{
-				//ContentsReady("Notice");
+				ContentsReady("Notice");
 				break;
 			}
 		}

@@ -47,17 +47,21 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Extensions\AndroidNative\xExample\Scripts\JS\JSUseExample.js" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_view_video_play.xml" />
      <None Include="Assets\NGUI\ReadMe - 3.9.4.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\Plugins\Android\AN_Res\res\values\version.xml" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Eyes\eyes.atlas.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\HiddenPass.shader" />
+     <None Include="Assets\Plugins\Android\unityads\proguard-project.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\Resources\Spine\exp_money\altas.atlas.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\mraid.js.txt" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\values\analytics.xml" />
+     <None Include="Assets\Plugins\Android\ChartboostSDK\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\unityads\build.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\social\an_social.txt" />
      <None Include="Assets\Extensions\AndroidNative\Documentation\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
@@ -66,6 +70,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Gauge\Gauge.atlas.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_button_audio_toggle.xml" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\FS_White.atlas.txt" />
      <None Include="Assets\Plugins\Android\AN_Res\AndroidManifest.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\libs\image-chooser-library-1.6.0.txt" />
@@ -88,6 +93,7 @@
      <None Include="Assets\Plugins\StansAssets\Android\google_play\google-play-services.txt" />
      <None Include="Assets\Resources\Spine\missile\atlas.atlas.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_background_button_pause.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\license.txt" />
      <None Include="Assets\Plugins\StansAssets\Android\AndroidManifest.txt" />
@@ -99,10 +105,14 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Bones.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_triangle.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\AndroidManifest.txt" />
+     <None Include="Assets\Plugins\Android\unityads\res\values\strings.xml" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Ghost\Shaders\SkeletonGhost.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_waves.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_base.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\libs\android-support-v4.txt" />
      <None Include="Assets\Extensions\StansAssetsCommon\Effetcs\Animations\Tween\Pixelplacement\iTween\ReadMe!.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
@@ -113,6 +123,7 @@
      <None Include="Assets\Plugins\StansAssets\Android\google_play\an_googleplay.txt" />
      <None Include="Assets\Plugins\StansAssets\Android\libs\an_sa_soomla.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_play.xml" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Skeleton.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Goblins\goblins-mesh.atlas.txt" />
      <None Include="Assets\Resources\Spine\player\player_atlas.atlas.txt" />
@@ -120,10 +131,13 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\values\version.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_button_pause.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\xml\file_paths.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\values\ids.xml" />
+     <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_view_video_paused.xml" />
      <None Include="Assets\Resources\Spine\Enemy\Enemy_atlas.atlas.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\SkeletonLit.shader" />
+     <None Include="Assets\Plugins\Android\unityads\AndroidManifest.xml" />
      <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\revision.txt" />
      <None Include="Assets\Plugins\StansAssets\Versions\AN_VersionInfo.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
@@ -133,6 +147,10 @@
  <Reference Include="Tapjoy">
  <HintPath>/Users/jung/ProjCellboy/Assets/Tapjoy/Tapjoy.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{990CD9B3-DCD4-0AED-7AF9-A4D1E23016AB}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -37,6 +37,8 @@ public partial class BtnManager : MonoBehaviour {
 	private AudioSource m_Audio = null;
 	private AudioClip m_BtnClip = null;
 	private AudioClip m_ScrollClip = null;
+
+	public GameObject m_objSoundBtn = null;
 	
 
 	private bool m_bStart = true;
@@ -93,6 +95,9 @@ public partial class BtnManager : MonoBehaviour {
 			Chartboost.showInterstitial (CBLocation.Default);
 			m_PlayerData.m_iPlayCountForAd = 0;
 		}
+
+		if(AudioListener.volume != 0)
+			SoundOnOffBtn_Click ();
 	
 	}
 
@@ -385,9 +390,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void LeaderboardBtn_Click()
 	{
-		//((PlayGamesPlatform)Social.Active).ShowLeaderboardUI ("CgkI-5Pv_oYcEAIQAQ");
-		GooglePlayManager.Instance.LoadLeaderBoards ();
-		GooglePlayManager.Instance.ShowLeaderBoard ("Score");
+		GooglePlayManager.Instance.ShowLeaderBoardById ("CgkI-5Pv_oYcEAIQAQ");
 
 	}
 
@@ -691,6 +694,19 @@ public partial class BtnManager : MonoBehaviour {
 		//AdFuctions.ShowUnityAds ();
 		m_bAdsOn = true;
 		
+	}
+
+	public void SoundOnOffBtn_Click()
+	{
+		if (AudioListener.volume == 0) {
+			m_objSoundBtn.transform.GetChild (0).gameObject.SetActive (true);
+			m_objSoundBtn.transform.GetChild (1).gameObject.SetActive (false);
+			AudioListener.volume = 3;
+		} else {
+			m_objSoundBtn.transform.GetChild(0).gameObject.SetActive(false);
+			m_objSoundBtn.transform.GetChild(1).gameObject.SetActive(true);
+			AudioListener.volume = 0;
+		}
 	}
 
 	public void Check_AdsReward()

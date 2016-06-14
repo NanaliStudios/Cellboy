@@ -126,7 +126,9 @@ public class EnemyBase : ObjectBase {
 				m_GameSys.m_PrefapMgr.CreateCoin(transform.position, m_iHaveCoin);
 				m_GameSys.m_iCurrent_GameScore += m_iHaveScore;
 
-				if(m_GameSys.CheckGameStart())
+				if(m_GameSys.CheckGameStart()
+				   && !m_GameSys.GetContinue()
+				   && !m_GameSys.Get_Fever())
 				{
 				if(m_EnemyID == ENEMY_ID.SPLIT_S )
 				{
@@ -179,7 +181,7 @@ public class EnemyBase : ObjectBase {
 			return;
 
 		if (m_iHp > 0) 
-		m_MyTrans.Translate(new Vector3(0.0f, -0.1f) * m_fSpeed);
+		m_MyTrans.Translate(new Vector3(0.0f, -0.1f) * (m_fSpeed + m_GameSys.Get_GlobalSpeed()));
 	}
 
 

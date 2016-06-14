@@ -29,9 +29,22 @@ public class PlayerData : MonoBehaviour {
 
 	void Awake()
 	{
-		//GooglePlayGames.PlayGamesPlatform.Activate ();
-		GooglePlayConnection.Instance.Connect ();
-		//Screen.SetResolution(864, 1536, false); 
+//		GooglePlayManager.ActionAvailableDeviceAccountsLoaded += delegate {
+//			string msg = "Device contains following google accounts:" + "\n";
+//			foreach(string acc in GooglePlayManager.Instance.deviceGoogleAccountList) {
+//				msg += acc + "\n";
+//			} 
+//
+//			GooglePlayConnection.Instance.Connect(GooglePlayManager.Instance.deviceGoogleAccountList[0]);
+//		};
+//
+//
+//		GooglePlayManager.Instance.RetrieveDeviceGoogleAccounts();
+
+		AudioListener.volume = 20;
+
+		AndroidInAppPurchaseManager.Client.AddProduct("coin_200");
+		AndroidInAppPurchaseManager.Client.Connect ();
 	}
 
 	// Use this for initialization
@@ -40,7 +53,7 @@ public class PlayerData : MonoBehaviour {
 		Application.targetFrameRate = 60;
 	
 		//fordebug
-		//PlayerPrefs.DeleteAll ();	
+		PlayerPrefs.DeleteAll ();	
 
 		if (PlayerPrefs.GetInt ("PlayNum") == 0) {
 			PlayerPrefs.DeleteAll ();	
@@ -80,6 +93,8 @@ public class PlayerData : MonoBehaviour {
 		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
 		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
 		m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
+
+		TapjoyManager.Instance.ContentsReady ("Notice");
 
 		DontDestroyOnLoad (this);
 	}

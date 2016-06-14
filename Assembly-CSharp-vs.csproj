@@ -496,6 +496,7 @@
      <Compile Include="Assets\Scripts\00.Header\AdFunctions.cs" />
      <Compile Include="Assets\Scripts\00.Header\Enum.cs" />
      <Compile Include="Assets\Scripts\00.Header\StageInfo.cs" />
+     <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\GoogleAdManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\PrefapManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\TapjoyManager.cs" />
@@ -548,6 +549,7 @@
      <Compile Include="Assets\Scripts\03. UI\Scene_Main\TiredProgress.cs" />
      <Compile Include="Assets\Scripts\03. UI\Scene_Main\UI_Playerimg.cs" />
      <Compile Include="Assets\Scripts\03. UI\TextBase.cs" />
+     <Compile Include="Assets\Scripts\LogoScene.cs" />
      <Compile Include="Assets\Scripts\ObjDisable.cs" />
      <Compile Include="Assets\Tapjoy\TapjoyCallbacksSample.cs" />
      <Compile Include="Assets\spine_runtime\spine-csharp\Properties\AssemblyInfo.cs" />

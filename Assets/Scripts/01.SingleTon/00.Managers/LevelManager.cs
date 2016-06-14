@@ -27,6 +27,10 @@ public class LevelManager : MonoBehaviour {
 	private float m_fImmChance = 0.0f;
 	private float m_fCoinSChance = 0.0f;
 	private float m_fCoinMChance = 0.0f;
+
+	public bool m_bFever = false;
+	private float m_fFeverTerm = 5.0f;
+	private float m_fFeverTimer = 0.0f;
 	
 
 	public void Initialize(GameSystem GameSys ,PrefapManager prefMgr, Rigidbody2D PlayerRigid2D)
@@ -35,6 +39,12 @@ public class LevelManager : MonoBehaviour {
 		m_PrefMgr = prefMgr;
 		m_PlayerRigid2D = PlayerRigid2D;
 		SetStage ();
+	}
+
+	public void Start_FeverTime(float fTime)
+	{
+		m_bFever = true;
+		m_fFeverTerm = fTime;
 	}
 
 
@@ -51,6 +61,23 @@ public class LevelManager : MonoBehaviour {
 
 			float fRandSpawnVal = Random.Range(0.0f, 100.0f);
 			ENEMY_ID SpawnEnemyID = ENEMY_ID.NORMAL_S;
+
+			if(m_bFever == true)	//Fever On
+			{
+				if(m_fFeverTimer >= m_fFeverTerm)
+				{
+					m_fFeverTimer = 0.0f;
+					m_GameSys.Return_GlobalSpeed();
+					m_bFever = false;
+				}
+
+				if(fRandSpawnVal < 80.0f)
+					SpawnEnemyID = ENEMY_ID.COIN_S;
+				else
+					SpawnEnemyID = ENEMY_ID.COIN_M;
+			}
+			else
+			{
 
 			if(fRandSpawnVal <= m_fNormalSChance)
 				SpawnEnemyID = ENEMY_ID.NORMAL_S;
@@ -77,6 +104,7 @@ public class LevelManager : MonoBehaviour {
 			else if(fRandSpawnVal <= m_fNormalSChance + m_fNormalMChance + m_fSpeedChance + m_fSplitSChance + m_fSplitMChance
 			        + m_fMoveChance + m_fFollowChance + m_fImmChance + m_fCoinSChance + m_fCoinMChance)
 				SpawnEnemyID = ENEMY_ID.COIN_M;
+			}
 
 			m_PrefMgr.CreateNormalEnemy(new Vector3(Random.Range(-2.4f, 2.4f), 5.0f), SpawnEnemyID);
 
@@ -86,7 +114,13 @@ public class LevelManager : MonoBehaviour {
 
 		if (m_GameSys.CheckGameStart ()) {
 			m_fEnemySpawnTimer += Time.deltaTime;
+
+			if(!m_bFever)
 			m_fGameTimer += Time.deltaTime;
+		}
+
+		if (m_bFever == true) {
+			m_fFeverTimer += Time.deltaTime;
 		}
 	}
 
@@ -111,7 +145,8 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 0.6f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.3f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.0f);
 			break;
 		case 1:
 			m_fNormalSChance = 55.0f;	//small normal
@@ -131,7 +166,8 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 0.8f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.5f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.02f);
 			break;
 		case 2:
 			m_fNormalSChance = 40.0f;	//small normal
@@ -151,7 +187,8 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.8f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.0f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.8f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.04f);
 			break;
 		case 3:
 			m_fNormalSChance = 10.0f;	//small normal
@@ -171,7 +208,8 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.8f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.2f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.0f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.06f);
 			break;
 		case 4:
 			m_fNormalSChance = 5.0f;	//small normal
@@ -179,19 +217,20 @@ public class LevelManager : MonoBehaviour {
 			
 			m_fSpeedChance = 10.0f;		//speed
 			
-			m_fSplitSChance = 20.0f;		//small split
+			m_fSplitSChance = 15.0f;		//small split
 			m_fSplitMChance = 15.0f;		//midium split
 			
 			m_fMoveChance = 0.0f;		//Move
 			m_fFollowChance = 0.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.7f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 1.2f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.08f);
 			break;
 		case 5:
 			m_fNormalSChance = 5.0f;	//small normal
@@ -199,19 +238,20 @@ public class LevelManager : MonoBehaviour {
 			
 			m_fSpeedChance = 10.0f;		//speed
 			
-			m_fSplitSChance = 20.0f;		//small split
+			m_fSplitSChance = 15.0f;		//small split
 			m_fSplitMChance = 15.0f;		//midium split
 			
 			m_fMoveChance = 10.0f;		//Move
 			m_fFollowChance = 0.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.7f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 1.2f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.1f);
 			break;
 		case 6:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -219,19 +259,20 @@ public class LevelManager : MonoBehaviour {
 			
 			m_fSpeedChance = 10.0f;		//speed
 			
-			m_fSplitSChance = 25.0f;		//small split
-			m_fSplitMChance = 20.0f;		//midium split
+			m_fSplitSChance = 20.0f;		//small split
+			m_fSplitMChance = 25.0f;		//midium split
 			
-			m_fMoveChance = 15.0f;		//Move
+			m_fMoveChance = 20.0f;		//Move
 			m_fFollowChance = 0.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 1.3f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.12f);
 			break;
 		case 7:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -245,13 +286,14 @@ public class LevelManager : MonoBehaviour {
 			m_fMoveChance = 25.0f;		//Move
 			m_fFollowChance = 10.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 1.3f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.14f);
 			break;
 		case 8:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -262,16 +304,17 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitSChance = 10.0f;		//small split
 			m_fSplitMChance = 5.0f;		//midium split
 			
-			m_fMoveChance = 30.0f;		//Move
+			m_fMoveChance = 25.0f;		//Move
 			m_fFollowChance = 20.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.4f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.5f; //set player speed
+			m_GameSys.Change_GlobalSpeed(0.16f);
 			break;
 		case 9:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -282,16 +325,16 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitSChance = 10.0f;		//small split
 			m_fSplitMChance = 5.0f;		//midium split
 			
-			m_fMoveChance = 30.0f;		//Move
+			m_fMoveChance = 25.0f;		//Move
 			m_fFollowChance = 25.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.5f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.8f; //set player speed
 			break;
 		case 10:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -302,16 +345,16 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitSChance = 10.0f;		//small split
 			m_fSplitMChance = 5.0f;		//midium split
 			
-			m_fMoveChance = 30.0f;		//Move
+			m_fMoveChance = 25.0f;		//Move
 			m_fFollowChance = 25.0f;		//follow
 			
-			m_fImmChance = 20.0f;		//immortal
+			m_fImmChance = 25.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.5f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.5f; //set player speed
+			m_PlayerRigid2D.gravityScale = 2.0f; //set player speed
 			break;
 
 

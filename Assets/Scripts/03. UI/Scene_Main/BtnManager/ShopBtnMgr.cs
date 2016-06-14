@@ -8,4 +8,14 @@ public partial class BtnManager : MonoBehaviour {
 		PlayerPrefs.SetInt ("HaveCoin", PlayerPrefs.GetInt("HaveCoin") + 1000);
 		TapjoyManager.Instance.ContentsReady ("getfreecoin1");
 	}
+
+	public void Buy200CoinBtn_Click()
+	{
+		AndroidInAppPurchaseManager.Client.Purchase ("coin_200");
+
+
+		if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+			PlayerPrefs.SetInt ("HaveCoin", PlayerPrefs.GetInt("HaveCoin") + 200);
+		}
+	}
 }

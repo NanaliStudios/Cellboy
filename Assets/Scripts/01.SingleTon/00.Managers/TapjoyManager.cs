@@ -22,6 +22,8 @@ public class TapjoyManager : MonoBehaviour
 	//연결 시도 후에 연결이 완료되면 Notice를 호출, 만약 5초이상 무응답이면 호출하지않고 종료.
 	private IEnumerator Start()
 	{
+		DontDestroyOnLoad (this);
+
 		//콜벡관련 등록.
 		TJPlacement.OnRequestSuccess += HandlePlacementRequestSuccess;
 		TJPlacement.OnRequestFailure += HandlePlacementRequestFailure;
@@ -41,7 +43,6 @@ public class TapjoyManager : MonoBehaviour
 				yield return new WaitForFixedUpdate();
 			else
 			{
-				ContentsReady("Notice");
 				break;
 			}
 		}

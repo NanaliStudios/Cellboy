@@ -29,19 +29,10 @@ public class Background : ObjectBase {
 			if (m_GameSys.CheckGameStart () == false)
 				return;
 
-//			if(m_Player.m_fGrav > 0.0f)
-//			{
-//				if(transform.localPosition.x <= 0.2f)
-//				m_MyTrans.Translate(new Vector3(0.01f, 0.0f));
-//			}
-//			else
-//			{
-//				if(transform.localPosition.x >= -0.2f)
-//				m_MyTrans.Translate(new Vector3(-0.01f, 0.0f));
-//			}
+			m_TransDownBack.localPosition = new Vector3 (0.0f, m_TransDownBack.localPosition.y - (m_fScrollSpeed + m_GameSys.Get_GlobalSpeed()));
 		}
-
-		m_TransDownBack.localPosition = new Vector3 (0.0f, m_TransDownBack.localPosition.y - m_fScrollSpeed);
+		else
+		m_TransDownBack.localPosition = new Vector3 (0.0f, m_TransDownBack.localPosition.y - (m_fScrollSpeed));
 
 		m_TransUpBack.localPosition = new Vector3(0.0f, m_TransDownBack.localPosition.y + m_fBackOffset);
 

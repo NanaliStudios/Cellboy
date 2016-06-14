@@ -39,6 +39,9 @@ public class GameSystem : MonoBehaviour {
 
 	private bool m_bIsGameStart = false;
 
+	private float m_fGlobalSpeed = 0.0f;
+	public float m_fCurrentGlobalSpeed = 0.0f;
+
 //	public StageInfo m_ArrayStageInfo;
 	//<-----End
 
@@ -48,32 +51,36 @@ public class GameSystem : MonoBehaviour {
 		m_PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 		PLAYER_ID PlayerID = m_PlayerData.m_PlayerID;
 
+		string strPlayerName = "NormalPlayer";
+
 		switch (PlayerID) {
 		case PLAYER_ID.NORMAL:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/NormalPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "NormalPlayer";
 				break;
 
 		case PLAYER_ID.SPREAD:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/SpreadPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "SpreadPlayer";
 			break;
 
 		case PLAYER_ID.LASER:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/LaserPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "LaserPlayer"; 
 			break;
 
 		case PLAYER_ID.HOMING:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/HomingPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "HomingPlayer"; 
 			break;
 
 		case PLAYER_ID.BOOM:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/BoomPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "BoomPlayer"; 
 			break;
 
 		default:
-			m_objPlayer = GameObject.Instantiate((Resources.Load("Prefaps/00.Objects/Players/NormalPlayer") as GameObject)) as GameObject; 
+			strPlayerName = "NormalPlayer";
 			break;
 
 		}
+
+		m_objPlayer = GameObject.Instantiate((Resources.Load(string.Format("Prefaps/00.Objects/Players/{0}", strPlayerName)) as GameObject), new Vector3(0.0f, -2.0f), Quaternion.identity) as GameObject; 
 		//<-----End
 
 		//Class Initialize----->
@@ -166,6 +173,11 @@ public class GameSystem : MonoBehaviour {
 		m_bOnContinue = true;
 	}
 
+	public bool GetContinue()
+	{
+		return m_bOnContinue;
+	}
+
 
 
 	//Functions----->
@@ -184,6 +196,44 @@ public class GameSystem : MonoBehaviour {
 	public bool CheckGameStart()
 	{
 		return m_bIsGameStart;
+	}
+
+	public void Start_FeverTime(float fTime)
+	{
+		Change_GlobalSpeed (m_fGlobalSpeed + 0.2f);
+		m_lvMgr.Start_FeverTime (fTime);
+
+		GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
+		
+		for(int i = 0; i < EnemyCase.transform.childCount; ++i)
+		{
+			if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
+				Destroy(EnemyCase.transform.GetChild(i).gameObject);
+			else
+				EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
+
+		}
+	}
+
+	public bool Get_Fever()
+	{
+		return m_lvMgr.m_bFever;
+	}
+
+	//global speed
+	public float Get_GlobalSpeed()
+	{
+		return m_fGlobalSpeed;
+	}
+	public void Change_GlobalSpeed(float fSpeed)
+	{
+		m_fCurrentGlobalSpeed = m_fGlobalSpeed;
+		m_fGlobalSpeed = fSpeed;
+	}
+
+	public void Return_GlobalSpeed()
+	{
+		m_fGlobalSpeed = m_fCurrentGlobalSpeed;
 	}
 
 	//UI
@@ -246,7 +296,7 @@ public class GameSystem : MonoBehaviour {
 			{
 				
 				//restart
-				GameObject EnemyCase = GameObject.Find("00_Enemies");
+				GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
 
 				for(int i = 0; i < EnemyCase.transform.childCount; ++i)
 				{

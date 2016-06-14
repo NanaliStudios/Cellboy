@@ -70,6 +70,7 @@ public class Player : ObjectBase {
 		m_LvUpSound = Resources.Load ("Sounds/ogg(96k)/cellboy_levelup") as AudioClip;
 		m_DieSound = Resources.Load ("Sounds/ogg(96k)/score_reset") as AudioClip;
 
+
 		StartCoroutine ("Excute");
 	}
 	void FixedUpdate()
@@ -150,37 +151,24 @@ public class Player : ObjectBase {
 			if(m_GameSys.m_iCurrent_Point > m_iLv1MaxPoint
 			   && m_iCurrentLv == 1)
 			{
-				m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BULLET_ID.LV2);
-				m_iCurrentMaxPoint = m_iLv2MaxPoint;
-				m_GameSys.m_iCurrent_Point = 0;
-				m_iCurrentLv = 2;
-
-				m_Skeleton.skeleton.SetSkin ("01");
-				m_Audio.clip = m_LvUpSound;
-				m_Audio.Play();
+				Player_LevelUp(BULLET_ID.LV2, 2, "01", m_iLv2MaxPoint);
 			}
 			if(m_GameSys.m_iCurrent_Point > m_iLv2MaxPoint
 			   && m_iCurrentLv == 2)
 			{
-				m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BULLET_ID.LV3);
-				m_iCurrentMaxPoint = m_iLv3MaxPoint;
-				m_GameSys.m_iCurrent_Point = 0;
-				m_iCurrentLv = 3;
-
-				m_Skeleton.skeleton.SetSkin ("02");
-				m_Audio.clip = m_LvUpSound;
-				m_Audio.Play();
+				Player_LevelUp(BULLET_ID.LV3, 3, "02", m_iLv3MaxPoint);
 			}
 			if(m_GameSys.m_iCurrent_Point > m_iLv3MaxPoint
 			   && m_iCurrentLv == 3)
 			{
-				m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BULLET_ID.LV4);
-				m_GameSys.m_iCurrent_Point = 0;
-				m_iCurrentLv = 4;
+				Player_LevelUp(BULLET_ID.LV4, 4, "03", m_iLv3MaxPoint);
+			}
 
-				m_Skeleton.skeleton.SetSkin ("03");
-				m_Audio.clip = m_LvUpSound;
-				m_Audio.Play();
+			if(m_GameSys.m_iCurrent_Point > m_iLv3MaxPoint
+			   && m_iCurrentLv == 4)
+			{
+				m_GameSys.m_iCurrent_Point = 0;
+				m_GameSys.Start_FeverTime (10.0f);
 			}
 			//<-----End
 
@@ -272,5 +260,21 @@ public class Player : ObjectBase {
 	{
 		m_Skeleton.state.SetAnimation(0, "idle", true);
 		m_objParticle.SetActive(true);
+	}
+
+	public void Player_LevelUp(BULLET_ID BulletID, int iLevel, string strSpineSkinIdx, int iLvMaxPoint)
+	{
+		//Fever Start
+		m_GameSys.Start_FeverTime (5 + ((iLevel - 2) * 2));
+
+
+			m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BulletID);
+			m_iCurrentMaxPoint = iLvMaxPoint;
+			m_GameSys.m_iCurrent_Point = 0;
+			m_iCurrentLv = iLevel;
+			
+			m_Skeleton.skeleton.SetSkin (strSpineSkinIdx);
+			m_Audio.clip = m_LvUpSound;
+			m_Audio.Play();
 	}
 }

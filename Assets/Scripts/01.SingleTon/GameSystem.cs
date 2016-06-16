@@ -103,14 +103,11 @@ public partial class GameSystem : MonoBehaviour {
 
 		//GameData Load----->
 
-		//for debug
-		//PlayerPrefs.DeleteAll ();
-
 		m_PlayerData.m_bWinHighScore = false;
 
 
 		//ads
-		if (PlayerPrefs.GetInt ("IsAdOn") == 1)
+		if (!m_PlayerData.m_Gamedata.m_bAdOff)
 			Admob_Back.SetActive (true);
 		else
 			Admob_Back.SetActive (false);

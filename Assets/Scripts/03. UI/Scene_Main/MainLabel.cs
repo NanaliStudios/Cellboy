@@ -14,7 +14,7 @@ public class MainLabel : TextBase {
 	public GameObject m_objLockIcon = null;
 
 	private bool m_bInit = false;
-	private int m_iCurrentLock = 0;
+	private bool m_bCurrentLock = false;
 
 	// Use this for initialization
 	void Start () {
@@ -34,84 +34,22 @@ public class MainLabel : TextBase {
 		}
 	
 		//TiredVal Change----->
-		if (m_PlayerData.m_PlayerID == PLAYER_ID.NORMAL) {
 
-			m_iCurrentLock = PlayerPrefs.GetInt ("Player0Lock");
-			
-			if (PlayerPrefs.GetFloat ("fPlayer0Tired") <= 0.0f) {
+		for (int i = 0; i < m_PlayerData.m_Gamedata.m_iTotalPlayerNum; ++i) {
+
+			m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsLock;
+
+			if (m_bCurrentLock == true) {
+				m_strBuy = m_PlayerData.m_iBuyPrice.ToString();
+				MakeBuyText ();
+				return;
+			}
+
+			if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].fTiredPercent <= 0.0f)
 				MakeChargeText ();
-			} else 
+			else
 				MakeStartText ();
-		} else if (m_PlayerData.m_PlayerID == PLAYER_ID.SPREAD) {
-
-			m_iCurrentLock = PlayerPrefs.GetInt ("Player1Lock");
-			
-			if (PlayerPrefs.GetFloat ("fPlayer1Tired") <= 0.0f) {
-				MakeChargeText ();
-			} else 
-				MakeStartText ();
-		} else if (m_PlayerData.m_PlayerID == PLAYER_ID.LASER) {
-
-			m_iCurrentLock = PlayerPrefs.GetInt ("Player2Lock");
-
-			if (PlayerPrefs.GetInt ("Player1Lock") == 1)
-			{
-				MakeLockText ();
-				return;
-			}
-			else {
-				if (PlayerPrefs.GetFloat ("fPlayer2Tired") <= 0.0f) 
-					MakeChargeText ();
-				else
-					MakeStartText ();
-			}
 		}
-		else if (m_PlayerData.m_PlayerID == PLAYER_ID.HOMING) {
-
-			m_iCurrentLock = PlayerPrefs.GetInt("Player3Lock");
-
-			if (PlayerPrefs.GetInt ("Player2Lock") == 1)
-			{
-				MakeLockText ();
-				return;
-			}
-			else {
-			
-			if (PlayerPrefs.GetFloat ("fPlayer3Tired") <= 0.0f) {
-				MakeChargeText();
-			}
-			else 
-				MakeStartText();
-			}
-
-		} else if (m_PlayerData.m_PlayerID == PLAYER_ID.BOOM) {
-
-			m_iCurrentLock = PlayerPrefs.GetInt("Player4Lock");
-
-
-			if (PlayerPrefs.GetInt ("Player3Lock") == 1)
-			{
-				MakeLockText ();
-				return;
-			}
-			else {
-
-			if (PlayerPrefs.GetFloat ("fPlayer4Tired") <= 0.0f) {
-				MakeChargeText();
-			}
-			else 
-				MakeStartText();
-			}
-
-		} 
-		//<-----End
-
-		if (m_iCurrentLock == 1) {
-			m_strBuy = m_PlayerData.m_iBuyPrice.ToString();
-			MakeBuyText ();
-		}
-
-
 	}
 
 	void MakeStartText()

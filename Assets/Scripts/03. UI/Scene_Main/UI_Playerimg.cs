@@ -56,7 +56,7 @@ public class UI_Playerimg : MonoBehaviour {
 		if (m_PlayerID == m_btnMgr.m_PlayerData.m_PlayerID
 		    && m_Skeleton != null) {
 
-			if(PlayerPrefs.GetFloat(string.Format("fPlayer{0}Tired",(int)m_PlayerID)) <= 0)
+			if(m_btnMgr.m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerID].fTiredPercent <= 0)
 			{
 				if(m_Skeleton.AnimationName != "sleep")
 			   m_Skeleton.state.SetAnimation(0, "sleep", true);

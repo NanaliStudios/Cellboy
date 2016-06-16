@@ -26,9 +26,7 @@ public class TimeLabel : TextBase {
 
 		int iPlayerIdx = (int)m_CurrentPlayerID;
 
-		TargetTime = new System.DateTime(PlayerPrefs.GetInt(string.Format("TargetYear{0}", iPlayerIdx)), PlayerPrefs.GetInt(string.Format("TargetMonth{0}", iPlayerIdx)), 
-		                                 PlayerPrefs.GetInt(string.Format("TargetDay{0}", iPlayerIdx)),PlayerPrefs.GetInt(string.Format("TargetHour{0}", iPlayerIdx)),  
-		                                 PlayerPrefs.GetInt(string.Format("TargetMin{0}", iPlayerIdx)),  PlayerPrefs.GetInt(string.Format("TargetSec{0}", iPlayerIdx))); 
+		TargetTime = m_PlayerData.m_Gamedata.m_PlayerInfo[iPlayerIdx].SleepEnd_Time; 
 
 
 		System.TimeSpan TimeSpan = TargetTime - System.DateTime.Now;

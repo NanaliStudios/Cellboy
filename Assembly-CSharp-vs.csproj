@@ -537,13 +537,13 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Scripts\00.Header\AdFunctions.cs" />
      <Compile Include="Assets\Scripts\00.Header\Enum.cs" />
+     <Compile Include="Assets\Scripts\00.Header\FileSystem.cs" />
      <Compile Include="Assets\Scripts\00.Header\GameData.cs" />
      <Compile Include="Assets\Scripts\00.Header\GameSDK_Fucs.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\GoogleAdManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\PrefapManager.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\00.Managers\TapjoyManager.cs" />
-     <Compile Include="Assets\Scripts\01.SingleTon\FileSystem.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\GameBtnFuncs.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\GameSystem.cs" />
      <Compile Include="Assets\Scripts\01.SingleTon\PlayerData.cs" />

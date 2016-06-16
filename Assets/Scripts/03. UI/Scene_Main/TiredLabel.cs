@@ -22,24 +22,8 @@ public class TiredLabel : TextBase {
 		}
 		
 		m_CurrentPlayerID = m_PlayerData.m_PlayerID;
+		m_fCurrentTired = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_CurrentPlayerID].fTiredPercent;
 		
-		switch (m_CurrentPlayerID) {
-		case PLAYER_ID.NORMAL:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer0Tired");
-			break;
-		case PLAYER_ID.SPREAD:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer1Tired");
-			break;
-		case PLAYER_ID.LASER:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer2Tired");
-			break;
-		case PLAYER_ID.HOMING:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer3Tired");
-			break;
-		case PLAYER_ID.BOOM:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer4Tired");
-			break;
-		}
 		m_MyText.text = m_fCurrentTired + "%";
 		
 	}

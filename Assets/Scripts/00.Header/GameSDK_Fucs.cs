@@ -10,7 +10,7 @@ class GameSDK_Funcs
 		AndroidInAppPurchaseManager.Client.AddProduct("coin_200");
 		AndroidInAppPurchaseManager.Client.Connect ();
 	
-		GooglePlaySavedGamesManager.Instance.ShowSavedGamesUI ("MySaved", 3);
+		//GooglePlaySavedGamesManager.Instance.ShowSavedGamesUI ("MySaved", 3);
 
 
 		//GooglePlay CloudSave Set Delegates
@@ -18,10 +18,7 @@ class GameSDK_Funcs
 
 		};
 
-
-		#endif
-
-		#if UNITY_IOS
+		#elif UNITY_IOS
 
 		Social.localUser.Authenticate(delegate {
 
@@ -34,14 +31,21 @@ class GameSDK_Funcs
 		#if UNITY_ANDROID
 		if (GooglePlayConnection.Instance.IsConnected)
 			return true;
-		#endif
-
-		#if UNITY_IOS
+		#elif UNITY_IOS
 		if(Social.localUser.authenticated)
 		return true;
 		#endif
 
 		return false;
+	}
+
+	public static void Show_CloudSaveUI()
+	{
+		#if UNITY_ANDROID
+		GooglePlaySavedGamesManager.Instance.ShowSavedGamesUI ("MySaved", 3);
+		#elif UNITY_IOS
+
+		#endif
 	}
 
 	public static void Show_LeaderBoard()
@@ -63,6 +67,25 @@ class GameSDK_Funcs
 
 		#if UNITY_IOS
 		//Social.ReportScore(iScore, "BoardName");
+		#endif
+	}
+
+	public static void Do_CloudSave(byte[] Data)
+	{
+
+
+		#if UNITY_ANDROID
+		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData","",null, Data, 0);
+		#elif UNITY_IOS
+		#endif
+	}
+
+	public static void Do_CloudLoad()
+	{
+
+		#if UNITY_ANDROID
+		GooglePlaySavedGamesManager.instance.LoadAvailableSavedGames();
+		#elif UNITY_IOS
 		#endif
 	}
 

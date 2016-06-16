@@ -14,13 +14,8 @@ public class LogoScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
-		if(!PlayerPrefs.HasKey("ADS_Key"))
-			PlayerPrefs.SetInt ("ADS_Key", 0);
-
 		AdFuctions.Initialize ();
 		GameSDK_Funcs.Initialize ();
-
 	
 	}
 	
@@ -29,18 +24,14 @@ public class LogoScene : MonoBehaviour {
 
 			if (m_fTerm <= m_fTimer)
 			{
-				if(Application.internetReachability == NetworkReachability.NotReachable)
-					Application.LoadLevel ("00_MAIN");
-				else
-				{
+#if UNITY_EDITOR_OSX
+			Application.LoadLevel ("00_MAIN");
+			return;
+#endif
 
-					if(AdFuctions.isInitialized ()
-				   	&& GameSDK_Funcs.isInitialized ()) 
-					{
-						AdFuctions.Show_GoogleAD();
-						Application.LoadLevel ("00_MAIN");
-					}
-				}
+				GameSDK_Funcs.Show_CloudSaveUI();
+				AdFuctions.Show_GoogleAD();
+				Application.LoadLevel ("00_MAIN");
 			}
 
 		m_fTimer += Time.deltaTime;

@@ -4,6 +4,8 @@ using TapjoyUnity;
 
 public class TapjoyManager : MonoBehaviour
 {
+	public int m_iTapjoyCurrency = 0;
+
 	private static TapjoyManager s_Instance = null;
 	public static TapjoyManager Instance
 	{
@@ -33,6 +35,14 @@ public class TapjoyManager : MonoBehaviour
 		
 		TJPlacement.OnPurchaseRequest += HandleOnPurchaseRequest;
 		TJPlacement.OnRewardRequest += HandleOnRewardRequest;
+
+		Tapjoy.OnGetCurrencyBalanceResponse += delegate(string currencyName, int balance){
+
+			m_iTapjoyCurrency = balance;
+
+
+
+		};
 		
 		if(!Tapjoy.IsConnected)
 			Tapjoy.Connect();

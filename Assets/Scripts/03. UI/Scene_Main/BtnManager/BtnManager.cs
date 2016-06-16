@@ -34,7 +34,7 @@ public partial class BtnManager : MonoBehaviour {
 	public MAINMENU_STATE m_MenuStateID = MAINMENU_STATE.MAIN;
 
 	private float m_fCurrentTired = 100.0f;
-	private int m_iCurrentLock = 0;
+	private bool m_bCurrentLock = false;
 
 	private AudioSource m_Audio = null;
 	private AudioClip m_BtnClip = null;
@@ -84,6 +84,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Set BackParticle
 		GameObject.Find ("Particles(Clone)").GetComponent<SetBackParticle> ().m_bInit = false;
 
+		//Logo Progress 
 		if (m_PlayerData.m_iCurrentPlayNum != 0) {
 			m_objLogo.SetActive (false);
 			m_objScore.gameObject.SetActive (true);
@@ -106,7 +107,7 @@ public partial class BtnManager : MonoBehaviour {
 			SoundOnOffBtn_Click ();
 
 		//ads
-		if (PlayerPrefs.GetInt ("IsAdOn") == 1)
+		if (!m_PlayerData.m_Gamedata.m_bAdOff)
 			Admob_Back.SetActive (true);
 		else
 			Admob_Back.SetActive (false);
@@ -146,32 +147,11 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		m_fCurrentTired = 100.0f;
+		//
+		m_fCurrentTired = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].fTiredPercent;
+		m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock;
 
-		switch (m_PlayerData.m_PlayerID) {
-		case PLAYER_ID.NORMAL:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer0Tired");
-			m_iCurrentLock = PlayerPrefs.GetInt("Player0Lock");
-
-			break;
-		case PLAYER_ID.SPREAD:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer1Tired");
-			m_iCurrentLock = PlayerPrefs.GetInt("Player1Lock");
-			break;
-		case PLAYER_ID.LASER:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer2Tired");
-			m_iCurrentLock = PlayerPrefs.GetInt("Player2Lock");
-			break;
-		case PLAYER_ID.HOMING:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer3Tired");
-			m_iCurrentLock = PlayerPrefs.GetInt("Player3Lock");
-			break;
-		case PLAYER_ID.BOOM:
-			m_fCurrentTired = PlayerPrefs.GetFloat("fPlayer4Tired");
-			m_iCurrentLock = PlayerPrefs.GetInt("Player4Lock");
-			break;
-		}
-
-		if (m_iCurrentLock == 0) {
+		if (m_bCurrentLock == false) {
 			if (m_fCurrentTired <= 0.0f) {
 				m_objTiredBar.SetActive (false);
 				m_objChargeBar.SetActive (true);
@@ -213,129 +193,32 @@ public partial class BtnManager : MonoBehaviour {
 
 		Play_BtnSound ();
 
-		//m_PlayerData.m_PlayerID = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild>().centeredObject.GetComponent<UI_Playerimg>().m_PlayerID;
-		//TiredVal Change----->
-		if (m_PlayerData.m_PlayerID == PLAYER_ID.NORMAL) {
-
 			//Buy
-			if (m_iCurrentLock == 1) {
-				if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
-					OnBuyMenu();
-				}
-				else
-					OnNoMoneyMenu();
+		if (m_bCurrentLock == true) {
 
-				return;
-			}
+			if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) 
+				OnBuyMenu ();
 			else
+				OnNoMoneyMenu ();
+
+			return;
+		} else {
 			//Charge
-			if(PlayerPrefs.GetFloat("fPlayer0Tired") <= 0.0f)
-			{
-				OnChargeMenu();
+			if (m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].fTiredPercent <= 0.0f) {
+				OnChargeMenu ();
 				return;
 			}
-
-			PlayerPrefs.SetFloat("fPlayer0Tired", PlayerPrefs.GetFloat("fPlayer0Tired") - 10.0f);
 		}
-		else if (m_PlayerData.m_PlayerID == PLAYER_ID.SPREAD) {
 
-			//Buy
-			if (m_iCurrentLock == 1) {
-				if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
-					OnBuyMenu();
-				}
-				else
-					OnNoMoneyMenu();
+		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 
-				return;
-			}
-			//Charge
-			if(PlayerPrefs.GetFloat("fPlayer1Tired") <= 0.0f)
-			{
-				OnChargeMenu();
-				return;
-			}
-			
-			PlayerPrefs.SetFloat("fPlayer1Tired", PlayerPrefs.GetFloat("fPlayer1Tired") - 15.0f);
-		}
-		else if (m_PlayerData.m_PlayerID == PLAYER_ID.LASER) {
 
-			//Buy
-			if (m_iCurrentLock == 1) {
-
-				if(PlayerPrefs.GetInt("Player1Lock") != 0)
-				{
-					//Lock
-					return;
-				}
-
-				if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
-					OnBuyMenu();
-				}
-				else
-					OnNoMoneyMenu();
-
-				return;
-			}
-
-			//Charge
-			if(PlayerPrefs.GetFloat("fPlayer2Tired") <= 0.0f)
-			{
-				OnChargeMenu();
-				return;
-			}
-			
-			PlayerPrefs.SetFloat("fPlayer2Tired", PlayerPrefs.GetFloat("fPlayer2Tired") - 18.0f);
-		}
-		else if (m_PlayerData.m_PlayerID == PLAYER_ID.HOMING) {
-			//Buy
-			if (m_iCurrentLock == 1) {
-				
-				if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
-					OnBuyMenu();
-				}
-				else
-					OnNoMoneyMenu();
-
-				return;
-			}
-
-			//Charge
-			if(PlayerPrefs.GetFloat("fPlayer3Tired") <= 0.0f)
-			{
-				OnChargeMenu();
-				return;
-			}
-			
-			PlayerPrefs.SetFloat("fPlayer3Tired", PlayerPrefs.GetFloat("fPlayer3Tired") - 20.0f);
-		}else if (m_PlayerData.m_PlayerID == PLAYER_ID.BOOM) {
-			//Buy
-			if (m_iCurrentLock == 1) {
-				if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
-					OnBuyMenu();
-				}
-				else
-					OnNoMoneyMenu();
-
-				return;
-			}
-
-			//Charge
-			if(PlayerPrefs.GetFloat("fPlayer4Tired") <= 0.0f)
-			{
-				OnChargeMenu();
-				return;
-			}
-			
-			PlayerPrefs.SetFloat("fPlayer4Tired", PlayerPrefs.GetFloat("fPlayer4Tired") - 25.0f);
-		}
-		//<-----End
 
 		//Game Start 
 		m_objScrollView.SetActive (false);
 		m_objEndBack.SetActive (true);
 		m_PlayerData.m_iCurrentPlayNum += 1;
-		PlayerPrefs.SetInt ("PlayNum", PlayerPrefs.GetInt("PlayNum") + 1);
+		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
 		Application.LoadLevel ("02_Game");
 		m_bTimeInit = false;
 
@@ -452,34 +335,14 @@ public partial class BtnManager : MonoBehaviour {
 	public void OnMoneyChargeBtn()
 	{
 		Play_BtnSound ();
-		if (m_PlayerData.m_iChargePrice <= PlayerPrefs.GetInt ("HaveCoin")) {
+		if (m_PlayerData.m_iChargePrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("HaveCoin").ToString());
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
-			PlayerPrefs.SetInt ("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") - m_PlayerData.m_iChargePrice);
+			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iChargePrice;
 
-			switch (m_PlayerData.m_PlayerID) {
-			case PLAYER_ID.NORMAL:
-				PlayerPrefs.SetFloat ("fPlayer0Tired", 100.0f);
-				PlayerPrefs.SetInt ("IsCharging0", 0);
-				break;
-			case PLAYER_ID.SPREAD:
-				PlayerPrefs.SetFloat ("fPlayer1Tired", 100.0f);
-				PlayerPrefs.SetInt ("IsCharging1", 0);
-				break;
-			case PLAYER_ID.LASER:
-				PlayerPrefs.SetFloat ("fPlayer2Tired", 100.0f);
-				PlayerPrefs.SetInt ("IsCharging2", 0);
-				break;
-			case PLAYER_ID.HOMING:
-				PlayerPrefs.SetFloat ("fPlayer3Tired", 100.0f);
-				PlayerPrefs.SetInt ("IsCharging3", 0);
-				break;
-			case PLAYER_ID.BOOM:
-				PlayerPrefs.SetFloat ("fPlayer4Tired", 100.0f);
-				PlayerPrefs.SetInt ("IsCharging4", 0);
-				break;
-			}
+			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].fTiredPercent = 100.0f;
+			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsSleep = false;
 
 			MainBackBtn_Click ();
 		} else
@@ -489,32 +352,12 @@ public partial class BtnManager : MonoBehaviour {
 	public void OnClickBuyBtn()
 	{
 		Play_BtnSound ();
-		if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
+		if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("PlayNum").ToString());
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iPlayNum.ToString());
 		
-			switch (m_PlayerData.m_PlayerID) {
-			case PLAYER_ID.NORMAL:
-				PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") -m_PlayerData.m_iBuyPrice);
-				PlayerPrefs.SetInt("Player0Lock", 0);
-				break;
-			case PLAYER_ID.SPREAD:
-				PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") -m_PlayerData.m_iBuyPrice);
-				PlayerPrefs.SetInt("Player1Lock", 0);
-				break;
-			case PLAYER_ID.LASER:
-				PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") -m_PlayerData.m_iBuyPrice);
-				PlayerPrefs.SetInt("Player2Lock", 0);
-				break;
-			case PLAYER_ID.HOMING:
-				PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") -m_PlayerData.m_iBuyPrice);
-				PlayerPrefs.SetInt("Player3Lock", 0);
-				break;
-			case PLAYER_ID.BOOM:
-				PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") -m_PlayerData.m_iBuyPrice);
-				PlayerPrefs.SetInt("Player4Lock", 0);
-				break;
-			}
+			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iBuyPrice;
+			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock = false;
 			
 			MainBackBtn_Click();
 		}
@@ -522,32 +365,11 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void ChargeTired()
 	{
-			switch (m_PlayerData.m_PlayerID) {
-		case PLAYER_ID.NORMAL:
-			PlayerPrefs.SetFloat ("fPlayer0Tired", 100.0f);
-			PlayerPrefs.SetInt ("IsCharging0", 0);
-			break;
-		case PLAYER_ID.SPREAD:
-			PlayerPrefs.SetFloat ("fPlayer1Tired", 100.0f);
-			PlayerPrefs.SetInt ("IsCharging1", 0);
-			break;
-		case PLAYER_ID.LASER:
+		m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].fTiredPercent = 100.0f;
+		m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].bIsSleep = false;
 
-			Debug.Log("charge");
-			PlayerPrefs.SetFloat ("fPlayer2Tired", 100.0f);
-			PlayerPrefs.SetInt ("IsCharging2", 0);
-			break;
-		case PLAYER_ID.HOMING:
-			PlayerPrefs.SetFloat ("fPlayer3Tired", 100.0f);
-			PlayerPrefs.SetInt ("IsCharging3", 0);
-			break;
-		case PLAYER_ID.BOOM:
-			PlayerPrefs.SetFloat ("fPlayer4Tired", 100.0f);
-			PlayerPrefs.SetInt ("IsCharging4", 0);
-			break;
-		}
 
-			MainBackBtn_Click();
+		MainBackBtn_Click();
 	}
 
 
@@ -557,150 +379,27 @@ public partial class BtnManager : MonoBehaviour {
 			return;
 
 		System.DateTime CurrentTime = System.DateTime.Now;
-		
-		//player0 Chargetime setting
-		if (PlayerPrefs.GetFloat ("fPlayer0Tired") <= 0.0f) {
 
-			if(PlayerPrefs.GetInt("IsCharging0") == 0)		//Time Setting
-			{
 
-				PlayerPrefs.SetInt ("IsCharging0", 1);
-				CurrentTime = CurrentTime.AddMinutes(PlayerPrefs.GetFloat("Player0ChargeTime"));
-				
-				PlayerPrefs.SetInt("TargetYear0", CurrentTime.Year);
-				PlayerPrefs.SetInt("TargetMonth0", CurrentTime.Month);
-				PlayerPrefs.SetInt("TargetDay0", CurrentTime.Day);
-				PlayerPrefs.SetInt("TargetHour0", CurrentTime.Hour);
-				PlayerPrefs.SetInt("TargetMin0", CurrentTime.Minute);
-				PlayerPrefs.SetInt("TargetSec0", CurrentTime.Second);
-			}
+		//player change state to SLEEP 
 
-			System.DateTime TargetTime = new System.DateTime(PlayerPrefs.GetInt("TargetYear0"), PlayerPrefs.GetInt("TargetMonth0"), PlayerPrefs.GetInt("TargetDay0"),
-			                                                 PlayerPrefs.GetInt("TargetHour0"),  PlayerPrefs.GetInt("TargetMin0"),  PlayerPrefs.GetInt("TargetSec0") ); 
-			
-			if(TargetTime <= System.DateTime.Now)
-			{
-				PlayerPrefs.SetInt ("IsCharging0", 0);
-				ChargeTired();
-			}
+		for (int i = 0; i < m_PlayerData.m_Gamedata.m_iTotalPlayerNum; ++i) {
+			if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].fTiredPercent <= 0.0f) {
 
-		}
-		
-		//player1 Chargetime setting
-		if (PlayerPrefs.GetFloat ("fPlayer1Tired") <= 0.0f) {
-			
-			CurrentTime = System.DateTime.Now;
-			
-			if(PlayerPrefs.GetInt("IsCharging1") == 0)		//Time Setting
-			{
-				PlayerPrefs.SetInt ("IsCharging1", 1);
-				CurrentTime = CurrentTime.AddMinutes(PlayerPrefs.GetFloat("Player1ChargeTime"));
-				
-				PlayerPrefs.SetInt("TargetYear1", CurrentTime.Year);
-				PlayerPrefs.SetInt("TargetMonth1", CurrentTime.Month);
-				PlayerPrefs.SetInt("TargetDay1", CurrentTime.Day);
-				PlayerPrefs.SetInt("TargetHour1", CurrentTime.Hour);
-				PlayerPrefs.SetInt("TargetMin1", CurrentTime.Minute);
-				PlayerPrefs.SetInt("TargetSec1", CurrentTime.Second);
-			}	
+				if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep == false) {		//Time Setting
 
-			System.DateTime TargetTime = new System.DateTime(PlayerPrefs.GetInt("TargetYear1"), PlayerPrefs.GetInt("TargetMonth1"), PlayerPrefs.GetInt("TargetDay1"),
-			                                                 PlayerPrefs.GetInt("TargetHour1"),  PlayerPrefs.GetInt("TargetMin1"),  PlayerPrefs.GetInt("TargetSec1") ); 
-			
-			if(TargetTime <= System.DateTime.Now)
-			{
-				PlayerPrefs.SetInt ("IsCharging1", 0);
-				ChargeTired();
+					m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = true;
+					CurrentTime = CurrentTime.AddMinutes (m_PlayerData.m_Gamedata.m_PlayerInfo [i].iSleepMin);
+					m_PlayerData.m_Gamedata.m_PlayerInfo [i].SleepEnd_Time = CurrentTime;
+				}
+
+				if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].SleepEnd_Time <= System.DateTime.Now) {
+					m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = false;
+					ChargeTired ();
+				}
+
 			}
 		}
-		
-		//player2 Chargetime setting
-		if (PlayerPrefs.GetFloat ("fPlayer2Tired") <= 0.0f) {
-			
-			CurrentTime = System.DateTime.Now;
-			
-			if(PlayerPrefs.GetInt("IsCharging2") == 0)		//Time Setting
-			{
-				PlayerPrefs.SetInt ("IsCharging2", 1);
-				CurrentTime = CurrentTime.AddMinutes(PlayerPrefs.GetFloat("Player2ChargeTime"));
-				
-				PlayerPrefs.SetInt("TargetYear2", CurrentTime.Year);
-				PlayerPrefs.SetInt("TargetMonth2", CurrentTime.Month);
-				PlayerPrefs.SetInt("TargetDay2", CurrentTime.Day);
-				PlayerPrefs.SetInt("TargetHour2", CurrentTime.Hour);
-				PlayerPrefs.SetInt("TargetMin2", CurrentTime.Minute);
-				PlayerPrefs.SetInt("TargetSec2", CurrentTime.Second);
-			}
-
-			System.DateTime TargetTime = new System.DateTime(PlayerPrefs.GetInt("TargetYear2"), PlayerPrefs.GetInt("TargetMonth2"), PlayerPrefs.GetInt("TargetDay2"),
-			                                                 PlayerPrefs.GetInt("TargetHour2"),  PlayerPrefs.GetInt("TargetMin2"),  PlayerPrefs.GetInt("TargetSec2") ); 
-			
-			if(TargetTime <= System.DateTime.Now)
-			{
-				PlayerPrefs.SetInt ("IsCharging2", 0);
-				ChargeTired();
-			}
-
-		}
-		
-		//player3 Chargetime setting
-		if (PlayerPrefs.GetFloat ("fPlayer3Tired") <= 0.0f) {
-			
-			CurrentTime = System.DateTime.Now;
-			
-			if(PlayerPrefs.GetInt("IsCharging3") == 0)		//Time Setting
-			{
-				PlayerPrefs.SetInt ("IsCharging3", 1);
-				CurrentTime = CurrentTime.AddMinutes(PlayerPrefs.GetFloat("Player3ChargeTime"));
-				
-				PlayerPrefs.SetInt("TargetYear3", CurrentTime.Year);
-				PlayerPrefs.SetInt("TargetMonth3", CurrentTime.Month);
-				PlayerPrefs.SetInt("TargetDay3", CurrentTime.Day);
-				PlayerPrefs.SetInt("TargetHour3", CurrentTime.Hour);
-				PlayerPrefs.SetInt("TargetMin3", CurrentTime.Minute);
-				PlayerPrefs.SetInt("TargetSec3", CurrentTime.Second);
-			}
-
-			System.DateTime TargetTime = new System.DateTime(PlayerPrefs.GetInt("TargetYear3"), PlayerPrefs.GetInt("TargetMonth3"), PlayerPrefs.GetInt("TargetDay3"),
-			                                                 PlayerPrefs.GetInt("TargetHour3"),  PlayerPrefs.GetInt("TargetMin3"),  PlayerPrefs.GetInt("TargetSec3") ); 
-			
-			if(TargetTime <= System.DateTime.Now)
-			{
-				PlayerPrefs.SetInt ("IsCharging3", 0);
-				ChargeTired();
-			}
-			
-		}
-		
-		//player4 Chargetime setting
-		if (PlayerPrefs.GetFloat ("fPlayer4Tired") <= 0.0f) {
-			
-			CurrentTime = System.DateTime.Now;
-			
-			if(PlayerPrefs.GetInt("IsCharging4") == 0)		//Time Setting
-			{
-				PlayerPrefs.SetInt ("IsCharging4", 1);
-				CurrentTime = CurrentTime.AddMinutes(PlayerPrefs.GetFloat("Player4ChargeTime"));
-				
-				PlayerPrefs.SetInt("TargetYear4", CurrentTime.Year);
-				PlayerPrefs.SetInt("TargetMonth4", CurrentTime.Month);
-				PlayerPrefs.SetInt("TargetDay4", CurrentTime.Day);
-				PlayerPrefs.SetInt("TargetHour4", CurrentTime.Hour);
-				PlayerPrefs.SetInt("TargetMin4", CurrentTime.Minute);
-				PlayerPrefs.SetInt("TargetSec4", CurrentTime.Second);
-			}
-
-			System.DateTime TargetTime = new System.DateTime(PlayerPrefs.GetInt("TargetYear4"), PlayerPrefs.GetInt("TargetMonth4"), PlayerPrefs.GetInt("TargetDay4"),
-			                                                 PlayerPrefs.GetInt("TargetHour4"),  PlayerPrefs.GetInt("TargetMin4"),  PlayerPrefs.GetInt("TargetSec4") ); 
-			
-			if(TargetTime <= System.DateTime.Now)
-			{
-				PlayerPrefs.SetInt ("IsCharging4", 0);
-				ChargeTired();
-			}
-			
-		}
-
 
 
 	}
@@ -708,7 +407,7 @@ public partial class BtnManager : MonoBehaviour {
 	//unityads
 	public void AdsBtnClick()
 	{
-		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("HaveCoin").ToString());
+		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 		if (!AdFuctions.Show_UnityAds ()) {
 			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
@@ -741,8 +440,9 @@ public partial class BtnManager : MonoBehaviour {
 
 			int iPlayerId = (int)m_PlayerData.m_PlayerID;
 
-			PlayerPrefs.SetFloat (string.Format("fPlayer{0}Tired", iPlayerId), 100.0f);
-			PlayerPrefs.SetInt (string.Format("IsCharging{0}", iPlayerId), 0);
+			m_PlayerData.m_Gamedata.m_PlayerInfo[iPlayerId].fTiredPercent = 100.0f;
+			m_PlayerData.m_Gamedata.m_PlayerInfo[iPlayerId].bIsSleep = false;
+
 
 				AdFuctions.m_bAdsComplete = false;
 				m_bAdsOn = false;

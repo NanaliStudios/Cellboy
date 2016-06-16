@@ -1,25 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class FileSystem : MonoBehaviour {
 	
-	public void writeStringToFile( string str, string filename )
+	public static byte[] WriteGameDataFromFile( GameData myGamedata, string filename )
 	{
 		#if !WEB_BUILD
 		string path = pathForDocumentsFile( filename );
 		FileStream file = new FileStream (path, FileMode.Create, FileAccess.Write);
 		
-		StreamWriter sw = new StreamWriter( file );
-		sw.WriteLine( str );
+		//StreamWriter sw = new StreamWriter( file );
+
+
+		BinaryFormatter b = new BinaryFormatter();
+		b.Serialize(file, myGamedata);
+
+		//cloud
+		byte[] fileBytes = null;
+		fileBytes = new byte[file.Length];
+
+		int bytecount = 0;
+
+		while(bytecount > 0)
+		{
+			int n = file.Read(fileBytes, bytecount, fileBytes.Length); 
+
+			if(n == 0)
+				break;
+		}
+		//sw.Write(); 
 		
-		sw.Close();
+		//sw.Close();
 		file.Close();
+
+		return fileBytes;
 		#endif
 	}
 	
 	
-	public string readStringFromFile( string filename)//, int lineIndex )
+	public static GameData ReadGameDataFromFile( string filename)//, int lineIndex )
 	{
 		#if !WEB_BUILD
 		string path = pathForDocumentsFile( filename );
@@ -29,13 +50,12 @@ public class FileSystem : MonoBehaviour {
 			FileStream file = new FileStream (path, FileMode.Open, FileAccess.Read);
 			StreamReader sr = new StreamReader( file );
 			
-			string str = null;
-			str = sr.ReadLine ();
-			
-			sr.Close();
+			BinaryFormatter b = new BinaryFormatter();
+			GameData ReadData = b.Deserialize(file) as GameData;
+		
 			file.Close();
 			
-			return str;
+			return ReadData;
 		}
 		
 		else
@@ -47,7 +67,7 @@ public class FileSystem : MonoBehaviour {
 		#endif 
 	}
 
-	public string pathForDocumentsFile( string filename ) 
+	public static string pathForDocumentsFile( string filename ) 
 	{ 
 		if (Application.platform == RuntimePlatform.IPhonePlayer)
 		{

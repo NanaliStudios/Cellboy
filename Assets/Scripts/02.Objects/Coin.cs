@@ -24,7 +24,7 @@ public class Coin : Item {
 			Destroy (gameObject);
 
 		if (m_bIsGet == true) {
-			PlayerPrefs.SetInt("HaveCoin", PlayerPrefs.GetInt("HaveCoin") +  m_iAddCoin);
+			m_GameSys.m_PlayerData.m_Gamedata.m_iHaveCoin += m_iAddCoin;
 			Destroy(gameObject);
 		}
 	}

@@ -36,8 +36,7 @@ class AdFuctions
 	//===Show===
 	public static void Show_GoogleAD()
 	{
-		if(PlayerPrefs.GetInt ("ADS_Key") == 0)
-			m_GoogleAD.ShowBanner ();
+		m_GoogleAD.ShowBanner ();
 	}
 
 	public static bool Show_UnityAds()

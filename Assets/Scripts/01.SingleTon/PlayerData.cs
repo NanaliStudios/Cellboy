@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.Advertisements;
 using TapjoyUnity;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 //using ChartboostSDK;
 
 public class PlayerData : MonoBehaviour {
@@ -26,61 +28,51 @@ public class PlayerData : MonoBehaviour {
 	public float m_fPlayer2_ChargeTime = 60;
 	public float m_fPlayer3_ChargeTime = 240;
 	public float m_fPlayer4_ChargeTime = 360;
-
-	public FileSystem m_FileSystem = null;
+	
 	public GameData m_Gamedata = null;
 
 	void Awake()
 	{
 	}
 
+	
+	private void ActionAvailableGameSavesLoaded (GooglePlayResult res) {
+		GP_SnapshotMeta s =  GooglePlaySavedGamesManager.instance.AvailableGameSaves[0];
+		GooglePlaySavedGamesManager.instance.LoadSpanshotByName(s.Title);
+	}
+
+	private void ActionGameSaveLoaded (GP_SpanshotLoadResult result) {
+
+		byte[] Data = result.Snapshot.bytes;
+		BinaryFormatter b = new BinaryFormatter ();
+		MemoryStream m = new MemoryStream ();
+	 	m.Write(Data, 0, Data.Length); 
+		m_Gamedata = b.Deserialize (m) as GameData;
+
+	}
+
 	// Use this for initialization
 	void Start () {
 
 		Application.targetFrameRate = 60;
-
+		GooglePlaySavedGamesManager.ActionAvailableGameSavesLoaded += ActionAvailableGameSavesLoaded;
+		GooglePlaySavedGamesManager.ActionGameSaveLoaded += ActionGameSaveLoaded;
 		//data for cloud 
-//		if(GameSDK_Funcs.)
-//		m_FileSystem.
+		//if(GameSDK_Funcs.cloud)
+		//m_FileSystem.
 	
 		//fordebug
-		PlayerPrefs.DeleteAll ();	
+		//PlayerPrefs.DeleteAll ();	
 
-		if (PlayerPrefs.GetInt ("PlayNum") == 0) {
-			PlayerPrefs.DeleteAll ();	
-			PlayerPrefs.SetInt ("PlayNum", 0);
-			
-			PlayerPrefs.SetInt ("HighScore", 0);
-			PlayerPrefs.SetInt ("HaveCoin", 0);
-			
-			PlayerPrefs.SetFloat ("fPlayer0Tired", 100.0f);
-			PlayerPrefs.SetFloat ("fPlayer1Tired", 100.0f);
-			PlayerPrefs.SetFloat ("fPlayer2Tired", 100.0f);
-			PlayerPrefs.SetFloat ("fPlayer3Tired", 100.0f);
-			PlayerPrefs.SetFloat ("fPlayer4Tired", 100.0f);
+		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 0) {
 
-			PlayerPrefs.SetFloat ("Player0ChargeTime", m_fPlayer0_ChargeTime);
-			PlayerPrefs.SetFloat ("Player1ChargeTime", m_fPlayer1_ChargeTime);
-			PlayerPrefs.SetFloat ("Player2ChargeTime", m_fPlayer2_ChargeTime);
-			PlayerPrefs.SetFloat ("Player3ChargeTime", m_fPlayer3_ChargeTime);
-			PlayerPrefs.SetFloat ("Player4ChargeTime", m_fPlayer4_ChargeTime);
+			//for cloud data
+			Create_SaveData();
 
-			//
-			PlayerPrefs.SetInt ("IsCharging0", 0);
-			PlayerPrefs.SetInt ("IsCharging1", 0);
-			PlayerPrefs.SetInt ("IsCharging2", 0);
-			PlayerPrefs.SetInt ("IsCharging3", 0);
-			PlayerPrefs.SetInt ("IsCharging4", 0);
-
-			PlayerPrefs.SetInt ("Player0Lock", 0);
-			PlayerPrefs.SetInt ("Player1Lock", 1);
-			PlayerPrefs.SetInt ("Player2Lock", 1);
-			PlayerPrefs.SetInt ("Player3Lock", 1);
-			PlayerPrefs.SetInt ("Player4Lock", 1);
-
-
-			Debug.Log("PlayerPrefs Initialize");
-		} 
+			Debug.Log("GameData Loaded");
+		}
+		else
+		GameData_Load ();
 
 		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
 		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
@@ -90,5 +82,49 @@ public class PlayerData : MonoBehaviour {
 
 
 		DontDestroyOnLoad (this);
+	}
+
+	public void Create_SaveData()
+	{
+		GameData MyGameData = new GameData();
+		MyGameData.Initialize();
+		FileSystem.WriteGameDataFromFile(MyGameData, "SaveData");
+		
+		m_Gamedata = MyGameData;
+	}
+
+
+	public void GameData_Save()
+	{
+		byte[] byteData = FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
+
+		if (GameSDK_Funcs.isInitialized ()) {
+			BinaryFormatter b = new BinaryFormatter();
+			MemoryStream m = new MemoryStream();
+
+			b.Serialize(m, m_Gamedata);
+
+
+			GameSDK_Funcs.Do_CloudSave (m.GetBuffer());
+		}
+	}
+
+	public void GameData_Load()
+	{
+		if (GameSDK_Funcs.isInitialized ())
+			GameSDK_Funcs.Do_CloudLoad ();
+//		else
+//		
+//		m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
+//
+//
+//		if (m_Gamedata == null)
+//			Create_SaveData ();
+
+	}
+
+	void OnApplicationQuit() {
+		GameData_Save ();
+		Debug.Log ("Game Quit");
 	}
 }

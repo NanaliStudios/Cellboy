@@ -239,10 +239,10 @@ public class Player : ObjectBase {
 			m_fInputWaitTimer = 0.0f;
 			m_MyRigid.Sleep();
 
-			if(PlayerPrefs.GetInt("HighScore") < m_GameSys.m_iCurrent_GameScore)
+			if(m_GameSys.m_PlayerData.m_Gamedata.m_iHaveCoin < m_GameSys.m_iCurrent_GameScore)
 			{
 				m_GameSys.WinHighScore();
-				PlayerPrefs.SetInt("HighScore", m_GameSys.m_iCurrent_GameScore);
+				m_GameSys.m_PlayerData.m_Gamedata.m_iHighScore = m_GameSys.m_iCurrent_GameScore;
 			}
 
 			if(m_GameSys.m_iCurrent_GameScore >= 15

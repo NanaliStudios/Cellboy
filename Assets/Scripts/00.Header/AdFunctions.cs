@@ -4,13 +4,27 @@ using UnityEngine.Advertisements;
 
 class AdFuctions
 {
+	private static GoogleAdManager m_GoogleAD = null;
 	public static bool m_bAdsComplete = false;
 
-	public static bool Init_UnityAds()
+	public static void Initialize()
 	{
+		//unityad init
 		Advertisement.Initialize ("1077035", true);
+	
+		//google admob init
+		m_GoogleAD = new GoogleAdManager();
+		m_GoogleAD.Initialize ();
+	
+	}
 
-		return Advertisement.isInitialized;
+	public static bool isInitialized()
+	{
+		if (Advertisement.isInitialized &&
+		    m_GoogleAD.isInitialized ())
+			return true;
+	
+		return false;
 	}
 
 	public static bool Check_UnityAdsRdy()
@@ -18,14 +32,28 @@ class AdFuctions
 		return Advertisement.IsReady();
 	}
 
-	public static void ShowUnityAds()
+
+	//===Show===
+	public static void Show_GoogleAD()
 	{
-		if (Check_UnityAdsRdy()) //동영상이 준비 되었으면
-		{
-			ShowOptions opt = new ShowOptions();
+		if(PlayerPrefs.GetInt ("ADS_Key") == 0)
+			m_GoogleAD.ShowBanner ();
+	}
+
+	public static bool Show_UnityAds()
+	{
+		if (!Advertisement.isInitialized)
+			return false;
+
+		if (Check_UnityAdsRdy ()) { //동영상이 준비 되었으면
+			ShowOptions opt = new ShowOptions ();
 			opt.resultCallback = OnShowResult;
-			Advertisement.Show(null, opt);
-		}
+			Advertisement.Show (null, opt);
+		} else
+			return false;
+
+		return true;
+
 	}
 	
 	public static void OnShowResult(ShowResult ret)

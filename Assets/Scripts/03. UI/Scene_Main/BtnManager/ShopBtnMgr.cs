@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TapjoyUnity;
 
 public partial class BtnManager : MonoBehaviour {
 
@@ -11,11 +12,16 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void Buy200CoinBtn_Click()
 	{
-		AndroidInAppPurchaseManager.Client.Purchase ("coin_200");
+		GameSDK_Funcs.Purcahse_Item ("coin_200");
 
-
-		if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+		if (GameSDK_Funcs.Check_IsPurchased ("coin_200"))
 			PlayerPrefs.SetInt ("HaveCoin", PlayerPrefs.GetInt("HaveCoin") + 200);
-		}
+	}
+
+	//
+	public void NoAdsBtn_Click()
+	{
+		PlayerPrefs.SetInt ("ADS_Key", 1);
+		Application.LoadLevel ("00_Logo");
 	}
 }

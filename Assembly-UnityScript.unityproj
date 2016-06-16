@@ -101,6 +101,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
+     <None Include="Assets\link.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\app_licensing\an_licensing_library.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Bones.shader" />

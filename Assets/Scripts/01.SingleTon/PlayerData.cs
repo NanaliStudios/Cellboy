@@ -27,30 +27,21 @@ public class PlayerData : MonoBehaviour {
 	public float m_fPlayer3_ChargeTime = 240;
 	public float m_fPlayer4_ChargeTime = 360;
 
+	public FileSystem m_FileSystem = null;
+	public GameData m_Gamedata = null;
+
 	void Awake()
 	{
-//		GooglePlayManager.ActionAvailableDeviceAccountsLoaded += delegate {
-//			string msg = "Device contains following google accounts:" + "\n";
-//			foreach(string acc in GooglePlayManager.Instance.deviceGoogleAccountList) {
-//				msg += acc + "\n";
-//			} 
-//
-//			GooglePlayConnection.Instance.Connect(GooglePlayManager.Instance.deviceGoogleAccountList[0]);
-//		};
-//
-//
-//		GooglePlayManager.Instance.RetrieveDeviceGoogleAccounts();
-
-		AudioListener.volume = 20;
-
-		AndroidInAppPurchaseManager.Client.AddProduct("coin_200");
-		AndroidInAppPurchaseManager.Client.Connect ();
 	}
 
 	// Use this for initialization
 	void Start () {
-		Advertisement.Initialize ("1077035", true);
+
 		Application.targetFrameRate = 60;
+
+		//data for cloud 
+//		if(GameSDK_Funcs.)
+//		m_FileSystem.
 	
 		//fordebug
 		PlayerPrefs.DeleteAll ();	
@@ -87,6 +78,7 @@ public class PlayerData : MonoBehaviour {
 			PlayerPrefs.SetInt ("Player3Lock", 1);
 			PlayerPrefs.SetInt ("Player4Lock", 1);
 
+
 			Debug.Log("PlayerPrefs Initialize");
 		} 
 
@@ -95,6 +87,7 @@ public class PlayerData : MonoBehaviour {
 		m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 
 		TapjoyManager.Instance.ContentsReady ("Notice");
+
 
 		DontDestroyOnLoad (this);
 	}

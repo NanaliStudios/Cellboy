@@ -29,6 +29,8 @@ public partial class BtnManager : MonoBehaviour {
 	public bool m_bTimeInit = true;
 	public bool m_bAdsOn = false;
 
+	public GameObject m_NetworkFail_Label = null;
+
 	public MAINMENU_STATE m_MenuStateID = MAINMENU_STATE.MAIN;
 
 	private float m_fCurrentTired = 100.0f;
@@ -39,6 +41,7 @@ public partial class BtnManager : MonoBehaviour {
 	private AudioClip m_ScrollClip = null;
 
 	public GameObject m_objSoundBtn = null;
+	public GameObject Admob_Back = null;
 	
 
 	private bool m_bStart = true;
@@ -47,6 +50,9 @@ public partial class BtnManager : MonoBehaviour {
 	void Awake()
 	{
 		m_fCurrentTired = 100.0f;
+
+			if ((Screen.width / 3) * 4 == Screen.height)
+				Camera.main.orthographicSize = 4.5f;
 	}
 
 	void Start()
@@ -98,6 +104,13 @@ public partial class BtnManager : MonoBehaviour {
 
 		if(AudioListener.volume != 0)
 			SoundOnOffBtn_Click ();
+
+		//ads
+		if (PlayerPrefs.GetInt ("IsAdOn") == 1)
+			Admob_Back.SetActive (true);
+		else
+			Admob_Back.SetActive (false);
+
 	
 	}
 
@@ -390,7 +403,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void LeaderboardBtn_Click()
 	{
-		GooglePlayManager.Instance.ShowLeaderBoardById ("CgkI-5Pv_oYcEAIQAQ");
+		GameSDK_Funcs.Show_LeaderBoard ();
 
 	}
 
@@ -441,6 +454,8 @@ public partial class BtnManager : MonoBehaviour {
 		Play_BtnSound ();
 		if (m_PlayerData.m_iChargePrice <= PlayerPrefs.GetInt ("HaveCoin")) {
 
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("HaveCoin").ToString());
+
 			PlayerPrefs.SetInt ("HaveCoin", PlayerPrefs.GetInt ("HaveCoin") - m_PlayerData.m_iChargePrice);
 
 			switch (m_PlayerData.m_PlayerID) {
@@ -475,6 +490,8 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		Play_BtnSound ();
 		if (m_PlayerData.m_iBuyPrice <= PlayerPrefs.GetInt ("HaveCoin")) {
+
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("PlayNum").ToString());
 		
 			switch (m_PlayerData.m_PlayerID) {
 			case PLAYER_ID.NORMAL:
@@ -691,7 +708,13 @@ public partial class BtnManager : MonoBehaviour {
 	//unityads
 	public void AdsBtnClick()
 	{
-		//AdFuctions.ShowUnityAds ();
+		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, PlayerPrefs.GetInt("HaveCoin").ToString());
+
+		if (!AdFuctions.Show_UnityAds ()) {
+			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
+			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
+			m_NetworkFail_Label.SetActive (true);
+		}
 		m_bAdsOn = true;
 		
 	}
@@ -711,22 +734,22 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void Check_AdsReward()
 	{
-//		if (m_bAdsOn == true) {
-//
-//			if(AdFuctions.m_bAdsComplete == true)
-//			{
-//
-//			int iPlayerId = (int)m_PlayerData.m_PlayerID;
-//
-//			PlayerPrefs.SetFloat (string.Format("fPlayer{0}Tired", iPlayerId), 100.0f);
-//			PlayerPrefs.SetInt (string.Format("IsCharging{0}", iPlayerId), 0);
-//
-//				AdFuctions.m_bAdsComplete = false;
-//				m_bAdsOn = false;
-//				MainBackBtn_Click();
-//			}
-//	
-//		}
+		if (m_bAdsOn == true) {
+
+			if(AdFuctions.m_bAdsComplete == true)
+			{
+
+			int iPlayerId = (int)m_PlayerData.m_PlayerID;
+
+			PlayerPrefs.SetFloat (string.Format("fPlayer{0}Tired", iPlayerId), 100.0f);
+			PlayerPrefs.SetInt (string.Format("IsCharging{0}", iPlayerId), 0);
+
+				AdFuctions.m_bAdsComplete = false;
+				m_bAdsOn = false;
+				MainBackBtn_Click();
+			}
+	
+		}
 	}
 
 

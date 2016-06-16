@@ -1,0 +1,5 @@
+<linker>
+  <assembly fullname="Tapjoy">
+    <type fullname="TapjoyUnity.Internal.ApiBindingIos" preserve="all" />
+  </assembly>
+</linker>

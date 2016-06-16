@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameSystem : MonoBehaviour {
+public partial class GameSystem : MonoBehaviour {
 
 
 	[HideInInspector] public FileSystem m_FileSys = null;
@@ -20,6 +20,11 @@ public class GameSystem : MonoBehaviour {
 	public GameObject m_ContinueMenu = null;
 	public GameObject m_GameOver = null;
 	public GameObject m_Tutorial = null;
+
+	public GameObject Admob_Back = null;
+
+	//==UI_Label==
+	public GameObject m_NetworkFail_Label = null;
 
 	//===Ads===
 	public bool m_bAdsOn = false;
@@ -44,6 +49,12 @@ public class GameSystem : MonoBehaviour {
 
 //	public StageInfo m_ArrayStageInfo;
 	//<-----End
+
+	void Awake()
+	{
+		if ((Screen.width / 3) * 4 == Screen.height)
+			Camera.main.orthographicSize = 4.5f;
+	}
 
 	void Start()
 	{
@@ -84,8 +95,6 @@ public class GameSystem : MonoBehaviour {
 		//<-----End
 
 		//Class Initialize----->
-		m_FileSys = new FileSystem ();
-		m_GameData = new GameData ();
 		m_PrefapMgr = new PrefapManager ();
 		m_PrefapMgr.Initialize ();
 		m_lvMgr = new LevelManager ();
@@ -98,6 +107,13 @@ public class GameSystem : MonoBehaviour {
 		//PlayerPrefs.DeleteAll ();
 
 		m_PlayerData.m_bWinHighScore = false;
+
+
+		//ads
+		if (PlayerPrefs.GetInt ("IsAdOn") == 1)
+			Admob_Back.SetActive (true);
+		else
+			Admob_Back.SetActive (false);
 
 		//<-----End
 
@@ -123,6 +139,9 @@ public class GameSystem : MonoBehaviour {
 				Check_AdsReward();
 			}
 			else{
+				//Game Over
+				TapjoyManager.Instance.TrackCustomEvent ("GameStatus", "GameOver", m_PlayerData.m_strPlayerName, m_iCurrent_GameScore.ToString());
+
 				Time.timeScale = 1;
 				m_PlayerData.m_iPlayCountForAd += 1;	 
 				Application.LoadLevel("00_Main");
@@ -158,7 +177,7 @@ public class GameSystem : MonoBehaviour {
 	{
 		m_PlayerData.m_bWinHighScore = true;
 		//google play
-		GooglePlayManager.Instance.SubmitScoreById ("CgkI-5Pv_oYcEAIQAQ", m_iCurrent_GameScore);
+		GameSDK_Funcs.SubmitScore_LeaderBoard (m_iCurrent_GameScore);
 	}
 
 	public void GameOver()
@@ -246,85 +265,6 @@ public class GameSystem : MonoBehaviour {
 		m_ContinueMenu.SetActive (true);
 		m_PauseBtn.SetActive (false);
 	}
-	//===Button===
-	public void OnClickPause()
-	{
-		Time.timeScale = 0.0f;
-		m_GameMenu.SetActive (false);
-		m_PauseMenu.SetActive (true);
-
-		m_PauseBtn.SetActive (false);
-	}
-
-	public void OnClickResume()
-	{
-		Time.timeScale = 1.0f;
-
-		m_GameMenu.SetActive (true);
-		m_PauseMenu.SetActive (false);
-		m_ContinueMenu.SetActive (false);
-
-		m_PauseBtn.SetActive (true);
-	}
-
-	public void OnClickHome()
-	{
-		Time.timeScale = 1.0f;
-		m_iCurrent_GameScore  = 0;
-		SetScore ();
-		Application.LoadLevel ("00_MAIN");
-	}
-
-	public void OnClickNoContinue()
-	{
-		m_bOnContinue = false;
-	}
-
-	//unityads
-	public void AdsBtnClick()
-	{
-		AdFuctions.ShowUnityAds ();
-		m_bAdsOn = true;
-		
-	}
-	
-	public void Check_AdsReward()
-	{
-		if (m_bAdsOn == true) {
-			
-			if(AdFuctions.m_bAdsComplete == true)
-			{
-				
-				//restart
-				GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
-
-				for(int i = 0; i < EnemyCase.transform.childCount; ++i)
-				{
-					if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
-						Destroy(EnemyCase.transform.GetChild(i).gameObject);
-					else
-					EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
-				}
-
-				m_objPlayer.transform.position = new Vector3(0.0f, -1.5f);
-				m_objPlayer.GetComponent<Player>().Set_AnimIdle();
-
-				m_bAdsOn = false;
-				m_bGameover = false;
-				m_fGameoverTimer = 0.0f;
-				m_bIsGameStart = false;
-				Physics2D.gravity = new Vector3 (0.0f, 0.0f, 0.0f);
-				AdFuctions.m_bAdsComplete = false;
-				m_CanRestart = false;
-				m_bOnContinue = false;
-				gameObject.GetComponent<AudioSource>().enabled = true;
-				OnClickResume();
-			}
-			
-		}
-	}
-
-	//<-----End
 
 
 	//==========SingleTon==========

@@ -175,21 +175,21 @@ public class SavedGamesExample : MonoBehaviour {
 
 	private void ActionGameSaveLoaded (GP_SpanshotLoadResult result) {
 
-		Debug.Log("ActionGameSaveLoaded: " + result.Message);
-		if(result.IsSucceeded) {
-
-			Debug.Log("Snapshot.Title: " 					+ result.Snapshot.meta.Title);
-			Debug.Log("Snapshot.Description: " 				+ result.Snapshot.meta.Description);
-			Debug.Log("Snapshot.CoverImageUrl): " 			+ result.Snapshot.meta.CoverImageUrl);
-			Debug.Log("Snapshot.LastModifiedTimestamp: " 	+ result.Snapshot.meta.LastModifiedTimestamp);
-
-			Debug.Log("Snapshot.stringData: " 				+ result.Snapshot.stringData);
-			Debug.Log("Snapshot.bytes.Length: " 			+ result.Snapshot.bytes.Length);
-
-			AndroidMessage.Create("Snapshot Loaded", "Data: " + result.Snapshot.stringData);
-		} 
-
-		SA_StatusBar.text = "Games Loaded: " + result.Message;
+//		Debug.Log("ActionGameSaveLoaded: " + result.Messagae);
+//		if(result.IsSucceeded) {
+//
+//			Debug.Log("Snapshot.Title: " 					+ result.Snapshot.meta.Title);
+//			Debug.Log("Snapshot.Description: " 				+ result.Snapshot.meta.Description);
+//			Debug.Log("Snapshot.CoverImageUrl): " 			+ result.Snapshot.meta.CoverImageUrl);
+//			Debug.Log("Snapshot.LastModifiedTimestamp: " 	+ result.Snapshot.meta.LastModifiedTimestamp);
+//
+//			Debug.Log("Snapshot.stringData: " 				+ result.Snapshot.stringData);
+//			Debug.Log("Snapshot.bytes.Length: " 			+ result.Snapshot.bytes.Length);
+//
+//			AndroidMessage.Create("Snapshot Loaded", "Data: " + result.Snapshot.stringData);
+//		} 
+//
+//		SA_StatusBar.text = "Games Loaded: " + result.Message;
 
 	}
 

@@ -3,65 +3,38 @@ using System.Collections;
 
 public class BackColor : MonoBehaviour {
 
+	public Color[] BackColorArray = new Color[14];
+	private TweenColor m_TweenColor = null;
+
 	// Use this for initialization
 	void Start () {
+		m_TweenColor = gameObject.GetComponent<TweenColor> ();
 
 		//Set Background Color
 		float RandColorR = Random.Range (0.0f, 1.0f);
 		float RandColorG = Random.Range (0.0f, 1.0f);
 		float RandColorB = Random.Range (0.0f, 1.0f);
 
-		int iRandColorKey = Random.Range (0, 14);
-		Color BackColor = Color.white;
+		BackColorArray[0] = new Color (201.0f / 255.0f, 18.0f / 255.0f, 125.0f / 255.0f);
+		BackColorArray[1] = new Color (209.0f / 255.0f, 82.0f / 255.0f, 27.0f / 255.0f);
+		BackColorArray[2] = new Color (3.0f / 255.0f, 95.0f / 255.0f, 194.0f / 255.0f);
+		BackColorArray[3] = new Color (255.0f / 255.0f, 77.0f / 255.0f, 107.0f / 255.0f);
+		BackColorArray[4] = new Color (3.0f / 255.0f, 95.0f / 255.0f, 194.0f / 255.0f);
+		BackColorArray[5] = new Color (200.0f / 255.0f, 18.0f / 255.0f, 18.0f / 255.0f);
+		BackColorArray[6] = new Color (72.0f / 255.0f, 72.0f / 255.0f, 72.0f / 255.0f);
+		BackColorArray[7] = new Color (115.0f / 255.0f, 27.0f / 255.0f, 151.0f / 255.0f);
+		BackColorArray[8] = new Color (45.0f / 255.0f, 199.0f / 255.0f, 154.0f / 255.0f);
+		BackColorArray[9] = new Color (121.0f / 255.0f, 167.0f / 255.0f, 49.0f / 255.0f);
+		BackColorArray[10] = new Color (0.0f / 255.0f, 144.0f / 255.0f, 112.0f / 255.0f);
+		BackColorArray[11] = new Color (165.0f / 255.0f, 60.0f / 255.0f, 190.0f / 255.0f);
+		BackColorArray[12] = new Color (91.0f / 255.0f, 38.0f / 255.0f, 255.0f / 255.0f);
+		BackColorArray[13] = new Color (112.0f / 255.0f, 84.0f / 255.0f, 255.0f / 246.0f);
 
 		if (Application.loadedLevelName == "00_MAIN") {
-			switch (iRandColorKey) {
-			case 0:
-				BackColor = new Color (201.0f / 255.0f, 18.0f / 255.0f, 125.0f / 255.0f);
-				break;
-			case 1:
-				BackColor = new Color (209.0f / 255.0f, 82.0f / 255.0f, 27.0f / 255.0f);
-				break;
-			case 2:
-				BackColor = new Color (3.0f / 255.0f, 95.0f / 255.0f, 194.0f / 255.0f);
-				break;
-			case 3:
-				BackColor = new Color (255.0f / 255.0f, 77.0f / 255.0f, 107.0f / 255.0f);
-				break;
-			case 4:
-				BackColor = new Color (3.0f / 255.0f, 95.0f / 255.0f, 194.0f / 255.0f);
-				break;
-			case 5:
-				BackColor = new Color (200.0f / 255.0f, 18.0f / 255.0f, 18.0f / 255.0f);
-				break;
-			case 6:
-				BackColor = new Color (72.0f / 255.0f, 72.0f / 255.0f, 72.0f / 255.0f);
-				break;
-			case 7:
-				BackColor = new Color (115.0f / 255.0f, 27.0f / 255.0f, 151.0f / 255.0f);
-				break;
-			case 8:
-				BackColor = new Color (45.0f / 255.0f, 199.0f / 255.0f, 154.0f / 255.0f);
-				break;
-			case 9:
-				BackColor = new Color (121.0f / 255.0f, 167.0f / 255.0f, 49.0f / 255.0f);
-				break;
-			case 10:
-				BackColor = new Color (0.0f / 255.0f, 144.0f / 255.0f, 112.0f / 255.0f);
-				break;
-			case 11:
-				BackColor = new Color (165.0f / 255.0f, 60.0f / 255.0f, 190.0f / 255.0f);
-				break;
-			case 12:
-				BackColor = new Color (91.0f / 255.0f, 38.0f / 255.0f, 255.0f / 255.0f);
-				break;
-			case 13:
-				BackColor = new Color (112.0f / 255.0f, 84.0f / 255.0f, 255.0f / 246.0f);
-				break;
-			}
-			GameObject.Find("PlayerData(Clone)").gameObject.GetComponent<PlayerData>().m_BackColor = BackColor;
-
-			gameObject.GetComponent<SpriteRenderer> ().color = BackColor;
+		
+			int iRandColorKey = Random.Range (0, 14);
+			GameObject.Find("PlayerData(Clone)").gameObject.GetComponent<PlayerData>().m_BackColor = BackColorArray[iRandColorKey];
+			gameObject.GetComponent<SpriteRenderer> ().color = BackColorArray[iRandColorKey];
 		} 
 		else {
 			gameObject.GetComponent<SpriteRenderer> ().color = GameObject.Find("PlayerData(Clone)").gameObject.GetComponent<PlayerData>().m_BackColor;
@@ -71,9 +44,16 @@ public class BackColor : MonoBehaviour {
 
 
 	}
+
+	public void SetRandColor()
+	{
+		int iRandColorKey = Random.Range (0, 14);
+		GameObject.Find("PlayerData(Clone)").gameObject.GetComponent<PlayerData>().m_BackColor = BackColorArray[iRandColorKey];
 	
-	// Update is called once per frame
-	void Update () {
-	
+		m_TweenColor.from = gameObject.GetComponent<SpriteRenderer> ().color;
+		m_TweenColor.to = BackColorArray[iRandColorKey];
+		m_TweenColor.ResetToBeginning ();
+
+		m_TweenColor.enabled = true;
 	}
 }

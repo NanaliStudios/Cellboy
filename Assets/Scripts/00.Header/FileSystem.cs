@@ -9,7 +9,7 @@ public class FileSystem : MonoBehaviour {
 	{
 		#if !WEB_BUILD
 		string path = pathForDocumentsFile( filename );
-		FileStream file = new FileStream (path, FileMode.Create, FileAccess.Write);
+		FileStream file = new FileStream (path, FileMode.Create, FileAccess.ReadWrite);
 		
 		//StreamWriter sw = new StreamWriter( file );
 
@@ -21,18 +21,10 @@ public class FileSystem : MonoBehaviour {
 		byte[] fileBytes = null;
 		fileBytes = new byte[file.Length];
 
-		int bytecount = 0;
 
-		while(bytecount > 0)
-		{
-			int n = file.Read(fileBytes, bytecount, fileBytes.Length); 
+		int n = file.Read(fileBytes, 0, fileBytes.Length); 
+		Debug.Log("file Reading");
 
-			if(n == 0)
-				break;
-		}
-		//sw.Write(); 
-		
-		//sw.Close();
 		file.Close();
 
 		return fileBytes;
@@ -47,8 +39,7 @@ public class FileSystem : MonoBehaviour {
 		
 		if (File.Exists(path))
 		{
-			FileStream file = new FileStream (path, FileMode.Open, FileAccess.Read);
-			StreamReader sr = new StreamReader( file );
+			FileStream file = new FileStream (path, FileMode.Open, FileAccess.ReadWrite);
 			
 			BinaryFormatter b = new BinaryFormatter();
 			GameData ReadData = b.Deserialize(file) as GameData;
@@ -57,9 +48,9 @@ public class FileSystem : MonoBehaviour {
 			
 			return ReadData;
 		}
-		
 		else
 		{
+			Debug.Log("Can't find SaveFile");
 			return null;
 		}
 		#else

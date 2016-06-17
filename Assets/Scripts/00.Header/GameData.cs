@@ -17,7 +17,6 @@ public class GameData {
 		public System.DateTime SleepEnd_Time;
 	};
 
-	
 	public int m_iPlayNum = 0;
 	public int m_iTotalPlayerNum = (int)PLAYER_ID.END;
 	public int m_iHighScore = 0;

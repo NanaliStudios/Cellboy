@@ -56,7 +56,7 @@ public partial class GameSystem : MonoBehaviour {
 			
 			if(AdFuctions.m_bAdsComplete == true)
 			{
-				TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "GameContinue", m_PlayerData.m_strPlayerName, m_iCurrent_GameScore.ToString());
+				TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "GameContinue", "PlayerName: " + m_PlayerData.m_strPlayerName, "GameScore: " + m_iCurrent_GameScore.ToString());
 				
 				//restart
 				GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();

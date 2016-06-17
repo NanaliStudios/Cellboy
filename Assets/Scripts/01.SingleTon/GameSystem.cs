@@ -21,6 +21,8 @@ public partial class GameSystem : MonoBehaviour {
 	public GameObject m_GameOver = null;
 	public GameObject m_Tutorial = null;
 
+	public GameObject m_objBackColor = null;
+
 	public GameObject Admob_Back = null;
 
 	//==UI_Label==
@@ -137,7 +139,7 @@ public partial class GameSystem : MonoBehaviour {
 			}
 			else{
 				//Game Over
-				TapjoyManager.Instance.TrackCustomEvent ("GameStatus", "GameOver", m_PlayerData.m_strPlayerName, m_iCurrent_GameScore.ToString());
+				TapjoyManager.Instance.TrackCustomEvent ("GameStatus", "GameOver", "PlayerName: " + m_PlayerData.m_strPlayerName, "GameScore: " + m_iCurrent_GameScore.ToString());
 
 				Time.timeScale = 1;
 				m_PlayerData.m_iPlayCountForAd += 1;	 
@@ -162,6 +164,14 @@ public partial class GameSystem : MonoBehaviour {
 //		if(Input.GetKeyDown(KeyCode.R))
 //			Application.LoadLevel("00_Main");
 
+	}
+
+
+	//
+
+	public void Back_SetRandColor()
+	{
+		m_objBackColor.gameObject.GetComponent<BackColor> ().SetRandColor ();
 	}
 
 	//GameDATA

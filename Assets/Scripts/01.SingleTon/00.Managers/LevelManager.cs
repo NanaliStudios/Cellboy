@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour {
 		if (m_fGameTimer >= m_fChangeStgaeTerm) {		//Change Next Stage
 			++m_iCurrentStage;
 			m_fGameTimer = 0.0f;
+			m_GameSys.Back_SetRandColor ();
 			SetStage();
 		}
 
@@ -259,8 +260,8 @@ public class LevelManager : MonoBehaviour {
 			
 			m_fSpeedChance = 10.0f;		//speed
 			
-			m_fSplitSChance = 20.0f;		//small split
-			m_fSplitMChance = 25.0f;		//midium split
+			m_fSplitSChance = 15.0f;		//small split
+			m_fSplitMChance = 20.0f;		//midium split
 			
 			m_fMoveChance = 20.0f;		//Move
 			m_fFollowChance = 0.0f;		//follow
@@ -283,7 +284,7 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitSChance = 15.0f;		//small split
 			m_fSplitMChance = 10.0f;		//midium split
 			
-			m_fMoveChance = 25.0f;		//Move
+			m_fMoveChance = 20.0f;		//Move
 			m_fFollowChance = 10.0f;		//follow
 			
 			m_fImmChance = 25.0f;		//immortal

@@ -3,6 +3,8 @@ using System.Collections;
 
 class GameSDK_Funcs
 {
+	public static byte[] CurrentSaveDAta = null;
+
 	public static void Initialize()
 	{
 		#if UNITY_ANDROID
@@ -16,7 +18,11 @@ class GameSDK_Funcs
 		//GooglePlay CloudSave Set Delegates
 		GooglePlaySavedGamesManager.ActionGameSaveLoaded += delegate(GP_SpanshotLoadResult result) {
 
+			Debug.Log("Cloud Save Loaded Complete");
+			CurrentSaveDAta = result.Snapshot.bytes;
+
 		};
+
 
 		#elif UNITY_IOS
 
@@ -75,16 +81,19 @@ class GameSDK_Funcs
 
 
 		#if UNITY_ANDROID
-		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData","",null, Data, 0);
+		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData", "",
+		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
+		                                                        Data, 0);
 		#elif UNITY_IOS
 		#endif
 	}
 
 	public static void Do_CloudLoad()
 	{
+		Debug.Log ("Try Load GameData to GoogleCloud");
 
 		#if UNITY_ANDROID
-		GooglePlaySavedGamesManager.instance.LoadAvailableSavedGames();
+		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
 		#endif
 	}

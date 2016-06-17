@@ -30,53 +30,17 @@ public class PlayerData : MonoBehaviour {
 	public float m_fPlayer4_ChargeTime = 360;
 	
 	public GameData m_Gamedata = null;
-
-	void Awake()
-	{
-	}
-
-	
-	private void ActionAvailableGameSavesLoaded (GooglePlayResult res) {
-		GP_SnapshotMeta s =  GooglePlaySavedGamesManager.instance.AvailableGameSaves[0];
-		GooglePlaySavedGamesManager.instance.LoadSpanshotByName(s.Title);
-	}
-
-	private void ActionGameSaveLoaded (GP_SpanshotLoadResult result) {
-
-		byte[] Data = result.Snapshot.bytes;
-		BinaryFormatter b = new BinaryFormatter ();
-		MemoryStream m = new MemoryStream ();
-	 	m.Write(Data, 0, Data.Length); 
-		m_Gamedata = b.Deserialize (m) as GameData;
-
-	}
+	private byte[] m_ByteGameData = null;
 
 	// Use this for initialization
 	void Start () {
 
 		Application.targetFrameRate = 60;
-		GooglePlaySavedGamesManager.ActionAvailableGameSavesLoaded += ActionAvailableGameSavesLoaded;
-		GooglePlaySavedGamesManager.ActionGameSaveLoaded += ActionGameSaveLoaded;
 		//data for cloud 
-		//if(GameSDK_Funcs.cloud)
-		//m_FileSystem.
-	
-		//fordebug
-		//PlayerPrefs.DeleteAll ();	
 
-		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 0) {
-
-			//for cloud data
-			Create_SaveData();
-
-			Debug.Log("GameData Loaded");
-		}
-		else
-		GameData_Load ();
-
-		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
-		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
-		m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
+//		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
+//		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
+//		m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 
 		TapjoyManager.Instance.ContentsReady ("Notice");
 
@@ -105,23 +69,30 @@ public class PlayerData : MonoBehaviour {
 			b.Serialize(m, m_Gamedata);
 
 
+			Debug.Log(m.GetBuffer().Length);
 			GameSDK_Funcs.Do_CloudSave (m.GetBuffer());
 		}
 	}
 
 	public void GameData_Load()
 	{
-		if (GameSDK_Funcs.isInitialized ())
-			GameSDK_Funcs.Do_CloudLoad ();
-//		else
-//		
-//		m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
-//
-//
-//		if (m_Gamedata == null)
-//			Create_SaveData ();
+		m_ByteGameData = GameSDK_Funcs.CurrentSaveDAta;
 
+		if (m_ByteGameData != null) {
+			BinaryFormatter b = new BinaryFormatter ();
+			MemoryStream m = new MemoryStream (m_ByteGameData);
+
+			Debug.Log(m.ToArray().Length);
+			m_Gamedata = b.Deserialize (m) as GameData;
+			Debug.Log ("Move CloudData to CurrentSaveData");
+		} else {
+			Debug.Log("LocalSave");
+			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
+			if(m_Gamedata == null)
+				Create_SaveData();
+		}
 	}
+
 
 	void OnApplicationQuit() {
 		GameData_Save ();

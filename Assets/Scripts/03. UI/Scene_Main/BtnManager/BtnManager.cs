@@ -97,6 +97,9 @@ public partial class BtnManager : MonoBehaviour {
 			//PlayerPrefs.DeleteAll ();		//for debug
 		}
 
+
+		//Main Menu Initialize here (Srry)
+
 		//show chartboost ad
 		if (m_PlayerData.m_iPlayCountForAd == 3) {
 			Chartboost.showInterstitial (CBLocation.Default);
@@ -111,6 +114,9 @@ public partial class BtnManager : MonoBehaviour {
 			Admob_Back.SetActive (true);
 		else
 			Admob_Back.SetActive (false);
+
+			//Game Save
+			m_PlayerData.GameData_Save ();
 
 	
 	}
@@ -337,7 +343,7 @@ public partial class BtnManager : MonoBehaviour {
 		Play_BtnSound ();
 		if (m_PlayerData.m_iChargePrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", "PlayerName: " + m_PlayerData.m_strPlayerName, "HaveCoin: " + m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iChargePrice;
 
@@ -354,7 +360,7 @@ public partial class BtnManager : MonoBehaviour {
 		Play_BtnSound ();
 		if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iPlayNum.ToString());
+			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", "HaveCoin: " + m_PlayerData.m_strPlayerName, "PlayNum: " + m_PlayerData.m_Gamedata.m_iPlayNum.ToString());
 		
 			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iBuyPrice;
 			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock = false;

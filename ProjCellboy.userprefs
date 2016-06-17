@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/01.SingleTon/PlayerData.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/02.Objects/Player.cs">
     <Files>
-      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="38" Column="2" />
-      <File FileName="Assets/Scripts/00.Header/FileSystem.cs" Line="13" Column="3" />
+      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="65" Column="40" />
+      <File FileName="Assets/Scripts/02.Objects/BackColor.cs" Line="43" Column="3" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameSystem.cs" Line="172" Column="19" />
+      <File FileName="Assets/Scripts/02.Objects/Player.cs" Line="280" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

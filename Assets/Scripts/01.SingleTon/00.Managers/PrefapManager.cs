@@ -20,6 +20,8 @@ public class PrefapManager {
 	private GameObject BulletParentObj = null;
 	private GameObject EnemyParentObj = null;
 	private GameObject ItemParentObj = null;
+	//
+	private GameObject m_obLevelupEffect = null;
 	//<-----End
 
 	public void Initialize () {
@@ -82,6 +84,7 @@ public class PrefapManager {
 
 		m_objPoint = Resources.Load ("Prefaps/00.Objects/Point") as GameObject;
 		m_objCoin = Resources.Load ("Prefaps/00.Objects/Coin") as GameObject;
+		m_obLevelupEffect = Resources.Load ("Prefaps/00.Objects/LevelupEffect") as GameObject;
 
 		EnemyParentObj = GameObject.Find ("00_Enemies");
 		BulletParentObj = GameObject.Find ("01_Bullets");
@@ -150,6 +153,11 @@ public class PrefapManager {
 			objCoin = GameObject.Instantiate (m_objCoin, Vec3Pos, Quaternion.identity) as GameObject;
 			objCoin.transform.parent = ItemParentObj.transform;
 		}
+	}
+
+	public GameObject Create_LevelupEffect(Vector3 Vec3Pos)
+	{
+		return GameObject.Instantiate (m_obLevelupEffect, Vec3Pos, Quaternion.identity) as GameObject;
 	}
 
 

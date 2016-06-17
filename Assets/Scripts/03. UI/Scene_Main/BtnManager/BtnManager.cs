@@ -38,6 +38,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	private AudioSource m_Audio = null;
 	private AudioClip m_BtnClip = null;
+	private AudioClip m_BuyBtnClip = null;
 	private AudioClip m_ScrollClip = null;
 
 	public GameObject m_objSoundBtn = null;
@@ -60,6 +61,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Load Audio
 		m_Audio = gameObject.GetComponent<AudioSource> ();
 		m_BtnClip = Resources.Load ("Sounds/ogg(96k)/button_click") as AudioClip;
+		m_BuyBtnClip = Resources.Load ("Sounds/ogg(96k)/button_buy") as AudioClip;
 		m_ScrollClip = Resources.Load ("Sounds/ogg(96k)/ui_scroll") as AudioClip;
 
 		GameObject objPlayerData = null;
@@ -317,7 +319,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void MainBackBtn_Click()
 	{
-		Play_BtnSound ();
+		//Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Option").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Shop").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
@@ -340,7 +342,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnMoneyChargeBtn()
 	{
-		Play_BtnSound ();
+		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iChargePrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
 			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", "PlayerName: " + m_PlayerData.m_strPlayerName, "HaveCoin: " + m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
@@ -357,7 +359,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnClickBuyBtn()
 	{
-		Play_BtnSound ();
+		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
 			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", "HaveCoin: " + m_PlayerData.m_strPlayerName, "PlayNum: " + m_PlayerData.m_Gamedata.m_iPlayNum.ToString());
@@ -416,9 +418,9 @@ public partial class BtnManager : MonoBehaviour {
 		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 		if (!AdFuctions.Show_UnityAds ()) {
-			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
-			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
-			m_NetworkFail_Label.SetActive (true);
+//			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
+//			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
+//			m_NetworkFail_Label.SetActive (true);
 		}
 		m_bAdsOn = true;
 		
@@ -462,6 +464,12 @@ public partial class BtnManager : MonoBehaviour {
 	public void Play_BtnSound()
 	{
 		m_Audio.clip = m_BtnClip;
+		m_Audio.Play();
+	}
+
+	public void Play_BuyBtnSound()
+	{
+		m_Audio.clip = m_BuyBtnClip;
 		m_Audio.Play();
 	}
 

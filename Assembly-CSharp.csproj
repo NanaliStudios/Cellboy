@@ -565,6 +565,7 @@
      <Compile Include="Assets\Scripts\02.Objects\BackColor.cs" />
      <Compile Include="Assets\Scripts\02.Objects\Background.cs" />
      <Compile Include="Assets\Scripts\02.Objects\Coin.cs" />
+     <Compile Include="Assets\Scripts\02.Objects\Effect.cs" />
      <Compile Include="Assets\Scripts\02.Objects\Item.cs" />
      <Compile Include="Assets\Scripts\02.Objects\ObjectBase.cs" />
      <Compile Include="Assets\Scripts\02.Objects\Player.cs" />
@@ -731,6 +732,7 @@
      <None Include="Assets\Extensions\StansAssetsCommon\Effetcs\Animations\Tween\Pixelplacement\iTween\ReadMe!.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Dragon\dragon.atlas.txt" />
+     <None Include="Assets\Resources\Spine\Effect\blow\blow.atlas.txt" />
      <None Include="Assets\Plugins\Android\AN_Res\res\values\analytics.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\Plugins\StansAssets\Versions\MSP_VersionInfo.txt" />

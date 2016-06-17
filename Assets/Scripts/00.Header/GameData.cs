@@ -44,6 +44,12 @@ public class GameData {
 		m_PlayerInfo [(int)PLAYER_ID.LASER].iSleepMin = 60;
 		m_PlayerInfo [(int)PLAYER_ID.HOMING].iSleepMin = 240;
 		m_PlayerInfo [(int)PLAYER_ID.BOOM].iSleepMin = 360;
+
+		m_PlayerInfo [(int)PLAYER_ID.NORMAL].bIsLock = false;
+		m_PlayerInfo [(int)PLAYER_ID.SPREAD].bIsLock = true;
+		m_PlayerInfo [(int)PLAYER_ID.LASER].bIsLock = true;
+		m_PlayerInfo [(int)PLAYER_ID.HOMING].bIsLock = true;
+		m_PlayerInfo [(int)PLAYER_ID.BOOM].bIsLock = true;
 	}
 
 	public void Spend_TiredVal(PLAYER_ID PlayerID)

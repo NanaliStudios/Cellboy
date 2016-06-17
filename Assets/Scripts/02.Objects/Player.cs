@@ -266,6 +266,7 @@ public class Player : ObjectBase {
 	{
 		//Fever Start
 		m_GameSys.Start_FeverTime (5 + ((iLevel - 2) * 2));
+		m_GameSys.m_PrefapMgr.Create_LevelupEffect (m_MyTrans.position);
 
 			m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BulletID);
 			m_iCurrentMaxPoint = iLvMaxPoint;

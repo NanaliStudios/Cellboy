@@ -33,6 +33,8 @@ public class EnemyBase : ObjectBase {
 	
 		m_fSpeed = Random.Range (m_fRandMinSpeed, m_fRandMaxSpeed);
 
+		m_Skeleton.gameObject.GetComponent<MeshRenderer> ().sortingOrder = Random.Range (-100, 100);
+
 		if (m_Skeleton != null) {
 			m_Skeleton.state.Complete += delegate {
 
@@ -80,9 +82,10 @@ public class EnemyBase : ObjectBase {
 
 			if(m_Skeleton != null)
 			{
+				PlaySound("enemy_hit");
+
 				if(m_Skeleton.Skeleton.data.FindAnimation("hit") != null)
 				{
-					PlaySound("enemy_hit");
 					m_Skeleton.state.SetAnimation(0, "hit", false);
 				}
 			}

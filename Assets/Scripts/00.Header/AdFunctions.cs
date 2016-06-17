@@ -48,7 +48,7 @@ class AdFuctions
 			ShowOptions opt = new ShowOptions ();
 			opt.resultCallback = OnShowResult;
 			Advertisement.Show (null, opt);
-		} else
+		}else
 			return false;
 
 		return true;

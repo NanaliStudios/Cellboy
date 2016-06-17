@@ -28,7 +28,7 @@ public class LogoScene : MonoBehaviour {
 			Debug.Log("Create PlayerData");
 		}
 
-		//PlayerPrefs.DeleteAll ();
+		PlayerPrefs.DeleteAll ();
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
 			m_PlayerData.Create_SaveData();
@@ -53,7 +53,6 @@ public class LogoScene : MonoBehaviour {
 #if UNITY_EDITOR_OSX
 			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
-
 			Application.LoadLevel ("00_MAIN");
 
 			return;

@@ -35,9 +35,7 @@ public class MainLabel : TextBase {
 	
 		//TiredVal Change----->
 
-		for (int i = 0; i < m_PlayerData.m_Gamedata.m_iTotalPlayerNum; ++i) {
-
-			m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsLock;
+			m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].bIsLock;
 
 			if (m_bCurrentLock == true) {
 				m_strBuy = m_PlayerData.m_iBuyPrice.ToString();
@@ -45,11 +43,10 @@ public class MainLabel : TextBase {
 				return;
 			}
 
-			if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].fTiredPercent <= 0.0f)
+		if (m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].fTiredPercent <= 0.0f)
 				MakeChargeText ();
 			else
 				MakeStartText ();
-		}
 	}
 
 	void MakeStartText()

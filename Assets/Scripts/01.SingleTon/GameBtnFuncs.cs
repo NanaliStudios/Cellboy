@@ -42,9 +42,9 @@ public partial class GameSystem : MonoBehaviour {
 	{
 		if (!AdFuctions.Show_UnityAds ()) {
 
-			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
-			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
-			m_NetworkFail_Label.SetActive (true);
+//			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
+//			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
+//			m_NetworkFail_Label.SetActive (true);
 		}
 		m_bAdsOn = true;
 		

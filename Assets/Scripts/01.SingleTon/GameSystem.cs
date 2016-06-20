@@ -174,6 +174,16 @@ public partial class GameSystem : MonoBehaviour {
 		m_objBackColor.gameObject.GetComponent<BackColor> ().SetRandColor ();
 	}
 
+	public void Back_SetPrevColor()
+	{
+		m_objBackColor.gameObject.GetComponent<BackColor> ().SetPrevColor ();
+	}
+
+	public void Back_SetFeverColor()
+	{
+		m_objBackColor.gameObject.GetComponent<BackColor> ().SetFeverColor ();
+	}
+
 	//GameDATA
 	public void SetScore()
 	{

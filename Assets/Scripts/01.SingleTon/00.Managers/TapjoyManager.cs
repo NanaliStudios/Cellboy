@@ -5,6 +5,7 @@ using TapjoyUnity;
 public class TapjoyManager : MonoBehaviour
 {
 	public int m_iTapjoyCurrency = 0;
+	public TJPlacement m_TjNotice = null;
 
 	private static TapjoyManager s_Instance = null;
 	public static TapjoyManager Instance
@@ -44,15 +45,16 @@ public class TapjoyManager : MonoBehaviour
 
 		};
 		
-		if(!Tapjoy.IsConnected)
-			Tapjoy.Connect();
-		
 		while(true)
 		{
 			if(!Tapjoy.IsConnected)
+			{
+				Tapjoy.Connect();
 				yield return new WaitForFixedUpdate();
+			}
 			else
 			{
+				m_TjNotice = ContentsReady("Notice");
 				break;
 			}
 		}
@@ -72,12 +74,14 @@ public class TapjoyManager : MonoBehaviour
 	}
 	
 	//CreatePlacement. 이미 컨텐츠가 호출되어있으면 다시 요청하지 않음.
-	public void ContentsReady(string targetKey)
+	public TJPlacement ContentsReady(string targetKey)
 	{
 		TJPlacement place = TJPlacement.CreatePlacement(targetKey);
 		if (!place.IsContentReady ()) {
 			place.RequestContent ();
 		}
+
+		return place;
 	}
 	
 	//컨텐츠 대기상태 설정.
@@ -94,7 +98,6 @@ public class TapjoyManager : MonoBehaviour
 	{
 		//컨텐츠 요청 성공시 리턴.
 		Debug.Log ("HandlePlacementRequestSuccess : "+placement.GetName());
-		placement.ShowContent (); 
 	}
 	
 	public void HandlePlacementRequestFailure(TJPlacement placement, string error)
@@ -122,11 +125,8 @@ public class TapjoyManager : MonoBehaviour
 		//컨텐츠 종료시 리턴. 플레이스먼트 아이디별로 다른 동작을 취해주면 됨.
 		Debug.Log ("HandlePlacementContentDismiss : "+placement.GetName());
 		SetReady(placement.GetName(),false);
-//		if(placement.GetName() != "Notice")
-//		{
-//			if(Mng_Advertise.Instance != null && !string.IsNullOrEmpty(placement.GetName()))
-//				Mng_Advertise.Instance.GetReward(placement.GetName());
-//		}
+		if (placement.GetName () == "Notice")
+			AdFuctions.m_bTjNoticeDismiss = true;
 	}
 	
 	

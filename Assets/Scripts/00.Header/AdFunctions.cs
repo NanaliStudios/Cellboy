@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Advertisements;
+using ChartboostSDK;
 
 class AdFuctions
 {
 	private static GoogleAdManager m_GoogleAD = null;
 	public static bool m_bAdsComplete = false;
+	public static bool m_bTjNoticeDismiss = false;
 
 	public static void Initialize()
 	{
@@ -15,6 +17,9 @@ class AdFuctions
 		//google admob init
 		m_GoogleAD = new GoogleAdManager();
 		m_GoogleAD.Initialize ();
+
+		//chartboost init
+		Chartboost.cacheInterstitial (CBLocation.Default);
 	
 	}
 
@@ -34,9 +39,19 @@ class AdFuctions
 
 
 	//===Show===
-	public static void Show_GoogleAD()
+	public static void Show_GoogleADBanner()
 	{
 		m_GoogleAD.ShowBanner ();
+	}
+
+	public static void Show_GoogleADPopup()
+	{
+		m_GoogleAD.ShowPopup ();
+	}
+
+	public static bool Check_IsClose_GooglePopup()
+	{
+		return m_GoogleAD.m_bIsDismissPopup;
 	}
 
 	public static bool Show_UnityAds()

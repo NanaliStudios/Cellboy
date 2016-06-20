@@ -38,10 +38,23 @@ public class MainLabel : TextBase {
 			m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].bIsLock;
 
 			if (m_bCurrentLock == true) {
-				m_strBuy = m_PlayerData.m_iBuyPrice.ToString();
-				MakeBuyText ();
-				return;
+
+			int iPlayerIdx = ((int)m_PlayerData.m_PlayerID) -1;
+
+			if(iPlayerIdx > 0)
+			{
+
+				if(m_PlayerData.m_Gamedata.m_PlayerInfo [((int)m_PlayerData.m_PlayerID) -1].bIsLock == true)
+				{
+					MakeLockText();
+					return;
+				}
 			}
+
+			m_strBuy = m_PlayerData.m_iBuyPrice.ToString ();
+			MakeBuyText ();
+			return;
+		}
 
 		if (m_PlayerData.m_Gamedata.m_PlayerInfo [(int)m_PlayerData.m_PlayerID].fTiredPercent <= 0.0f)
 				MakeChargeText ();

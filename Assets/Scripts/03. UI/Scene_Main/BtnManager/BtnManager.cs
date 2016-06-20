@@ -27,7 +27,6 @@ public partial class BtnManager : MonoBehaviour {
 	public GameObject m_objRightBtn = null;
 
 	public bool m_bTimeInit = true;
-	public bool m_bAdsOn = false;
 
 	public GameObject m_NetworkFail_Label = null;
 
@@ -43,8 +42,13 @@ public partial class BtnManager : MonoBehaviour {
 
 	public GameObject m_objSoundBtn = null;
 	public GameObject Admob_Back = null;
-	
 
+
+	//ad
+	public bool m_bIsDismissAD = false;
+	public bool m_bVideoAdsOn = false;
+	public bool m_bPopupAdsOn = false;
+	
 	private bool m_bStart = true;
 
 
@@ -101,12 +105,6 @@ public partial class BtnManager : MonoBehaviour {
 
 
 		//Main Menu Initialize here (Srry)
-
-		//show chartboost ad
-		if (m_PlayerData.m_iPlayCountForAd == 3) {
-			Chartboost.showInterstitial (CBLocation.Default);
-			m_PlayerData.m_iPlayCountForAd = 0;
-		}
 
 		if(AudioListener.volume != 0)
 			SoundOnOffBtn_Click ();
@@ -193,7 +191,20 @@ public partial class BtnManager : MonoBehaviour {
 
 		//Ads
 		Check_AdsReward ();
-	
+
+		if (m_PlayerData.m_iCurrentPlayNum == 1)
+		if (AdFuctions.m_bTjNoticeDismiss) {
+			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+			GameStart ();
+		}
+
+		if (m_bIsDismissAD == true
+			|| AdFuctions.Check_IsClose_GooglePopup () == true) {
+			m_PlayerData.m_iPlayCountForAd = 0;
+			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+			GameStart ();
+		}
+			
 	}
 
 	public void OnStartBtnClick()
@@ -218,18 +229,39 @@ public partial class BtnManager : MonoBehaviour {
 			}
 		}
 
-		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-
-
-
+		//show chartboost ad
+		
+		Chartboost.didDismissInterstitial += delegate {
+			m_bIsDismissAD = true;
+		};
+		
+		if (m_PlayerData.m_iPlayCountForAd == 3) {
+			
+			if(m_bPopupAdsOn == false)
+			{
+				if (Chartboost.isAnyViewVisible ())
+					Chartboost.showInterstitial (CBLocation.Default);
+				else
+					AdFuctions.Show_GoogleADPopup ();
+			}
+			
+			m_bPopupAdsOn = true;
+		} else {
+			if (m_PlayerData.m_iCurrentPlayNum == 1)
+				TapjoyManager.Instance.m_TjNotice.ShowContent ();
+			else
+			{
+				m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+				GameStart ();
+			}
+		}
 		//Game Start 
-		m_objScrollView.SetActive (false);
-		m_objEndBack.SetActive (true);
-		m_PlayerData.m_iCurrentPlayNum += 1;
-		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
-		Application.LoadLevel ("02_Game");
-		m_bTimeInit = false;
 
+#if UNITY_EDITOR_OSX
+		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+		GameStart ();
+#endif
+	
 	}
 
 	public void LeftBtnClick() 
@@ -418,11 +450,10 @@ public partial class BtnManager : MonoBehaviour {
 		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 		if (!AdFuctions.Show_UnityAds ()) {
-//			Color CurrentCol = m_NetworkFail_Label.GetComponent<UISprite>().color;
-//			m_NetworkFail_Label.GetComponent<UISprite>().color = new Color(CurrentCol.r, CurrentCol.g, CurrentCol.b, CurrentCol.a);
-//			m_NetworkFail_Label.SetActive (true);
+
+			TapjoyManager.Instance.ContentsReady("RewardAd");
 		}
-		m_bAdsOn = true;
+		m_bVideoAdsOn = true;
 		
 	}
 
@@ -441,7 +472,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void Check_AdsReward()
 	{
-		if (m_bAdsOn == true) {
+		if (m_bVideoAdsOn == true) {
 
 			if(AdFuctions.m_bAdsComplete == true)
 			{
@@ -453,11 +484,21 @@ public partial class BtnManager : MonoBehaviour {
 
 
 				AdFuctions.m_bAdsComplete = false;
-				m_bAdsOn = false;
+				m_bVideoAdsOn = false;
 				MainBackBtn_Click();
 			}
 	
 		}
+	}
+
+	public void GameStart()
+	{
+		m_objScrollView.SetActive (false);
+		m_objEndBack.SetActive (true);
+		m_PlayerData.m_iCurrentPlayNum += 1;
+		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
+		Application.LoadLevel ("02_Game");
+		m_bTimeInit = false;
 	}
 
 

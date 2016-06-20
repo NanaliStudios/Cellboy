@@ -57,7 +57,7 @@ public class LogoScene : MonoBehaviour {
 
 			return;
 #endif
-			AdFuctions.Show_GoogleAD ();
+			AdFuctions.Show_GoogleADBanner();
 			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
 			Application.LoadLevel ("00_MAIN");

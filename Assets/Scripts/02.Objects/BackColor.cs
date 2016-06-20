@@ -6,6 +6,11 @@ public class BackColor : MonoBehaviour {
 	public Color[] BackColorArray = new Color[14];
 	private TweenColor m_TweenColor = null;
 
+	private Color m_PrevColor = Color.white;
+	private Color m_FeverColor = Color.black;
+
+	private GameSystem m_GameSys = null;
+
 	// Use this for initialization
 	void Start () {
 		m_TweenColor = gameObject.GetComponent<TweenColor> ();
@@ -38,6 +43,7 @@ public class BackColor : MonoBehaviour {
 		} 
 		else {
 			gameObject.GetComponent<SpriteRenderer> ().color = GameObject.Find("PlayerData(Clone)").gameObject.GetComponent<PlayerData>().m_BackColor;
+			m_GameSys = GameSystem.GetInstance ();
 		}
 
 
@@ -54,6 +60,24 @@ public class BackColor : MonoBehaviour {
 		m_TweenColor.to = BackColorArray[iRandColorKey];
 		m_TweenColor.ResetToBeginning ();
 
+		m_TweenColor.enabled = true;
+	}
+
+	public void SetFeverColor()
+	{
+		m_PrevColor = m_TweenColor.from = gameObject.GetComponent<SpriteRenderer> ().color;
+		m_TweenColor.to = m_FeverColor;
+		m_TweenColor.ResetToBeginning ();
+		
+		m_TweenColor.enabled = true;
+	}
+
+	public void SetPrevColor()
+	{
+		m_TweenColor.from = gameObject.GetComponent<SpriteRenderer> ().color;
+		m_TweenColor.to = m_PrevColor;
+		m_TweenColor.ResetToBeginning ();
+		
 		m_TweenColor.enabled = true;
 	}
 }

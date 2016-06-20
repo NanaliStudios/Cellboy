@@ -67,7 +67,8 @@ public class EnemyBase : ObjectBase {
 				m_fImmTimer = 0.0f;
 			}
 
-		if(m_EnemyID != ENEMY_ID.CHILD)
+		if(m_EnemyID != ENEMY_ID.CHILD
+		   && m_EnemyID != ENEMY_ID.FOLLOW_S)
 		Move ();
 
 

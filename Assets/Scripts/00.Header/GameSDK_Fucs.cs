@@ -121,6 +121,7 @@ class GameSDK_Funcs
 	public static void Purcahse_Item(string strID)
 	{
 		#if UNITY_ANDROID
+		AndroidInAppPurchaseManager.Client.Connect();
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#endif
 

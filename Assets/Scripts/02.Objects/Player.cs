@@ -232,6 +232,10 @@ public class Player : ObjectBase {
 		    || Coll.gameObject.tag == "Stone") {
 
 			m_Audio.clip = m_DieSound;
+
+			if(AudioListener.volume != 0.0f)
+			m_Audio.volume = 0.6f;
+
 			m_Audio.Play();
 
 			m_Skeleton.state.SetAnimation(0, "die", false);
@@ -260,6 +264,8 @@ public class Player : ObjectBase {
 	{
 		m_Skeleton.state.SetAnimation(0, "idle", true);
 		m_objParticle.SetActive(true);
+		if(AudioListener.volume != 0.0f)
+		m_Audio.volume = 1.0f;
 	}
 
 	public void Player_LevelUp(BULLET_ID BulletID, int iLevel, string strSpineSkinIdx, int iLvMaxPoint)

@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour {
 	private float m_fCoinMChance = 0.0f;
 
 	public bool m_bFever = false;
+	public bool m_bFeverInit = false;
 	private float m_fFeverTerm = 5.0f;
 	private float m_fFeverTimer = 0.0f;
 	
@@ -65,11 +66,21 @@ public class LevelManager : MonoBehaviour {
 
 			if(m_bFever == true)	//Fever On
 			{
+				if(m_bFeverInit == false)
+				{
+					m_GameSys.Back_SetFeverColor();
+					m_bFeverInit = true;
+				}
+
+
+
 				if(m_fFeverTimer >= m_fFeverTerm)
 				{
 					m_fFeverTimer = 0.0f;
 					m_GameSys.Return_GlobalSpeed();
+					m_GameSys.Back_SetPrevColor();
 					m_bFever = false;
+					m_bFeverInit = false;
 				}
 
 				if(fRandSpawnVal < 80.0f)

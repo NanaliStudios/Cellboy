@@ -38,13 +38,6 @@ public class PlayerData : MonoBehaviour {
 		Application.targetFrameRate = 60;
 		//data for cloud 
 
-//		m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
-//		m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
-//		m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
-
-		TapjoyManager.Instance.ContentsReady ("Notice");
-
-
 		DontDestroyOnLoad (this);
 	}
 

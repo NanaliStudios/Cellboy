@@ -126,7 +126,7 @@ public class TapjoyManager : MonoBehaviour
 		Debug.Log ("HandlePlacementContentDismiss : "+placement.GetName());
 		SetReady(placement.GetName(),false);
 		if (placement.GetName () == "Notice")
-			AdFuctions.m_bTjNoticeDismiss = true;
+			AdFunctions.m_bTjNoticeDismiss = true;
 	}
 	
 	

@@ -317,9 +317,9 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitMChance = 5.0f;		//midium split
 			
 			m_fMoveChance = 25.0f;		//Move
-			m_fFollowChance = 20.0f;		//follow
+			m_fFollowChance = 10.0f;		//follow
 			
-			m_fImmChance = 25.0f;		//immortal
+			m_fImmChance = 35.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
@@ -338,9 +338,9 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitMChance = 5.0f;		//midium split
 			
 			m_fMoveChance = 25.0f;		//Move
-			m_fFollowChance = 25.0f;		//follow
+			m_fFollowChance = 15.0f;		//follow
 			
-			m_fImmChance = 25.0f;		//immortal
+			m_fImmChance = 35.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin
@@ -358,9 +358,9 @@ public class LevelManager : MonoBehaviour {
 			m_fSplitMChance = 5.0f;		//midium split
 			
 			m_fMoveChance = 25.0f;		//Move
-			m_fFollowChance = 25.0f;		//follow
+			m_fFollowChance = 15.0f;		//follow
 			
-			m_fImmChance = 25.0f;		//immortal
+			m_fImmChance = 35.0f;		//immortal
 			
 			m_fCoinSChance = 4.0f;		//small coin	
 			m_fCoinMChance = 1.0f;		//midium coin

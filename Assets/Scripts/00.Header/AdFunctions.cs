@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.Advertisements;
 using ChartboostSDK;
 
-class AdFuctions
+class AdFunctions
 {
 	private static GoogleAdManager m_GoogleAD = null;
 	public static bool m_bAdsComplete = false;
@@ -52,6 +52,11 @@ class AdFuctions
 	public static bool Check_IsClose_GooglePopup()
 	{
 		return m_GoogleAD.m_bIsDismissPopup;
+	}
+
+	public static void Set_IsClose_GooglePopup()
+	{
+		m_GoogleAD.m_bIsDismissPopup = false;
 	}
 
 	public static bool Show_UnityAds()

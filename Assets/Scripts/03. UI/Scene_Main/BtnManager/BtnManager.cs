@@ -104,10 +104,16 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 
-		//Main Menu Initialize here (Srry)
+		//Main Menu Initialize here (Srry)\
 
-		if(AudioListener.volume != 0)
-			SoundOnOffBtn_Click ();
+		//Sound Btn Set
+		if (AudioListener.volume == 0) {
+			m_objSoundBtn.transform.GetChild (0).gameObject.SetActive (false);
+			m_objSoundBtn.transform.GetChild (1).gameObject.SetActive (true);
+		} else {
+			m_objSoundBtn.transform.GetChild (0).gameObject.SetActive (true);
+			m_objSoundBtn.transform.GetChild (1).gameObject.SetActive (false);
+		}
 
 		//ads
 		if (!m_PlayerData.m_Gamedata.m_bAdOff)
@@ -193,13 +199,19 @@ public partial class BtnManager : MonoBehaviour {
 		Check_AdsReward ();
 
 		if (m_PlayerData.m_iCurrentPlayNum == 1)
-		if (AdFuctions.m_bTjNoticeDismiss) {
+		if (AdFunctions.m_bTjNoticeDismiss) {
+			AdFunctions.m_bTjNoticeDismiss = false;
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 			GameStart ();
 		}
 
 		if (m_bIsDismissAD == true
-			|| AdFuctions.Check_IsClose_GooglePopup () == true) {
+		    || AdFunctions.Check_IsClose_GooglePopup () == true) {
+
+			m_bIsDismissAD = false;
+			AdFunctions.Set_IsClose_GooglePopup();
+
+
 			m_PlayerData.m_iPlayCountForAd = 0;
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 			GameStart ();
@@ -242,7 +254,7 @@ public partial class BtnManager : MonoBehaviour {
 				if (Chartboost.isAnyViewVisible ())
 					Chartboost.showInterstitial (CBLocation.Default);
 				else
-					AdFuctions.Show_GoogleADPopup ();
+					AdFunctions.Show_GoogleADPopup ();
 			}
 			
 			m_bPopupAdsOn = true;
@@ -449,7 +461,7 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
-		if (!AdFuctions.Show_UnityAds ()) {
+		if (!AdFunctions.Show_UnityAds ()) {
 
 			TapjoyManager.Instance.ContentsReady("RewardAd");
 		}
@@ -462,11 +474,13 @@ public partial class BtnManager : MonoBehaviour {
 		if (AudioListener.volume == 0) {
 			m_objSoundBtn.transform.GetChild (0).gameObject.SetActive (true);
 			m_objSoundBtn.transform.GetChild (1).gameObject.SetActive (false);
-			AudioListener.volume = 3;
+			PlayerPrefs.SetFloat("GameVolume", 3.0f);
+			AudioListener.volume = 	3.0f;
 		} else {
 			m_objSoundBtn.transform.GetChild(0).gameObject.SetActive(false);
 			m_objSoundBtn.transform.GetChild(1).gameObject.SetActive(true);
-			AudioListener.volume = 0;
+			PlayerPrefs.SetFloat("GameVolume", 0.0f);
+			AudioListener.volume = 0.0f;
 		}
 	}
 
@@ -474,7 +488,7 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		if (m_bVideoAdsOn == true) {
 
-			if(AdFuctions.m_bAdsComplete == true)
+			if(AdFunctions.m_bAdsComplete == true)
 			{
 
 			int iPlayerId = (int)m_PlayerData.m_PlayerID;
@@ -483,7 +497,7 @@ public partial class BtnManager : MonoBehaviour {
 			m_PlayerData.m_Gamedata.m_PlayerInfo[iPlayerId].bIsSleep = false;
 
 
-				AdFuctions.m_bAdsComplete = false;
+				AdFunctions.m_bAdsComplete = false;
 				m_bVideoAdsOn = false;
 				MainBackBtn_Click();
 			}

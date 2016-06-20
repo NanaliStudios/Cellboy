@@ -40,7 +40,7 @@ public partial class GameSystem : MonoBehaviour {
 	//unityads
 	public void AdsBtnClick()
 	{
-		if (!AdFuctions.Show_UnityAds ()) {
+		if (!AdFunctions.Show_UnityAds ()) {
 		}
 		m_bAdsOn = true;
 		
@@ -50,7 +50,7 @@ public partial class GameSystem : MonoBehaviour {
 	{
 		if (m_bAdsOn == true) {
 			
-			if(AdFuctions.m_bAdsComplete == true)
+			if(AdFunctions.m_bAdsComplete == true)
 			{
 				TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "GameContinue", "PlayerName: " + m_PlayerData.m_strPlayerName, "GameScore: " + m_iCurrent_GameScore.ToString());
 				
@@ -73,7 +73,7 @@ public partial class GameSystem : MonoBehaviour {
 				m_fGameoverTimer = 0.0f;
 				m_bIsGameStart = false;
 				Physics2D.gravity = new Vector3 (0.0f, 0.0f, 0.0f);
-				AdFuctions.m_bAdsComplete = false;
+				AdFunctions.m_bAdsComplete = false;
 				m_CanRestart = false;
 				m_bOnContinue = false;
 				gameObject.GetComponent<AudioSource>().enabled = true;

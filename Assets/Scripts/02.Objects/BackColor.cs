@@ -67,6 +67,7 @@ public class BackColor : MonoBehaviour {
 	{
 		m_PrevColor = m_TweenColor.from = gameObject.GetComponent<SpriteRenderer> ().color;
 		m_TweenColor.to = m_FeverColor;
+		m_TweenColor.duration = 1.5f;
 		m_TweenColor.ResetToBeginning ();
 		
 		m_TweenColor.enabled = true;
@@ -76,6 +77,7 @@ public class BackColor : MonoBehaviour {
 	{
 		m_TweenColor.from = gameObject.GetComponent<SpriteRenderer> ().color;
 		m_TweenColor.to = m_PrevColor;
+		m_TweenColor.duration = 2.5f;
 		m_TweenColor.ResetToBeginning ();
 		
 		m_TweenColor.enabled = true;

@@ -19,7 +19,7 @@ public class LogoScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		AdFuctions.Initialize ();
+		AdFunctions.Initialize ();
 		GameSDK_Funcs.Initialize ();
 
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
@@ -28,10 +28,18 @@ public class LogoScene : MonoBehaviour {
 			Debug.Log("Create PlayerData");
 		}
 
-		PlayerPrefs.DeleteAll ();
+		//PlayerPrefs.DeleteAll ();
+
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
 			m_PlayerData.Create_SaveData();
+		}
+
+		if (PlayerPrefs.HasKey ("GameVolume") == false) {
+			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
+		} else {
+			if(PlayerPrefs.GetFloat("GameVolume") == 0.0f)
+				AudioListener.volume = 0.0f;
 		}
 	
 	}
@@ -57,7 +65,7 @@ public class LogoScene : MonoBehaviour {
 
 			return;
 #endif
-			AdFuctions.Show_GoogleADBanner();
+			AdFunctions.Show_GoogleADBanner();
 			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
 			Application.LoadLevel ("00_MAIN");

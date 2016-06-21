@@ -242,7 +242,7 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		//show chartboost ad
-		
+
 		Chartboost.didDismissInterstitial += delegate {
 			m_bIsDismissAD = true;
 		};
@@ -251,7 +251,7 @@ public partial class BtnManager : MonoBehaviour {
 			
 			if(m_bPopupAdsOn == false)
 			{
-				if (Chartboost.isAnyViewVisible ())
+				if (Chartboost.hasInterstitial (CBLocation.Default))
 					Chartboost.showInterstitial (CBLocation.Default);
 				else
 					AdFunctions.Show_GoogleADPopup ();

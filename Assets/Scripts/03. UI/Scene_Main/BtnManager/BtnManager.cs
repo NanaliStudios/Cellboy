@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using ChartboostSDK;
 
 public partial class BtnManager : MonoBehaviour {
@@ -241,6 +242,12 @@ public partial class BtnManager : MonoBehaviour {
 			}
 		}
 
+		#if UNITY_EDITOR_OSX
+		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+		GameStart ();
+		return;
+		#endif
+
 		//show chartboost ad
 
 		Chartboost.didDismissInterstitial += delegate {
@@ -268,11 +275,6 @@ public partial class BtnManager : MonoBehaviour {
 			}
 		}
 		//Game Start 
-
-#if UNITY_EDITOR_OSX
-		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-		GameStart ();
-#endif
 	
 	}
 
@@ -462,8 +464,7 @@ public partial class BtnManager : MonoBehaviour {
 		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 		if (!AdFunctions.Show_UnityAds ()) {
-
-			TapjoyManager.Instance.ContentsReady("RewardAd");
+			AdFunctions.Show_VungleAds ();
 		}
 		m_bVideoAdsOn = true;
 		

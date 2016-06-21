@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Advertisements;
 using ChartboostSDK;
 
@@ -13,11 +14,17 @@ class AdFunctions
 	{
 		//unityad init
 		Advertisement.Initialize ("1077035", true);
+		Vungle.init ("57678f631b10f2b7140000ff", "5768c8c2d79d27ac140000e6");
 	
 		//google admob init
 		m_GoogleAD = new GoogleAdManager();
 		m_GoogleAD.Initialize ();
 
+
+		//Vungle
+		Vungle.onAdFinishedEvent += delegate {
+			m_bAdsComplete = true;
+		};
 		//chartboost init
 		Chartboost.cacheInterstitial (CBLocation.Default);
 	
@@ -73,6 +80,13 @@ class AdFunctions
 
 		return true;
 
+	}
+
+	public static void Show_VungleAds()
+	{
+		Dictionary<string, object> options = new Dictionary<string, object> ();
+		options ["incentivized"] = true;
+		Vungle.playAdWithOptions(options);
 	}
 	
 	public static void OnShowResult(ShowResult ret)

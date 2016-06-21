@@ -48,12 +48,15 @@ public class PlayerData : MonoBehaviour {
 		FileSystem.WriteGameDataFromFile(MyGameData, "SaveData");
 		
 		m_Gamedata = MyGameData;
+
+		Debug.Log ("Create Save Data Complete");
 	}
 
 
 	public void GameData_Save()
 	{
-		byte[] byteData = FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
+		FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
+		Debug.Log ("Save GameData Complete");
 
 		if (GameSDK_Funcs.isInitialized ()) {
 			BinaryFormatter b = new BinaryFormatter();
@@ -87,8 +90,10 @@ public class PlayerData : MonoBehaviour {
 	}
 
 
-	void OnApplicationQuit() {
-		GameData_Save ();
-		Debug.Log ("Game Quit");
+	void OnApplicationPause(bool pauseStatus) {
+		if (pauseStatus)
+			Vungle.onPause ();
+		else
+			Vungle.onResume ();
 	}
 }

@@ -41,6 +41,7 @@ public partial class GameSystem : MonoBehaviour {
 	public void AdsBtnClick()
 	{
 		if (!AdFunctions.Show_UnityAds ()) {
+			AdFunctions.Show_VungleAds();
 		}
 		m_bAdsOn = true;
 		

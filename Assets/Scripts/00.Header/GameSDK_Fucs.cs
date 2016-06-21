@@ -23,7 +23,6 @@ class GameSDK_Funcs
 
 		};
 
-
 		#elif UNITY_IOS
 
 		Social.localUser.Authenticate(delegate {
@@ -90,9 +89,8 @@ class GameSDK_Funcs
 
 	public static void Do_CloudLoad()
 	{
-		Debug.Log ("Try Load GameData to GoogleCloud");
-
 		#if UNITY_ANDROID
+		Debug.Log ("Try Load GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
 		#endif

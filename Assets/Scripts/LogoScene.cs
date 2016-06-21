@@ -22,6 +22,7 @@ public class LogoScene : MonoBehaviour {
 		AdFunctions.Initialize ();
 		GameSDK_Funcs.Initialize ();
 
+
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
 			m_PlayerData = objPlayerData.GetComponent<PlayerData>();

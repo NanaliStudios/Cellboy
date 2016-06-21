@@ -1,13 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../Downloads/NotificationManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/01.SingleTon/GameBtnFuncs.cs" Line="44" Column="33" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="56" Column="14" />
-      <File FileName="Assets/Scripts/LogoScene.cs" Line="32" Column="30" />
-      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="49" Column="3" />
-      <File FileName="Assets/Extensions/AndroidNative/xExample/Scripts/Social/AndroidSocialNativeExample.cs" Line="7" Column="18" />
-      <File FileName="../Downloads/NotificationManager.cs" Line="1" Column="1" />
+      <File FileName="../Downloads/admob/Mng_AdMob.cs" Line="156" Column="2" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs" Line="80" Column="5" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="213" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

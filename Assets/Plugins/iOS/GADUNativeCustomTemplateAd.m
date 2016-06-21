@@ -2,7 +2,7 @@
 
 #import "GADUNativeCustomTemplateAd.h"
 
-@import GoogleMobileAds;
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @implementation GADUNativeCustomTemplateAd
 

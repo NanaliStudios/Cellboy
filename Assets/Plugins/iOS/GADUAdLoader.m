@@ -2,7 +2,7 @@
 
 #import "GADUAdLoader.h"
 
-@import GoogleMobileAds;
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #import "GADUNativeCustomTemplateAd.h"
 #import "GADUObjectCache.h"

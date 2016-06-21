@@ -29,7 +29,7 @@ public class LogoScene : MonoBehaviour {
 			Debug.Log("Create PlayerData");
 		}
 
-		//PlayerPrefs.DeleteAll ();
+		PlayerPrefs.DeleteAll ();
 
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);

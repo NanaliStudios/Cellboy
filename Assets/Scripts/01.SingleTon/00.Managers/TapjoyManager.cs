@@ -49,6 +49,10 @@ public class TapjoyManager : MonoBehaviour
 		{
 			if(!Tapjoy.IsConnected)
 			{
+				#if UNITY_EDITOR_OSX
+				break;
+				#endif
+
 				Tapjoy.Connect();
 				yield return new WaitForFixedUpdate();
 			}

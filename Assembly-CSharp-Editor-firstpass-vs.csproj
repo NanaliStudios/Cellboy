@@ -179,6 +179,9 @@
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
+ <Reference Include="JarResolverLib">
+ <HintPath>/Users/jung/ProjCellboy/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">

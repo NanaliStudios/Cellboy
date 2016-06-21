@@ -86,6 +86,8 @@
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\SA_EditorTool.cs" />
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\SA_RemoveTool.cs" />
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\SA_VersionsManager.cs" />
+     <Compile Include="Assets\GoogleMobileAds\Editor\CocoaPodHelper.cs" />
+     <Compile Include="Assets\GoogleMobileAds\Editor\PostProcessor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\ActiveAnimationEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\BMFontReader.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\ComponentSelector.cs" />
@@ -169,6 +171,14 @@
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetContainerEditor.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWidgetInspector.cs" />
      <Compile Include="Assets\NGUI\Scripts\Editor\UIWrapContentEditor.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\AdMobDependencies.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\DefaultResolver.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\IResolver.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\PlayServicesResolver.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\ResolverVer1_1.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\ResolverVer1_2.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\SampleDependencies.cs" />
+     <Compile Include="Assets\PlayServicesResolver\Editor\SettingsDialog.cs" />
      <Compile Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Editor\AtlasAssetInspector.cs" />
      <Compile Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Editor\BoneFollowerInspector.cs" />
      <Compile Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Editor\BoundingBoxFollowerInspector.cs" />
@@ -302,6 +312,9 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="JarResolverLib">
+ <HintPath>/Users/jung/ProjCellboy/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

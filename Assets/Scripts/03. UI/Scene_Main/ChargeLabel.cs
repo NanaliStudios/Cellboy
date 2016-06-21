@@ -18,7 +18,7 @@ public class ChargeLabel : TextBase {
 	{
 		Initialize ();
 		m_PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>();
-		m_MyText.text = m_PlayerData.m_strPlayerName + strInfo;
+		m_MyText.text = strInfo + " " + m_PlayerData.m_strPlayerName + "?";
 	}
 	
 

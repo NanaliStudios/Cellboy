@@ -7,7 +7,7 @@ public partial class BtnManager : MonoBehaviour {
 	public void OnFreeCharge1_Click()
 	{
 		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
-		TapjoyManager.Instance.ContentsReady ("getfreecoin1");
+		//TapjoyManager.Instance.ContentsReady ("getfreecoin1");
 	}
 
 	public void Buy200CoinBtn_Click()
@@ -21,7 +21,7 @@ public partial class BtnManager : MonoBehaviour {
 	//
 	public void NoAdsBtn_Click()
 	{
-		m_PlayerData.m_Gamedata.m_bAdOff = true;
-		Application.LoadLevel ("00_Logo");
+		//m_PlayerData.m_Gamedata.m_bAdOff = true;
+		//Application.LoadLevel ("00_Logo");
 	}
 }

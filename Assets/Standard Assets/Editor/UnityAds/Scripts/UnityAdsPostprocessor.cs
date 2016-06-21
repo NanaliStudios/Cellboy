@@ -81,16 +81,19 @@ namespace UnityEngine.Advertisements
 
       frameworksearchpaths.Add (copyDependencies ? "$(SRCROOT)/UnityAds" : MacPath (pluginsPath));
 
-      List<string> frameworks = new List<string> ();
-      frameworks.Add ("AdSupport.framework");
-      frameworks.Add ("StoreKit.framework");
-      frameworks.Add ("CoreTelephony.framework");
-
-      List<string> dependencyList = new List<string> ();
-      dependencyList.Add ("UnityAds.framework");
-      dependencyList.Add ("UnityAds.bundle");
-      dependencyList.Add ("UnityAdsUnityWrapper.h");
-      dependencyList.Add ("UnityAdsUnityWrapper.mm");
+		List<string> frameworks = new List<string> ();
+		frameworks.Add ("AdSupport.framework");
+		frameworks.Add ("StoreKit.framework");
+		frameworks.Add ("CoreTelephony.framework");
+		frameworks.Add ("CoreBluetooth.framework");
+		frameworks.Add ("SafariServices.framework");
+		
+		List<string> dependencyList = new List<string> ();
+		dependencyList.Add ("UnityAds.framework");
+		dependencyList.Add ("UnityAds.bundle");
+		dependencyList.Add ("UnityAdsUnityWrapper.h");
+		dependencyList.Add ("UnityAdsUnityWrapper.mm");
+		dependencyList.Add ("GoogleMobileAds.framework");
 
       string dependencyTargetPath = copyDependencies ? modPath : pluginsPath;
       List<string> files = new List<string> ();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TapjoyUnity;
 public class LogoScene : MonoBehaviour {
 
 	private float m_fTimer = 0.0f;
@@ -72,6 +73,7 @@ public class LogoScene : MonoBehaviour {
 			AdFunctions.Show_GoogleADBanner();
 			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
+
 			Application.LoadLevel ("00_MAIN");
 			return;
 		}

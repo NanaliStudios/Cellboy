@@ -6,6 +6,7 @@ public class TapjoyManager : MonoBehaviour
 {
 	public int m_iTapjoyCurrency = 0;
 	public TJPlacement m_TjNotice = null;
+	public TJPlacement m_TjOfferwall = null;
 
 	private static TapjoyManager s_Instance = null;
 	public static TapjoyManager Instance
@@ -37,21 +38,24 @@ public class TapjoyManager : MonoBehaviour
 		TJPlacement.OnPurchaseRequest += HandleOnPurchaseRequest;
 		TJPlacement.OnRewardRequest += HandleOnRewardRequest;
 
-		if(!Tapjoy.IsConnected)
-			Tapjoy.Connect();
-
+		if (!Tapjoy.IsConnected)
+			Tapjoy.Connect ();
+	
 		float curTime = Time.time;
-		while(true)
-		{
-			if(Time.time - curTime > 5)
+		while (true) {
+			if (Time.time - curTime > 5)
 				break;
-			else
-			{
-				if(!Tapjoy.IsConnected)
-					yield return new WaitForFixedUpdate();
-				else
-				{
-					m_TjNotice = ContentsReady("Notice");
+			else {
+				if (!Tapjoy.IsConnected)
+					yield return new WaitForFixedUpdate ();
+				else {
+
+					Tapjoy.OnEarnedCurrency += HandleOnEarnedCurrency;
+					Tapjoy.OnAwardCurrencyResponse += HandleOnAwardCurrencyResponse;
+
+					m_TjNotice = ContentsReady ("Notice");
+					m_TjOfferwall = ContentsReady ("getfreecoin1");
+			
 					break;
 				}
 			}
@@ -136,6 +140,7 @@ public class TapjoyManager : MonoBehaviour
 	public void HandleOnRewardRequest(TJPlacement placement, TJActionRequest request, string itemId, int quantity)
 	{
 		//리워드관련 컨텐츠 연동시 사용.
+		Debug.Log (itemId + "-" + quantity);
 	}
 	
 	public void TrackInappPurchase_ForApple(string itemName, string currency, double price, string transactionID)
@@ -158,5 +163,15 @@ public class TapjoyManager : MonoBehaviour
 	{
 		//커스텀 이벤트. ex = TrackCustomEvent(“GUN”,”Get”,”price”,”10”);
 		Tapjoy.TrackEvent(category,eventName,param1,param2);
+	}
+
+	void HandleOnEarnedCurrency (string currencyName, int amount)
+	{
+		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, amount));
+	}
+
+	void HandleOnAwardCurrencyResponse (string currencyName, int balance)
+	{
+		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
 	}
 }

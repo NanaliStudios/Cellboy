@@ -1,12 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LogoScene.cs">
     <Files>
-      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="5" Column="5" />
-      <File FileName="../Downloads/TapjoyManager.cs" Line="3" Column="3" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="42" Column="42" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs" Line="61" Column="61" />
-      <File FileName="Assets/Scripts/00.Header/AdFunctions.cs" Line="46" Column="46" />
+      <File FileName="Assets/Scripts/00.Header/GameSDK_Fucs.cs" Line="45" Column="45" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="53" Column="53" />
+      <File FileName="Assets/Extensions/AndroidNative/xExample/Scripts/Billing/BillingExample.cs" Line="34" Column="34" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="4" Column="4" />
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="9" Column="9" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameBtnFuncs.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/02.Objects/Coin.cs" Line="11" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

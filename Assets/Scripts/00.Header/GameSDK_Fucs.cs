@@ -13,7 +13,14 @@ class GameSDK_Funcs
 		AndroidInAppPurchaseManager.Client.AddProduct("coin_200");
 		AndroidInAppPurchaseManager.Client.Connect ();
 	
-		//GooglePlaySavedGamesManager.Instance.ShowSavedGamesUI ("MySaved", 3);
+		AndroidInAppPurchaseManager.ActionProductPurchased += delegate {
+			if(AndroidInAppPurchaseManager.Client.IsConnected)
+			{
+				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200"))
+					Debug.Log("coin_200 Purchase success");
+			}
+
+		};  
 
 
 		//GooglePlay CloudSave Set Delegates

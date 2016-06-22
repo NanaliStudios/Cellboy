@@ -298,6 +298,15 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.2/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
+ <Reference Include="Prime31MenuItem">
+ <HintPath>/Users/jung/ProjCellboy/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
+ </Reference>
+ <Reference Include="JarResolverLib">
+ <HintPath>/Users/jung/ProjCellboy/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
+ </Reference>
+ <Reference Include="P31RestKit">
+ <HintPath>/Users/jung/ProjCellboy/Assets/Plugins/P31RestKit.dll</HintPath>
+ </Reference>
  <Reference Include="VungleSDKProxy">
  <HintPath>/Users/jung/ProjCellboy/Assets/Plugins/VungleSDKProxy.dll</HintPath>
  </Reference>
@@ -309,9 +318,6 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
- <Reference Include="JarResolverLib">
- <HintPath>/Users/jung/ProjCellboy/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,13 @@ public partial class GameSystem : MonoBehaviour {
 	public void AdsBtnClick()
 	{
 		if (!AdFunctions.Show_UnityAds ()) {
-			AdFunctions.Show_VungleAds();
+			if (!AdFunctions.Show_VungleAds ()) {
+				m_NetworkFail_Label.GetComponent<TweenAlpha> ().ResetToBeginning ();
+				m_NetworkFail_Label.GetComponent<TweenAlpha> ().enabled = true;
+				m_NetworkFail_Label.SetActive (true);
+
+				return;
+			}
 		}
 		m_bAdsOn = true;
 		

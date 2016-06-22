@@ -21,8 +21,6 @@ public class FileSystem : MonoBehaviour {
 		byte[] fileBytes = null;
 		fileBytes = new byte[file.Length];
 
-
-		int n = file.Read(fileBytes, 0, fileBytes.Length); 
 		Debug.Log("file Reading");
 
 		file.Close();
@@ -59,24 +57,23 @@ public class FileSystem : MonoBehaviour {
 	}
 
 	public static string pathForDocumentsFile( string filename ) 
-	{ 
-		if (Application.platform == RuntimePlatform.IPhonePlayer)
-		{
-			string path = Application.dataPath.Substring( 0, Application.dataPath.Length - 5 );
-			path = path.Substring( 0, path.LastIndexOf( '/' ) );
-			return Path.Combine( Path.Combine( path, "Documents" ), filename );
-		}
-		
-		else if(Application.platform == RuntimePlatform.Android)
-		{
-			string path = Application.persistentDataPath;
-			path = path.Substring(0, path.LastIndexOf( '/' ) );
+	{
+		string path;
+
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			path = Application.persistentDataPath;
+			path = path.Substring (0, path.LastIndexOf ('/'));
+			path = Path.Combine (Path.Combine (path, "Documents"), filename);
+			Debug.Log (path);
+			return path;
+		} else if (Application.platform == RuntimePlatform.Android) {
+			path = Application.persistentDataPath;
+			path = path.Substring (0, path.LastIndexOf ('/'));
 			return Path.Combine (path, filename);
 		}
-		
-		else 
+		else
 		{
-			string path = Application.dataPath;
+			path = Application.dataPath;
 			path = path.Substring(0, path.LastIndexOf( '/' ) );
 			return Path.Combine (path, filename);
 		}

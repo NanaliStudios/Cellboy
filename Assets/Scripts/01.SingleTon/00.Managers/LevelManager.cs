@@ -108,7 +108,7 @@ public class LevelManager : MonoBehaviour {
 			        + m_fMoveChance + m_fFollowChance)
 				SpawnEnemyID = ENEMY_ID.FOLLOW_S;
 			else if(fRandSpawnVal <= m_fNormalSChance + m_fNormalMChance + m_fSpeedChance + m_fSplitSChance + m_fSplitMChance
-			        + m_fImmChance)
+					+ m_fMoveChance + m_fFollowChance + m_fImmChance)
 				SpawnEnemyID = ENEMY_ID.IMM;
 			else if(fRandSpawnVal <= m_fNormalSChance + m_fNormalMChance + m_fSpeedChance + m_fSplitSChance + m_fSplitMChance
 			        + m_fMoveChance + m_fFollowChance + m_fImmChance + m_fCoinSChance)
@@ -143,7 +143,7 @@ public class LevelManager : MonoBehaviour {
 			m_fNormalSChance = 95.0f;	//small normal
 			m_fNormalMChance = 0.0f;	//midium normal
 
-			m_fSpeedChance = 0.0f;		//speed
+			m_fSpeedChance = 0.0f;		//speed 
 
 			m_fSplitSChance = 0.0f;		//small split
 			m_fSplitMChance = 0.0f;		//midium split

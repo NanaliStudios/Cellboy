@@ -83,7 +83,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Create Particels
 
 		GameObject objParticles = null;
-
+	
 		if (GameObject.Find ("Particles(Clone)") == null) {
 			objParticles = Instantiate (m_objParticles) as GameObject;
 		}
@@ -124,6 +124,28 @@ public partial class BtnManager : MonoBehaviour {
 
 			//Game Save
 			m_PlayerData.GameData_Save ();
+
+
+		//starscore, facebook like
+		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 5) {
+			OnRateMenu ();
+		}
+		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 15) {
+			OnRateMenu ();
+		}
+		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 50) {
+			OnRateMenu ();
+		}
+
+		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 10) {
+			OnFBLikeMenu ();
+		}
+		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 20) {
+			OnFBLikeMenu ();
+		}
+		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 60) {
+			OnFBLikeMenu ();
+		}
 
 	
 	}
@@ -199,6 +221,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Ads
 		Check_AdsReward ();
 
+		#if !UNITY_EDITOR_OSX
 		if (m_PlayerData.m_iCurrentPlayNum == 1)
 		if (AdFunctions.m_bTjNoticeDismiss) {
 			AdFunctions.m_bTjNoticeDismiss = false;
@@ -217,6 +240,7 @@ public partial class BtnManager : MonoBehaviour {
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 			GameStart ();
 		}
+		#endif
 			
 	}
 
@@ -254,7 +278,8 @@ public partial class BtnManager : MonoBehaviour {
 			m_bIsDismissAD = true;
 		};
 		
-		if (m_PlayerData.m_iPlayCountForAd == 3) {
+		if (m_PlayerData.m_iPlayCountForAd == 3
+			&& (Application.internetReachability != NetworkReachability.NotReachable)) {
 			
 			if(m_bPopupAdsOn == false)
 			{
@@ -266,7 +291,8 @@ public partial class BtnManager : MonoBehaviour {
 			
 			m_bPopupAdsOn = true;
 		} else {
-			if (m_PlayerData.m_iCurrentPlayNum == 1)
+			if (m_PlayerData.m_iCurrentPlayNum == 1
+				&& (Application.internetReachability != NetworkReachability.NotReachable))
 				TapjoyManager.Instance.m_TjNotice.ShowContent ();
 			else
 			{
@@ -363,6 +389,26 @@ public partial class BtnManager : MonoBehaviour {
 		m_MenuStateID = MAINMENU_STATE.CHARGE;
 	}
 
+	public void OnRateMenu()
+	{
+		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Starscore").gameObject.SetActive(true);
+
+		m_MenuStateID = MAINMENU_STATE.CHARGE;
+	}
+
+	public void OnFBLikeMenu()
+	{
+		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(true);
+
+		m_MenuStateID = MAINMENU_STATE.CHARGE;
+	}
+
 	public void MainBackBtn_Click()
 	{
 		//Play_BtnSound ();
@@ -371,6 +417,8 @@ public partial class BtnManager : MonoBehaviour {
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Buy").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Starscore").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(false);
 
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(true);
 
@@ -464,7 +512,13 @@ public partial class BtnManager : MonoBehaviour {
 		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
 
 		if (!AdFunctions.Show_UnityAds ()) {
-			AdFunctions.Show_VungleAds ();
+			if (!AdFunctions.Show_VungleAds ()) {
+				m_NetworkFail_Label.GetComponent<TweenAlpha> ().ResetToBeginning ();
+				m_NetworkFail_Label.GetComponent<TweenAlpha> ().enabled = true;
+				m_NetworkFail_Label.SetActive (true);
+
+				return;
+			}
 		}
 		m_bVideoAdsOn = true;
 		

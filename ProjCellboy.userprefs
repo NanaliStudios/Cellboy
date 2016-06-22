@@ -1,10 +1,12 @@
-﻿<Properties>
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs">
     <Files>
-      <File FileName="../Downloads/admob/Mng_AdMob.cs" Line="156" Column="2" />
-      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs" Line="80" Column="5" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="213" Column="35" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="5" Column="5" />
+      <File FileName="../Downloads/TapjoyManager.cs" Line="3" Column="3" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="42" Column="42" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs" Line="61" Column="61" />
+      <File FileName="Assets/Scripts/00.Header/AdFunctions.cs" Line="46" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

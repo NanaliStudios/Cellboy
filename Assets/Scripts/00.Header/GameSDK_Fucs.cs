@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 using System.Collections;
 
 class GameSDK_Funcs
@@ -24,10 +25,12 @@ class GameSDK_Funcs
 		};
 
 		#elif UNITY_IOS
-
-		Social.localUser.Authenticate(delegate {
-
-	});
+		Social.localUser.Authenticate( sucess => {
+			if(sucess)
+				Debug.Log("IOS Gamecenter login sucess");
+			else
+				Debug.Log("IOS Gamecenter login failed");
+		});
 		#endif
 	}
 
@@ -60,7 +63,7 @@ class GameSDK_Funcs
 		#endif
 
 		#if UNITY_IOS
-		Social.ShowLeaderboardUI();
+		GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
 		#endif
 	}
 
@@ -71,7 +74,9 @@ class GameSDK_Funcs
 		#endif
 
 		#if UNITY_IOS
-		//Social.ReportScore(iScore, "BoardName");
+		Social.ReportScore(iScore, "CellboyScore", success => {
+			Debug.Log(success ? "Reported score successfully" : "Failed to report score");
+		});
 		#endif
 	}
 
@@ -84,6 +89,8 @@ class GameSDK_Funcs
 		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
 		                                                        Data, 0);
 		#elif UNITY_IOS
+		Debug.Log ("Try Save GameData to ICloud");
+		P31CloudFile.writeAllBytes("SaveData", Data);
 		#endif
 	}
 
@@ -93,25 +100,8 @@ class GameSDK_Funcs
 		Debug.Log ("Try Load GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
-		#endif
-	}
-
-	public static void Get_CloudSave()
-	{
-		#if UNITY_ANDROID
-		//GooglePlaySavedGamesManager.action
-		#endif
-		
-		#if UNITY_IOS
-		#endif
-	}
-
-	public static void Gamedata_CloudSave()
-	{
-		#if UNITY_ANDROID
-		#endif
-		
-		#if UNITY_IOS
+		Debug.Log ("Try Load GameData to ICloud");
+		CurrentSaveDAta = P31CloudFile.readAllBytes("SaveData");
 		#endif
 	}
 

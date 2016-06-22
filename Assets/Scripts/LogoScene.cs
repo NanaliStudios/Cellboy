@@ -22,6 +22,9 @@ public class LogoScene : MonoBehaviour {
 		AdFunctions.Initialize ();
 		GameSDK_Funcs.Initialize ();
 
+		#if UNITY_EDITOR_OSX
+		PlayerPrefs.DeleteAll();
+		#endif
 
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
@@ -29,7 +32,7 @@ public class LogoScene : MonoBehaviour {
 			Debug.Log("Create PlayerData");
 		}
 
-		PlayerPrefs.DeleteAll ();
+		//PlayerPrefs.DeleteAll ();
 
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);

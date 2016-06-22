@@ -82,11 +82,17 @@ class AdFunctions
 
 	}
 
-	public static void Show_VungleAds()
+	public static bool Show_VungleAds()
 	{
-		Dictionary<string, object> options = new Dictionary<string, object> ();
-		options ["incentivized"] = true;
-		Vungle.playAdWithOptions(options);
+		if (Vungle.isAdvertAvailable ()) {
+			Dictionary<string, object> options = new Dictionary<string, object> ();
+			options ["incentivized"] = true;
+			Vungle.playAdWithOptions (options);
+
+			return true;
+		}
+
+		return false;
 	}
 	
 	public static void OnShowResult(ShowResult ret)

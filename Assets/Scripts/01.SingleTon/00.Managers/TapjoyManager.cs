@@ -37,29 +37,23 @@ public class TapjoyManager : MonoBehaviour
 		TJPlacement.OnPurchaseRequest += HandleOnPurchaseRequest;
 		TJPlacement.OnRewardRequest += HandleOnRewardRequest;
 
-		Tapjoy.OnGetCurrencyBalanceResponse += delegate(string currencyName, int balance){
+		if(!Tapjoy.IsConnected)
+			Tapjoy.Connect();
 
-			m_iTapjoyCurrency = balance;
-
-
-
-		};
-		
+		float curTime = Time.time;
 		while(true)
 		{
-			if(!Tapjoy.IsConnected)
-			{
-				#if UNITY_EDITOR_OSX
+			if(Time.time - curTime > 5)
 				break;
-				#endif
-
-				Tapjoy.Connect();
-				yield return new WaitForFixedUpdate();
-			}
 			else
 			{
-				m_TjNotice = ContentsReady("Notice");
-				break;
+				if(!Tapjoy.IsConnected)
+					yield return new WaitForFixedUpdate();
+				else
+				{
+					m_TjNotice = ContentsReady("Notice");
+					break;
+				}
 			}
 		}
 	}

@@ -1,0 +1,14 @@
+/Users/jung/ProjCellboy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/jung/ProjCellboy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/jung/ProjCellboy/obj/Debug/Assembly-CSharp-firstpass.dll
+/Users/jung/ProjCellboy/obj/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/jung/ProjCellboy/Temp/bin/Debug/UnityEngine.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/UnityEditor.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/P31RestKit.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/VungleSDKProxy.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/Tapjoy.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/Mono.Cecil.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/nunit.framework.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/Unity.DataContract.dll
+/Users/jung/ProjCellboy/Temp/bin/Debug/ICSharpCode.NRefactory.dll

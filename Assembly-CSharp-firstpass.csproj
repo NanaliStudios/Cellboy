@@ -54,6 +54,12 @@
      <Compile Include="Assets\Plugins\Vungle\demo\VungleComboUI.cs" />
      <Compile Include="Assets\Plugins\Vungle\iOS\VungleBinding.cs" />
      <Compile Include="Assets\Plugins\Vungle\win\VungleWin.cs" />
+     <Compile Include="Assets\Plugins\iCloud\P31CloudFile.cs" />
+     <Compile Include="Assets\Plugins\iCloud\P31Prefs.cs" />
+     <Compile Include="Assets\Plugins\iCloud\demo\iCloudEventListener.cs" />
+     <Compile Include="Assets\Plugins\iCloud\demo\iCloudGUIManager.cs" />
+     <Compile Include="Assets\Plugins\iCloud\iCloudBinding.cs" />
+     <Compile Include="Assets\Plugins\iCloud\iCloudManager.cs" />
      <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisement.cs" />
      <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\Misc\AsyncExec.cs" />
      <Compile Include="Assets\Standard Assets\UnityAds\Scripts\Advertisements\Misc\MiniJSON.cs" />
@@ -168,6 +174,9 @@
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.2/Standalone/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="P31RestKit">
+ <HintPath>/Users/jung/ProjCellboy/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="VungleSDKProxy">
  <HintPath>/Users/jung/ProjCellboy/Assets/Plugins/VungleSDKProxy.dll</HintPath>

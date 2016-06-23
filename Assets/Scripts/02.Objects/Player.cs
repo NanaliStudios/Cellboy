@@ -167,8 +167,14 @@ public class Player : ObjectBase {
 			if(m_GameSys.m_iCurrent_Point > m_iLv3MaxPoint
 			   && m_iCurrentLv == 4)
 			{
-				m_GameSys.m_iCurrent_Point = 0;
 				m_GameSys.Start_FeverTime (10.0f);
+				m_GameSys.m_PrefapMgr.Create_LevelupEffect (m_MyTrans.position);
+
+				m_iCurrentMaxPoint = m_iLv3MaxPoint;
+				m_GameSys.m_iCurrent_Point = 0;
+
+				m_Audio.clip = m_LvUpSound;
+				m_Audio.Play();
 			}
 			//<-----End
 

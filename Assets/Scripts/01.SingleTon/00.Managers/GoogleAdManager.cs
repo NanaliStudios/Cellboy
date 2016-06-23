@@ -108,63 +108,19 @@ public class GoogleAdManager : MonoBehaviour
 	{
 		bannerView.Show ();
 	}
-
-	public void ShowBanner()
-	{
-		bannerView.Hide ();
-	}
-
-
 	
 	public void ShowPopup()
 	{
 		interstitial.Show ();
 	}
+
+
+	public void BannerHide()
+	{
+		Debug.Log("AD OFF");
+
+		bannerView.Hide ();
+	}
 		
-//		public void Request(AdMobState state)
-//		{
-//			string adUnitId = PluginIDManager.Instance.GetAdMobID(state);
-//			// Create an empty ad request.
-//			AdRequest request = new AdRequest.Builder().Build();
-//			switch(state)
-//			{
-//			case AdMobState.Interstitial:
-//				// Initialize an InterstitialAd.
-//				interstitial = new InterstitialAd(adUnitId);
-//				// Load the interstitial with the request.
-//				interstitial.LoadAd(request);
-//				break;
-//			case AdMobState.Banner:
-//				// Create a 320x50 banner at the top of the screen.
-//				bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
-//				// Load the banner with the request.
-//				bannerView.LoadAd(request);
-//				break;
-//			}
-//		}
-//		
-//		public void ShowContents(AdMobState state)
-//		{
-//			string id = PluginIDManager.Instance.GetAdMobID(state);
-//			Debug.Log (state + " : " + id);
-//			switch(state)
-//			{
-//			case AdMobState.Interstitial:
-//				if (interstitial.IsLoaded())
-//				{
-//					interstitial.Show();
-//					Request(state);
-//				}
-//				break;
-//			case AdMobState.Banner:
-//				bannerView.Show();
-//				break;
-//			}
-//		}
-//		
-//		public void BannerHide()
-//		{
-//			bannerView.Hide();
-//		}
 }
 #endif

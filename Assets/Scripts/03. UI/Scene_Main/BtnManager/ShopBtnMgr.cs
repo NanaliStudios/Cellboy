@@ -17,8 +17,16 @@ public partial class BtnManager : MonoBehaviour {
 	public void Buy200CoinBtn_Click()
 	{
 		GameSDK_Funcs.Purcahse_Item ("coin_200");
-//		if (GameSDK_Funcs.Check_IsPurchased ("coin_200"))
-//			m_PlayerData.m_Gamedata.m_iHaveCoin += 200;
+	}
+
+	public void Buy500CoinBtn_Click()
+	{
+		GameSDK_Funcs.Purcahse_Item ("coin_500");
+	}
+
+	public void Buy1000CoinBtn_Click()
+	{
+		GameSDK_Funcs.Purcahse_Item ("coin_1000");
 	}
 
 	//
@@ -26,9 +34,7 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		if (m_PlayerData.m_Gamedata.m_bAdOff == true)
 			return;
-
-		m_PlayerData.m_Gamedata.m_bAdOff = true;
-		m_PlayerData.GameData_Save ();
-		Application.LoadLevel ("00_Logo");
+			
+		GameSDK_Funcs.Purcahse_Item ("adoff");
 	}
 }

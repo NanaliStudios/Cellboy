@@ -72,6 +72,7 @@ public class PlayerData : MonoBehaviour {
 
 	public void GameData_Load()
 	{
+		Debug.Log ("Try Gamedata Load");
 		m_ByteGameData = GameSDK_Funcs.CurrentSaveDAta;
 
 		if (m_ByteGameData != null) {

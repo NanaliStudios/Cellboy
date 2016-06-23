@@ -1,15 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LogoScene.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/00.Header/AdFunctions.cs">
     <Files>
-      <File FileName="Assets/Scripts/00.Header/GameSDK_Fucs.cs" Line="45" Column="45" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="53" Column="53" />
-      <File FileName="Assets/Extensions/AndroidNative/xExample/Scripts/Billing/BillingExample.cs" Line="34" Column="34" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="4" Column="4" />
-      <File FileName="Assets/Scripts/LogoScene.cs" Line="9" Column="9" />
-      <File FileName="Assets/Scripts/01.SingleTon/GameBtnFuncs.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/02.Objects/Coin.cs" Line="11" Column="11" />
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="34" Column="34" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="45" Column="45" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs" Line="20" Column="20" />
+      <File FileName="Assets/Extensions/AndroidNative/xExample/Scripts/AdMob/AndroidGoogleAdsExample.cs" Line="10" Column="10" />
+      <File FileName="Assets/Scripts/00.Header/AdFunctions.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

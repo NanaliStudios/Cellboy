@@ -63,6 +63,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	void Start()
 	{
+		Debug.Log ("BtnManager");
 		//Load Audio
 		m_Audio = gameObject.GetComponent<AudioSource> ();
 		m_BtnClip = Resources.Load ("Sounds/ogg(96k)/button_click") as AudioClip;
@@ -117,10 +118,14 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		//ads
-		if (!m_PlayerData.m_Gamedata.m_bAdOff)
+		if (!m_PlayerData.m_Gamedata.m_bAdOff) {
 			Admob_Back.SetActive (true);
-		else
+			AdFunctions.Show_GoogleADBanner ();
+		}
+		else {
 			Admob_Back.SetActive (false);
+			AdFunctions.Hide_GoogleADBanner ();
+		}
 
 			//Game Save
 			m_PlayerData.GameData_Save ();
@@ -147,6 +152,7 @@ public partial class BtnManager : MonoBehaviour {
 			OnFBLikeMenu ();
 		}
 
+		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
 	
 	}
 
@@ -277,27 +283,32 @@ public partial class BtnManager : MonoBehaviour {
 		Chartboost.didDismissInterstitial += delegate {
 			m_bIsDismissAD = true;
 		};
-		
-		if (m_PlayerData.m_iPlayCountForAd == 3
-			&& (Application.internetReachability != NetworkReachability.NotReachable)) {
+
+		if (m_PlayerData.m_Gamedata.m_bAdOff == true) {
+
+			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+			GameStart ();
+		} 
+		else {
+			if (m_PlayerData.m_iPlayCountForAd == 3
+			   && (Application.internetReachability != NetworkReachability.NotReachable)) {
 			
-			if(m_bPopupAdsOn == false)
-			{
-				if (Chartboost.hasInterstitial (CBLocation.Default))
-					Chartboost.showInterstitial (CBLocation.Default);
-				else
-					AdFunctions.Show_GoogleADPopup ();
-			}
+				if (m_bPopupAdsOn == false) {
+					if (Chartboost.hasInterstitial (CBLocation.Default))
+						Chartboost.showInterstitial (CBLocation.Default);
+					else
+						AdFunctions.Show_GoogleADPopup ();
+				}
 			
-			m_bPopupAdsOn = true;
-		} else {
-			if (m_PlayerData.m_iCurrentPlayNum == 1
-				&& (Application.internetReachability != NetworkReachability.NotReachable))
-				TapjoyManager.Instance.m_TjNotice.ShowContent ();
-			else
-			{
-				m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-				GameStart ();
+				m_bPopupAdsOn = true;
+			} else {
+				if (m_PlayerData.m_iCurrentPlayNum == 1
+				   && (Application.internetReachability != NetworkReachability.NotReachable))
+					TapjoyManager.Instance.m_TjNotice.ShowContent ();
+				else {
+					m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
+					GameStart ();
+				}
 			}
 		}
 		//Game Start 
@@ -564,7 +575,6 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		m_objScrollView.SetActive (false);
 		m_objEndBack.SetActive (true);
-		m_PlayerData.m_iCurrentPlayNum += 1;
 		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
 		Application.LoadLevel ("02_Game");
 		m_bTimeInit = false;

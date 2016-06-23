@@ -7,12 +7,11 @@ public partial class BtnManager : MonoBehaviour {
 	public void OnFreeCharge1_Click()
 	{
 		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
-		TapjoyManager.Instance.m_TjOfferwall.ShowContent();
 	}
 
 	public void OnFreeCharge2_Click()
 	{
-		Tapjoy.GetCurrencyBalance ();
+		TapjoyManager.Instance.m_TjOfferwall.ShowContent();
 	}
 
 	public void Buy200CoinBtn_Click()
@@ -25,7 +24,11 @@ public partial class BtnManager : MonoBehaviour {
 	//
 	public void NoAdsBtn_Click()
 	{
-		//m_PlayerData.m_Gamedata.m_bAdOff = true;
-		//Application.LoadLevel ("00_Logo");
+		if (m_PlayerData.m_Gamedata.m_bAdOff == true)
+			return;
+
+		m_PlayerData.m_Gamedata.m_bAdOff = true;
+		m_PlayerData.GameData_Save ();
+		Application.LoadLevel ("00_Logo");
 	}
 }

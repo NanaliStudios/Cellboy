@@ -51,6 +51,11 @@ class AdFunctions
 		m_GoogleAD.ShowBanner ();
 	}
 
+	public static void Hide_GoogleADBanner()
+	{
+		m_GoogleAD.BannerHide ();
+	}
+
 	public static void Show_GoogleADPopup()
 	{
 		m_GoogleAD.ShowPopup ();

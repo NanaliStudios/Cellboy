@@ -41,6 +41,10 @@ public class TapjoyManager : MonoBehaviour
 		if (!Tapjoy.IsConnected)
 			Tapjoy.Connect ();
 	
+		Tapjoy.OnEarnedCurrency += HandleOnEarnedCurrency;
+		Tapjoy.OnAwardCurrencyResponse += HandleOnAwardCurrencyResponse;
+		Tapjoy.OnGetCurrencyBalanceResponse += HandleOnGetCurrencyBalanceResponse;
+
 		float curTime = Time.time;
 		while (true) {
 			if (Time.time - curTime > 5)
@@ -50,9 +54,6 @@ public class TapjoyManager : MonoBehaviour
 					yield return new WaitForFixedUpdate ();
 				else {
 
-					Tapjoy.OnEarnedCurrency += HandleOnEarnedCurrency;
-					Tapjoy.OnAwardCurrencyResponse += HandleOnAwardCurrencyResponse;
-
 					m_TjNotice = ContentsReady ("Notice");
 					m_TjOfferwall = ContentsReady ("getfreecoin1");
 			
@@ -61,7 +62,7 @@ public class TapjoyManager : MonoBehaviour
 			}
 		}
 	}
-	
+
 	//CreatePlacement가 완료되었는지 확인.
 	public bool IsReady(string key)
 	{
@@ -171,6 +172,11 @@ public class TapjoyManager : MonoBehaviour
 	}
 
 	void HandleOnAwardCurrencyResponse (string currencyName, int balance)
+	{
+		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
+	}
+
+	void HandleOnGetCurrencyBalanceResponse (string currencyName, int balance)
 	{
 		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
 	}

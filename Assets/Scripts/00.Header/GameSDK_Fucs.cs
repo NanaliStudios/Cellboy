@@ -17,7 +17,11 @@ class GameSDK_Funcs
 			if(AndroidInAppPurchaseManager.Client.IsConnected)
 			{
 				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200"))
+				{
+					GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>().m_Gamedata.m_iHaveCoin += 200;
+					AndroidInAppPurchaseManager.Client.Consume("coin_200");
 					Debug.Log("coin_200 Purchase success");
+				}
 			}
 
 		};  
@@ -92,6 +96,7 @@ class GameSDK_Funcs
 
 
 		#if UNITY_ANDROID
+		Debug.Log ("Try Save GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData", "",
 		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
 		                                                        Data, 0);

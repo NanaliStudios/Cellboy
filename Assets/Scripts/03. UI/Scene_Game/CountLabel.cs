@@ -28,6 +28,9 @@ public class CountLabel : TextBase {
 		if(m_GameSys.m_bAdsOn == false)
 		m_fRemainTime -= Time.unscaledDeltaTime;
 
+		if (m_fRemainTime <= 0)
+			m_fRemainTime = 0.0f;
+
 		int iTime = (int)m_fRemainTime;
 		m_MyText.text = iTime.ToString();
 	}

@@ -20,25 +20,27 @@ public class LogoScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		AdFunctions.Initialize ();
-		GameSDK_Funcs.Initialize ();
-
-		#if UNITY_EDITOR_OSX
-		PlayerPrefs.DeleteAll();
-		#endif
+//		#if UNITY_EDITOR_OSX
+//		PlayerPrefs.DeleteAll();
+//		#endif
 
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
-			m_PlayerData = objPlayerData.GetComponent<PlayerData>();
-			Debug.Log("Create PlayerData");
-		}
-
-		//PlayerPrefs.DeleteAll ();
+			m_PlayerData = objPlayerData.GetComponent<PlayerData> ();
+			Debug.Log ("Create PlayerData");
+		} else
+			m_PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>();
 
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
 			m_PlayerData.Create_SaveData();
 		}
+
+		if(!GameSDK_Funcs.isInitialized())
+		GameSDK_Funcs.Initialize ();
+
+		if(!AdFunctions.isInitialized())
+		AdFunctions.Initialize ();
 
 		if (PlayerPrefs.HasKey ("GameVolume") == false) {
 			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
@@ -70,10 +72,9 @@ public class LogoScene : MonoBehaviour {
 
 			return;
 #endif
-			AdFunctions.Show_GoogleADBanner();
 			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
-
+			  
 			Application.LoadLevel ("00_MAIN");
 			return;
 		}

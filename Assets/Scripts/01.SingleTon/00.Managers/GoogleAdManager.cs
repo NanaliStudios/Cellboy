@@ -13,7 +13,8 @@ public class GoogleAdManager : MonoBehaviour {
 	private string strPopupID = "ca-app-pub-6269735295695961/9295379334";
 	
 	public void Initialize()
-	{	
+	{
+
 		m_AdMob = AndroidAdMobController.Instance;
 
 		if (m_AdMob != null) {
@@ -25,22 +26,27 @@ public class GoogleAdManager : MonoBehaviour {
 			Debug.Log("Popup Closed");
 		};
 
+		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
+
 	}
 
 	public bool isInitialized()
 	{
-		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
 		return m_AdMob.IsInited;
 	}
 
 	public void ShowBanner()
 	{
-	 	if (banner == null) {
+		if (banner == null) {
+			Debug.Log("banner is null. Create Banner");
 			banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
-			banner.Show();
+			banner.Show ();
+		} else {
+			if (!banner.IsOnScreen) {
+				Debug.Log("AD ON");
+				banner.Show ();
+			}
 		}
-	 	else
-	 		banner.Show();
 	}
 
 	public void ShowPopup()
@@ -50,8 +56,14 @@ public class GoogleAdManager : MonoBehaviour {
 	
 	public void BannerHide()
 	{
-		if(banner.IsLoaded && banner.IsOnScreen)
-			banner.Hide();
+		Debug.Log("AD OFF");
+
+		if (banner != null) {
+			banner.Hide ();
+			m_AdMob.DestroyBanner (banner.id);
+		}
+		else
+			Debug.Log ("banner is null");
 	}
 }
 
@@ -96,6 +108,13 @@ public class GoogleAdManager : MonoBehaviour
 	{
 		bannerView.Show ();
 	}
+
+	public void ShowBanner()
+	{
+		bannerView.Hide ();
+	}
+
+
 	
 	public void ShowPopup()
 	{

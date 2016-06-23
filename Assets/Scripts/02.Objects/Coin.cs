@@ -25,9 +25,9 @@ public class Coin : Item {
 			Destroy (gameObject);
 
 		if (m_bIsGet == true) {
-			if (Tapjoy.IsConnected)
-				Tapjoy.AwardCurrency (m_iAddCoin);
-			else
+//			if (Tapjoy.IsConnected)
+//				Tapjoy.AwardCurrency (m_iAddCoin);
+//			else
 			m_GameSys.m_PlayerData.m_Gamedata.m_iHaveCoin += m_iAddCoin;
 
 			Destroy(gameObject);

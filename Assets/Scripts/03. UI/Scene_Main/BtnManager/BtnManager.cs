@@ -601,6 +601,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_objScrollView.SetActive (false);
 		m_objEndBack.SetActive (true);
 		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
+		m_PlayerData.m_iCurrentPlayNum += 1;
 		Application.LoadLevel ("02_Game");
 		m_bTimeInit = false;
 	}

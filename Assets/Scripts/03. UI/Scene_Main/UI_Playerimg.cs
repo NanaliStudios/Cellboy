@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class UI_Playerimg : MonoBehaviour {
 
 	public PLAYER_ID m_PlayerID = PLAYER_ID.NORMAL;
-	public string m_strName = "A";
-	public string m_strInfo = "ABCDEFG";
+	public string m_strName_KEY = "PLAYER1_NAME";
+	public string m_strInfo_KEY = "PLAYER1_INFO";
 	public int m_iPlayerIdx = 0;
 	public bool m_bSelected = false;
 	public int m_iChargePrice = 10;
@@ -45,7 +45,7 @@ public class UI_Playerimg : MonoBehaviour {
 			m_MySprite.enabled = false;
 			m_MySkeleton.enabled = true;
 			transform.localScale = new Vector3 (130.0f, 130.0f);
-			m_NameLabel.text = m_strName;
+			m_NameLabel.text = Localization.Get(m_strName_KEY);
 			m_btnMgr.m_iCurrnetPlayerIndex = m_iPlayerIdx;
 		} else {
 			m_MySprite.enabled = true;

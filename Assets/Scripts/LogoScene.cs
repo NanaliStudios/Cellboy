@@ -15,14 +15,16 @@ public class LogoScene : MonoBehaviour {
 	{
 		if ((Screen.width / 3) * 4 == Screen.height)
 			Camera.main.orthographicSize = 4.5f;
+
+		Localization.language = "한국어";
 	}
 
 	// Use this for initialization
 	void Start () {
 
-//		#if UNITY_EDITOR_OSX
-//		PlayerPrefs.DeleteAll();
-//		#endif
+		#if UNITY_EDITOR_OSX
+		PlayerPrefs.DeleteAll();
+		#endif
 
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
@@ -33,6 +35,7 @@ public class LogoScene : MonoBehaviour {
 
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
+			PlayerPrefs.SetInt ("Adoff", 0);
 			m_PlayerData.Create_SaveData();
 		}
 
@@ -50,7 +53,7 @@ public class LogoScene : MonoBehaviour {
 		}
 	
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 

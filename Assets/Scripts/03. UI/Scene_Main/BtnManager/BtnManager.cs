@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ChartboostSDK;
+using TapjoyUnity;
 
 public partial class BtnManager : MonoBehaviour {
 
@@ -51,6 +52,9 @@ public partial class BtnManager : MonoBehaviour {
 	public bool m_bPopupAdsOn = false;
 	
 	private bool m_bStart = true;
+
+	private float m_fRewardCheckTimer = 0.0f;
+	private float m_fRewardCheckTerm = 3.0f;
 
 
 	void Awake()
@@ -118,7 +122,7 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		//ads
-		if (!m_PlayerData.m_Gamedata.m_bAdOff) {
+		if (PlayerPrefs.GetInt("Adoff") == 0) {
 			Admob_Back.SetActive (true);
 			AdFunctions.Show_GoogleADBanner ();
 		}
@@ -153,7 +157,6 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
-	
 	}
 
 	void FixedUpdate()
@@ -179,8 +182,8 @@ public partial class BtnManager : MonoBehaviour {
 
 			//wait
 			m_PlayerData.m_PlayerID = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_PlayerID;
-			m_PlayerData.m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
-			m_PlayerData.m_strPlayerInfo = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo;
+			m_PlayerData.m_strPlayerName = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName_KEY);
+			m_PlayerData.m_strPlayerInfo = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo_KEY);
 			m_PlayerData.m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
 			m_PlayerData.m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 			m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
@@ -226,6 +229,25 @@ public partial class BtnManager : MonoBehaviour {
 
 		//Ads
 		Check_AdsReward ();
+
+		if (TapjoyManager.Instance.m_bCheckreward == true) {
+			Tapjoy.GetCurrencyBalance ();
+
+			if(m_fRewardCheckTimer >= m_fRewardCheckTerm)
+			{
+				m_fRewardCheckTimer = 0.0f;
+				TapjoyManager.Instance.m_bCheckreward = false;
+			}
+			else
+			m_fRewardCheckTimer += Time.deltaTime;
+
+		}
+
+		int iTjCoin = TapjoyManager.Instance.TakeTjCurrency ();
+		if (iTjCoin != 0) {
+			Play_BuyBtnSound();
+			m_PlayerData.m_Gamedata.m_iHaveCoin += iTjCoin;
+		}
 
 		#if !UNITY_EDITOR_OSX
 		if (m_PlayerData.m_iCurrentPlayNum == 1)
@@ -278,13 +300,16 @@ public partial class BtnManager : MonoBehaviour {
 		return;
 		#endif
 
+		if (TapjoyManager.Instance.m_bCheckreward == true)
+			return;
+
 		//show chartboost ad
 
 		Chartboost.didDismissInterstitial += delegate {
 			m_bIsDismissAD = true;
 		};
 
-		if (m_PlayerData.m_Gamedata.m_bAdOff == true) {
+		if (PlayerPrefs.GetInt("Adoff") == 1) {
 
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 			GameStart ();
@@ -325,8 +350,8 @@ public partial class BtnManager : MonoBehaviour {
 
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject = m_objScrollView.transform.GetChild (m_iCurrnetPlayerIndex - 1).gameObject;
 		m_PlayerData.m_PlayerID = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_PlayerID;
-		m_PlayerData.m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
-		m_PlayerData.m_strPlayerInfo = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo;
+		m_PlayerData.m_strPlayerName = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName_KEY);
+		m_PlayerData.m_strPlayerInfo = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo_KEY);
 		m_PlayerData.m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
 		m_PlayerData.m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
@@ -344,8 +369,8 @@ public partial class BtnManager : MonoBehaviour {
 
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject = m_objScrollView.transform.GetChild (m_iCurrnetPlayerIndex + 1).gameObject;
 		m_PlayerData.m_PlayerID = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_PlayerID;
-		m_PlayerData.m_strPlayerName = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName;
-		m_PlayerData.m_strPlayerInfo = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo;
+		m_PlayerData.m_strPlayerName = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName_KEY);
+		m_PlayerData.m_strPlayerInfo = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo_KEY);
 		m_PlayerData.m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
 		m_PlayerData.m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;

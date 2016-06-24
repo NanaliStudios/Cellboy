@@ -23,9 +23,6 @@ public class GameData {
 	public int m_iHaveCoin = 0;
 	public PlayerInfo[] m_PlayerInfo = new PlayerInfo[5];
 
-	public bool m_bAdOff = false;
-
-
 	public void Initialize()
 	{
 		//m_PlayerInfo = new PlayerInfo [m_iTotalPlayerNum];

@@ -4,9 +4,11 @@ using TapjoyUnity;
 
 public class TapjoyManager : MonoBehaviour
 {
-	public int m_iTapjoyCurrency = 0;
+	private int m_iTapjoyCurrency = 0;
 	public TJPlacement m_TjNotice = null;
 	public TJPlacement m_TjOfferwall = null;
+
+	public bool m_bCheckreward = false;
 
 	private static TapjoyManager s_Instance = null;
 	public static TapjoyManager Instance
@@ -38,12 +40,11 @@ public class TapjoyManager : MonoBehaviour
 		TJPlacement.OnPurchaseRequest += HandleOnPurchaseRequest;
 		TJPlacement.OnRewardRequest += HandleOnRewardRequest;
 
+		Tapjoy.OnGetCurrencyBalanceResponse += HandleOnGetCurrencyBalanceResponse;
+		Tapjoy.OnEarnedCurrency += HandleOnEarnedCurrency;
+
 		if (!Tapjoy.IsConnected)
 			Tapjoy.Connect ();
-	
-		Tapjoy.OnEarnedCurrency += HandleOnEarnedCurrency;
-		Tapjoy.OnAwardCurrencyResponse += HandleOnAwardCurrencyResponse;
-		Tapjoy.OnGetCurrencyBalanceResponse += HandleOnGetCurrencyBalanceResponse;
 
 		float curTime = Time.time;
 		while (true) {
@@ -130,6 +131,11 @@ public class TapjoyManager : MonoBehaviour
 		SetReady(placement.GetName(),false);
 		if (placement.GetName () == "Notice")
 			AdFunctions.m_bTjNoticeDismiss = true;
+
+		if (placement.GetName () == "getfreecoin1") {
+			placement.RequestContent();
+			m_bCheckreward = true;
+		}
 	}
 	
 	
@@ -165,19 +171,23 @@ public class TapjoyManager : MonoBehaviour
 		//커스텀 이벤트. ex = TrackCustomEvent(“GUN”,”Get”,”price”,”10”);
 		Tapjoy.TrackEvent(category,eventName,param1,param2);
 	}
+	
+	void HandleOnGetCurrencyBalanceResponse (string currencyName, int balance)
+	{
+		Debug.Log(string.Format("HandleOnGetCurrencyBalanceResponse - CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
+	}
 
 	void HandleOnEarnedCurrency (string currencyName, int amount)
 	{
-		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, amount));
+		m_bCheckreward = false;
+		Debug.Log(string.Format("HandleOnEarnedCurrency - CurrencyName : {0}, CurrencyNum : {1}", currencyName, amount));
+		m_iTapjoyCurrency += amount;
 	}
 
-	void HandleOnAwardCurrencyResponse (string currencyName, int balance)
+	public int TakeTjCurrency()
 	{
-		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
-	}
-
-	void HandleOnGetCurrencyBalanceResponse (string currencyName, int balance)
-	{
-		Debug.Log(string.Format("CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
+		int val = m_iTapjoyCurrency;
+		m_iTapjoyCurrency = 0;
+		return val;
 	}
 }

@@ -39,6 +39,16 @@ public partial class BtnManager : MonoBehaviour {
 		Application.OpenURL ("http://www.nanali.net");
 	}
 
+	public void RestoreProduct()
+	{
+		Debug.Log ("Restore");
+
+		if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
+			PlayerPrefs.SetInt("Adoff", 1);
+			Application.LoadLevel ("00_Logo");
+		}
+	}
+
 	public void SNS_ShareBtn()
 	{
 		string strMessage = string.Format ("My highscore is {0} in Cellboy!\n->http://www.nanali.net/", m_PlayerData.m_Gamedata.m_iHighScore);

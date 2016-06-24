@@ -109,7 +109,7 @@ public partial class GameSystem : MonoBehaviour {
 
 
 		//ads
-		if (!m_PlayerData.m_Gamedata.m_bAdOff)
+		if (PlayerPrefs.GetInt("Adoff") == 0)
 			Admob_Back.SetActive (true);
 		else
 			Admob_Back.SetActive (false);

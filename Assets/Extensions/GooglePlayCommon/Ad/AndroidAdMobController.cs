@@ -206,7 +206,7 @@ public class AndroidAdMobController : SA_Singleton<AndroidAdMobController>, Goog
 		}
 
 		AndroidADBanner bannner = new AndroidADBanner(anchor, size, GADBannerIdFactory.nextId);
-		_banners.Add(bannner.id, bannner);
+	 	_banners.Add(bannner.id, bannner);
 
 		return bannner;
 		

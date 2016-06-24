@@ -11,29 +11,35 @@ class GameSDK_Funcs
 		#if UNITY_ANDROID
 		GooglePlayConnection.Instance.Connect ();
 		AndroidInAppPurchaseManager.Client.AddProduct ("coin_200");
+		AndroidInAppPurchaseManager.Client.AddProduct ("coin_500");
+		AndroidInAppPurchaseManager.Client.AddProduct ("coin_1000");
+		AndroidInAppPurchaseManager.Client.AddProduct ("addoff");
 		AndroidInAppPurchaseManager.Client.Connect ();
 	
 		//IAP Purchase delegate
-		AndroidInAppPurchaseManager.ActionProductPurchased += delegate {
+		AndroidInAppPurchaseManager.ActionProductPurchased += delegate(BillingResult obj){
 			if (AndroidInAppPurchaseManager.Client.IsConnected) {
 				PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
 				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
 					_PlayerData.m_Gamedata.m_iHaveCoin += 200;
 					AndroidInAppPurchaseManager.Client.Consume ("coin_200");
+					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_200", "", "");
 					Debug.Log ("coin_200 Purchase success");
 				} else if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
 					_PlayerData.m_Gamedata.m_iHaveCoin += 500;
 					AndroidInAppPurchaseManager.Client.Consume ("coin_500");
+					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_500", "", "");
 					Debug.Log ("coin_500 Purchase success");
 				} else if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_1000")) {
 					_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 					AndroidInAppPurchaseManager.Client.Consume ("coin_1000");
+					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_1000", "", "");
 					Debug.Log ("coin_1000 Purchase success");
 				}
-
+			
 				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
-					_PlayerData.m_Gamedata.m_bAdOff = true;
+					PlayerPrefs.SetInt("Adoff", 1);
 					Application.LoadLevel ("00_Logo");
 				}
 

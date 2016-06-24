@@ -4,9 +4,6 @@ using System.Collections;
 public class MainLabel : TextBase {
 
 	PlayerData m_PlayerData = null;
-	public string m_strStartText = "";
-	public string m_strChargeText = "";
-	public string m_strLockText = "";
 	public string m_strBuy = "";
 
 	private UISprite m_BtnUISprite = null;
@@ -16,12 +13,15 @@ public class MainLabel : TextBase {
 	private bool m_bInit = false;
 	private bool m_bCurrentLock = false;
 
+	private UILocalize m_MyLocalize = null;
+
 	// Use this for initialization
 	void Start () {
 	
 		Initialize ();
 
 		m_BtnUISprite = gameObject.transform.parent.gameObject.GetComponent<UISprite> ();
+		m_MyLocalize = gameObject.GetComponent<UILocalize> ();
 		MakeStartText();
 	}
 	
@@ -64,7 +64,8 @@ public class MainLabel : TextBase {
 
 	void MakeStartText()
 	{
-		m_MyText.text = m_strStartText;
+		//Localization.language = "English"
+		m_MyText.text = Localization.Get ("START");
 		m_MyText.color = Color.white;
 
 		m_BtnUISprite.enabled = true;
@@ -74,7 +75,7 @@ public class MainLabel : TextBase {
 
 	void MakeChargeText()
 	{
-		m_MyText.text = m_strChargeText;
+		m_MyText.text = Localization.Get ("CHARGE");
 		m_MyText.color = Color.yellow;
 	
 		m_BtnUISprite.enabled = true;
@@ -94,7 +95,7 @@ public class MainLabel : TextBase {
 
 	void MakeLockText()
 	{
-		m_MyText.text = m_strLockText;
+		m_MyText.text = "";
 		m_MyText.color = Color.black;
 
 		m_BtnUISprite.enabled = false;

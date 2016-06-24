@@ -14,6 +14,13 @@ public partial class BtnManager : MonoBehaviour {
 		TapjoyManager.Instance.m_TjOfferwall.ShowContent();
 	}
 
+	public void OnFreeCharge3_Click()
+	{
+		Tapjoy.GetCurrencyBalance();
+	}
+
+
+
 	public void Buy200CoinBtn_Click()
 	{
 		GameSDK_Funcs.Purcahse_Item ("coin_200");
@@ -32,7 +39,7 @@ public partial class BtnManager : MonoBehaviour {
 	//
 	public void NoAdsBtn_Click()
 	{
-		if (m_PlayerData.m_Gamedata.m_bAdOff == true)
+		if (PlayerPrefs.GetInt("Adoff")== 1)
 			return;
 			
 		GameSDK_Funcs.Purcahse_Item ("adoff");

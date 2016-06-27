@@ -59,18 +59,32 @@ public partial class GameSystem : MonoBehaviour {
 			
 			if(AdFunctions.m_bAdsComplete == true)
 			{
-				TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "GameContinue", "PlayerName: " + m_PlayerData.m_strPlayerName, "GameScore: " + m_iCurrent_GameScore.ToString());
+				string strPlayerTrackID = "";
+
+				switch (m_PlayerData.m_PlayerID) {
+
+				case PLAYER_ID.NORMAL:
+					strPlayerTrackID = "NORMAL";
+					break;
+				case PLAYER_ID.SPREAD:
+					strPlayerTrackID = "SPREAD";
+					break;
+				case PLAYER_ID.LASER:
+					strPlayerTrackID = "LASER";
+					break;
+				case PLAYER_ID.HOMING:
+					strPlayerTrackID = "HOMING";
+					break;
+				case PLAYER_ID.BOOM:
+					strPlayerTrackID = "BOOM";
+					break;
+
+				}
+
+				TapjoyManager.Instance.TrackCustomEvent ("Continue_RewardAD", strPlayerTrackID, "Gamescore :" + m_iCurrent_GameScore + " PlayNum :" + m_PlayerData.m_Gamedata.m_iTotalPlayerNum, "");
 				
 				//restart
-				GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
-				
-				for(int i = 0; i < EnemyCase.transform.childCount; ++i)
-				{
-					if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
-						Destroy(EnemyCase.transform.GetChild(i).gameObject);
-					else
-						EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
-				}
+				Delete_AllEnemy ();
 				
 				m_objPlayer.transform.position = new Vector3(0.0f, -1.5f);
 				m_objPlayer.GetComponent<Player>().Set_AnimIdle();

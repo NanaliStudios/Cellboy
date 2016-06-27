@@ -42,12 +42,7 @@ public partial class BtnManager : MonoBehaviour {
 	public void RestoreProduct()
 	{
 		Debug.Log ("Restore");
-
-		if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
-			//AndroidInAppPurchaseManager.Client.Inventory.g
-			PlayerPrefs.SetInt("Adoff", 1);
-			Application.LoadLevel ("00_Logo");
-		}
+		AndroidInAppPurchaseManager.Client.RetrieveProducDetails();
 	}
 
 	public void SNS_ShareBtn()

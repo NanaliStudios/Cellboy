@@ -8,7 +8,7 @@ public class CoinTxt : TextBase {
 
 	// Use this for initialization
 	void Start () {
-		
+
 		Initialize ();
 	}
 	
@@ -21,5 +21,14 @@ public class CoinTxt : TextBase {
 		
 		m_MyText.text = m_PlayerData.m_Gamedata.m_iHaveCoin.ToString();
 		
+	}
+
+	public void SetScale_Origin()
+	{
+		TweenScale Tween = gameObject.GetComponent<TweenScale> ();
+		Tween.to = new Vector3 (4.0f, 4.0f);
+		Tween.ResetToBeginning ();
+		Tween.enabled = true;
+
 	}
 }

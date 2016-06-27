@@ -169,6 +169,8 @@ public class EnemyBase : ObjectBase {
 			{
 				if(m_Skeleton.Skeleton.data.FindAnimation("die") != null)
 				m_Skeleton.state.SetAnimation(0, "die", false);
+
+				transform.parent = null;
 			}
 
 		

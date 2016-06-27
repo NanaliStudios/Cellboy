@@ -230,6 +230,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Ads
 		Check_AdsReward ();
 
+		//Tapjoy Reward Check
 		if (TapjoyManager.Instance.m_bCheckreward == true) {
 			Tapjoy.GetCurrencyBalance ();
 
@@ -392,6 +393,9 @@ public partial class BtnManager : MonoBehaviour {
 	//Shop
 	public void ShopBtnClick()
 	{
+		if (m_bPopupAdsOn == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
@@ -475,7 +479,29 @@ public partial class BtnManager : MonoBehaviour {
 		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iChargePrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "Charge", "PlayerName: " + m_PlayerData.m_strPlayerName, "HaveCoin: " + m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
+			string strPlayerTrackID = "";
+
+			switch (m_PlayerData.m_PlayerID) {
+
+			case PLAYER_ID.NORMAL:
+				strPlayerTrackID = "NORMAL";
+				break;
+			case PLAYER_ID.SPREAD:
+				strPlayerTrackID = "SPREAD";
+				break;
+			case PLAYER_ID.LASER:
+				strPlayerTrackID = "LASER";
+				break;
+			case PLAYER_ID.HOMING:
+				strPlayerTrackID = "HOMING";
+				break;
+			case PLAYER_ID.BOOM:
+				strPlayerTrackID = "BOOM";
+				break;
+
+			}
+
+			TapjoyManager.Instance.TrackCustomEvent ("Buy_Playercharge", strPlayerTrackID, "Coin :" + m_PlayerData.m_Gamedata.m_iHaveCoin, "");
 
 			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iChargePrice;
 
@@ -492,7 +518,29 @@ public partial class BtnManager : MonoBehaviour {
 		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
-			TapjoyManager.Instance.TrackCustomEvent ("UseCoin", "BuyPlayer", "HaveCoin: " + m_PlayerData.m_strPlayerName, "PlayNum: " + m_PlayerData.m_Gamedata.m_iPlayNum.ToString());
+			string strPlayerTrackID = "";
+
+			switch (m_PlayerData.m_PlayerID) {
+
+			case PLAYER_ID.NORMAL:
+				strPlayerTrackID = "NORMAL";
+				break;
+			case PLAYER_ID.SPREAD:
+				strPlayerTrackID = "SPREAD";
+				break;
+			case PLAYER_ID.LASER:
+				strPlayerTrackID = "LASER";
+				break;
+			case PLAYER_ID.HOMING:
+				strPlayerTrackID = "HOMING";
+				break;
+			case PLAYER_ID.BOOM:
+				strPlayerTrackID = "BOOM";
+				break;
+
+			}
+
+			TapjoyManager.Instance.TrackCustomEvent ("Buy_Player", strPlayerTrackID, "PlayerNum :" + m_PlayerData.m_Gamedata.m_iTotalPlayerNum + " Coin :" + m_PlayerData.m_Gamedata.m_iHaveCoin, "");
 		
 			m_PlayerData.m_Gamedata.m_iHaveCoin -= m_PlayerData.m_iBuyPrice;
 			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock = false;
@@ -545,7 +593,29 @@ public partial class BtnManager : MonoBehaviour {
 	//unityads
 	public void AdsBtnClick()
 	{
-		TapjoyManager.Instance.TrackCustomEvent ("RewardAD", "Charge", m_PlayerData.m_strPlayerName, m_PlayerData.m_Gamedata.m_iHaveCoin.ToString());
+		string strPlayerTrackID = "";
+
+		switch (m_PlayerData.m_PlayerID) {
+
+		case PLAYER_ID.NORMAL:
+			strPlayerTrackID = "NORMAL";
+			break;
+		case PLAYER_ID.SPREAD:
+			strPlayerTrackID = "SPREAD";
+			break;
+		case PLAYER_ID.LASER:
+			strPlayerTrackID = "LASER";
+			break;
+		case PLAYER_ID.HOMING:
+			strPlayerTrackID = "HOMING";
+			break;
+		case PLAYER_ID.BOOM:
+			strPlayerTrackID = "BOOM";
+			break;
+
+		}
+
+		TapjoyManager.Instance.TrackCustomEvent ("Charge_RewardAD", strPlayerTrackID, "Coin :" + m_PlayerData.m_Gamedata.m_iHaveCoin, "");
 
 		if (!AdFunctions.Show_UnityAds ()) {
 			if (!AdFunctions.Show_VungleAds ()) {

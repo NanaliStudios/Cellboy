@@ -31,7 +31,7 @@ public class Point : Item {
 	}
 
 
-	void OnTriggerEnter2D(Collider2D Coll)
+	void OnTriggerStay2D(Collider2D Coll)
 	{
 		if (Coll.gameObject.tag == "Player") {
 
@@ -39,6 +39,7 @@ public class Point : Item {
 			m_Audio.clip = m_GetSound[iRandVal];
 			m_Audio.Play();
 
+			m_MyCircleColl.enabled = false;
 			m_Skeleton.state.SetAnimation(0, "die", false);
 		}
 	}

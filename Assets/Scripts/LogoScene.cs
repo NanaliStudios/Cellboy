@@ -23,7 +23,7 @@ public class LogoScene : MonoBehaviour {
 	void Start () {
 
 		#if UNITY_EDITOR_OSX
-		PlayerPrefs.DeleteAll();
+		//PlayerPrefs.DeleteAll();
 		#endif
 
 		if (GameObject.Find ("PlayerData(Clone)") == null) {

@@ -15,35 +15,64 @@ class GameSDK_Funcs
 		AndroidInAppPurchaseManager.Client.AddProduct ("coin_1000");
 		AndroidInAppPurchaseManager.Client.AddProduct ("addoff");
 		AndroidInAppPurchaseManager.Client.Connect ();
-	
+
 		//IAP Purchase delegate
 		AndroidInAppPurchaseManager.ActionProductPurchased += delegate(BillingResult obj){
 			if (AndroidInAppPurchaseManager.Client.IsConnected) {
 				PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
-				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
-					_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-					AndroidInAppPurchaseManager.Client.Consume ("coin_200");
-					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_200", "", "");
-					Debug.Log ("coin_200 Purchase success");
-				} else if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
-					_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-					AndroidInAppPurchaseManager.Client.Consume ("coin_500");
-					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_500", "", "");
-					Debug.Log ("coin_500 Purchase success");
-				} else if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_1000")) {
-					_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
-					AndroidInAppPurchaseManager.Client.Consume ("coin_1000");
-					TapjoyManager.Instance.TrackInappPurchase_ForAndroid ("coin_1000", "", "");
-					Debug.Log ("coin_1000 Purchase success");
-				}
-			
-				if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
-					PlayerPrefs.SetInt("Adoff", 1);
-					Application.LoadLevel ("00_Logo");
+				//package name?
+				if(obj.purchase.packageName == "coin_200")
+				{
+					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+						_PlayerData.m_Gamedata.m_iHaveCoin += 200;
+						AndroidInAppPurchaseManager.Client.Consume ("coin_200");
+					}
+
 				}
 
+				if(obj.purchase.packageName == "coin_500")
+				{
+					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
+						_PlayerData.m_Gamedata.m_iHaveCoin += 500;
+						AndroidInAppPurchaseManager.Client.Consume ("coin_500");
+					}
+
+				}
+
+				if(obj.purchase.packageName == "coin_1000")
+				{
+					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_1000")) {
+						_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
+						AndroidInAppPurchaseManager.Client.Consume ("coin_1000");
+
+					}
+				}
+					
+				if(obj.purchase.packageName == "adoff")
+				{
+					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
+
+						PlayerPrefs.SetInt("Adoff", 1);
+						Application.LoadLevel ("00_Logo");
+					}
+				}
+
+				TapjoyManager.Instance.TrackInappPurchase_ForAndroid (obj.purchase.SKU, obj.purchase.originalJson, obj.purchase.signature);
 				_PlayerData.GameData_Save ();
+			}
+		};
+
+
+		AndroidInAppPurchaseManager.ActionRetrieveProducsFinished += delegate(BillingResult obj) {
+		
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
+
+				if(PlayerPrefs.GetInt("Adoff") == 0)
+					return;
+
+				PlayerPrefs.SetInt("Adoff", 1);
+				Application.LoadLevel ("00_Logo");
 			}
 		};
 
@@ -172,7 +201,6 @@ class GameSDK_Funcs
 	public static void Purcahse_Item(string strID)
 	{
 		#if UNITY_ANDROID
-		AndroidInAppPurchaseManager.Client.Connect();
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#elif UNITY_IOS
 		EasyStoreKit.BuyProductWithIdentifier ("coin_200", 1);

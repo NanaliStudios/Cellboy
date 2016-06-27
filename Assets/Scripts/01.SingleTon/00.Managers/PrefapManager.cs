@@ -121,7 +121,7 @@ public class PrefapManager {
 		Boom BoomScript = objBoom.GetComponent<Boom> ();
 		BoomScript.m_iBoomDamage = m_iBoomDmg;
 		objBoom.transform.localScale = new Vector3(objBoom.transform.localScale.x * m_fBoomRadius, objBoom.transform.localScale.y * m_fBoomRadius);
-		objBoom.transform.parent = EnemyParentObj.transform;
+		objBoom.transform.parent = BulletParentObj.transform;
 		
 		return objBoom;
 	}

@@ -5,6 +5,7 @@ using TapjoyUnity;
 public class Coin : Item {
 
 	public int m_iAddCoin = 1;
+	private bool m_bAddAnim = false;
 
 	private AudioClip[] m_GetSound = new AudioClip[3];
 	
@@ -35,7 +36,7 @@ public class Coin : Item {
 	}
 	
 	
-	void OnTriggerEnter2D(Collider2D Coll)
+	void OnTriggerStay2D(Collider2D Coll)
 	{
 		if (Coll.gameObject.tag == "Player") {
 
@@ -44,6 +45,12 @@ public class Coin : Item {
 			m_Audio.clip = m_GetSound[iRandVal];
 			m_Audio.Play();
 
+			if (m_bAddAnim == false) {
+				m_GameSys.CoinnumLabel_Tweenscale ();
+				m_bAddAnim = true;
+			}
+
+			m_MyCircleColl.enabled = false;
 			m_Skeleton.state.SetAnimation(0, "die", false);
 		}
 	}

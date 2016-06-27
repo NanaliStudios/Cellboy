@@ -20,6 +20,7 @@ public partial class GameSystem : MonoBehaviour {
 	public GameObject m_ContinueMenu = null;
 	public GameObject m_GameOver = null;
 	public GameObject m_Tutorial = null;
+	public GameObject m_CoinnumLabel = null;
 
 	public GameObject m_objBackColor = null;
 
@@ -139,7 +140,29 @@ public partial class GameSystem : MonoBehaviour {
 			}
 			else{
 				//Game Over
-				TapjoyManager.Instance.TrackCustomEvent ("GameStatus", "GameOver", "PlayerName: " + m_PlayerData.m_strPlayerName, "GameScore: " + m_iCurrent_GameScore.ToString());
+
+				string strPlayerTrackID = "";
+
+				switch (m_objPlayer.GetComponent<Player>().m_PlayerID) {
+
+				case PLAYER_ID.NORMAL:
+					strPlayerTrackID = "NORMAL";
+					break;
+				case PLAYER_ID.SPREAD:
+					strPlayerTrackID = "SPREAD";
+					break;
+				case PLAYER_ID.LASER:
+					strPlayerTrackID = "LASER";
+					break;
+				case PLAYER_ID.HOMING:
+					strPlayerTrackID = "HOMING";
+					break;
+				case PLAYER_ID.BOOM:
+					strPlayerTrackID = "BOOM";
+					break;
+
+				}
+				TapjoyManager.Instance.TrackCustomEvent ("Gameover", strPlayerTrackID , "Gamescore: " + m_iCurrent_GameScore.ToString(), "Stage: " +m_lvMgr.m_iCurrentStage);
 
 				Time.timeScale = 1;
 				m_PlayerData.m_iPlayCountForAd += 1;	 
@@ -239,21 +262,41 @@ public partial class GameSystem : MonoBehaviour {
 		Change_GlobalSpeed (m_fGlobalSpeed + 0.2f);
 		m_lvMgr.Start_FeverTime (fTime);
 
-		GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
-		
-		for(int i = 0; i < EnemyCase.transform.childCount; ++i)
-		{
-			if(EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_EnemyID == ENEMY_ID.IMM)
-				Destroy(EnemyCase.transform.GetChild(i).gameObject);
-			else
-				EnemyCase.transform.GetChild(i).GetComponent<EnemyBase>().m_iHp = 0;
-
-		}
+		Delete_AllEnemy ();
 	}
 
 	public bool Get_Fever()
 	{
 		return m_lvMgr.m_bFever;
+	}
+
+
+	public void Delete_AllEnemy()
+	{
+		GameObject EnemyCase = m_PrefapMgr.Get_EnemyParent();
+
+		for(int i = 0; i < EnemyCase.transform.childCount; ++i)
+		{
+			GameObject objEnemyChild = EnemyCase.transform.GetChild (i).gameObject;
+
+			if (objEnemyChild.Equals (null))
+				return;
+
+			if (objEnemyChild.GetComponent<EnemyBase> ().m_EnemyID == ENEMY_ID.IMM) {
+				Destroy (objEnemyChild);
+			}
+			else
+				objEnemyChild.GetComponent<EnemyBase>().m_iHp = 0;
+
+		}
+	}
+
+	public void CoinnumLabel_Tweenscale()
+	{
+		TweenScale tween =	m_CoinnumLabel.GetComponent<TweenScale> ();
+		tween.to = new Vector3 (6.0f, 6.0f);
+		tween.ResetToBeginning ();
+		tween.enabled = true;
 	}
 
 	//global speed

@@ -16,11 +16,22 @@ public class NormalEnemy : EnemyBase {
 				if (iidx < 0)
 					iidx = 0;
 				m_Skeleton.skeleton.SetSkin (string.Format ("0{0}", iidx));
+
 			} else {
 				iidx = Random.Range (m_iSmallSkinIdx_Range - m_iSkinNum, m_iSmallSkinIdx_Range);
 				if (iidx < 0)
 					iidx = 0;
 				m_Skeleton.skeleton.SetSkin (string.Format ("0{0}", iidx));
+
+			}
+		}
+
+		//lv2
+		if (m_GameSys != null
+			&& (m_EnemyID == ENEMY_ID.NORMAL_S || m_EnemyID == ENEMY_ID.NORMAL_M)) {
+			if (m_GameSys.m_lvMgr.m_iCurrentStage > 2) {
+				m_Skeleton.skeleton.SetColor (new Color(1.0f, 0.5f, 0.5f));
+				m_iHp = m_iHp * 2;
 			}
 		}
 

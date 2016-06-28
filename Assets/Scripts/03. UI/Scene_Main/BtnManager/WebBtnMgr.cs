@@ -8,11 +8,6 @@ public partial class BtnManager : MonoBehaviour {
 	private static extern void NotiManagerClientX_openActionSheetWithMessage(string message);
 	[DllImport ("__Internal")]
 	private static extern void NotiManagerClientX_openActionSheetWithImagePath(string path,string message);
-	
-	[DllImport ("__Internal")]
-	private static extern void RegisterDeviceToken();
-	[DllImport ("__Internal")]
-	private static extern void CancelAllNotification();
 
 	public void ConnectFacebook()
 	{

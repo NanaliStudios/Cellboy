@@ -23,7 +23,7 @@ public class GoogleAdManager : MonoBehaviour {
 
 		m_AdMob.OnInterstitialClosed += delegate {
 			m_bIsDismissPopup = true;
-			Debug.Log("Popup Closed");
+			//Debug.Log("Popup Closed");
 		};
 
 		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
@@ -38,12 +38,12 @@ public class GoogleAdManager : MonoBehaviour {
 	public void ShowBanner()
 	{
 		if (banner == null) {
-			Debug.Log("banner is null. Create Banner");
+			//Debug.Log("banner is null. Create Banner");
 			banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
 			banner.Show ();
 		} else {
 			if (!banner.IsOnScreen) {
-				Debug.Log("AD ON");
+				//Debug.Log("AD ON");
 				banner.Show ();
 			}
 		}
@@ -56,14 +56,14 @@ public class GoogleAdManager : MonoBehaviour {
 	
 	public void BannerHide()
 	{
-		Debug.Log("AD OFF");
+		//Debug.Log("AD OFF");
 
 		if (banner != null) {
 			banner.Hide ();
 			m_AdMob.DestroyBanner (banner.id);
 		}
-		else
-			Debug.Log ("banner is null");
+		//else
+			//Debug.Log ("banner is null");
 	}
 }
 
@@ -117,7 +117,7 @@ public class GoogleAdManager : MonoBehaviour
 
 	public void BannerHide()
 	{
-		Debug.Log("AD OFF");
+		//Debug.Log("AD OFF");
 
 		bannerView.Hide ();
 	}

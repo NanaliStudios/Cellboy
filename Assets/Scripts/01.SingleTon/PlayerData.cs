@@ -49,14 +49,14 @@ public class PlayerData : MonoBehaviour {
 		
 		m_Gamedata = MyGameData;
 
-		Debug.Log ("Create Save Data Complete");
+		//Debug.Log ("Create Save Data Complete");
 	}
 
 
 	public void GameData_Save()
 	{
 		FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
-		Debug.Log ("Save GameData Complete");
+		//Debug.Log ("Save GameData Complete");
 
 		if (GameSDK_Funcs.isInitialized ()) {
 			BinaryFormatter b = new BinaryFormatter();
@@ -65,25 +65,25 @@ public class PlayerData : MonoBehaviour {
 			b.Serialize(m, m_Gamedata);
 
 
-			Debug.Log(m.GetBuffer().Length);
+			//Debug.Log(m.GetBuffer().Length);
 			GameSDK_Funcs.Do_CloudSave (m.GetBuffer());
 		}
 	}
 
 	public void GameData_Load()
 	{
-		Debug.Log ("Try Gamedata Load");
+		//Debug.Log ("Try Gamedata Load");
 		m_ByteGameData = GameSDK_Funcs.CurrentSaveDAta;
 
 		if (m_ByteGameData != null) {
 			BinaryFormatter b = new BinaryFormatter ();
 			MemoryStream m = new MemoryStream (m_ByteGameData);
 
-			Debug.Log(m.ToArray().Length);
+			//Debug.Log(m.ToArray().Length);
 			m_Gamedata = b.Deserialize (m) as GameData;
-			Debug.Log ("Move CloudData to CurrentSaveData");
+			//Debug.Log ("Move CloudData to CurrentSaveData");
 		} else {
-			Debug.Log("LocalSave");
+			//Debug.Log("LocalSave");
 			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
 			if(m_Gamedata == null)
 				Create_SaveData();

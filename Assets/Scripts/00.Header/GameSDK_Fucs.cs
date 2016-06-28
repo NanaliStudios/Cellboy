@@ -1,10 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 class GameSDK_Funcs
 {
 	public static byte[] CurrentSaveDAta = null;
+
+	#if UNITY_IOS
+//	[DllImport ("__Internal")]
+//	private static extern bool StorekitCellboy_Initialize();
+//	[DllImport ("__Internal")]
+//	private static extern bool StorekitCellboy_GetStoreItemInformation(string storeItemID);
+//	[DllImport ("__Internal")]
+//	private static extern int StorekitCellboy_BeginPurchase(string storeItemID);
+//	[DllImport ("__Internal")]
+//	private static extern bool StorekitCellboy_FinishPurchase(string storeItemID);
+//	[DllImport ("__Internal")]
+//	private static extern void StorekitCellboy_ProcessErrorPurchase();
+
+	#endif
 
 	public static void Initialize()
 	{
@@ -21,54 +36,66 @@ class GameSDK_Funcs
 			if (AndroidInAppPurchaseManager.Client.IsConnected) {
 				PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
-				//package name?
-				if(obj.purchase.packageName == "coin_200")
+				if(obj.isSuccess)
 				{
-					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+					if(obj.purchase.SKU == "coin_200")
+					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 200;
 						AndroidInAppPurchaseManager.Client.Consume ("coin_200");
 					}
-
-				}
-
-				if(obj.purchase.packageName == "coin_500")
-				{
-					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
+						
+					if(obj.purchase.SKU == "coin_500")
+					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 500;
 						AndroidInAppPurchaseManager.Client.Consume ("coin_500");
 					}
 
-				}
-
-				if(obj.purchase.packageName == "coin_1000")
-				{
-					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_1000")) {
-						_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
-						AndroidInAppPurchaseManager.Client.Consume ("coin_1000");
-
+					if(obj.purchase.SKU == "coin_5000")
+					{
+						_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
+						AndroidInAppPurchaseManager.Client.Consume ("coin_5000");
 					}
-				}
-					
-				if(obj.purchase.packageName == "adoff")
-				{
-					if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
 
+					if(obj.purchase.SKU == "adoff")
+					{
 						PlayerPrefs.SetInt("Adoff", 1);
 						Application.LoadLevel ("00_Logo");
 					}
-				}
 
-				TapjoyManager.Instance.TrackInappPurchase_ForAndroid (obj.purchase.SKU, obj.purchase.originalJson, obj.purchase.signature);
-				_PlayerData.GameData_Save ();
+					TapjoyManager.Instance.TrackInappPurchase_ForAndroid (obj.purchase.SKU, obj.purchase.originalJson, obj.purchase.signature);
+					_PlayerData.GameData_Save ();
+				}
+				else if(obj.isFailure)
+				{
+					//Debug.Log("Purchased fail");
+					return;
+				}
 			}
 		};
 
 
 		AndroidInAppPurchaseManager.ActionRetrieveProducsFinished += delegate(BillingResult obj) {
 		
+			PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
+
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+				_PlayerData.m_Gamedata.m_iHaveCoin += 200;
+				AndroidInAppPurchaseManager.Client.Consume ("coin_200");
+			}
+
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
+				_PlayerData.m_Gamedata.m_iHaveCoin += 500;
+				AndroidInAppPurchaseManager.Client.Consume ("coin_500");
+			}
+
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_5000")) {
+				_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
+				AndroidInAppPurchaseManager.Client.Consume ("coin_5000");
+			}
+
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
 
-				if(PlayerPrefs.GetInt("Adoff") == 0)
+				if(PlayerPrefs.GetInt("Adoff") == 1)
 					return;
 
 				PlayerPrefs.SetInt("Adoff", 1);
@@ -79,49 +106,23 @@ class GameSDK_Funcs
 		//GooglePlay CloudSave Set Delegates
 		GooglePlaySavedGamesManager.ActionGameSaveLoaded += delegate(GP_SpanshotLoadResult result) {
 
-			Debug.Log("Cloud Save Loaded Complete");
+			//Debug.Log("Cloud Save Loaded Complete");
 			CurrentSaveDAta = result.Snapshot.bytes;
 
 		};
 
 		#elif UNITY_IOS
+
 		Social.localUser.Authenticate( sucess => {
-			if(sucess)
-				Debug.Log("IOS Gamecenter login sucess");
-			else
-				Debug.Log("IOS Gamecenter login failed");
+			//if(sucess)
+				//Debug.Log("IOS Gamecenter login sucess");
+			//else
+				//Debug.Log("IOS Gamecenter login failed");
 		});
-			
-		EasyStoreKit.LoadProducts();
 
+		//StorekitCellboy_GetStoreItemInformation("coin_200");
+		//StorekitCellboy_Initialize();
 
-		EasyStoreKit.transactionPurchasedEvent += delegate(string productIdentifier) {
-
-		PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>();
-
-		if(productIdentifier == "coin_200")
-		{
-		_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-		Debug.Log("coin_200 Purchase success");
-		}
-		else if(productIdentifier == "coin_500")
-		{
-		_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-		Debug.Log("coin_500 Purchase success");
-		}
-		else if(productIdentifier == "coin_1000")
-		{
-		_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
-		Debug.Log("coin_1000 Purchase success");
-		}
-		else if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
-		_PlayerData.m_Gamedata.m_bAdOff = true;
-		Application.LoadLevel ("00_Logo");
-		}
-
-		_PlayerData.GameData_Save ();
-
-		};
 		#endif
 	}
 
@@ -166,7 +167,7 @@ class GameSDK_Funcs
 
 		#if UNITY_IOS
 		Social.ReportScore(iScore, "CellboyScore", success => {
-			Debug.Log(success ? "Reported score successfully" : "Failed to report score");
+			//Debug.Log(success ? "Reported score successfully" : "Failed to report score");
 		});
 		#endif
 	}
@@ -176,12 +177,12 @@ class GameSDK_Funcs
 
 
 		#if UNITY_ANDROID
-		Debug.Log ("Try Save GameData to GoogleCloud");
+		//Debug.Log ("Try Save GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData", "",
 		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
 		                                                        Data, 0);
 		#elif UNITY_IOS
-		Debug.Log ("Try Save GameData to ICloud");
+		//Debug.Log ("Try Save GameData to ICloud");
 		P31CloudFile.writeAllBytes("SaveData", Data);
 		#endif
 	}
@@ -189,10 +190,10 @@ class GameSDK_Funcs
 	public static void Do_CloudLoad()
 	{
 		#if UNITY_ANDROID
-		Debug.Log ("Try Load GameData to GoogleCloud");
+		//Debug.Log ("Try Load GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
-		Debug.Log ("Try Load GameData to ICloud");
+		//Debug.Log ("Try Load GameData to ICloud");
 		CurrentSaveDAta = P31CloudFile.readAllBytes("SaveData");
 		#endif
 	}
@@ -203,7 +204,7 @@ class GameSDK_Funcs
 		#if UNITY_ANDROID
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#elif UNITY_IOS
-		EasyStoreKit.BuyProductWithIdentifier ("coin_200", 1);
+		//StorekitCellboy_BeginPurchase(strID);
 		#endif
 	}
 
@@ -216,9 +217,17 @@ class GameSDK_Funcs
 		#endif
 		
 		#if UNITY_IOS
+
 		#endif
 
 		return false;
+	}
+
+
+	//for ios 
+	static public void SuccessPurchase(string strID)
+	{		
+		//StorekitCellboy_FinishPurchase (strID);
 	}
 
 }

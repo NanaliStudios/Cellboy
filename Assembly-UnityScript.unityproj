@@ -66,6 +66,7 @@
      <None Include="Assets\Extensions\AndroidNative\Documentation\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
+     <None Include="Assets\Plugins\Android\res\values-ko\strings.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (TextureClip).shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Gauge\Gauge.atlas.txt" />
@@ -96,6 +97,7 @@
      <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_background_button_pause.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\license.txt" />
+     <None Include="Assets\Plugins\Android\res\values-en\strings.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\AndroidManifest.txt" />
      <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\WebViewJavascriptBridge.js.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
@@ -112,6 +114,7 @@
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\AndroidManifest.txt" />
      <None Include="Assets\Plugins\Android\unityads\res\values\strings.xml" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Ghost\Shaders\SkeletonGhost.shader" />
+     <None Include="Assets\Plugins\Android\res\values\strings.xml" />
      <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_waves.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_base.xml" />

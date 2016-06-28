@@ -21,7 +21,7 @@ public class FileSystem : MonoBehaviour {
 		byte[] fileBytes = null;
 		fileBytes = new byte[file.Length];
 
-		Debug.Log("file Reading");
+		//Debug.Log("file Reading");
 
 		file.Close();
 
@@ -48,7 +48,7 @@ public class FileSystem : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log("Can't find SaveFile");
+			//Debug.Log("Can't find SaveFile");
 			return null;
 		}
 		#else
@@ -64,7 +64,7 @@ public class FileSystem : MonoBehaviour {
 			path = Application.persistentDataPath;
 			path = path.Substring (0, path.LastIndexOf ('/'));
 			path = Path.Combine (Path.Combine (path, "Documents"), filename);
-			Debug.Log (path);
+			//Debug.Log (path);
 			return path;
 		} else if (Application.platform == RuntimePlatform.Android) {
 			path = Application.persistentDataPath;

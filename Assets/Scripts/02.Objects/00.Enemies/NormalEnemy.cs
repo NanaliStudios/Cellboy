@@ -27,11 +27,20 @@ public class NormalEnemy : EnemyBase {
 		}
 
 		//lv2
+
 		if (m_GameSys != null
 			&& (m_EnemyID == ENEMY_ID.NORMAL_S || m_EnemyID == ENEMY_ID.NORMAL_M)) {
 			if (m_GameSys.m_lvMgr.m_iCurrentStage > 2) {
-				m_Skeleton.skeleton.SetColor (new Color(1.0f, 0.5f, 0.5f));
-				m_iHp = m_iHp * 2;
+
+				float fRandVal = Random.Range (0.0f, 100.0f);
+
+				if (fRandVal > 50.0f) {
+					m_Skeleton.skeleton.SetColor (new Color(1.0f, 0.5f, 0.5f));
+					m_iHp = m_iHp * 2;
+					m_iHavePoint *= 2;
+				}
+
+
 			}
 		}
 

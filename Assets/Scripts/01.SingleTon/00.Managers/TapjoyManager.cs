@@ -101,33 +101,33 @@ public class TapjoyManager : MonoBehaviour
 	public void HandlePlacementRequestSuccess(TJPlacement placement)
 	{
 		//컨텐츠 요청 성공시 리턴.
-		Debug.Log ("HandlePlacementRequestSuccess : "+placement.GetName());
+		//Debug.Log ("HandlePlacementRequestSuccess : "+placement.GetName());
 	}
 	
 	public void HandlePlacementRequestFailure(TJPlacement placement, string error)
 	{
 		//컨텐츠 요청 실패시 리턴. 컨텐츠별 대기상태를 false로 설정.
-		Debug.Log ("HandlePlacementRequestFailure : "+placement.GetName());
+		//Debug.Log ("HandlePlacementRequestFailure : "+placement.GetName());
 		SetReady(placement.GetName(),false);
 	}
 	
 	public void HandlePlacementContentReady(TJPlacement placement)
 	{
 		//컨텐츠가 준비완료 되었을 때 리턴.
-		Debug.Log ("HandlePlacementContentReady : "+placement.GetName());
+		//Debug.Log ("HandlePlacementContentReady : "+placement.GetName());
 		SetReady(placement.GetName(),true);
 	}
 	
 	public void HandlePlacementContentShow(TJPlacement placement)
 	{
 		//ShowContent를 수행하는 순간 리턴.
-		Debug.Log ("HandlePlacementContentShow : "+placement.GetName());
+		//Debug.Log ("HandlePlacementContentShow : "+placement.GetName());
 	}
 	
 	public void HandlePlacementContentDismiss(TJPlacement placement)
 	{
 		//컨텐츠 종료시 리턴. 플레이스먼트 아이디별로 다른 동작을 취해주면 됨.
-		Debug.Log ("HandlePlacementContentDismiss : "+placement.GetName());
+		//Debug.Log ("HandlePlacementContentDismiss : "+placement.GetName());
 		SetReady(placement.GetName(),false);
 		if (placement.GetName () == "Notice")
 			AdFunctions.m_bTjNoticeDismiss = true;
@@ -147,7 +147,7 @@ public class TapjoyManager : MonoBehaviour
 	public void HandleOnRewardRequest(TJPlacement placement, TJActionRequest request, string itemId, int quantity)
 	{
 		//리워드관련 컨텐츠 연동시 사용.
-		Debug.Log (itemId + "-" + quantity);
+		//Debug.Log (itemId + "-" + quantity);
 	}
 	
 	public void TrackInappPurchase_ForApple(string itemName, string currency, double price, string transactionID)
@@ -163,6 +163,7 @@ public class TapjoyManager : MonoBehaviour
 		//Android 인앱결제 연동. (변수들은 검색해서 사용 (안드로이드 기본 데이터))
 		#if UNITY_ANDROID
 		Tapjoy.TrackPurchaseInGooglePlayStore(skuDetails,purchaseData,dataSignature);
+		//Debug.Log("TrackInappPurchase_ForAndroid");
 		#endif
 	}
 	
@@ -174,13 +175,13 @@ public class TapjoyManager : MonoBehaviour
 	
 	void HandleOnGetCurrencyBalanceResponse (string currencyName, int balance)
 	{
-		Debug.Log(string.Format("HandleOnGetCurrencyBalanceResponse - CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
+		//Debug.Log(string.Format("HandleOnGetCurrencyBalanceResponse - CurrencyName : {0}, CurrencyNum : {1}", currencyName, balance));
 	}
 
 	void HandleOnEarnedCurrency (string currencyName, int amount)
 	{
 		m_bCheckreward = false;
-		Debug.Log(string.Format("HandleOnEarnedCurrency - CurrencyName : {0}, CurrencyNum : {1}", currencyName, amount));
+		//Debug.Log(string.Format("HandleOnEarnedCurrency - CurrencyName : {0}, CurrencyNum : {1}", currencyName, amount));
 		m_iTapjoyCurrency += amount;
 	}
 

@@ -4,7 +4,7 @@ using TapjoyUnity;
 public class LogoScene : MonoBehaviour {
 
 	private float m_fTimer = 0.0f;
-	public float m_fTerm  = 5.0f;
+	public float m_fTerm  = 2.0f;
 
 	public GameObject m_objPlayerData = null;
 	private PlayerData m_PlayerData = null;
@@ -16,7 +16,10 @@ public class LogoScene : MonoBehaviour {
 		if ((Screen.width / 3) * 4 == Screen.height)
 			Camera.main.orthographicSize = 4.5f;
 
-		Localization.language = "한국어";
+		if (Application.systemLanguage == SystemLanguage.Korean)
+			Localization.language = "한국어";
+		else
+			Localization.language = "English";
 	}
 
 	// Use this for initialization
@@ -29,21 +32,21 @@ public class LogoScene : MonoBehaviour {
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
 			m_PlayerData = objPlayerData.GetComponent<PlayerData> ();
-			Debug.Log ("Create PlayerData");
+			//Debug.Log ("Create PlayerData");
 		} else
 			m_PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>();
-
-		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
-			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
-			PlayerPrefs.SetInt ("Adoff", 0);
-			m_PlayerData.Create_SaveData();
-		}
 
 		if(!GameSDK_Funcs.isInitialized())
 		GameSDK_Funcs.Initialize ();
 
 		if(!AdFunctions.isInitialized())
 		AdFunctions.Initialize ();
+
+
+		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
+			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
+			PlayerPrefs.SetInt ("Adoff", 0);
+		}
 
 		if (PlayerPrefs.HasKey ("GameVolume") == false) {
 			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
@@ -69,13 +72,11 @@ public class LogoScene : MonoBehaviour {
 
 			if (m_fTerm <= m_fTimer) {
 #if UNITY_EDITOR_OSX
-			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
 			Application.LoadLevel ("00_MAIN");
 
 			return;
 #endif
-			if(PlayerPrefs.GetInt ("CurrentPlayNum") != 0)
 			m_PlayerData.GameData_Load();
 			  
 			Application.LoadLevel ("00_MAIN");

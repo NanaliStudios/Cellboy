@@ -6,21 +6,10 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnFreeCharge1_Click()
 	{
+		//TapjoyManager.Instance.m_TjOfferwall.ShowContent();
 		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 	}
-
-	public void OnFreeCharge2_Click()
-	{
-		TapjoyManager.Instance.m_TjOfferwall.ShowContent();
-	}
-
-	public void OnFreeCharge3_Click()
-	{
-		Tapjoy.GetCurrencyBalance();
-	}
-
-
-
+		
 	public void Buy200CoinBtn_Click()
 	{
 		GameSDK_Funcs.Purcahse_Item ("coin_200");

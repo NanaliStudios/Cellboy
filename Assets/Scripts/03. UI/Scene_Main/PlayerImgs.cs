@@ -43,7 +43,7 @@ public class PlayerImgs : MonoBehaviour {
 					bSwipeStart = true;
 				}else if(bSwipeStart && Input.GetMouseButton(0))
 				{
-				Debug.Log("Clicking");
+				//Debug.Log("Clicking");
 					CurMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 					fPressTime += Time.deltaTime;
 					
@@ -56,7 +56,7 @@ public class PlayerImgs : MonoBehaviour {
 				
 				if(CurMousePos.x > ClickMousePos.x)
 			{
-				Debug.Log("CurMousePosX" + CurMousePos.x + "ClickMousePosX" + ClickMousePos.x);
+				//Debug.Log("CurMousePosX" + CurMousePos.x + "ClickMousePosX" + ClickMousePos.x);
 				transform.position = new Vector3(transform.position.x + fSpeed, transform.position.y, -10f);
 			}
 				else if(CurMousePos.x < ClickMousePos.x)

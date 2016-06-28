@@ -67,7 +67,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	void Start()
 	{
-		Debug.Log ("BtnManager");
+		//Debug.Log ("BtnManager");
 		//Load Audio
 		m_Audio = gameObject.GetComponent<AudioSource> ();
 		m_BtnClip = Resources.Load ("Sounds/ogg(96k)/button_click") as AudioClip;
@@ -78,7 +78,7 @@ public partial class BtnManager : MonoBehaviour {
 		
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			objPlayerData = Instantiate (m_objPlayerData) as GameObject;
-			Debug.Log("Create PlayerData");
+			//Debug.Log("Create PlayerData");
 		}
 		else
 			objPlayerData = GameObject.Find ("PlayerData(Clone)").gameObject;
@@ -155,8 +155,7 @@ public partial class BtnManager : MonoBehaviour {
 		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 60) {
 			OnFBLikeMenu ();
 		}
-
-		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
+			
 	}
 
 	void FixedUpdate()

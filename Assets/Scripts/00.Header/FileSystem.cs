@@ -21,7 +21,7 @@ public class FileSystem : MonoBehaviour {
 		byte[] fileBytes = null;
 		fileBytes = new byte[file.Length];
 
-		//Debug.Log("file Reading");
+		Debug.Log("file Reading");
 
 		file.Close();
 

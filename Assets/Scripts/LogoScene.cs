@@ -7,7 +7,9 @@ public class LogoScene : MonoBehaviour {
 	public float m_fTerm  = 2.0f;
 
 	public GameObject m_objPlayerData = null;
+	public GameObject m_objSDKMgr = null;
 	private PlayerData m_PlayerData = null;
+	private GameSDKManager m_SdkMgr = null;
 
 	public bool m_bLateInit = false;
 
@@ -29,6 +31,12 @@ public class LogoScene : MonoBehaviour {
 		//PlayerPrefs.DeleteAll();
 		#endif
 
+		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
+			GameObject objSdkMgr = Instantiate (m_objSDKMgr) as GameObject;
+			m_SdkMgr = m_objSDKMgr.GetComponent<GameSDKManager> ();
+		} else
+			m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
+
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
 			GameObject objPlayerData = Instantiate (m_objPlayerData) as GameObject;
 			m_PlayerData = objPlayerData.GetComponent<PlayerData> ();
@@ -36,8 +44,10 @@ public class LogoScene : MonoBehaviour {
 		} else
 			m_PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData>();
 
-		if(!GameSDK_Funcs.isInitialized())
-		GameSDK_Funcs.Initialize ();
+		if(!m_SdkMgr.isInitialized())
+			m_SdkMgr.Initialize ();
+
+
 
 		if(!AdFunctions.isInitialized())
 		AdFunctions.Initialize ();
@@ -61,10 +71,10 @@ public class LogoScene : MonoBehaviour {
 	void Update () {
 
 			if (m_bLateInit == false) {
-			if(GameSDK_Funcs.isInitialized())
+			if(m_SdkMgr.isInitialized())
 			{
 				if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
-				GameSDK_Funcs.Do_CloudLoad ();
+					m_SdkMgr.Do_CloudLoad ();
 
 				m_bLateInit = true;
 			}

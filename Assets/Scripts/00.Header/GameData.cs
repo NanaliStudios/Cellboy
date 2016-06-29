@@ -22,9 +22,7 @@ public class GameData {
 	public int m_iHighScore = 0;
 	public int m_iHaveCoin = 0;
 	public PlayerInfo[] m_PlayerInfo = new PlayerInfo[5];
-#if UNITY_EDITOR_OSX
-	public bool m_bAdOff = false;
-#endif
+	//public bool m_bAdOff = false;
 
 
 	public void Initialize()

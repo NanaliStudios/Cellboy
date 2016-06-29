@@ -45,6 +45,9 @@ public partial class BtnManager : MonoBehaviour {
 	public GameObject m_objSoundBtn = null;
 	public GameObject Admob_Back = null;
 
+	public GameObject m_objSdkMgr = null;
+	private GameSDKManager m_SdkMgr = null;
+
 
 	//ad
 	public bool m_bIsDismissAD = false;
@@ -74,6 +77,13 @@ public partial class BtnManager : MonoBehaviour {
 		m_BuyBtnClip = Resources.Load ("Sounds/ogg(96k)/button_buy") as AudioClip;
 		m_ScrollClip = Resources.Load ("Sounds/ogg(96k)/ui_scroll") as AudioClip;
 
+
+		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
+			GameObject objSdkMgr = Instantiate (m_objSdkMgr) as GameObject;
+			m_SdkMgr = m_objSdkMgr.GetComponent<GameSDKManager> ();
+		} else
+			m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
+
 		GameObject objPlayerData = null;
 		
 		if (GameObject.Find ("PlayerData(Clone)") == null) {
@@ -84,6 +94,8 @@ public partial class BtnManager : MonoBehaviour {
 			objPlayerData = GameObject.Find ("PlayerData(Clone)").gameObject;
 
 			m_PlayerData = objPlayerData.GetComponent<PlayerData> ();
+		//Game Save
+		m_PlayerData.GameData_Save ();
 	
 		//Create Particels
 
@@ -122,6 +134,8 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		//ads
+
+		#if !UNITY_EDITOR_OSX
 		if (PlayerPrefs.GetInt("Adoff") == 0) {
 			Admob_Back.SetActive (true);
 			AdFunctions.Show_GoogleADBanner ();
@@ -130,10 +144,7 @@ public partial class BtnManager : MonoBehaviour {
 			Admob_Back.SetActive (false);
 			AdFunctions.Hide_GoogleADBanner ();
 		}
-
-			//Game Save
-			m_PlayerData.GameData_Save ();
-
+		#endif
 
 		//starscore, facebook like
 		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 5) {
@@ -405,7 +416,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void LeaderboardBtn_Click()
 	{
-		GameSDK_Funcs.Show_LeaderBoard ();
+		m_SdkMgr.Show_LeaderBoard ();
 
 	}
 

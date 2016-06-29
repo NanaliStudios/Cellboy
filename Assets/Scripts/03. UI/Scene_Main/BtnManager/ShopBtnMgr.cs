@@ -12,17 +12,17 @@ public partial class BtnManager : MonoBehaviour {
 		
 	public void Buy200CoinBtn_Click()
 	{
-		GameSDK_Funcs.Purcahse_Item ("coin_200");
+		m_SdkMgr.Purcahse_Item ("cellboy_coin200");
 	}
 
 	public void Buy500CoinBtn_Click()
 	{
-		GameSDK_Funcs.Purcahse_Item ("coin_500");
+		m_SdkMgr.Purcahse_Item ("cellboy_coin500");
 	}
 
 	public void Buy1000CoinBtn_Click()
 	{
-		GameSDK_Funcs.Purcahse_Item ("coin_1000");
+		m_SdkMgr.Purcahse_Item ("cellboy_coin5000");
 	}
 
 	//
@@ -31,6 +31,6 @@ public partial class BtnManager : MonoBehaviour {
 		if (PlayerPrefs.GetInt("Adoff")== 1)
 			return;
 			
-		GameSDK_Funcs.Purcahse_Item ("adoff");
+		m_SdkMgr.Purcahse_Item ("cellboy_adoff");
 	}
 }

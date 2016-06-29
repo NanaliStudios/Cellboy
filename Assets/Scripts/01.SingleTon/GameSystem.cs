@@ -12,6 +12,7 @@ public partial class GameSystem : MonoBehaviour {
 	//GameObject----->
 	public GameObject m_objPlayer = null;
 	public PlayerData m_PlayerData;
+	public GameSDKManager m_SdkMgr = null;
 
 	//===UI===
 	public GameObject m_PauseMenu = null;
@@ -96,6 +97,11 @@ public partial class GameSystem : MonoBehaviour {
 
 		m_objPlayer = GameObject.Instantiate((Resources.Load(string.Format("Prefaps/00.Objects/Players/{0}", strPlayerName)) as GameObject), new Vector3(0.0f, -2.0f), Quaternion.identity) as GameObject; 
 		//<-----End
+
+
+		//--->GamesdkManager Set
+		m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
+		//--->End
 
 		//Class Initialize----->
 		m_PrefapMgr = new PrefapManager ();
@@ -217,7 +223,7 @@ public partial class GameSystem : MonoBehaviour {
 	{
 		m_PlayerData.m_bWinHighScore = true;
 		//google play
-		GameSDK_Funcs.SubmitScore_LeaderBoard (m_iCurrent_GameScore);
+		m_SdkMgr.SubmitScore_LeaderBoard (m_iCurrent_GameScore);
 	}
 
 	public void GameOver()

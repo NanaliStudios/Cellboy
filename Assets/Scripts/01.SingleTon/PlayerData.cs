@@ -32,6 +32,9 @@ public class PlayerData : MonoBehaviour {
 	public GameData m_Gamedata = null;
 	private byte[] m_ByteGameData = null;
 
+
+	private GameSDKManager m_SdkMgr = null;
+
 	// Use this for initialization
 	void Start () {
 
@@ -39,6 +42,8 @@ public class PlayerData : MonoBehaviour {
 		//data for cloud 
 
 		DontDestroyOnLoad (this);
+	
+		m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
 	}
 
 	public void Create_SaveData()
@@ -49,16 +54,18 @@ public class PlayerData : MonoBehaviour {
 		
 		m_Gamedata = MyGameData;
 
-		//Debug.Log ("Create Save Data Complete");
+		Debug.Log ("Create Save Data Complete");
+
+		//m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
 	}
 
 
 	public void GameData_Save()
 	{
 		FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
-		//Debug.Log ("Save GameData Complete");
+		Debug.Log ("Save GameData Complete");
 
-		if (GameSDK_Funcs.isInitialized ()) {
+		if (m_SdkMgr.isInitialized ()) {
 			BinaryFormatter b = new BinaryFormatter();
 			MemoryStream m = new MemoryStream();
 
@@ -66,24 +73,25 @@ public class PlayerData : MonoBehaviour {
 
 
 			//Debug.Log(m.GetBuffer().Length);
-			GameSDK_Funcs.Do_CloudSave (m.GetBuffer());
+			m_SdkMgr.Do_CloudSave (m.GetBuffer());
 		}
 	}
 
 	public void GameData_Load()
 	{
-		//Debug.Log ("Try Gamedata Load");
-		m_ByteGameData = GameSDK_Funcs.CurrentSaveDAta;
+		Debug.Log ("Try Gamedata Load");
+		m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
 
-		if (m_ByteGameData != null) {
+		if (m_ByteGameData.Length != 0) {
+			Debug.Log ("Cloud Load");
 			BinaryFormatter b = new BinaryFormatter ();
 			MemoryStream m = new MemoryStream (m_ByteGameData);
 
-			//Debug.Log(m.ToArray().Length);
+
 			m_Gamedata = b.Deserialize (m) as GameData;
-			//Debug.Log ("Move CloudData to CurrentSaveData");
+			Debug.Log ("Move CloudData to CurrentSaveData");
 		} else {
-			//Debug.Log("LocalSave");
+			Debug.Log("LocalLoad");
 			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
 			if(m_Gamedata == null)
 				Create_SaveData();

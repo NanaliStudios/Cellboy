@@ -4,11 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-class GameSDKManager
+public class GameSDKManager : MonoBehaviour
 {
-	public static byte[] CurrentSaveDAta = null;
+	public byte[] CurrentSaveDAta = null;
 
-	#if UNITY_IOS
+	private static bool m_bIsPurchasing = false;
+	private static string m_strCurrentItemID = "";
+
+	//#if UNITY_IOS
 	[DllImport ("__Internal")]
 	private static extern bool StorekitCellboy_Initialize();
 	[DllImport ("__Internal")]
@@ -20,13 +23,18 @@ class GameSDKManager
 	[DllImport ("__Internal")]
 	private static extern void StorekitCellboy_ProcessErrorPurchase();
 
-	#endif
+	//#endif
 
 	// ****** Common ******
 	private static List<ProductInfo> listProducts=new List<ProductInfo>(); //상품의 정보 : 한번 불러오면 게임이 끝날때까지 계속 들고 있음. (IOS,Android 공통사용).
 	private static bool IsFake=false;
 
-	public static void Initialize()
+
+	void Start()
+	{
+		DontDestroyOnLoad (this);
+	}
+	public void Initialize()
 	{
 		#if UNITY_ANDROID
 		GooglePlayConnection.Instance.Connect ();
@@ -69,6 +77,7 @@ class GameSDKManager
 
 					TapjoyManager.Instance.TrackInappPurchase_ForAndroid (obj.purchase.SKU, obj.purchase.originalJson, obj.purchase.signature);
 					_PlayerData.GameData_Save ();
+					 m_bIsPurchasing = false;
 				}
 				else if(obj.isFailure)
 				{
@@ -125,13 +134,12 @@ class GameSDKManager
 				//Debug.Log("IOS Gamecenter login failed");
 		});
 
-		StorekitCellboy_GetStoreItemInformation("coin_200");
 		StorekitCellboy_Initialize();
 
 		#endif
 	}
 
-	public static bool isInitialized()
+	public bool isInitialized()
 	{
 		#if UNITY_ANDROID
 		if (GooglePlayConnection.Instance.IsConnected)
@@ -144,7 +152,7 @@ class GameSDKManager
 		return false;
 	}
 
-	public static void Show_CloudSaveUI()
+	public void Show_CloudSaveUI()
 	{
 		#if UNITY_ANDROID
 		GooglePlaySavedGamesManager.Instance.ShowSavedGamesUI ("MySaved", 3);
@@ -153,7 +161,7 @@ class GameSDKManager
 		#endif
 	}
 
-	public static void Show_LeaderBoard()
+	public void Show_LeaderBoard()
 	{
 		#if UNITY_ANDROID
 		GooglePlayManager.Instance.ShowLeaderBoardById ("CgkI-5Pv_oYcEAIQAQ");
@@ -164,7 +172,7 @@ class GameSDKManager
 		#endif
 	}
 
-	public static void SubmitScore_LeaderBoard(int iScore)
+	public void SubmitScore_LeaderBoard(int iScore)
 	{
 		#if UNITY_ANDROID
 		GooglePlayManager.Instance.SubmitScoreById("CgkI-5Pv_oYcEAIQAQ" , iScore);
@@ -177,7 +185,7 @@ class GameSDKManager
 		#endif
 	}
 
-	public static void Do_CloudSave(byte[] Data)
+	public void Do_CloudSave(byte[] Data)
 	{
 
 
@@ -192,29 +200,35 @@ class GameSDKManager
 		#endif
 	}
 
-	public static void Do_CloudLoad()
+	public void Do_CloudLoad()
 	{
 		#if UNITY_ANDROID
-		//Debug.Log ("Try Load GameData to GoogleCloud");
+		Debug.Log ("Try Load GameData to GoogleCloud");
 		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
-		//Debug.Log ("Try Load GameData to ICloud");
+		Debug.Log ("Try Load GameData to ICloud");
 		CurrentSaveDAta = P31CloudFile.readAllBytes("SaveData");
 
 		#endif
 	}
 
 	//Purchase
-	public static void Purcahse_Item(string strID)
+	public void Purcahse_Item(string strID)
 	{
+		if (m_bIsPurchasing == true)
+			return;
+
 		#if UNITY_ANDROID
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#elif UNITY_IOS
 		StorekitCellboy_BeginPurchase(strID);
 		#endif
+
+		m_strCurrentItemID = strID;
+		m_bIsPurchasing = true;
 	}
 
-	public static bool Check_IsPurchased(string strID)
+	public bool Check_IsPurchased(string strID)
 	{
 
 		#if UNITY_ANDROID
@@ -370,7 +384,7 @@ class GameSDKManager
 		Debug.Log ("StoreItemID:" + storeItemID + "ErrorDescription:" + errorDescription);
 
 		//        ShowPopUpWindow ("Store Error", errorDescription);
-		CurItemID = "";
+		//CurItemID = "";
 	}
 
 
@@ -406,7 +420,7 @@ class GameSDKManager
 	{
 		// TODO: Remove Block-screen
 
-		CurItemID = "";
+		//CurItemID = "";
 	}
 
 	public void OnFinishPurchase_ForNotIOS(string transactionID)
@@ -462,7 +476,7 @@ class GameSDKManager
 
 		// To Do : Produce Item to In-Game-Side
 
-		SuccessPurchase(transactionID);
+		SuccessPurchase(storeItemID);
 	}
 
 	static public void SuccessPurchase(string transactionId)
@@ -476,24 +490,29 @@ class GameSDKManager
 		}
 
 		//get reawrd.
-
 		PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
-		switch (purchasedStoreItemID) {
-		case "coin_200":
+		switch (m_strCurrentItemID) {
+		case "cellboy_coin200":
 			_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-			AndroidInAppPurchaseManager.Client.Consume ("coin_200");
 			break;
-		case "coin_500":
+		case "cellboy_coin500":
+			_PlayerData.m_Gamedata.m_iHaveCoin += 500;
 			break;
-		case "coin_1000":
+		case "cellboy_coin5000":
+			_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
 			break;
-		case "adoff":
+		case "cellboy_adoff":
+			PlayerPrefs.SetInt("Adoff", 1);
+			Application.LoadLevel ("00_Logo");
 			break;
 		default:
+			_PlayerData.m_Gamedata.m_iHaveCoin += 1;
 			break;
 		}
 
+		m_strCurrentItemID = "";
+		m_bIsPurchasing = false;
 		_PlayerData.GameData_Save ();
 		FinishPurchase (purchasedStoreItemID);
 	}

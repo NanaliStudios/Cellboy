@@ -10,6 +10,7 @@ public class GameSDKManager : MonoBehaviour
 
 	private static bool m_bIsPurchasing = false;
 	private static string m_strCurrentItemID = "";
+	private static bool m_bRestoreVal = false;
 
 	//#if UNITY_IOS
 	[DllImport ("__Internal")]
@@ -76,17 +77,17 @@ public class GameSDKManager : MonoBehaviour
 					}
 
 					TapjoyManager.Instance.TrackInappPurchase_ForAndroid (obj.purchase.SKU, obj.purchase.originalJson, obj.purchase.signature);
+
 					_PlayerData.GameData_Save ();
-					 m_bIsPurchasing = false;
 				}
 				else if(obj.isFailure)
 				{
 					//Debug.Log("Purchased fail");
 					return;
 				}
+
 			}
 		};
-
 
 		AndroidInAppPurchaseManager.ActionRetrieveProducsFinished += delegate(BillingResult obj) {
 		
@@ -215,12 +216,21 @@ public class GameSDKManager : MonoBehaviour
 	//Purchase
 	public void Purcahse_Item(string strID)
 	{
-		if (m_bIsPurchasing == true)
-			return;
-
 		#if UNITY_ANDROID
+
+		if (m_bIsPurchasing == true) {
+			if(AndroidInAppPurchaseManager.Client.IsConnectingToServiceInProcess)
+				return;
+			else
+				m_bIsPurchasing =false;
+		}
+
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#elif UNITY_IOS
+
+		if(m_bIsPurchasing == true)
+			return;
+
 		StorekitCellboy_BeginPurchase(strID);
 		#endif
 
@@ -382,6 +392,7 @@ public class GameSDKManager : MonoBehaviour
 			errorCode = errorInformation ["errorCode"] as string;
 
 		Debug.Log ("StoreItemID:" + storeItemID + "ErrorDescription:" + errorDescription);
+		m_bIsPurchasing = false;
 
 		//        ShowPopUpWindow ("Store Error", errorDescription);
 		//CurItemID = "";
@@ -454,6 +465,8 @@ public class GameSDKManager : MonoBehaviour
 			}
 		}
 
+		m_bIsPurchasing = false;
+
 		CurItemID = "";
 	}
 
@@ -492,18 +505,24 @@ public class GameSDKManager : MonoBehaviour
 		//get reawrd.
 		PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
+		int iPrice = 0;
+
 		switch (m_strCurrentItemID) {
 		case "cellboy_coin200":
 			_PlayerData.m_Gamedata.m_iHaveCoin += 200;
+			iPrice = 1000;
 			break;
 		case "cellboy_coin500":
 			_PlayerData.m_Gamedata.m_iHaveCoin += 500;
+			iPrice = 2000;
 			break;
 		case "cellboy_coin5000":
 			_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
+			iPrice = 5000;
 			break;
 		case "cellboy_adoff":
 			PlayerPrefs.SetInt("Adoff", 1);
+			iPrice = 3000;
 			Application.LoadLevel ("00_Logo");
 			break;
 		default:
@@ -511,6 +530,7 @@ public class GameSDKManager : MonoBehaviour
 			break;
 		}
 
+		TapjoyManager.Instance.TrackInappPurchase_ForApple (m_strCurrentItemID, "cellboy_coin", iPrice, transactionId);
 		m_strCurrentItemID = "";
 		m_bIsPurchasing = false;
 		_PlayerData.GameData_Save ();

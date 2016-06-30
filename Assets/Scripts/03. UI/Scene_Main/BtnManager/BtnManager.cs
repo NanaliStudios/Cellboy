@@ -59,6 +59,10 @@ public partial class BtnManager : MonoBehaviour {
 	private float m_fRewardCheckTimer = 0.0f;
 	private float m_fRewardCheckTerm = 3.0f;
 
+	private bool m_bIsclickArrowBtn = false;
+	private float m_SelectTerm = 0.01f;
+	private float m_SelectTimer = 0.0f;
+
 
 	void Awake()
 	{
@@ -166,7 +170,6 @@ public partial class BtnManager : MonoBehaviour {
 		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 60) {
 			OnFBLikeMenu ();
 		}
-			
 	}
 
 	void FixedUpdate()
@@ -280,6 +283,22 @@ public partial class BtnManager : MonoBehaviour {
 			GameStart ();
 		}
 		#endif
+
+		//for debug
+		if (Input.GetKeyDown (KeyCode.LeftArrow))
+			LeftBtnClick ();
+		if (Input.GetKeyDown (KeyCode.RightArrow))
+			RightBtnClick ();
+
+		if (m_bIsclickArrowBtn == true) {
+			m_SelectTimer += Time.deltaTime;
+			
+			if(m_SelectTimer >= m_SelectTerm)
+			{
+				m_bIsclickArrowBtn = false;
+				m_SelectTimer = 0.0f;
+			}
+		}
 			
 	}
 
@@ -354,9 +373,11 @@ public partial class BtnManager : MonoBehaviour {
 	public void LeftBtnClick() 
 	{
 		Play_ScrollSound ();
-		if (m_iCurrnetPlayerIndex == 0)
+		if (m_iCurrnetPlayerIndex == 0 ||
+		    m_bIsclickArrowBtn == true)
 			return;
 
+		//m_SpringPanel.target = new Vector3 (m_SpringPanel.target.x + (1200 * m_iCurrnetPlayerIndex -1), 0.0f);
 		m_SpringPanel.target = new Vector3(m_SpringPanel.target.x + 1200.0f, 0.0f);
 
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject = m_objScrollView.transform.GetChild (m_iCurrnetPlayerIndex - 1).gameObject;
@@ -368,14 +389,17 @@ public partial class BtnManager : MonoBehaviour {
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
 			
 		m_SpringPanel.enabled = true;
+		m_bIsclickArrowBtn = true;
 		//TiredTime_Setting ();
 	}
 	public void RightBtnClick()
 	{
 		Play_ScrollSound ();
-		if (m_iCurrnetPlayerIndex + 1== m_objScrollView.transform.childCount)
+		if (m_iCurrnetPlayerIndex + 1== m_objScrollView.transform.childCount
+		    || m_bIsclickArrowBtn == true)
 			return;
 
+		//m_SpringPanel.target = new Vector3 (m_SpringPanel.target.x - (1200 * m_iCurrnetPlayerIndex +1), 0.0f);
 		m_SpringPanel.target = new Vector3(m_SpringPanel.target.x - 1200.0f, 0.0f);
 
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject = m_objScrollView.transform.GetChild (m_iCurrnetPlayerIndex + 1).gameObject;
@@ -387,6 +411,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
 
 		m_SpringPanel.enabled = true;
+		m_bIsclickArrowBtn = true;
 		//TiredTime_Setting ();
 	}
 

@@ -40,10 +40,19 @@ public class SetBackParticle : MonoBehaviour {
 				m_bInit = true;
 			}
 
+		} else {
+
+
+			if(Application.loadedLevelName == "02_Game")
+			{
+				m_BigParticle.playbackSpeed = 1 + GameSystem.GetInstance().Get_GlobalSpeed() * 10;
+				m_SmallParticle.playbackSpeed = 1 + GameSystem.GetInstance().Get_GlobalSpeed() * 10;
+			}
 		}
 
 		if (Application.loadedLevelName == "00_Logo")
 			Destroy (gameObject);
+
 	}
 
 }

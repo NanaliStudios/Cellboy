@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/02.Objects/00.Enemies/NormalEnemy.cs">
+    <Files>
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="85" Column="25" />
+      <File FileName="Assets/Scripts/00.Header/FileSystem.cs" Line="6" Column="1" />
+      <File FileName="../ProjLeaner/Assets/Scripts/01.SingleTon/PlayerData.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="210" Column="23" />
+      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="67" Column="3" />
+      <File FileName="Assets/Scripts/02.Objects/00.Enemies/NormalEnemy.cs" Line="31" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

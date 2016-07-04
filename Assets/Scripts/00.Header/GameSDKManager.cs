@@ -23,6 +23,9 @@ public class GameSDKManager : MonoBehaviour
 	private static extern bool StorekitCellboy_FinishPurchase(string storeItemID);
 	[DllImport ("__Internal")]
 	private static extern void StorekitCellboy_ProcessErrorPurchase();
+	[DllImport ("__Internal")]
+	private static extern void StorekitCellboy_RestoreItem();
+
 
 	//#endif
 
@@ -361,6 +364,12 @@ public class GameSDKManager : MonoBehaviour
 		StorekitCellboy_ProcessErrorPurchase();
 	}
 
+	public void RestoreItem()
+	{
+		StorekitCellboy_RestoreItem();
+	}
+
+
 	public void OnErrorPurchase_ForNotIOS(string error)
 	{
 		var ht=new Hashtable();
@@ -470,6 +479,16 @@ public class GameSDKManager : MonoBehaviour
 		CurItemID = "";
 	}
 
+	void Callback_StorekitCellboy_RestoreAdoff()
+	{
+		PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
+		
+		PlayerPrefs.SetInt("Adoff", 1);
+		
+		_PlayerData.GameData_Save ();
+		Application.LoadLevel ("00_Logo");
+	}
+
 	static public string CurItemID="";
 	void Callback_StorekitCellboy_OnProcessErrorPurchase(string json)
 	{
@@ -537,7 +556,7 @@ public class GameSDKManager : MonoBehaviour
 		FinishPurchase (purchasedStoreItemID);
 	}
 }
-	
+
 public struct ProductInfo
 {
 	public string Price;

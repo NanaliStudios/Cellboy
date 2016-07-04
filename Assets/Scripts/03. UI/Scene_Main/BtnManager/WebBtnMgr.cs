@@ -37,7 +37,14 @@ public partial class BtnManager : MonoBehaviour {
 	public void RestoreProduct()
 	{
 		Debug.Log ("Restore");
+
+		if (!AdFunctions.isInitialized())
+			return;
+#if UNITY_ANDROID
 		AndroidInAppPurchaseManager.Client.RetrieveProducDetails();
+#elif UNITY_IOS
+		m_SdkMgr.RestoreItem();
+#endif
 	}
 
 	public void SNS_ShareBtn()

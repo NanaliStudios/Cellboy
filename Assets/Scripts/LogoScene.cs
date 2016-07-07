@@ -70,26 +70,37 @@ public class LogoScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-			if (m_bLateInit == false) {
-			if(m_SdkMgr.isInitialized())
-			{
-				if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
-					m_SdkMgr.Do_CloudLoad ();
-
-				m_bLateInit = true;
-			}
-		}
+//			if (m_bLateInit == false) {
+//			if(m_SdkMgr.isInitialized())
+//			{
+//				if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
+//					m_SdkMgr.Do_CloudLoad ();
+//
+//				m_bLateInit = true;
+//			}
+//		}
 
 			if (m_fTerm <= m_fTimer) {
-#if UNITY_EDITOR_OSX
+#if UNITY_EDITOR_OSX || UNITY_IOS
 			m_PlayerData.GameData_Load();
 			Application.LoadLevel ("00_MAIN");
 
 			return;
 #endif
-			m_PlayerData.GameData_Load();
-			  
-			Application.LoadLevel ("00_MAIN");
+
+			if(Application.internetReachability == NetworkReachability.NotReachable)
+			{
+				m_PlayerData.GameData_Load();
+				Application.LoadLevel ("00_MAIN");
+			}
+			else
+			{
+				if(m_SdkMgr.m_bIsLoadedData == true)
+				{
+					m_PlayerData.GameData_Load();
+					Application.LoadLevel ("00_MAIN");
+				}
+			}
 			return;
 		}
 		m_fTimer += Time.deltaTime;

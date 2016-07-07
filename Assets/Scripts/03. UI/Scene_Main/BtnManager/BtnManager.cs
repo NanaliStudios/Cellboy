@@ -98,8 +98,6 @@ public partial class BtnManager : MonoBehaviour {
 			objPlayerData = GameObject.Find ("PlayerData(Clone)").gameObject;
 
 			m_PlayerData = objPlayerData.GetComponent<PlayerData> ();
-		//Game Save
-		m_PlayerData.GameData_Save ();
 	
 		//Create Particels
 
@@ -150,26 +148,30 @@ public partial class BtnManager : MonoBehaviour {
 		}
 		#endif
 
-		//starscore, facebook like
-		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 5) {
-			OnRateMenu ();
-		}
-		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 15) {
-			OnRateMenu ();
-		}
-		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 50) {
-			OnRateMenu ();
-		}
+		//starscore, facebook likehttps://www.youtube.com/watch?v=PZbkF-15Obu
 
-		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 10) {
+		if (m_PlayerData.m_bCanShowRate == false) {
+
+			Debug.Log(PlayerPrefs.GetInt ("CurrentPlayNum"));
+			if ((PlayerPrefs.GetInt ("CurrentPlayNum") == 5
+			    ||PlayerPrefs.GetInt ("CurrentPlayNum") == 15
+			    ||PlayerPrefs.GetInt ("CurrentPlayNum") == 50)) {
+				m_PlayerData.m_bCanShowRate = true;
+			} 
+		} else
+			OnRateMenu ();
+
+		if (m_PlayerData.m_bCanShowFB == false) {
+			if ((PlayerPrefs.GetInt ("CurrentPlayNum") == 10
+				|| PlayerPrefs.GetInt ("CurrentPlayNum") == 20
+				|| PlayerPrefs.GetInt ("CurrentPlayNum") == 55)) {
+				m_PlayerData.m_bCanShowFB = true;
+			}
+		} else
 			OnFBLikeMenu ();
-		}
-		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 20) {
-			OnFBLikeMenu ();
-		}
-		else if (PlayerPrefs.GetInt ("CurrentPlayNum") == 60) {
-			OnFBLikeMenu ();
-		}
+
+		//Game Save
+		m_PlayerData.GameData_Save ();
 	}
 
 	void FixedUpdate()
@@ -299,6 +301,14 @@ public partial class BtnManager : MonoBehaviour {
 				m_SelectTimer = 0.0f;
 			}
 		}
+
+#if UNITY_IOS
+		//Purchase
+		if(m_SdkMgr.GetIsPurchasing())
+			m_objWaitback.SetActive(true);
+		else
+			m_objWaitback.SetActive(false);
+#endif
 			
 	}
 
@@ -306,6 +316,12 @@ public partial class BtnManager : MonoBehaviour {
 	{
 
 		Play_BtnSound ();
+
+		if (Mathf.Abs (m_objScrollView.transform.localPosition.x - m_SpringPanel.target.x) > 50.0f) {
+				Debug.Log(string.Format("ScrollViewX : {0}, SprinTargetX : {1}", m_objScrollView.transform.position.x, m_SpringPanel.target.x));
+
+			return;
+		}
 
 			//Buy
 		if (m_bCurrentLock == true) {
@@ -460,28 +476,41 @@ public partial class BtnManager : MonoBehaviour {
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(true);
-		
+
 		m_MenuStateID = MAINMENU_STATE.CHARGE;
 	}
 
 	public void OnRateMenu()
 	{
+		if (m_PlayerData.m_bCanShowRate == false
+		    || m_PlayerData.m_iCurrentPlayNum == 0)
+			return;
+
+
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Starscore").gameObject.SetActive(true);
 
 		m_MenuStateID = MAINMENU_STATE.CHARGE;
+
+		m_PlayerData.m_bCanShowRate = false;
 	}
 
 	public void OnFBLikeMenu()
 	{
+		if (m_PlayerData.m_bCanShowFB == false
+		    || m_PlayerData.m_iCurrentPlayNum == 0)
+			return;
+
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(true);
 
 		m_MenuStateID = MAINMENU_STATE.CHARGE;
+
+		m_PlayerData.m_bCanShowFB = false;
 	}
 
 	public void MainBackBtn_Click()

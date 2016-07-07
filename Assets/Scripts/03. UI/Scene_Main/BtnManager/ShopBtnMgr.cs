@@ -4,6 +4,8 @@ using TapjoyUnity;
 
 public partial class BtnManager : MonoBehaviour {
 
+	public GameObject m_objWaitback = null;
+
 	public void OnFreeCharge1_Click()
 	{
 		//TapjoyManager.Instance.m_TjOfferwall.ShowContent();

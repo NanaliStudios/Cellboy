@@ -8,9 +8,11 @@ public class GameSDKManager : MonoBehaviour
 {
 	public byte[] CurrentSaveDAta = null;
 
-	private static bool m_bIsPurchasing = false;
+	public static bool m_bIsPurchasing = false;
 	private static string m_strCurrentItemID = "";
 	private static bool m_bRestoreVal = false;
+	public bool m_bIsLoadedData = false;
+	public bool m_bCanLoadCloud = false;
 
 	//#if UNITY_IOS
 	[DllImport ("__Internal")]
@@ -33,19 +35,22 @@ public class GameSDKManager : MonoBehaviour
 	private static List<ProductInfo> listProducts=new List<ProductInfo>(); //상품의 정보 : 한번 불러오면 게임이 끝날때까지 계속 들고 있음. (IOS,Android 공통사용).
 	private static bool IsFake=false;
 
-
-	void Start()
+	void Awake()
 	{
 		DontDestroyOnLoad (this);
+
+		CurrentSaveDAta = null;
+
+		Debug.Log ("Sdkmgr Awake");
 	}
 	public void Initialize()
 	{
 		#if UNITY_ANDROID
 		GooglePlayConnection.Instance.Connect ();
-		AndroidInAppPurchaseManager.Client.AddProduct ("coin_200");
-		AndroidInAppPurchaseManager.Client.AddProduct ("coin_500");
-		AndroidInAppPurchaseManager.Client.AddProduct ("coin_1000");
-		AndroidInAppPurchaseManager.Client.AddProduct ("addoff");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin200");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin500");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin5000");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_adoff");
 		AndroidInAppPurchaseManager.Client.Connect ();
 
 		//IAP Purchase delegate
@@ -55,25 +60,25 @@ public class GameSDKManager : MonoBehaviour
 
 				if(obj.isSuccess)
 				{
-					if(obj.purchase.SKU == "coin_200")
+					if(obj.purchase.SKU == "cellboy_coin200")
 					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-						AndroidInAppPurchaseManager.Client.Consume ("coin_200");
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin200");
 					}
 						
-					if(obj.purchase.SKU == "coin_500")
+					if(obj.purchase.SKU == "cellboy_coin500")
 					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-						AndroidInAppPurchaseManager.Client.Consume ("coin_500");
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin500");
 					}
 
-					if(obj.purchase.SKU == "coin_5000")
+					if(obj.purchase.SKU == "cellboy_coin5000")
 					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
-						AndroidInAppPurchaseManager.Client.Consume ("coin_5000");
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin5000");
 					}
 
-					if(obj.purchase.SKU == "adoff")
+					if(obj.purchase.SKU == "cellboy_adoff")
 					{
 						PlayerPrefs.SetInt("Adoff", 1);
 						Application.LoadLevel ("00_Logo");
@@ -96,22 +101,22 @@ public class GameSDKManager : MonoBehaviour
 		
 			PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_200")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin200")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-				AndroidInAppPurchaseManager.Client.Consume ("coin_200");
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin200");
 			}
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_500")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin500")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-				AndroidInAppPurchaseManager.Client.Consume ("coin_500");
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin500");
 			}
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("coin_5000")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin5000")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
-				AndroidInAppPurchaseManager.Client.Consume ("coin_5000");
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin5000");
 			}
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("adoff")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_adoff")) {
 
 				if(PlayerPrefs.GetInt("Adoff") == 1)
 					return;
@@ -121,12 +126,64 @@ public class GameSDKManager : MonoBehaviour
 			}
 		};
 
+		GooglePlaySavedGamesManager.ActionConflict += delegate(GP_SnapshotConflict result) {
+			Debug.Log("Conflict Detected: ");
+			GP_Snapshot snapshot = result.Snapshot;
+			GP_Snapshot conflictSnapshot = result.ConflictingSnapshot;
+			// Resolve between conflicts by selecting the newest of the conflicting snapshots.
+			GP_Snapshot mResolvedSnapshot = snapshot;
+			if (snapshot.meta.LastModifiedTimestamp < conflictSnapshot.meta.LastModifiedTimestamp) {
+				mResolvedSnapshot = conflictSnapshot;
+			}
+			result.Resolve(mResolvedSnapshot);
+			Do_CloudSave(result.Snapshot.bytes);
+		};
+
 		//GooglePlay CloudSave Set Delegates
 		GooglePlaySavedGamesManager.ActionGameSaveLoaded += delegate(GP_SpanshotLoadResult result) {
 
-			//Debug.Log("Cloud Save Loaded Complete");
-			CurrentSaveDAta = result.Snapshot.bytes;
+			PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
+			Debug.Log("ActionGameSaveLoaded");
+			_PlayerData.m_ByteGameData = result.Snapshot.bytes;
+			Debug.Log(string.Format("LoadedData_Length : {0}", result.Snapshot.bytes.Length));
+			Debug.Log(string.Format("LastModifiedTimestamp : {0}", result.Snapshot.meta.LastModifiedTimestamp));
+
+			m_bIsLoadedData = true; 
+		
+		};
+
+		GooglePlaySavedGamesManager.ActionAvailableGameSavesLoaded += delegate(GooglePlayResult obj) {
+
+			if(GooglePlaySavedGamesManager.Instance.AvailableGameSaves.Count == 0)
+				m_bIsLoadedData = true;
+			else
+				Do_CloudLoad();
+
+			Debug.Log(string.Format("SaveNum : {0}", GooglePlaySavedGamesManager.Instance.AvailableGameSaves.Count));
+
+		};
+
+		GooglePlaySavedGamesManager.ActionGameSaveResult += delegate(GP_SpanshotLoadResult obj) {
+
+			if(obj.IsSucceeded)
+				Debug.Log("ActionGameSaveResult : Cloud Saved Complete");
+			else
+				Debug.Log("ActionGameSaveResult: Cloud Save Failed");
+
+			Debug.Log(string.Format("LastModifiedTimestamp : {0}", obj.Snapshot.meta.LastModifiedTimestamp));
+		};
+	
+		GooglePlayConnection.ActionConnectionResultReceived += delegate(GooglePlayConnectionResult obj)
+		{
+			Debug.Log("ActionConnectionResultReceived");
+
+			if(obj.IsSuccess)
+			{
+				Debug.Log("Connected!");
+				if(Application.loadedLevelName == "00_Logo")
+				GooglePlaySavedGamesManager.Instance.LoadAvailableSavedGames();
+			}
 		};
 
 		#elif UNITY_IOS
@@ -194,7 +251,8 @@ public class GameSDKManager : MonoBehaviour
 
 
 		#if UNITY_ANDROID
-		//Debug.Log ("Try Save GameData to GoogleCloud");
+		Debug.Log ("Try Save GameData to GoogleCloud");
+		Debug.Log(Data.Length);
 		GooglePlaySavedGamesManager.Instance.CreateNewSnapshot ("SaveData", "",
 		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
 		                                                        Data, 0);
@@ -386,25 +444,25 @@ public class GameSDKManager : MonoBehaviour
 	{		
 		// TODO: Remove Block-screen
 
-		Hashtable errorInformation = MiniJSONV.Json.Deserialize (errorInfoJSON) as Hashtable;
-
-		string storeItemID = "";
-		if(errorInformation ["storeItemID"] != null)
-			storeItemID = errorInformation ["storeItemID"] as string;
-
-		string errorDescription = "";
-		if(errorInformation ["errorDescription"] != null)
-			errorDescription = errorInformation ["errorDescription"] as string;
-
-		string errorCode = "";
-		if(errorInformation ["errorCode"] != null)
-			errorCode = errorInformation ["errorCode"] as string;
-
-		Debug.Log ("StoreItemID:" + storeItemID + "ErrorDescription:" + errorDescription);
+//		Hashtable errorInformation = MiniJSONV.Json.Deserialize (errorInfoJSON) as Hashtable;
+//	
+//		string storeItemID = "";
+//		if(errorInformation ["storeItemID"] != null)
+//			storeItemID = errorInformation ["storeItemID"] as string;
+//	
+//		string errorDescription = "";
+//		if(errorInformation ["errorDescription"] != null)
+//			errorDescription = errorInformation ["errorDescription"] as string;
+//	
+//		string errorCode = "";
+//		if(errorInformation ["errorCode"] != null)
+//			errorCode = errorInformation ["errorCode"] as string;
+//	
+//		Debug.Log ("StoreItemID:" + storeItemID + "ErrorDescription:" + errorDescription);
 		m_bIsPurchasing = false;
 
-		//        ShowPopUpWindow ("Store Error", errorDescription);
-		//CurItemID = "";
+		//ShowPopUpWindow ("Store Error", errorDescription);
+		CurItemID = "";
 	}
 
 
@@ -554,6 +612,11 @@ public class GameSDKManager : MonoBehaviour
 		m_bIsPurchasing = false;
 		_PlayerData.GameData_Save ();
 		FinishPurchase (purchasedStoreItemID);
+	}
+
+	public bool GetIsPurchasing()
+	{
+		return m_bIsPurchasing;
 	}
 }
 

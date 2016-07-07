@@ -28,9 +28,12 @@ public class PlayerData : MonoBehaviour {
 	public float m_fPlayer2_ChargeTime = 60;
 	public float m_fPlayer3_ChargeTime = 240;
 	public float m_fPlayer4_ChargeTime = 360;
+
+	public bool m_bCanShowRate = false;
+	public bool m_bCanShowFB = false;
 	
 	public GameData m_Gamedata = null;
-	private byte[] m_ByteGameData = null;
+	public byte[] m_ByteGameData = null;
 
 
 	private GameSDKManager m_SdkMgr = null;
@@ -44,6 +47,8 @@ public class PlayerData : MonoBehaviour {
 		DontDestroyOnLoad (this);
 	
 		m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
+
+		m_ByteGameData = null;
 	}
 
 	public void Create_SaveData()
@@ -69,6 +74,7 @@ public class PlayerData : MonoBehaviour {
 			BinaryFormatter b = new BinaryFormatter();
 			MemoryStream m = new MemoryStream();
 
+			Debug.Log(m_Gamedata.m_iHaveCoin);
 			b.Serialize(m, m_Gamedata);
 
 
@@ -80,9 +86,14 @@ public class PlayerData : MonoBehaviour {
 	public void GameData_Load()
 	{
 		Debug.Log ("Try Gamedata Load");
-		m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
+		//m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
 
-		if (m_ByteGameData.Length != 0) {
+//		if (m_ByteGameData == null)
+//			Debug.Log ("CloudLoad Failed");
+//		if (m_SdkMgr == null)
+//			Debug.Log ("gamesdkmgr is null");
+
+		if (m_ByteGameData != null) {
 			Debug.Log ("Cloud Load");
 			BinaryFormatter b = new BinaryFormatter ();
 			MemoryStream m = new MemoryStream (m_ByteGameData);

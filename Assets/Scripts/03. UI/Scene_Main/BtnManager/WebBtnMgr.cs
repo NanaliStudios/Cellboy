@@ -3,7 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 
 public partial class BtnManager : MonoBehaviour {
-	
+
 	[DllImport ("__Internal")]
 	private static extern void NotiManagerClientX_openActionSheetWithMessage(string message);
 	[DllImport ("__Internal")]
@@ -56,5 +56,18 @@ public partial class BtnManager : MonoBehaviour {
 #elif UNITY_IOS
 		NotiManagerClientX_openActionSheetWithMessage(strMessage);
 #endif
+	}
+
+
+	public void Connect_Store_forStarscroe()
+	{
+
+		m_PlayerData.m_bCanShowRate = false;
+	}
+
+	public void Connect_Facebook_forLike()
+	{
+
+		m_PlayerData.m_bCanShowFB = false;
 	}
 }

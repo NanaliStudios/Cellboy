@@ -36,8 +36,6 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void RestoreProduct()
 	{
-		Debug.Log ("Restore");
-
 		if (!AdFunctions.isInitialized())
 			return;
 #if UNITY_ANDROID

@@ -1,11 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/00.Header/GameSDKManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs">
     <Files>
-      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="68" Column="7" />
-      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="97" Column="29" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="7" Column="1" />
-      <File FileName="Assets/Scripts/LogoScene.cs" Line="84" Column="34" />
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="527" Column="37" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="304" Column="36" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="33" Column="7" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs" Line="38" Column="3" />
+      <File FileName="Assets/NGUI/Scripts/Internal/UIWidget.cs" Line="1076" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

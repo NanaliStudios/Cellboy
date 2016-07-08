@@ -9,30 +9,35 @@ public partial class BtnManager : MonoBehaviour {
 	public void OnFreeCharge1_Click()
 	{
 		//TapjoyManager.Instance.m_TjOfferwall.ShowContent();
+		Play_BtnSound ();
 		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
+
 	}
 		
 	public void Buy200CoinBtn_Click()
 	{
+		Play_BtnSound ();
 		m_SdkMgr.Purcahse_Item ("cellboy_coin200");
 	}
 
 	public void Buy500CoinBtn_Click()
 	{
+		Play_BtnSound ();
 		m_SdkMgr.Purcahse_Item ("cellboy_coin500");
 	}
 
 	public void Buy1000CoinBtn_Click()
 	{
+		Play_BtnSound ();
 		m_SdkMgr.Purcahse_Item ("cellboy_coin5000");
 	}
 
 	//
 	public void NoAdsBtn_Click()
 	{
-		if (PlayerPrefs.GetInt("Adoff")== 1)
-			return;
-			
+//		if (PlayerPrefs.GetInt("Adoff")== 1)
+//			return;
+		Play_BtnSound ();
 		m_SdkMgr.Purcahse_Item ("cellboy_adoff");
 	}
 }

@@ -225,10 +225,29 @@ public class GameSDKManager : MonoBehaviour
 	public void Show_LeaderBoard()
 	{
 		#if UNITY_ANDROID
-		GooglePlayManager.Instance.ShowLeaderBoardById ("CgkI-5Pv_oYcEAIQAQ");
-		#endif
+		string strScoreBoardID = "5Pv_oYcEAIQAQ";
+		
+		if (GooglePlayConnection.Instance.IsConnected)
+			GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
+		else {
+			GooglePlayConnection.ActionConnectionResultReceived += delegate(GooglePlayConnectionResult obj) {
+				if(obj.IsSuccess)
+					GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
+			};
+			
+			//delegate end 
+			GooglePlayConnection.Instance.Connect();
+		}
+		#elif UNITY_IOS
 
-		#if UNITY_IOS
+		if(Social.localUser.authenticated == false)
+		{
+			Social.localUser.Authenticate( sucess => {
+				if(sucess)
+					GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
+			});
+		}
+		else
 		GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
 		#endif
 	}
@@ -492,6 +511,8 @@ public class GameSDKManager : MonoBehaviour
 		Debug.Log ("___________________________________________________________________________________________________________________________");
 
 		SuccessPurchase(storeItemID);
+
+		m_bIsPurchasing = false;
 	}
 
 	static public void OnFakeFinishPurchase_ForNotIOS()

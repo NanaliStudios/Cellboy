@@ -61,6 +61,11 @@ class AdFunctions
 		m_GoogleAD.ShowPopup ();
 	}
 
+	public static bool IsLoadedPopup()
+	{
+		return m_GoogleAD.IsLoadedPopup ();
+	}
+
 	public static bool Check_IsClose_GooglePopup()
 	{
 		return m_GoogleAD.m_bIsDismissPopup;

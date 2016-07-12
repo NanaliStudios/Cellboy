@@ -181,8 +181,12 @@ public class GameSDKManager : MonoBehaviour
 			if(obj.IsSuccess)
 			{
 				Debug.Log("Connected!");
+				//Debug.Log(Application.loadedLevelName);
+
 				if(Application.loadedLevelName == "00_Logo")
 				GooglePlaySavedGamesManager.Instance.LoadAvailableSavedGames();
+
+				Debug.Log(Application.loadedLevelName);
 			}
 		};
 
@@ -297,14 +301,6 @@ public class GameSDKManager : MonoBehaviour
 	public void Purcahse_Item(string strID)
 	{
 		#if UNITY_ANDROID
-
-		if (m_bIsPurchasing == true) {
-			if(AndroidInAppPurchaseManager.Client.IsConnectingToServiceInProcess)
-				return;
-			else
-				m_bIsPurchasing =false;
-		}
-
 		AndroidInAppPurchaseManager.Client.Purchase (strID);
 		#elif UNITY_IOS
 
@@ -315,7 +311,6 @@ public class GameSDKManager : MonoBehaviour
 		#endif
 
 		m_strCurrentItemID = strID;
-		m_bIsPurchasing = true;
 	}
 
 	public bool Check_IsPurchased(string strID)
@@ -468,7 +463,7 @@ public class GameSDKManager : MonoBehaviour
 //		string storeItemID = "";
 //		if(errorInformation ["storeItemID"] != null)
 //			storeItemID = errorInformation ["storeItemID"] as string;
-//	
+		//	m_bIsPurchasing
 //		string errorDescription = "";
 //		if(errorInformation ["errorDescription"] != null)
 //			errorDescription = errorInformation ["errorDescription"] as string;
@@ -512,7 +507,7 @@ public class GameSDKManager : MonoBehaviour
 
 		SuccessPurchase(storeItemID);
 
-		m_bIsPurchasing = false;
+		m_bIsPurchasing = true;
 	}
 
 	static public void OnFakeFinishPurchase_ForNotIOS()
@@ -630,7 +625,6 @@ public class GameSDKManager : MonoBehaviour
 
 		TapjoyManager.Instance.TrackInappPurchase_ForApple (m_strCurrentItemID, "cellboy_coin", iPrice, transactionId);
 		m_strCurrentItemID = "";
-		m_bIsPurchasing = false;
 		_PlayerData.GameData_Save ();
 		FinishPurchase (purchasedStoreItemID);
 	}

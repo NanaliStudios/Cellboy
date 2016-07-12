@@ -114,6 +114,11 @@ public class GoogleAdManager : MonoBehaviour
 		interstitial.Show ();
 	}
 
+	public bool IsLoadedPopup()
+	{
+		return interstitial.IsLoaded ();
+	}
+
 
 	public void BannerHide()
 	{

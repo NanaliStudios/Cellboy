@@ -3,18 +3,22 @@ KEY,English,한국어
 Flag,Flag-US,Flag-KR
 Language,English,한국어
 
+
+//PLAYER INFO
 PLAYER1_NAME,Ting,팅
 PLAYER2_NAME,Bangocyte,뱅고사이트
 PLAYER3_NAME,Neutrong,뉴트롱
 PLAYER4_NAME,Eosing,에오싱
 PLAYER5_NAME,Boomito,부미토
 
-PLAYER1_INFO,He is normal,일반형입니다.
-PLAYER2_INFO,He can shoot spread bullet at front,앞으로 퍼지는 총알을 발사합니다.
-PLAYER3_INFO,he can shoot the laser can penetrate to enemy,적을 관통할 수 있는 레이저를 발사합니다.
-PLAYER4_INFO,He can shoot guided bullet,적을 추격하는 총알을 발사합니다.
-PLAYER5_INFO,he can shoot boom bullet,적에게 닿으면 폭팔하는 총알을 발사합니다.
+PLAYER1_INFO,A plain One. ,일반형입니다.
+PLAYER2_INFO,Fire several bullets spread at front.,앞으로 퍼지는 총알을 발사합니다.
+PLAYER3_INFO,Shoots the laser penetrate enemies.,적을 관통할 수 있는 레이저를 발사합니다.
+PLAYER4_INFO,Shoots the guided missile. ,적을 추격하는 총알을 발사합니다.
+PLAYER5_INFO,Using the most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔하는 총알을 발사합니다.
 
+
+//GAME UI
 START,Start,시작하기
 RECHARGE,Recharge,충전하기
 WATCHAD,Watch An Ad,광고보기
@@ -30,18 +34,31 @@ RATE_INFO,Enjoying Cellboy? \nPlease Rate Cellboy!,게임이 마음에 드신다
 FBLIKE_INFO,Like Cellboy? \nThen Like Us On Facebook!,게임이 마음에 드신다면\n페이스북에서 좋아요를 눌러주세요!
 BUY_ALERT,Confirm Your Purchase!,구매를 확인합니다!
 COIN_LACK,Not Enough Coins! \nWould You Like More?,코인이 부족합니다!\n상점으로 이동할까요?
-PLAYER1_NAME,Ting,팅
-PLAYER2_NAME,Bangocyte,뱅고사이트
-PLAYER3_NAME,Neutrong,뉴트롱
-PLAYER4_NAME,Eosing,에오싱
-PLAYER5_NAME,Boomito,부미토
-PLAYER1_INFO,A plain One. ,일반형입니다.
-PLAYER2_INFO,Fire several bullets spread at front.,앞으로 퍼지는 총알을 발사합니다.
-PLAYER3_INFO,Shoots the laser penetrate enemies.,적을 관통할 수 있는 레이저를 발사합니다.
-PLAYER4_INFO,Shoots the guided missile. ,적을 추격하는 총알을 발사합니다.
-PLAYER5_INFO,Using the most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔하는 총알을 발사합니다.
 
+//TUTORIAL 
+TUTORIAL,TAP TO START,탭하여 시작하세요
 
+//CREDIT 
+CREDIT_MJB,Minjae Bak,박민재 
+CREDIT_JHB,Jaehwan Bak,박재환
+CREDIT_JSJ,Jaesoon Jung,정재순 
+CREDIT_SJS,Sangji Seo,서상지
+CREDIT_MKB,Minki Bae,배민기
+CREDIT_DUL,Donguk Lee,이동욱
+CREDIT_JHG,Junho Gang,강준호
+CREDIT_MONO,Mono,모노
+CREDIT_YOUTUBE,Vibe Tracks\n'Zoom',Vibe Tracks\n'Zoom'
+
+CREDIT_EP,Executive producer,제작 총괄
+CREDIT_GD&C,Game Design & Code,기획 & 프로그래밍 
+CREDIT_ART,Art,아트
+CREDIT_A&E,Animation & Effect,애니메이션
+CREDIT_TA,Technical Advice,기술 지원
+CREDIT_BS,Business Support,사업 지원
+CREDIT_SOUND,Sound Design,사운드 디자인
+CREDIT_BGM,BGM,배경음악
+
+//SHOP
 FREECOIN,FREE COIN,무료 충전
 1000PRICE,$ 0.99,W 1000
 2000PRICE, $ 1.99,W 2000

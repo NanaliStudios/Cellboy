@@ -25,8 +25,6 @@ public partial class GameSystem : MonoBehaviour {
 
 	public GameObject m_objBackColor = null;
 
-	public GameObject Admob_Back = null;
-
 	//==UI_Label==
 	public GameObject m_NetworkFail_Label = null;
 
@@ -113,13 +111,6 @@ public partial class GameSystem : MonoBehaviour {
 		//GameData Load----->
 
 		m_PlayerData.m_bWinHighScore = false;
-
-
-		//ads
-		if (PlayerPrefs.GetInt("Adoff") == 0)
-			Admob_Back.SetActive (true);
-		else
-			Admob_Back.SetActive (false);
 
 		//<-----End
 

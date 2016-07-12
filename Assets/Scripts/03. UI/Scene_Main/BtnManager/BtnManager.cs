@@ -55,6 +55,7 @@ public partial class BtnManager : MonoBehaviour {
 	public bool m_bPopupAdsOn = false;
 	
 	private bool m_bStart = true;
+	private bool m_bInfoUpdate = true;
 
 	private float m_fRewardCheckTimer = 0.0f;
 	private float m_fRewardCheckTerm = 3.0f;
@@ -82,6 +83,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_ScrollClip = Resources.Load ("Sounds/ogg(96k)/ui_scroll") as AudioClip;
 
 
+		//Create Singleton or Set Getter
 		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
 			GameObject objSdkMgr = Instantiate (m_objSdkMgr) as GameObject;
 			m_SdkMgr = m_objSdkMgr.GetComponent<GameSDKManager> ();
@@ -110,7 +112,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Set BackParticle
 		GameObject.Find ("Particles(Clone)").GetComponent<SetBackParticle> ().m_bInit = false;
 
-		//Logo Progress 
+		//Main Logo Change --> Scoreboard 
 		if (m_PlayerData.m_iCurrentPlayNum != 0) {
 			m_objLogo.SetActive (false);
 			m_objScore.gameObject.SetActive (true);
@@ -170,6 +172,7 @@ public partial class BtnManager : MonoBehaviour {
 
 		//Game Save
 		m_PlayerData.GameData_Save ();
+		m_bInfoUpdate = true;
 	}
 
 	void FixedUpdate()
@@ -189,7 +192,10 @@ public partial class BtnManager : MonoBehaviour {
 				m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
 				
 				m_SpringPanel.enabled = true;
-				
+
+				if(m_PlayerData.m_PlayerID == PLAYER_ID.NORMAL)
+					m_objLeftBtn.SetActive(false);
+
 				m_bStart = false;
 			}
 
@@ -198,8 +204,9 @@ public partial class BtnManager : MonoBehaviour {
 				m_bSelectChk = true;
 
 
-			if(m_bSelectChk == true &&
+			if((m_bSelectChk == true &&
 			   Mathf.Abs (m_objScrollView.transform.localPosition.x - m_SpringPanel.target.x) > 50.0f)
+			   || m_bInfoUpdate == true)
 			{
 				m_bSelectChk = false;
 
@@ -209,30 +216,6 @@ public partial class BtnManager : MonoBehaviour {
 				m_PlayerData.m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
 				m_PlayerData.m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
 				m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
-
-				m_fCurrentTired = 100.0f;
-				//
-				m_fCurrentTired = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].fTiredPercent;
-				m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock;
-				
-				if (m_bCurrentLock == false) {
-					if (m_fCurrentTired <= 0.0f) {
-						m_objTiredBar.SetActive (false);
-						m_objChargeBar.SetActive (true);
-						m_objPlayerInfo.SetActive(false);
-					} else {
-						m_objTiredBar.SetActive (true);
-						m_objChargeBar.SetActive (false);
-						m_objPlayerInfo.SetActive(false);
-					}
-					
-					//TiredTime Setting 
-					TiredTime_Setting ();
-				} else {
-					m_objTiredBar.SetActive (false);
-					m_objChargeBar.SetActive (false);
-					m_objPlayerInfo.SetActive(true);
-				}
 				
 				
 				//Arrow Btn Set
@@ -245,13 +228,42 @@ public partial class BtnManager : MonoBehaviour {
 					m_objRightBtn.SetActive (false);
 				else
 					m_objRightBtn.SetActive (true);
+
+				m_bInfoUpdate = false;
 			}
 
+			m_fCurrentTired = 100.0f;
+			//
+			m_fCurrentTired = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].fTiredPercent;
+			m_bCurrentLock = m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock;
+			
+			if (m_bCurrentLock == false) {
+				if (m_fCurrentTired <= 0.0f) {
+					m_objTiredBar.SetActive (false);
+					m_objChargeBar.SetActive (true);
+					m_objPlayerInfo.SetActive(false);
+				} else {
+					m_objTiredBar.SetActive (true);
+					m_objChargeBar.SetActive (false);
+					m_objPlayerInfo.SetActive(false);
+				}
+			} else {
+				m_objTiredBar.SetActive (false);
+				m_objChargeBar.SetActive (false);
+				m_objPlayerInfo.SetActive(true);
+			}
+			
 		}
 
-
+		//Check TireTIme
+		TiredTime_Setting ();
+		
+		
 		//Ads
 		Check_AdsReward ();
+		Chartboost.didDismissInterstitial += delegate {
+			m_bIsDismissAD = true;
+		};
 
 		//Tapjoy Reward Check
 		if (TapjoyManager.Instance.m_bCheckreward == true) {
@@ -320,12 +332,13 @@ public partial class BtnManager : MonoBehaviour {
 			
 	}
 
+	//Startbtn
 	public void OnStartBtnClick()
 	{
 
 		Play_BtnSound ();
 
-		if (Mathf.Abs (m_objScrollView.transform.localPosition.x - m_SpringPanel.target.x) > 50.0f) {
+		if (Mathf.Abs (m_objScrollView.transform.localPosition.x - m_SpringPanel.target.x) > 200.0f) {
 				Debug.Log(string.Format("ScrollViewX : {0}, SprinTargetX : {1}", m_objScrollView.transform.position.x, m_SpringPanel.target.x));
 
 			return;
@@ -354,15 +367,12 @@ public partial class BtnManager : MonoBehaviour {
 		return;
 		#endif
 
-		if (TapjoyManager.Instance.m_bCheckreward == true)
+		if (TapjoyManager.Instance.m_bCheckreward == true) {
+			Debug.Log("TapjoyManager.Instance.m_bCheckreward == true");
 			return;
+		}
 
 		//show chartboost ad
-
-		Chartboost.didDismissInterstitial += delegate {
-			m_bIsDismissAD = true;
-		};
-
 		if (PlayerPrefs.GetInt("Adoff") == 1) {
 
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
@@ -375,8 +385,10 @@ public partial class BtnManager : MonoBehaviour {
 				if (m_bPopupAdsOn == false) {
 					if (Chartboost.hasInterstitial (CBLocation.Default))
 						Chartboost.showInterstitial (CBLocation.Default);
+					else if(AdFunctions.IsLoadedPopup())
+						AdFunctions.Show_GoogleADPopup();
 					else
-						AdFunctions.Show_GoogleADPopup ();
+						GameStart();
 				}
 			
 				m_bPopupAdsOn = true;
@@ -581,6 +593,7 @@ public partial class BtnManager : MonoBehaviour {
 			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsSleep = false;
 
 			m_PlayerData.GameData_Save ();
+			m_bInfoUpdate = true;
 			MainBackBtn_Click ();
 		} else
 			OnNoMoneyMenu ();
@@ -619,6 +632,7 @@ public partial class BtnManager : MonoBehaviour {
 			m_PlayerData.m_Gamedata.m_PlayerInfo[(int)m_PlayerData.m_PlayerID].bIsLock = false;
 
 			m_PlayerData.GameData_Save ();
+			m_bInfoUpdate = true;
 			MainBackBtn_Click();
 		}
 	}
@@ -651,10 +665,13 @@ public partial class BtnManager : MonoBehaviour {
 					m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = true;
 					CurrentTime = CurrentTime.AddMinutes (m_PlayerData.m_Gamedata.m_PlayerInfo [i].iSleepMin);
 					m_PlayerData.m_Gamedata.m_PlayerInfo [i].SleepEnd_Time = CurrentTime;
+					Debug.Log("TiredTime_Setting");
+					m_PlayerData.GameData_Save ();
 				}
 
 				if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].SleepEnd_Time <= System.DateTime.Now) {
 					m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = false;
+					Debug.Log("ChargeTired");
 					ChargeTired ();
 				}
 
@@ -736,6 +753,7 @@ public partial class BtnManager : MonoBehaviour {
 				m_bVideoAdsOn = false;
 
 				m_PlayerData.GameData_Save();
+				m_bInfoUpdate = true;
 				MainBackBtn_Click();
 			}
 	
@@ -769,6 +787,11 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		m_Audio.clip = m_ScrollClip;
 		m_Audio.Play();
+	}
+
+	public void Set_ProgressBar()
+	{
+
 	}
 
 }

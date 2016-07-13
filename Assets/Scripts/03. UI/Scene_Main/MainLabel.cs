@@ -75,7 +75,7 @@ public class MainLabel : TextBase {
 
 	void MakeChargeText()
 	{
-		m_MyText.text = Localization.Get ("CHARGE");
+		m_MyText.text = Localization.Get ("RECHARGE");
 		m_MyText.color = Color.yellow;
 	
 		m_BtnUISprite.enabled = true;

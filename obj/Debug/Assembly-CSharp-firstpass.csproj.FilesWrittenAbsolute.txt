@@ -26,3 +26,17 @@
 /Users/jung/Cellboy_0627/Temp/bin/Debug/nunit.framework.dll
 /Users/jung/Cellboy_0627/Temp/bin/Debug/Unity.DataContract.dll
 /Users/jung/Cellboy_0627/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/jsjung/Desktop/Cellboy/obj/Debug/Assembly-CSharp-firstpass.dll
+/Users/jsjung/Desktop/Cellboy/obj/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/UnityEngine.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/UnityEditor.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/P31RestKit.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/VungleSDKProxy.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/Tapjoy.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/Mono.Cecil.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/nunit.framework.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/Unity.DataContract.dll
+/Users/jsjung/Desktop/Cellboy/Temp/bin/Debug/ICSharpCode.NRefactory.dll

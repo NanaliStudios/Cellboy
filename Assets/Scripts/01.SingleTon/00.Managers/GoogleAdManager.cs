@@ -5,6 +5,7 @@ using System.Collections;
 public class GoogleAdManager : MonoBehaviour {
 
 	public bool m_bIsDismissPopup  = false;
+	private bool m_bIsLoadedPopup = false;
 
 	private AndroidAdMobController m_AdMob = null;
 	private GoogleMobileAdBanner banner = null;
@@ -24,6 +25,10 @@ public class GoogleAdManager : MonoBehaviour {
 		m_AdMob.OnInterstitialClosed += delegate {
 			m_bIsDismissPopup = true;
 			//Debug.Log("Popup Closed");
+		};
+
+		m_AdMob.OnInterstitialLoaded += delegate {
+			m_bIsLoadedPopup = true;
 		};
 
 		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
@@ -47,6 +52,11 @@ public class GoogleAdManager : MonoBehaviour {
 				banner.Show ();
 			}
 		}
+	}
+
+	public bool IsLoadedPopup()
+	{
+		return m_bIsLoadedPopup;
 	}
 
 	public void ShowPopup()
@@ -95,6 +105,9 @@ public class GoogleAdManager : MonoBehaviour
 		interstitial = new InterstitialAd(strPopupID);
 		interstitial.OnAdClosed += delegate {
 			m_bIsDismissPopup = true;
+	
+			interstitial.Destroy();
+			interstitial.LoadAd(request);
 		};
 		interstitial.LoadAd(request);
 	}

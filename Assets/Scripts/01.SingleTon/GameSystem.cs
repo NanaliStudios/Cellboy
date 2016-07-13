@@ -283,7 +283,10 @@ public partial class GameSystem : MonoBehaviour {
 				Destroy (objEnemyChild);
 			}
 			else
+			{
+				objEnemyChild.GetComponent<EnemyBase>().SetAnim_Die();
 				objEnemyChild.GetComponent<EnemyBase>().m_iHp = 0;
+			}
 
 		}
 	}

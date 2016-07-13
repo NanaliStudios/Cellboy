@@ -180,6 +180,13 @@ public class EnemyBase : ObjectBase {
 
 	}
 
+	public void SetAnim_Die()
+	{
+		if(m_Skeleton.Skeleton.data.FindAnimation("die") != null)
+			m_Skeleton.state.SetAnimation(0, "die", false);
+
+	}
+
 
 	protected void Move()
 	{

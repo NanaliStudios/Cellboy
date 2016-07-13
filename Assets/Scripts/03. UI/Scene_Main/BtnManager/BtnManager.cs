@@ -388,7 +388,10 @@ public partial class BtnManager : MonoBehaviour {
 					else if(AdFunctions.IsLoadedPopup())
 						AdFunctions.Show_GoogleADPopup();
 					else
+					{
+						Debug.Log("NO_ADS");
 						GameStart();
+					}
 				}
 			
 				m_bPopupAdsOn = true;

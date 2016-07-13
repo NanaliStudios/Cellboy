@@ -1,11 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/01.SingleTon/PlayerData.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="182" Column="5" />
-      <File FileName="Assets/Scripts/LogoScene.cs" Line="20" Column="3" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="666" Column="30" />
-      <File FileName="Assets/Scripts/01.SingleTon/PlayerData.cs" Line="68" Column="2" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="83" Column="29" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="85" Column="3" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/GoogleAdManager.cs" Line="43" Column="26" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameBtnFuncs.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/01.SingleTon/GameSystem.cs" Line="296" Column="59" />
+      <File FileName="Assets/Scripts/02.Objects/00.Enemies/EnemyBase.cs" Line="179" Column="18" />
+      <File FileName="Assets/Scripts/00.Header/AdFunctions.cs" Line="66" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

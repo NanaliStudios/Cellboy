@@ -10,18 +10,31 @@ public class PrefapManager {
 	private GameObject m_objHomingBullet = null;
 	private GameObject m_objBoom = null;
 	//Enemies----->
-	private ArrayList m_ListEnemies = new ArrayList ();
+//	private ArrayList m_ListEnemies = new ArrayList ();
 //	private GameObject m_objNormalEnemyS = null;
 //	private GameObject m_objNormalEnemyM = null;
-	//Items----->
-	private GameObject m_objPoint = null;
-	private GameObject m_objCoin = null;
 	//Obj's Parents----->
 	private GameObject BulletParentObj = null;
 	private GameObject EnemyParentObj = null;
 	private GameObject ItemParentObj = null;
 	//
 	private GameObject m_obLevelupEffect = null;
+
+	//memory pool
+	CGameObjectPool<GameObject>	m_NormalSEnemyObjPool;
+	CGameObjectPool<GameObject>	m_NormalMEnemyObjPool;
+	CGameObjectPool<GameObject>	m_SpeedEnemyObjPool;
+	CGameObjectPool<GameObject>	m_SplitSEnemyObjPool;
+	CGameObjectPool<GameObject>	m_SplitMEnemyObjPool;
+	CGameObjectPool<GameObject>	m_ChildEnemyObjPool;
+	CGameObjectPool<GameObject>	m_MoveEnemyObjPool;
+	CGameObjectPool<GameObject>	m_FollowEnemyObjPool;
+	CGameObjectPool<GameObject>	m_ImmEnemyObjPool;
+	CGameObjectPool<GameObject>	m_CoinSEnemyObjPool;
+	CGameObjectPool<GameObject>	m_CoinMEnemyObjPool;
+
+	CGameObjectPool<GameObject> m_PointObjPool;
+	GameObject m_objCoin = null;
 	//<-----End
 
 	public void Initialize () {
@@ -68,27 +81,177 @@ public class PrefapManager {
 		m_objBoom = Resources.Load ("Prefaps/00.Objects/Bullets/Boom/Boom") as GameObject;
 		//<-----End
 
-		//Load Enemy----->
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyM") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Speed/SpeedEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyM") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/ChildEnemy") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Follow/FollowEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Move/MoveEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Imm/ImmEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyS") as GameObject);
-		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyM") as GameObject);
-		//<-----End
 
-		m_objPoint = Resources.Load ("Prefaps/00.Objects/Point") as GameObject;
-		m_objCoin = Resources.Load ("Prefaps/00.Objects/Coin") as GameObject;
-		m_obLevelupEffect = Resources.Load ("Prefaps/00.Objects/LevelupEffect") as GameObject;
+		//Load Enemy----->
+
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyM") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Speed/SpeedEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyM") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Split/ChildEnemy") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Follow/FollowEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Move/MoveEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Imm/ImmEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyS") as GameObject);
+//		m_ListEnemies.Add (Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyM") as GameObject);
+		//<-----End
 
 		EnemyParentObj = GameObject.Find ("00_Enemies");
 		BulletParentObj = GameObject.Find ("01_Bullets");
 		ItemParentObj = GameObject.Find ("02_Items");
+
+		//MemoryPool Init----->
+
+		//GameObject ob = Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyS") as GameObject;
+		GameObject LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyS") as GameObject; 
+		m_NormalSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+		                                                 
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Normal/NormalEnemyM") as GameObject; 
+		m_NormalMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Speed/SpeedEnemyS") as GameObject; 
+		m_SpeedEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyS") as GameObject; 
+		m_SplitSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Split/SplitEnemyM") as GameObject; 
+		m_SplitMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Split/ChildEnemy") as GameObject; 
+		m_ChildEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		});
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Follow/FollowEnemyS") as GameObject; 
+		m_FollowEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		});
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Move/MoveEnemyS") as GameObject; 
+		m_MoveEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Imm/ImmEnemyS") as GameObject; 
+		m_ImmEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyS") as GameObject; 
+		m_CoinSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Enemies/Coin/CoinEnemyM") as GameObject; 
+		m_CoinMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		//Item
+		LoadedObj = null;
+		LoadedObj = Resources.Load ("Prefaps/00.Objects/Point") as GameObject; 
+		m_PointObjPool = new CGameObjectPool<GameObject>(50, () =>  {
+			
+			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+			MyObj.transform.parent = ItemParentObj.transform;
+			MyObj.SetActive(false);
+			return MyObj; 
+			
+		}); 
+
+		m_objCoin = Resources.Load ("Prefaps/00.Objects/Coin") as GameObject; 
+
+	//		LoadedObj = null;
+	//		LoadedObj = Resources.Load ("Prefaps/00.Objects/Coin") as GameObject; 
+	//		m_CoinObjPool = new CGameObjectPool<GameObject>(50, () =>  {
+	//			
+	//			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
+	//			MyObj.transform.parent = ItemParentObj.transform;
+	//			MyObj.SetActive(false);
+	//			return MyObj; 
+	//			
+	//		}); 
+
+		//<-----End
+		m_obLevelupEffect = Resources.Load ("Prefaps/00.Objects/LevelupEffect") as GameObject;
+
 		//Debug.Log ("Prefap Manager Initialize Complete");
 	}
 
@@ -128,10 +291,105 @@ public class PrefapManager {
 
 	public GameObject CreateNormalEnemy(Vector3 Vec3Pos, ENEMY_ID EnemyID = ENEMY_ID.NORMAL_S)
 	{
-		GameObject objEnemy = GameObject.Instantiate (m_ListEnemies[(int)EnemyID] as GameObject, Vec3Pos, Quaternion.identity) as GameObject;
-		objEnemy.transform.parent = EnemyParentObj.transform;
+		CGameObjectPool<GameObject> ObjPool;
+
+		switch (EnemyID) {
+		case ENEMY_ID.NORMAL_S:
+			ObjPool = m_NormalSEnemyObjPool;
+			break;
+		case ENEMY_ID.NORMAL_M:
+			Debug.Log("NormalM Spawn");
+			ObjPool = m_NormalMEnemyObjPool;
+			break;
+		case ENEMY_ID.SPEED:
+			ObjPool = m_SpeedEnemyObjPool;
+			break;
+		case ENEMY_ID.SPLIT_S:
+			ObjPool = m_SplitSEnemyObjPool;
+			break;
+		case ENEMY_ID.SPLIT_M:
+			ObjPool = m_SplitMEnemyObjPool;
+			break;
+		case ENEMY_ID.CHILD:
+			ObjPool = m_ChildEnemyObjPool;
+			break;
+		case ENEMY_ID.FOLLOW_S:
+			ObjPool = m_FollowEnemyObjPool;
+			break;
+		case ENEMY_ID.MOVE_S:
+			ObjPool = m_MoveEnemyObjPool;
+			break;
+		case ENEMY_ID.IMM:
+			ObjPool = m_ImmEnemyObjPool;
+			Debug.Log("Imm Spawn");
+			break;
+		case ENEMY_ID.COIN_S:
+			ObjPool = m_CoinSEnemyObjPool;
+			Debug.Log("CoinS Spawn");
+			break;
+		case ENEMY_ID.COIN_M:
+			ObjPool = m_CoinMEnemyObjPool;
+			Debug.Log("CoinM Spawn");
+			break;
+		default:
+			ObjPool = null;
+			break;
+
+		}
+
+		GameObject objEnemy = ObjPool.pop();
+		objEnemy.transform.position = Vec3Pos;
+		objEnemy.SetActive (true);
 		
 		return objEnemy;
+	}
+
+	public void DestroyEnemy(GameObject obj, ENEMY_ID EnemyID = ENEMY_ID.NORMAL_S)
+	{
+		CGameObjectPool<GameObject> ObjPool;
+		
+		switch (EnemyID) {
+		case ENEMY_ID.NORMAL_S:
+			ObjPool = m_NormalSEnemyObjPool;
+			break;
+		case ENEMY_ID.NORMAL_M:
+			ObjPool = m_NormalMEnemyObjPool;
+			break;
+		case ENEMY_ID.SPEED:
+			ObjPool = m_SpeedEnemyObjPool;
+			break;
+		case ENEMY_ID.SPLIT_S:
+			ObjPool = m_SplitSEnemyObjPool;
+			break;
+		case ENEMY_ID.SPLIT_M:
+			ObjPool = m_SplitMEnemyObjPool;
+			break;
+		case ENEMY_ID.CHILD:
+			ObjPool = m_ChildEnemyObjPool;
+			break;
+		case ENEMY_ID.FOLLOW_S:
+			ObjPool = m_FollowEnemyObjPool;
+			break;
+		case ENEMY_ID.MOVE_S:
+			ObjPool = m_MoveEnemyObjPool;
+			break;
+		case ENEMY_ID.IMM:
+			ObjPool = m_ImmEnemyObjPool;
+			break;
+		case ENEMY_ID.COIN_S:
+			ObjPool = m_CoinSEnemyObjPool;
+			break;
+		case ENEMY_ID.COIN_M:
+			ObjPool = m_CoinMEnemyObjPool;
+			break;
+		default:
+			ObjPool = null;
+			break;
+		}
+
+		obj.SetActive (false);
+		ObjPool.push (obj);
+
 	}
 
 
@@ -140,8 +398,9 @@ public class PrefapManager {
 		GameObject objPoint;
 
 		for (int i = 0; i < iNum; ++i) {
-			objPoint = GameObject.Instantiate (m_objPoint, Vec3Pos, Quaternion.identity) as GameObject;
-			objPoint.transform.parent = ItemParentObj.transform;
+			objPoint = m_PointObjPool.pop();
+			objPoint.transform.position = Vec3Pos;
+			objPoint.SetActive(true);
 		}
 	}
 
@@ -150,9 +409,19 @@ public class PrefapManager {
 		GameObject objCoin;
 		
 		for (int i = 0; i < iNum; ++i) {
-			objCoin = GameObject.Instantiate (m_objCoin, Vec3Pos, Quaternion.identity) as GameObject;
-			objCoin.transform.parent = ItemParentObj.transform;
+			objCoin = GameObject.Instantiate(m_objCoin, Vec3Pos, Quaternion.identity) as GameObject;
 		}
+	}
+
+	public void DestoryPoint(GameObject objPoint)
+	{
+		objPoint.SetActive (false);
+		m_PointObjPool.push (objPoint);
+	}
+
+	public void DestroyCoin(GameObject objCoin)
+	{
+		GameObject.Destroy (objCoin);
 	}
 
 	public GameObject Create_LevelupEffect(Vector3 Vec3Pos)

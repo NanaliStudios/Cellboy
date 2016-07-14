@@ -153,12 +153,14 @@ public class LevelManager : MonoBehaviour {
 
 			m_fImmChance = 0.0f;		//immortal
 
-			m_fCoinSChance = 4.0f;		//small coin	
-			m_fCoinMChance = 1.0f;		//midium coin
+			m_fCoinSChance = 5.0f;		//small coin	
+			m_fCoinMChance = 0.0f;		//midium coin
 
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 0.3f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.0f);
+
+			Debug.Log("Stage1");
 			break;
 		case 1:
 			m_fNormalSChance = 55.0f;	//small normal
@@ -180,6 +182,8 @@ public class LevelManager : MonoBehaviour {
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
 			m_PlayerRigid2D.gravityScale = 0.4f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.02f);
+
+			Debug.Log("Stage2");
 			break;
 		case 2:
 			m_fNormalSChance = 40.0f;	//small normal

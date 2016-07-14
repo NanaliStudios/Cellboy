@@ -9,6 +9,18 @@ public class Item: ObjectBase {
 	protected float m_fSpeed = 0.0f;
 	protected bool m_bIsGet = false;
 
+
+	void OnEnable()
+	{
+		if (m_Skeleton != null) {
+			m_Skeleton.state.SetAnimation(0, "start", false);
+			m_MyCircleColl.enabled = true;
+			m_bIsGet = false;
+			m_fSpeed = Random.Range (m_fRandSpeedMin, m_fRandSpeedMax);
+			Debug.Log("Item:OnEnable");
+		}
+	}
+
 	protected void Initialize()
 	{
 		base.Initialize ();

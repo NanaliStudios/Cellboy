@@ -10,6 +10,7 @@ public partial class BtnManager : MonoBehaviour {
 	public GameObject m_objParticles = null;
 
 	private SpringPanel m_SpringPanel = null;
+	private UICenterOnChild m_CurrentCenterPlayer = null;
 	public GameObject m_objScrollView = null;
 	public int m_iCurrnetPlayerIndex = 0;
 
@@ -81,8 +82,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_BtnClip = Resources.Load ("Sounds/ogg(96k)/button_click") as AudioClip;
 		m_BuyBtnClip = Resources.Load ("Sounds/ogg(96k)/button_buy") as AudioClip;
 		m_ScrollClip = Resources.Load ("Sounds/ogg(96k)/ui_scroll") as AudioClip;
-
-
+		
 		//Create Singleton or Set Getter
 		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
 			GameObject objSdkMgr = Instantiate (m_objSdkMgr) as GameObject;
@@ -114,13 +114,12 @@ public partial class BtnManager : MonoBehaviour {
 
 		//Main Logo Change --> Scoreboard 
 		if (m_PlayerData.m_iCurrentPlayNum != 0) {
-			m_objLogo.SetActive (false);
-			m_objScore.gameObject.SetActive (true);
-
+			SetObjActive(m_objLogo, false);
+			SetObjActive(m_objScore, true);
 			if (m_PlayerData.m_bWinHighScore == true)
-				m_objBadge.SetActive (true);
+				SetObjActive(m_objBadge, true);
 			else
-				m_objBadge.SetActive (false);
+				SetObjActive(m_objBadge, false);
 		} else {
 			//PlayerPrefs.DeleteAll ();		//for debug
 		}
@@ -173,8 +172,13 @@ public partial class BtnManager : MonoBehaviour {
 		//Game Save
 		m_PlayerData.GameData_Save ();
 		m_bInfoUpdate = true;
+
+		Chartboost.didDismissInterstitial += delegate {
+			m_bIsDismissAD = true;
+		};
 	}
 
+	//Update 
 	void FixedUpdate()
 	{
 		//Input
@@ -183,9 +187,13 @@ public partial class BtnManager : MonoBehaviour {
 		}
 
 		if (m_MenuStateID == MAINMENU_STATE.MAIN) {
-			m_SpringPanel = GameObject.Find ("ScrollView").gameObject.GetComponent<SpringPanel> ();
+
+			//Late Init
 
 			if (m_bStart == true) {
+
+				m_SpringPanel = GameObject.Find ("ScrollView").gameObject.GetComponent<SpringPanel> ();
+
 				m_SpringPanel.target = new Vector3 (m_SpringPanel.target.x + (-1200 * (int)m_PlayerData.m_PlayerID), 0.0f);
 				
 				m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject = m_objScrollView.transform.GetChild ((int)m_PlayerData.m_PlayerID).gameObject;
@@ -193,8 +201,9 @@ public partial class BtnManager : MonoBehaviour {
 				
 				m_SpringPanel.enabled = true;
 
-				if(m_PlayerData.m_PlayerID == PLAYER_ID.NORMAL)
-					m_objLeftBtn.SetActive(false);
+				if(m_PlayerData.m_PlayerID == PLAYER_ID.NORMAL
+				   && m_objLeftBtn.activeSelf == true)
+					SetObjActive(m_objLeftBtn, false);
 
 				m_bStart = false;
 			}
@@ -210,24 +219,26 @@ public partial class BtnManager : MonoBehaviour {
 			{
 				m_bSelectChk = false;
 
-				m_PlayerData.m_PlayerID = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_PlayerID;
-				m_PlayerData.m_strPlayerName = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strName_KEY);
-				m_PlayerData.m_strPlayerInfo = Localization.Get(GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_strInfo_KEY);
-				m_PlayerData.m_iChargePrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iChargePrice;
-				m_PlayerData.m_iBuyPrice = GameObject.Find ("ScrollView").gameObject.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_iBuyPrice;
-				m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg> ().m_bSelected = true;
+				UI_Playerimg CenterPlayerInfo = m_objScrollView.GetComponent<UICenterOnChild> ().centeredObject.GetComponent<UI_Playerimg>();
+
+				m_PlayerData.m_PlayerID = CenterPlayerInfo.m_PlayerID;
+				m_PlayerData.m_strPlayerName = Localization.Get(CenterPlayerInfo.m_strName_KEY);
+				m_PlayerData.m_strPlayerInfo = Localization.Get(CenterPlayerInfo.m_strInfo_KEY);
+				m_PlayerData.m_iChargePrice = CenterPlayerInfo.m_iChargePrice;
+				m_PlayerData.m_iBuyPrice = CenterPlayerInfo.m_iBuyPrice;
+				CenterPlayerInfo.m_bSelected = true;
 				
-				
+
 				//Arrow Btn Set
 				if (m_iCurrnetPlayerIndex == 0)
-					m_objLeftBtn.SetActive (false);
+					SetObjActive(m_objLeftBtn, false);
 				else
-					m_objLeftBtn.SetActive (true);
+					SetObjActive(m_objLeftBtn, true);
 				
 				if (m_iCurrnetPlayerIndex == m_objScrollView.transform.childCount -1)
-					m_objRightBtn.SetActive (false);
+					SetObjActive(m_objRightBtn, false);
 				else
-					m_objRightBtn.SetActive (true);
+					SetObjActive(m_objRightBtn, true);
 
 				m_bInfoUpdate = false;
 			}
@@ -239,18 +250,18 @@ public partial class BtnManager : MonoBehaviour {
 			
 			if (m_bCurrentLock == false) {
 				if (m_fCurrentTired <= 0.0f) {
-					m_objTiredBar.SetActive (false);
-					m_objChargeBar.SetActive (true);
-					m_objPlayerInfo.SetActive(false);
+					SetObjActive(m_objTiredBar, false);
+					SetObjActive(m_objChargeBar, true);
+					SetObjActive(m_objPlayerInfo, false);
 				} else {
-					m_objTiredBar.SetActive (true);
-					m_objChargeBar.SetActive (false);
-					m_objPlayerInfo.SetActive(false);
+					SetObjActive(m_objTiredBar, true);
+					SetObjActive(m_objChargeBar, false);
+					SetObjActive(m_objPlayerInfo, false);
 				}
 			} else {
-				m_objTiredBar.SetActive (false);
-				m_objChargeBar.SetActive (false);
-				m_objPlayerInfo.SetActive(true);
+				SetObjActive(m_objTiredBar, false);
+				SetObjActive(m_objChargeBar, false);
+				SetObjActive(m_objPlayerInfo, true);
 			}
 			
 		}
@@ -261,9 +272,6 @@ public partial class BtnManager : MonoBehaviour {
 		
 		//Ads
 		Check_AdsReward ();
-		Chartboost.didDismissInterstitial += delegate {
-			m_bIsDismissAD = true;
-		};
 
 		//Tapjoy Reward Check
 		if (TapjoyManager.Instance.m_bCheckreward == true) {
@@ -325,9 +333,9 @@ public partial class BtnManager : MonoBehaviour {
 #if UNITY_IOS
 		//Purchase
 		if(m_SdkMgr.GetIsPurchasing())
-			m_objWaitback.SetActive(true);
+			SetObjActive(m_objWaitback, true);
 		else
-			m_objWaitback.SetActive(false);
+			SetObjActive(m_objWaitback, false);
 #endif
 			
 	}
@@ -715,7 +723,7 @@ public partial class BtnManager : MonoBehaviour {
 			if (!AdFunctions.Show_VungleAds ()) {
 				m_NetworkFail_Label.GetComponent<TweenAlpha> ().ResetToBeginning ();
 				m_NetworkFail_Label.GetComponent<TweenAlpha> ().enabled = true;
-				m_NetworkFail_Label.SetActive (true);
+				SetObjActive(m_NetworkFail_Label, true);
 
 				return;
 			}
@@ -727,13 +735,13 @@ public partial class BtnManager : MonoBehaviour {
 	public void SoundOnOffBtn_Click()
 	{
 		if (AudioListener.volume == 0) {
-			m_objSoundBtn.transform.GetChild (0).gameObject.SetActive (true);
-			m_objSoundBtn.transform.GetChild (1).gameObject.SetActive (false);
+			SetObjActive(m_objSoundBtn.transform.GetChild (0).gameObject, true);
+			SetObjActive(m_objSoundBtn.transform.GetChild (1).gameObject, false);
 			PlayerPrefs.SetFloat("GameVolume", 3.0f);
 			AudioListener.volume = 	3.0f;
 		} else {
-			m_objSoundBtn.transform.GetChild(0).gameObject.SetActive(false);
-			m_objSoundBtn.transform.GetChild(1).gameObject.SetActive(true);
+			SetObjActive(m_objSoundBtn.transform.GetChild (0).gameObject, false);
+			SetObjActive(m_objSoundBtn.transform.GetChild (1).gameObject, true);
 			PlayerPrefs.SetFloat("GameVolume", 0.0f);
 			AudioListener.volume = 0.0f;
 		}
@@ -763,6 +771,12 @@ public partial class BtnManager : MonoBehaviour {
 		}
 	}
 
+	private void SetObjActive(GameObject obj,bool bBool)
+	{
+		if (obj.activeSelf != bBool)
+			obj.SetActive (bBool);
+	}
+
 	public void GameStart()
 	{
 		m_objScrollView.SetActive (false);
@@ -776,6 +790,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void Play_BtnSound()
 	{
+		if (m_Audio.isPlaying)
+			return;
+
 		m_Audio.clip = m_BtnClip;
 		m_Audio.Play();
 	}

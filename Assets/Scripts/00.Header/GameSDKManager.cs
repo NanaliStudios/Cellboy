@@ -201,6 +201,8 @@ public class GameSDKManager : MonoBehaviour
 
 		StorekitCellboy_Initialize();
 
+		P31CloudFile.exists("SaveData");
+
 		#endif
 	}
 
@@ -306,6 +308,8 @@ public class GameSDKManager : MonoBehaviour
 
 		if(m_bIsPurchasing == true)
 			return;
+
+		m_bIsPurchasing = true;
 
 		StorekitCellboy_BeginPurchase(strID);
 		#endif
@@ -506,8 +510,6 @@ public class GameSDKManager : MonoBehaviour
 		Debug.Log ("___________________________________________________________________________________________________________________________");
 
 		SuccessPurchase(storeItemID);
-
-		m_bIsPurchasing = true;
 	}
 
 	static public void OnFakeFinishPurchase_ForNotIOS()
@@ -597,6 +599,7 @@ public class GameSDKManager : MonoBehaviour
 
 		//get reawrd.
 		PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
+		BtnManager _BtnMgr = GameObject.Find ("BtnManager").GetComponent<BtnManager>();
 
 		int iPrice = 0;
 
@@ -626,6 +629,7 @@ public class GameSDKManager : MonoBehaviour
 		TapjoyManager.Instance.TrackInappPurchase_ForApple (m_strCurrentItemID, "cellboy_coin", iPrice, transactionId);
 		m_strCurrentItemID = "";
 		_PlayerData.GameData_Save ();
+		_BtnMgr.Play_BuyBtnSound ();
 		FinishPurchase (purchasedStoreItemID);
 	}
 

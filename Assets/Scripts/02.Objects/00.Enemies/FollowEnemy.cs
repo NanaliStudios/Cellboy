@@ -26,12 +26,10 @@ public class FollowEnemy : EnemyBase {
 		//
 		m_MyTrans.position = Vector3.MoveTowards(m_MyTrans.transform.position, m_GameSys.Get_PlayerPos(), m_fSpeed);
 		
-		if(transform.position.y <= -5.8f)
-			Destroy(gameObject);
-		
-		if(DeadCheck())	
+		if(DeadCheck()
+		   || (transform.position.y <= -5.8f))	
 		{
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestroyEnemy(gameObject, m_EnemyID);
 		}
 	}
 }

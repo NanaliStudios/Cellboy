@@ -96,7 +96,6 @@ public partial class GameSystem : MonoBehaviour {
 		m_objPlayer = GameObject.Instantiate((Resources.Load(string.Format("Prefaps/00.Objects/Players/{0}", strPlayerName)) as GameObject), new Vector3(0.0f, -2.0f), Quaternion.identity) as GameObject; 
 		//<-----End
 
-
 		//--->GamesdkManager Set
 		m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
 		//--->End
@@ -278,14 +277,16 @@ public partial class GameSystem : MonoBehaviour {
 
 			if (objEnemyChild.Equals (null))
 				return;
-
-			if (objEnemyChild.GetComponent<EnemyBase> ().m_EnemyID == ENEMY_ID.IMM) {
-				Destroy (objEnemyChild);
-			}
-			else
+			if(objEnemyChild.activeSelf == true)
 			{
-				objEnemyChild.GetComponent<EnemyBase>().SetAnim_Die();
-				objEnemyChild.GetComponent<EnemyBase>().m_iHp = 0;
+				if (objEnemyChild.GetComponent<EnemyBase> ().m_EnemyID == ENEMY_ID.IMM) {
+					Destroy (objEnemyChild);
+				}
+				else
+				{
+					objEnemyChild.GetComponent<EnemyBase>().SetAnim_Die();
+					objEnemyChild.GetComponent<EnemyBase>().m_iHp = 0;
+				}
 			}
 
 		}

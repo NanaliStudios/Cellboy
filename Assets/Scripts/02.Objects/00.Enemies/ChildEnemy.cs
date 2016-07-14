@@ -9,6 +9,13 @@ public class ChildEnemy : EnemyBase {
 	private bool m_bStay = true;
 
 
+	void OnEnable()
+	{
+		base.OnEnable ();
+		m_fStayTimer = 0.0f;
+		m_bStay = true;
+	}
+
 	void Start () {
 		base.Initialize ();
 	}
@@ -26,12 +33,10 @@ public class ChildEnemy : EnemyBase {
 		} else
 			Move ();
 		
-		if(transform.position.y <= -5.8f)
-			Destroy(gameObject);
-		
-		if(DeadCheck())	
+		if(DeadCheck()
+		   || (transform.position.y <= -5.8f))	
 		{
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestroyEnemy(gameObject, m_EnemyID);
 		}
 	}
 }

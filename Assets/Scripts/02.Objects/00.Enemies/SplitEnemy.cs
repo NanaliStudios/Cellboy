@@ -19,7 +19,7 @@ public class SplitEnemy : EnemyBase {
 		
 		if(DeadCheck())	
 		{
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestroyEnemy(gameObject, m_EnemyID);
 		}
 	}
 }

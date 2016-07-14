@@ -23,7 +23,7 @@ public class Coin : Item {
 		Follow_Player ();
 
 		if (m_GameSys.m_GameOver.activeSelf == true)
-			Destroy (gameObject);
+			m_GameSys.m_PrefapMgr.DestroyCoin (gameObject);
 
 		if (m_bIsGet == true) {
 //			if (Tapjoy.IsConnected)
@@ -31,7 +31,7 @@ public class Coin : Item {
 //			else
 			m_GameSys.m_PlayerData.m_Gamedata.m_iHaveCoin += m_iAddCoin;
 
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestroyCoin (gameObject);
 		}
 	}
 	

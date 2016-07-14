@@ -21,11 +21,42 @@ public class EnemyBase : ObjectBase {
 	private float m_fGiveTimer = 0.0f;
 	private float m_fGiveTime = 0.3f;
 
+	//for reset
+	protected int	m_iInitHp = 1;
+	protected int m_iInitHaveScore = 1;
+	protected int	m_iInitHavePoint = 0;
+	protected int 	m_iInitHaveCoin = 0;
+
+	protected float m_fInitSpeed = 0.0f;
+
 	public ENEMY_SIZE m_Size = ENEMY_SIZE.SMALL;
 	public ENEMY_ID m_EnemyID = ENEMY_ID.NORMAL_S;
 
 	protected AudioClip[] m_HitSound = new AudioClip[3];
 	protected AudioClip[] m_DieSound = new AudioClip[3];
+
+	protected void OnEnable()
+	{
+		if (m_Skeleton != null) {
+			m_Skeleton.Reset();
+			m_Skeleton.state.SetAnimation (0, "idle", true);
+
+			m_iHp = m_iInitHp;
+			m_iHaveScore = m_iInitHaveScore;
+			m_iHavePoint = m_iInitHavePoint;
+			m_iHaveCoin = m_iInitHaveCoin;
+			m_fSpeed = m_fInitSpeed;
+			
+			m_bDead = false;
+			m_bGiveScore = true;
+
+			m_fGiveTimer = 0.0f;
+
+		}
+
+		if(m_MyCircleColl != null)
+			m_MyCircleColl.enabled = true;
+	}
 
 	protected void Initialize()
 	{
@@ -47,6 +78,15 @@ public class EnemyBase : ObjectBase {
 				//}
 			};
 		}
+
+
+		//set init var
+		m_iInitHp = m_iHp;
+		m_iInitHaveScore = m_iHaveScore;
+		m_iInitHavePoint = m_iHavePoint;
+		m_iInitHaveCoin = m_iHaveCoin;
+		m_fInitSpeed = m_fSpeed;
+
 
 		//Load Sound
 
@@ -169,8 +209,6 @@ public class EnemyBase : ObjectBase {
 			{
 				if(m_Skeleton.Skeleton.data.FindAnimation("die") != null)
 				m_Skeleton.state.SetAnimation(0, "die", false);
-
-				transform.parent = null;
 			}
 
 		
@@ -182,6 +220,10 @@ public class EnemyBase : ObjectBase {
 
 	public void SetAnim_Die()
 	{
+		if (m_Skeleton == null) {
+			Debug.Log("SetAnim_Die():m_Skeleton == null");
+			return;
+		}
 		if(m_Skeleton.Skeleton.data.FindAnimation("die") != null)
 			m_Skeleton.state.SetAnimation(0, "die", false);
 

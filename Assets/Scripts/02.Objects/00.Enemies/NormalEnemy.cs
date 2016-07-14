@@ -54,12 +54,10 @@ public class NormalEnemy : EnemyBase {
 	{
 		Progress();
 		
-		if(transform.position.y <= -5.8f)
-			Destroy(gameObject);
-		
-		if(DeadCheck())	
+		if(DeadCheck()
+		   || (transform.position.y <= -5.8f))	
 		{
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestroyEnemy(gameObject, m_EnemyID);
 		}
 	}
 

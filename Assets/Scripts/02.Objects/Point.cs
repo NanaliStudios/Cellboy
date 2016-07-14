@@ -22,11 +22,11 @@ public class Point : Item {
 	
 
 		if (m_GameSys.m_GameOver.activeSelf == true)
-			Destroy (gameObject);
+			m_GameSys.m_PrefapMgr.DestoryPoint (gameObject);
 
 		if (m_bIsGet == true) {
 			m_GameSys.m_iCurrent_Point +=  m_iAddPoint;
-			Destroy(gameObject);
+			m_GameSys.m_PrefapMgr.DestoryPoint (gameObject);
 		}
 	}
 
@@ -41,6 +41,8 @@ public class Point : Item {
 
 			m_MyCircleColl.enabled = false;
 			m_Skeleton.state.SetAnimation(0, "die", false);
+
+			Debug.Log("Point.cs:OnTriggerStay2D");
 		}
 	}
 }

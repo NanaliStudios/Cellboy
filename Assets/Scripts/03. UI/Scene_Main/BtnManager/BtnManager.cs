@@ -24,6 +24,7 @@ public partial class BtnManager : MonoBehaviour {
 	public GameObject m_objTiredBar = null;
 	public GameObject m_objChargeBar = null;
 	public GameObject m_objPlayerInfo = null;
+	public GameObject m_objStartBack = null;
 	public GameObject m_objEndBack = null;
 
 	public GameObject m_objLeftBtn = null;
@@ -343,6 +344,8 @@ public partial class BtnManager : MonoBehaviour {
 	//Startbtn
 	public void OnStartBtnClick()
 	{
+		if (m_objStartBack.GetComponent<UISprite> ().color.a > 0)
+			return;
 
 		Play_BtnSound ();
 

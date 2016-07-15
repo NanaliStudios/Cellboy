@@ -41,8 +41,6 @@ public class Point : Item {
 
 			m_MyCircleColl.enabled = false;
 			m_Skeleton.state.SetAnimation(0, "die", false);
-
-			Debug.Log("Point.cs:OnTriggerStay2D");
 		}
 	}
 }

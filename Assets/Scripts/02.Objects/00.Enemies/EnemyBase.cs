@@ -221,7 +221,7 @@ public class EnemyBase : ObjectBase {
 	public void SetAnim_Die()
 	{
 		if (m_Skeleton == null) {
-			Debug.Log("SetAnim_Die():m_Skeleton == null");
+			//Debug.Log("SetAnim_Die():m_Skeleton == null");
 			return;
 		}
 		if(m_Skeleton.Skeleton.data.FindAnimation("die") != null)

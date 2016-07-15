@@ -17,7 +17,6 @@ public class Item: ObjectBase {
 			m_MyCircleColl.enabled = true;
 			m_bIsGet = false;
 			m_fSpeed = Random.Range (m_fRandSpeedMin, m_fRandSpeedMax);
-			Debug.Log("Item:OnEnable");
 		}
 	}
 

@@ -115,12 +115,9 @@ public class CGameObjectPool<T> where T : class
 			
 		{  
 			
-			Debug.Log("Pool object out");
+			//Debug.Log("Pool object out");
 			
 		}  
-		
-		
-		Debug.Log (objects.Count);
 		return this.objects.Pop();  
 		
 	}  

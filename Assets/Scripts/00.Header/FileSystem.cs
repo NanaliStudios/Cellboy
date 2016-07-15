@@ -48,7 +48,7 @@ public class FileSystem : MonoBehaviour {
 		}
 		else
 		{
-			//Debug.Log("Can't find SaveFile");
+			Debug.Log("Can't find SaveFile");
 			return null;
 		}
 		#else

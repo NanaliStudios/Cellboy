@@ -36,8 +36,10 @@ BUY_ALERT,Confirm Your Purchase!,구매를 확인합니다!
 COIN_LACK,Not Enough Coins! \nWould You Like More?,코인이 부족합니다!\n상점으로 이동할까요?
 
 //TUTORIAL 
-TUTORIAL,TAP TO START,탭하여 시작하세요
-
+TUTORIAL,TAP TO START,화면을 탭하면 시작합니다.
+TUTORIAL1,TAP AGAIN TO CHANGE DIR,다시 탭하면 미사일 발사와\n함께 방향을 바꿉니다.
+TUTORIAL2,TAP AGAIN TO CHANGE DIR,다시 한번 탭하여\n왼쪽으로 이동해보세요.
+TUTORIAL3,TAP AGAIN TO CHANGE DIR,모든 준비가 끝났습니다.\n가서 나쁜 세포들을 물리치세요!
 //CREDIT 
 CREDIT_MJB,Minjae Bak,박민재 
 CREDIT_JHB,Jaehwan Bak,박재환

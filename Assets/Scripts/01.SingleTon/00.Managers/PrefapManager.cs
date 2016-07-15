@@ -16,6 +16,7 @@ public class PrefapManager {
 	//Obj's Parents----->
 	private GameObject BulletParentObj = null;
 	private GameObject EnemyParentObj = null;
+	private GameObject SleepEnemyParentObj = null;
 	private GameObject ItemParentObj = null;
 	//
 	private GameObject m_obLevelupEffect = null;
@@ -98,6 +99,7 @@ public class PrefapManager {
 		//<-----End
 
 		EnemyParentObj = GameObject.Find ("00_Enemies");
+		SleepEnemyParentObj = GameObject.Find ("00_SleepEnemies");
 		BulletParentObj = GameObject.Find ("01_Bullets");
 		ItemParentObj = GameObject.Find ("02_Items");
 
@@ -108,7 +110,7 @@ public class PrefapManager {
 		m_NormalSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 		                                                 
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -119,7 +121,7 @@ public class PrefapManager {
 		m_NormalMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -130,7 +132,7 @@ public class PrefapManager {
 		m_SpeedEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -141,7 +143,7 @@ public class PrefapManager {
 		m_SplitSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -152,7 +154,7 @@ public class PrefapManager {
 		m_SplitMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -163,7 +165,7 @@ public class PrefapManager {
 		m_ChildEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -174,7 +176,7 @@ public class PrefapManager {
 		m_FollowEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -185,7 +187,7 @@ public class PrefapManager {
 		m_MoveEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -196,7 +198,7 @@ public class PrefapManager {
 		m_ImmEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -207,7 +209,7 @@ public class PrefapManager {
 		m_CoinSEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -218,7 +220,7 @@ public class PrefapManager {
 		m_CoinMEnemyObjPool = new CGameObjectPool<GameObject>(30, () =>  {
 			
 			GameObject MyObj = GameObject.Instantiate(LoadedObj) as GameObject;
-			MyObj.transform.parent = EnemyParentObj.transform;
+			MyObj.transform.parent = SleepEnemyParentObj.transform;
 			MyObj.SetActive(false);
 			return MyObj; 
 			
@@ -298,7 +300,6 @@ public class PrefapManager {
 			ObjPool = m_NormalSEnemyObjPool;
 			break;
 		case ENEMY_ID.NORMAL_M:
-			Debug.Log("NormalM Spawn");
 			ObjPool = m_NormalMEnemyObjPool;
 			break;
 		case ENEMY_ID.SPEED:
@@ -321,15 +322,12 @@ public class PrefapManager {
 			break;
 		case ENEMY_ID.IMM:
 			ObjPool = m_ImmEnemyObjPool;
-			Debug.Log("Imm Spawn");
 			break;
 		case ENEMY_ID.COIN_S:
 			ObjPool = m_CoinSEnemyObjPool;
-			Debug.Log("CoinS Spawn");
 			break;
 		case ENEMY_ID.COIN_M:
 			ObjPool = m_CoinMEnemyObjPool;
-			Debug.Log("CoinM Spawn");
 			break;
 		default:
 			ObjPool = null;
@@ -339,6 +337,7 @@ public class PrefapManager {
 
 		GameObject objEnemy = ObjPool.pop();
 		objEnemy.transform.position = Vec3Pos;
+		objEnemy.transform.parent = EnemyParentObj.transform;
 		objEnemy.SetActive (true);
 		
 		return objEnemy;
@@ -388,6 +387,7 @@ public class PrefapManager {
 		}
 
 		obj.SetActive (false);
+		obj.transform.parent = SleepEnemyParentObj.transform;
 		ObjPool.push (obj);
 
 	}

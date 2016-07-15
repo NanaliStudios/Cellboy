@@ -54,6 +54,7 @@ public class PlayerData : MonoBehaviour {
 	public void Create_SaveData()
 	{
 		GameData MyGameData = new GameData();
+		Debug.Log ("Try Create Savedata");
 		MyGameData.Initialize();
 		FileSystem.WriteGameDataFromFile(MyGameData, "SaveData");
 		
@@ -67,14 +68,13 @@ public class PlayerData : MonoBehaviour {
 
 	public void GameData_Save()
 	{
+		m_Gamedata.m_SavedTime = System.DateTime.Now;
 		FileSystem.WriteGameDataFromFile(m_Gamedata, "SaveData");
 		Debug.Log ("Save GameData Complete");
 
 		if (m_SdkMgr.isInitialized ()) {
 			BinaryFormatter b = new BinaryFormatter();
 			MemoryStream m = new MemoryStream();
-
-			Debug.Log(m_Gamedata.m_iHaveCoin);
 			b.Serialize(m, m_Gamedata);
 
 
@@ -98,9 +98,17 @@ public class PlayerData : MonoBehaviour {
 			BinaryFormatter b = new BinaryFormatter ();
 			MemoryStream m = new MemoryStream (m_ByteGameData);
 
+			GameData m_CloudData = b.Deserialize (m) as GameData;
+			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
 
-			m_Gamedata = b.Deserialize (m) as GameData;
-			Debug.Log ("Move CloudData to CurrentSaveData");
+			if(m_Gamedata.m_SavedTime <= m_CloudData.m_SavedTime)
+			{
+				Debug.Log ("Move CloudData to CurrentSaveData");
+				m_Gamedata = m_CloudData;
+			}
+			else
+				Debug.Log("LocalSaveData more recent");
+			
 		} else {
 			Debug.Log("LocalLoad");
 			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");

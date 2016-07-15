@@ -22,7 +22,7 @@ public class GameData {
 	public int m_iHighScore = 0;
 	public int m_iHaveCoin = 0;
 	public PlayerInfo[] m_PlayerInfo = new PlayerInfo[5];
-	public bool m_bAdOff = false;
+	public System.DateTime m_SavedTime = new System.DateTime(2000, 1, 1);
 
 
 	public void Initialize()

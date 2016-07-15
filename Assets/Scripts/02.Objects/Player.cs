@@ -40,6 +40,13 @@ public class Player : ObjectBase {
 	private AudioClip m_DieSound;
 
 	private GameObject m_objParticle = null;
+
+	public float m_OriGravScale = 0.0f;
+
+	//tutorial 
+	private bool m_bTutorialTap = true;
+	private bool m_bTapLock = false;
+	private bool m_bLastTutorial = false;
 	//<-----End
 	
 
@@ -51,6 +58,7 @@ public class Player : ObjectBase {
 		Initialize ();
 		m_GameSys.m_PrefapMgr.SetBullet(m_PlayerID, BULLET_ID.LV1);
 		Physics2D.gravity = new Vector3 (0.0f, 0.0f, 0.0f);
+		m_OriGravScale = m_MyRigid.gravityScale;
 
 		m_iCurrentMaxPoint = m_iLv1MaxPoint;
 		m_ScoreBoard = GameObject.Find ("ScoreFill").GetComponent<UISprite>();
@@ -70,7 +78,7 @@ public class Player : ObjectBase {
 		m_LvUpSound = Resources.Load ("Sounds/ogg(96k)/cellboy_levelup") as AudioClip;
 		m_DieSound = Resources.Load ("Sounds/ogg(96k)/score_reset") as AudioClip;
 
-
+		m_Skeleton.gameObject.GetComponent<MeshRenderer> ().sortingLayerName = "Tutorial";
 		StartCoroutine ("Excute");
 	}
 	void FixedUpdate()
@@ -90,23 +98,91 @@ public class Player : ObjectBase {
 	IEnumerator Excute () {
 
 		do {
+
+			//Tutorial
+
+			if(m_GameSys.m_bIsOnFirstTutorial == true)
+			{
+				if(m_MyTrans.position.x <= -1.8f
+				   && m_GameSys.m_bIsOnFirstTutorial == true)
+				{
+					m_MyTrans.position = new Vector3(-1.79f, m_MyTrans.transform.position.y);
+
+					Time.timeScale = 0.0f;
+					m_GameSys.m_Tutorial.SetActive(true);
+					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL1");
+					m_bTutorialTap = false;
+					m_bTapLock = false;
+				}
+				if(m_MyTrans.position.x >= 1.8f)
+				{
+					m_MyTrans.position = new Vector3(1.79f, m_MyTrans.transform.position.y);
+
+					Time.timeScale = 0.0f;
+					m_GameSys.m_Tutorial.SetActive(true);
+					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL2");
+					m_bTutorialTap = false;
+					m_bTapLock = false;
+					m_bLastTutorial = true;
+				}
+
+				if(m_MyTrans.position.x <= 0.0f
+				   && m_bLastTutorial == true)
+				{
+					//Time.timeScale = 0.0f;
+					m_Skeleton.state.SetAnimation(0, "idle", true);
+
+					m_MyRigid.Sleep();
+					m_MyRigid.gravityScale = 0.0f;
+					m_MyTrans.position = new Vector3(0.0f, m_MyTrans.transform.position.y);
+					m_MyRigid.WakeUp();
+
+					m_GameSys.m_Tutorial.SetActive(true);
+					m_GameSys.m_bIsOnFirstTutorial = false;
+					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL3");
+					m_bTutorialTap = false;
+					m_bTapLock = false;
+				}
+			}
+			
 			if(m_GameSys.CheckGameStart() == false)
 				m_fInputWaitTimer += Time.deltaTime;
-			if(m_fInputWaitTerm <= m_fInputWaitTimer)
+			if(m_fInputWaitTerm <= m_fInputWaitTimer
+			   && m_bTapLock == false )
 			{
+				//Input
 			if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))
 			    &&  (m_GameSys.m_GameOver.activeSelf == false && m_GameSys.m_ContinueMenu.activeSelf == false
 				    &&  m_GameSys.m_PauseMenu.activeSelf == false))
 			{
+					if(m_bTutorialTap == false)	//Tutorial End
+					{
+						m_GameSys.m_Tutorial.SetActive(false);
+						//m_GameSys.m_bIsOnFirstTutorial = false;
+						Time.timeScale = 1.0f;
+					}
+
+					if(m_GameSys.m_bIsOnFirstTutorial == true)
+						m_bTapLock = true;
+
 
 				if(m_GameSys.CheckGameStart() == false
-				   && m_GameSys.m_PauseMenu.activeSelf == false)
+				   && m_GameSys.m_PauseMenu.activeSelf == false
+					   && m_GameSys.m_bIsOnFirstTutorial == false)
 				{
-					m_GameSys.GameStart();
+						if(m_GameSys.m_bIsOnFirstTutorial == false)
+						{
+							if(m_MyRigid.gravityScale < m_OriGravScale)
+							m_MyRigid.gravityScale = m_OriGravScale;
+							m_Skeleton.gameObject.GetComponent<MeshRenderer> ().sortingLayerName = "Player";
+							m_GameSys.GameStart();
+						}
+
 					Switch_Dir ();
 				}
 				else
 				{
+					m_GameSys.m_Tutorial.SetActive(false);
 					Switch_Dir ();
 					
 					//Fire Bullet----->

@@ -50,6 +50,9 @@ public partial class GameSystem : MonoBehaviour {
 	public float m_fCurrentGlobalSpeed = 0.0f;
 
 //	public StageInfo m_ArrayStageInfo;
+
+	//Tutorial
+	public bool m_bIsOnFirstTutorial = false;
 	//<-----End
 
 	void Awake()
@@ -111,6 +114,8 @@ public partial class GameSystem : MonoBehaviour {
 
 		m_PlayerData.m_bWinHighScore = false;
 
+		if (PlayerPrefs.GetInt ("CurrentPlayNum") == 1)
+			m_bIsOnFirstTutorial = true;
 		//<-----End
 
 	}
@@ -158,7 +163,7 @@ public partial class GameSystem : MonoBehaviour {
 					break;
 
 				}
-				TapjoyManager.Instance.TrackCustomEvent ("Gameover", strPlayerTrackID , "Gamescore: " + m_iCurrent_GameScore.ToString(), "Stage: " +m_lvMgr.m_iCurrentStage);
+				TapjoyManager.Instance.TrackCustomEvent ("Gmeover", strPlayerTrackID , "Gamescore: " + m_iCurrent_GameScore.ToString(), "Stage: " +m_lvMgr.m_iCurrentStage);
 
 				Time.timeScale = 1;
 				m_PlayerData.m_iPlayCountForAd += 1;	 
@@ -232,9 +237,7 @@ public partial class GameSystem : MonoBehaviour {
 	{
 		return m_bOnContinue;
 	}
-
-
-
+	
 	//Functions----->
 	public Vector3 Get_PlayerPos()
 	{
@@ -245,6 +248,7 @@ public partial class GameSystem : MonoBehaviour {
 	{
 		Physics2D.gravity = new Vector3 (9.8f, 0.0f, 0.0f);
 		m_bIsGameStart = true;
+		//m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL1");
 		m_Tutorial.SetActive (false);
 	}
 

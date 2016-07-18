@@ -70,15 +70,15 @@ public class LogoScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-//			if (m_bLateInit == false) {
-//			if(m_SdkMgr.isInitialized())
-//			{
-//				if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
-//					m_SdkMgr.Do_CloudLoad ();
-//
-//				m_bLateInit = true;
-//			}
-//		}
+			if (m_bLateInit == false) {
+			if(m_SdkMgr.isInitialized())
+			{
+				//if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
+					m_SdkMgr.Do_CloudLoad ();
+
+				m_bLateInit = true;
+			}
+		}
 
 			if (m_fTerm <= m_fTimer) {
 #if UNITY_EDITOR_OSX || UNITY_IOS

@@ -201,8 +201,6 @@ public class GameSDKManager : MonoBehaviour
 
 		StorekitCellboy_Initialize();
 
-		P31CloudFile.exists("SaveData");
-
 		#endif
 	}
 
@@ -232,28 +230,19 @@ public class GameSDKManager : MonoBehaviour
 	{
 		#if UNITY_ANDROID
 		string strScoreBoardID = "5Pv_oYcEAIQAQ";
-		
-		if (GooglePlayConnection.Instance.IsConnected)
-			GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
-		else {
-			GooglePlayConnection.ActionConnectionResultReceived += delegate(GooglePlayConnectionResult obj) {
-				if(obj.IsSuccess)
-					GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
-			};
-			
-			//delegate end 
-			GooglePlayConnection.Instance.Connect();
-		}
+
+		GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
+
 		#elif UNITY_IOS
 
-		if(Social.localUser.authenticated == false)
-		{
-			Social.localUser.Authenticate( sucess => {
-				if(sucess)
-					GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
-			});
-		}
-		else
+//		if(Social.localUser.authenticated == false)
+//		{
+//			Social.localUser.Authenticate( sucess => {
+//				if(sucess)
+//					GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
+//			});
+//		}
+//		else
 		GameCenterPlatform.ShowLeaderboardUI("CellboyScore", UnityEngine.SocialPlatforms.TimeScope.AllTime);
 		#endif
 	}
@@ -282,8 +271,9 @@ public class GameSDKManager : MonoBehaviour
 		                                                        new Texture2D( 100, 100, TextureFormat.RGB24, false ),
 		                                                        Data, 0);
 		#elif UNITY_IOS
-		//Debug.Log ("Try Save GameData to ICloud");
+		Debug.Log ("Try Save GameData to ICloud");
 		P31CloudFile.writeAllBytes("SaveData", Data);
+		Debug.Log(Data.Length);
 		#endif
 	}
 
@@ -294,8 +284,17 @@ public class GameSDKManager : MonoBehaviour
 		GooglePlaySavedGamesManager.instance.LoadSpanshotByName("SaveData");
 		#elif UNITY_IOS
 		Debug.Log ("Try Load GameData to ICloud");
+		
+		Debug.Log("is File in Cloud? : " + iCloudBinding.isFileInCloud("SaveData"));
+		Debug.Log("is File Downloaded? : " + iCloudBinding.isFileDownloaded("SaveData"));
+		
 		CurrentSaveDAta = P31CloudFile.readAllBytes("SaveData");
-
+		Debug.Log("SaveData is exist? : " + P31CloudFile.exists("SaveData"));
+		
+		if(CurrentSaveDAta != null)
+			Debug.Log (CurrentSaveDAta.Length);
+		else
+			Debug.Log ("CurrentSaveDAta is null");
 		#endif
 	}
 
@@ -534,6 +533,7 @@ public class GameSDKManager : MonoBehaviour
 	{
 		Debug.Log ("Callback_StorekitCellboy_OnFinishPurchaseResponse");
 		// TODO: Remove Block-screen
+		m_bIsPurchasing = false;
 
 		if(!IsFake)
 		{
@@ -549,8 +549,6 @@ public class GameSDKManager : MonoBehaviour
 				idfaID = ht["idfaID"].ToString();
 			}
 		}
-
-		m_bIsPurchasing = false;
 
 		CurItemID = "";
 	}

@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LogoScene.cs">
+    <Files>
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="289" Column="14" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="19" Column="20" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="412" Column="23" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/iCloud/iCloudManager.cs" Line="57" Column="4" />
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="76" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

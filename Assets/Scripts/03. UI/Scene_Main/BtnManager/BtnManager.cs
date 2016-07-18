@@ -139,6 +139,18 @@ public partial class BtnManager : MonoBehaviour {
 
 		//ads
 
+		//if user network on off 
+		if (Application.internetReachability != NetworkReachability.NotReachable) {
+			if(!Tapjoy.IsConnected)
+				Tapjoy.Connect();
+			if(!m_SdkMgr.isInitialized())
+				m_SdkMgr.Initialize();
+			
+			if(!AdFunctions.isInitialized())
+				AdFunctions.Initialize();
+			
+		}
+
 		#if !UNITY_EDITOR_OSX
 		if (PlayerPrefs.GetInt("Adoff") == 0) {
 			AdFunctions.Show_GoogleADBanner ();
@@ -173,6 +185,7 @@ public partial class BtnManager : MonoBehaviour {
 		//Game Save
 		m_PlayerData.GameData_Save ();
 		m_bInfoUpdate = true;
+
 
 		Chartboost.didDismissInterstitial += delegate {
 			m_bIsDismissAD = true;
@@ -394,7 +407,8 @@ public partial class BtnManager : MonoBehaviour {
 			   && (Application.internetReachability != NetworkReachability.NotReachable)) {
 			
 				if (m_bPopupAdsOn == false) {
-					if (Chartboost.hasInterstitial (CBLocation.Default))
+					if (Chartboost.hasInterstitial (CBLocation.Default)
+					    && Chartboost.isInitialized())
 						Chartboost.showInterstitial (CBLocation.Default);
 					else if(AdFunctions.IsLoadedPopup())
 						AdFunctions.Show_GoogleADPopup();
@@ -408,7 +422,7 @@ public partial class BtnManager : MonoBehaviour {
 				m_bPopupAdsOn = true;
 			} else {
 				if (m_PlayerData.m_iCurrentPlayNum == 1
-				   && (Application.internetReachability != NetworkReachability.NotReachable))
+				    && TapjoyManager.Instance.m_TjNotice.IsContentAvailable())
 					TapjoyManager.Instance.m_TjNotice.ShowContent ();
 				else {
 					m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
@@ -417,7 +431,6 @@ public partial class BtnManager : MonoBehaviour {
 			}
 		}
 		//Game Start 
-	
 	}
 
 	public void LeftBtnClick() 
@@ -491,6 +504,7 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void LeaderboardBtn_Click()
 	{
+		Play_BtnSound ();
 		m_SdkMgr.Show_LeaderBoard ();
 
 	}
@@ -737,6 +751,8 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void SoundOnOffBtn_Click()
 	{
+		Play_BtnSound ();
+
 		if (AudioListener.volume == 0) {
 			SetObjActive(m_objSoundBtn.transform.GetChild (0).gameObject, true);
 			SetObjActive(m_objSoundBtn.transform.GetChild (1).gameObject, false);

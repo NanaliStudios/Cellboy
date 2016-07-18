@@ -11,31 +11,38 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void ConnectFacebook()
 	{
+		Play_BtnSound ();
 		Application.OpenURL ("http://facebook.com/nanalistudios");
 	}
 
 	public void ConnectTwitter()
 	{
+		Play_BtnSound ();
 		Application.OpenURL ("https://twitter.com/nanalistudios");
 	}
 
 	public void ConnectNanali()
 	{
+		Play_BtnSound ();
 		Application.OpenURL ("http://www.nanali.net");
 	}
 
 	public void ConnectMail()
 	{
+		Play_BtnSound ();
 		Application.OpenURL ("http://www.nanali.net/bbs/write/bbs_qna");
 	}
 
 	public void RateBtn()
 	{
+		Play_BtnSound ();
 		Application.OpenURL ("http://www.nanali.net");
 	}
 
 	public void RestoreProduct()
 	{
+		Play_BtnSound ();
+
 		if (!AdFunctions.isInitialized())
 			return;
 #if UNITY_ANDROID
@@ -47,6 +54,8 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void SNS_ShareBtn()
 	{
+		Play_BtnSound ();
+
 		string strMessage = string.Format ("My highscore is {0} in Cellboy!\n->http://www.nanali.net/", m_PlayerData.m_Gamedata.m_iHighScore);
 
 #if UNITY_ANDROID
@@ -59,12 +68,14 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void Connect_Store_forStarscroe()
 	{
+		Play_BtnSound ();
 
 		m_PlayerData.m_bCanShowRate = false;
 	}
 
 	public void Connect_Facebook_forLike()
 	{
+		Play_BtnSound ();
 
 		m_PlayerData.m_bCanShowFB = false;
 	}

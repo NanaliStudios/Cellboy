@@ -16,7 +16,7 @@ public class Point : Item {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		Follow_Player ();
 	

@@ -86,12 +86,12 @@ public class PlayerData : MonoBehaviour {
 	public void GameData_Load()
 	{
 		Debug.Log ("Try Gamedata Load");
-		//m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
+		m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
 
-//		if (m_ByteGameData == null)
-//			Debug.Log ("CloudLoad Failed");
-//		if (m_SdkMgr == null)
-//			Debug.Log ("gamesdkmgr is null");
+		if (m_ByteGameData == null)
+			Debug.Log ("CloudLoad Failed");
+		if (m_SdkMgr == null)
+			Debug.Log ("gamesdkmgr is null");
 
 		if (m_ByteGameData != null) {
 			Debug.Log ("Cloud Load");
@@ -99,15 +99,28 @@ public class PlayerData : MonoBehaviour {
 			MemoryStream m = new MemoryStream (m_ByteGameData);
 
 			GameData m_CloudData = b.Deserialize (m) as GameData;
-			m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
-
-			if(m_Gamedata.m_SavedTime <= m_CloudData.m_SavedTime)
+			//m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
+			if(m_CloudData != null)
 			{
-				Debug.Log ("Move CloudData to CurrentSaveData");
-				m_Gamedata = m_CloudData;
+				m_Gamedata = FileSystem.ReadGameDataFromFile ("SaveData");
+
+				if(m_Gamedata == null)
+					m_Gamedata = m_CloudData;
+				else
+				{
+					if(m_Gamedata.m_SavedTime <= m_CloudData.m_SavedTime)
+					{
+						Debug.Log ("Move CloudData to CurrentSaveData");
+						m_Gamedata = m_CloudData;
+					}
+					else
+					{
+						Debug.Log("LocalSaveData more recent");
+					}
+				}
+
+				GameData_Save();
 			}
-			else
-				Debug.Log("LocalSaveData more recent");
 			
 		} else {
 			Debug.Log("LocalLoad");

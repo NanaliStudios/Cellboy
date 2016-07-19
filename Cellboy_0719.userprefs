@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs">
+    <Files>
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="392" Column="68" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="43" Column="77" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -193,10 +193,10 @@ public class GameSDKManager : MonoBehaviour
 		#elif UNITY_IOS
 
 		Social.localUser.Authenticate( sucess => {
-			//if(sucess)
-				//Debug.Log("IOS Gamecenter login sucess");
-			//else
-				//Debug.Log("IOS Gamecenter login failed");
+			if(sucess)
+				Debug.Log("IOS Gamecenter login sucess");
+			else
+				Debug.Log("IOS Gamecenter login failed");
 		});
 
 		StorekitCellboy_Initialize();
@@ -229,9 +229,8 @@ public class GameSDKManager : MonoBehaviour
 	public void Show_LeaderBoard()
 	{
 		#if UNITY_ANDROID
-		string strScoreBoardID = "5Pv_oYcEAIQAQ";
 
-		GooglePlayManager.Instance.ShowLeaderBoardById (strScoreBoardID);
+		GooglePlayManager.Instance.ShowLeaderBoardById ("CgkI-5Pv_oYcEAIQAQ");
 
 		#elif UNITY_IOS
 
@@ -441,6 +440,7 @@ public class GameSDKManager : MonoBehaviour
 
 	public void RestoreItem()
 	{
+		m_bIsPurchasing = true;
 		StorekitCellboy_RestoreItem();
 	}
 
@@ -560,9 +560,14 @@ public class GameSDKManager : MonoBehaviour
 		PlayerPrefs.SetInt("Adoff", 1);
 		
 		_PlayerData.GameData_Save ();
+		m_bIsPurchasing = false;
 		Application.LoadLevel ("00_Logo");
 	}
 
+	void Callback_StorekitCellboy_RestorePurchaseError()
+	{
+		m_bIsPurchasing = false;
+	}
 	static public string CurItemID="";
 	void Callback_StorekitCellboy_OnProcessErrorPurchase(string json)
 	{

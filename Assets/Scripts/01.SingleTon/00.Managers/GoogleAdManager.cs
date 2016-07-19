@@ -94,12 +94,13 @@ public class GoogleAdManager : MonoBehaviour
 
 	public void Initialize()
 	{
+		Debug.Log ("GoogleAdManager:Initialize");
+
 		AdRequest request = new AdRequest.Builder().Build();
 
 		bannerView = new BannerView(strBannerID, AdSize.SmartBanner, AdPosition.Bottom);
-		bannerView.OnAdLoaded += delegate {
-			m_bIsInitialized = true;
-		};
+//		bannerView.OnAdLoaded += delegate {
+//		};
 		bannerView.LoadAd(request);
 
 		interstitial = new InterstitialAd(strPopupID);
@@ -110,6 +111,8 @@ public class GoogleAdManager : MonoBehaviour
 			interstitial.LoadAd(request);
 		};
 		interstitial.LoadAd(request);
+
+		m_bIsInitialized = true;
 	}
 
 	public bool isInitialized()
@@ -119,6 +122,7 @@ public class GoogleAdManager : MonoBehaviour
 	
 	public void ShowBanner()
 	{
+		Debug.Log ("Show Admob Banner");
 		bannerView.Show ();
 	}
 	
@@ -135,8 +139,7 @@ public class GoogleAdManager : MonoBehaviour
 
 	public void BannerHide()
 	{
-		//Debug.Log("AD OFF");
-
+		Debug.Log ("Hide Admob Banner");
 		bannerView.Hide ();
 	}
 		

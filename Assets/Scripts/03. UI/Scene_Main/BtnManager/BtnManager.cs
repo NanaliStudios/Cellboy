@@ -146,10 +146,13 @@ public partial class BtnManager : MonoBehaviour {
 			if(!m_SdkMgr.isInitialized())
 				m_SdkMgr.Initialize();
 			
-			if(!AdFunctions.isInitialized())
-				AdFunctions.Initialize();
-			
+//			if(!AdFunctions.isInitialized())
+//			{
+//				Debug.Log("Init again");
+//				AdFunctions.Initialize();
+//			}
 		}
+
 
 		#if !UNITY_EDITOR_OSX
 		if (PlayerPrefs.GetInt("Adoff") == 0) {
@@ -422,7 +425,7 @@ public partial class BtnManager : MonoBehaviour {
 				m_bPopupAdsOn = true;
 			} else {
 				if (m_PlayerData.m_iCurrentPlayNum == 1
-				    && TapjoyManager.Instance.m_TjNotice.IsContentAvailable())
+				    && TapjoyManager.Instance.m_TjNotice != null)
 					TapjoyManager.Instance.m_TjNotice.ShowContent ();
 				else {
 					m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);

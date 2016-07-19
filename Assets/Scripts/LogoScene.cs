@@ -33,7 +33,7 @@ public class LogoScene : MonoBehaviour {
 
 		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
 			GameObject objSdkMgr = Instantiate (m_objSDKMgr) as GameObject;
-			m_SdkMgr = m_objSDKMgr.GetComponent<GameSDKManager> ();
+			m_SdkMgr = objSdkMgr.GetComponent<GameSDKManager> ();
 		} else
 			m_SdkMgr = GameObject.Find ("GameSDKManager(Clone)").GetComponent<GameSDKManager>();
 

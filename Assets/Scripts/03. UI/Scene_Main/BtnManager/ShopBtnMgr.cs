@@ -35,9 +35,12 @@ public partial class BtnManager : MonoBehaviour {
 	//
 	public void NoAdsBtn_Click()
 	{
-//		if (PlayerPrefs.GetInt("Adoff")== 1)
-//			return;
-		Play_BtnSound ();
-		m_SdkMgr.Purcahse_Item ("cellboy_adoff");
+		if (PlayerPrefs.GetInt ("Adoff") == 1) {
+			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "you already have adoff");
+			return;
+		} else {
+			Play_BtnSound ();
+			m_SdkMgr.Purcahse_Item ("cellboy_adoff");
+		}
 	}
 }

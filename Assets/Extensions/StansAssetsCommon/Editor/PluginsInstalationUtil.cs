@@ -29,15 +29,16 @@ public class PluginsInstalationUtil : MonoBehaviour {
 		
 		
 		//IOS Native
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_Camera.mm.txt", 		PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_Camera.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_GameCenter.mm.txt", 	PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_GameCenter.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_iAd.mm.txt", 			PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_iAd.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_InApp.mm.txt", 		PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_InApp.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_Media.mm.txt", 		PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_Media.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_ReplayKit.mm.txt", 	PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_ReplayKit.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_CloudKit.mm.txt", 		PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_CloudKit.mm");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_NSData+Base64.h.txt", 	PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_NSData+Base64.h");
-		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_NSData+Base64.m.txt", 	PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_NSData+Base64.m");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_Camera.mm.txt", 				PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_Camera.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_GameCenter.mm.txt", 			PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_GameCenter.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_iAd.mm.txt", 					PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_iAd.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_InApp.mm.txt", 					PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_InApp.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_Media.mm.txt", 					PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_Media.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_ReplayKit.mm.txt", 				PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_ReplayKit.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_GestureRecognizer.mm.txt", 		PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_GestureRecognizer.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_CloudKit.mm.txt", 				PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_CloudKit.mm");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_NSData+Base64.h.txt", 			PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_NSData+Base64.h");
+		SA_FileStaticAPI.CopyFile(PluginsInstalationUtil.IOS_SOURCE_PATH + "ISN_NSData+Base64.m.txt", 			PluginsInstalationUtil.IOS_DESTANATION_PATH + "ISN_NSData+Base64.m");
 		
 		
 		IOS_Install_SocialPart();
@@ -193,7 +194,7 @@ public class PluginsInstalationUtil : MonoBehaviour {
 		RemoveIOSFile("ISN_ReplayKit");
 		RemoveIOSFile("ISN_CloudKit");
 		RemoveIOSFile("ISN_Soomla");
-		
+		RemoveIOSFile("ISN_GestureRecognizer");
 		
 		
 		
@@ -246,15 +247,100 @@ public class PluginsInstalationUtil : MonoBehaviour {
 	
 	
 	public static void EnableGooglePlayAPI() {
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/an_googleplay.txt", 	ANDROID_DESTANATION_PATH + "libs/an_googleplay.jar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/google-play-services.txt", 	ANDROID_DESTANATION_PATH + "libs/google-play-services.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/an_googleplay.txt", 			ANDROID_DESTANATION_PATH + "libs/an_googleplay.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-base.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-base.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-basement.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-basement.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
 	}
 	
 	public static void DisableGooglePlayAPI() {
-		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/google-play-services.jar");
-		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_googleplay.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_googleplay.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-base.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-basement.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
 	}
-	
+
+	public static void EnableDriveAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+	}
+
+	public static void DisableDriveAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+	}
+
+	public static void EnableOAuthAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+	}
+
+	public static void DisableOAuthAPI(){
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+	}
+
+	public static void EnableAnalyticsAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+	}
+
+	public static void DisableAnalyticsAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+	}
+
+	public static void EnableAppInvitesAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+	}
+
+	public static void DisableAppInvitesAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+	}
+
+	public static void EnableGooglePlusAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+	}
+
+	public static void DisableGooglePlusAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+	}
+
+	public static void EnablePushNotificationsAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+	}
+
+	public static void DisablePushNotificationsAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+	}
+
+	public static void EnableGoogleAdMobAPI() {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+	}
+
+	public static void DisableGoogleAdMobAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+	}
+
+	public static void EnableGooglePlayServicesAPI () {
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+	}
+
+	public static void DisableGooglePlayServicesAPI() {
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+	}
 	
 	public static void EnableAndroidCampainAPI() {
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "libs/sa_analytics.txt", 	ANDROID_DESTANATION_PATH + "libs/sa_analytics.jar");
@@ -288,24 +374,24 @@ public class PluginsInstalationUtil : MonoBehaviour {
 	
 	
 	public static void EnableBillingAPI() {
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "billing/an_billing.txt", 	ANDROID_DESTANATION_PATH + "libs/an_billing.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "billing/an_billing.txt", 	ANDROID_DESTANATION_PATH + "libs/an_billing.aar");
 	}
 	
 	public static void DisableBillingAPI() {
-		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_billing.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_billing.aar");
 	}
 	
 	
 	
 	
 	public static void EnableSocialAPI() {
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/an_social.txt", 	ANDROID_DESTANATION_PATH + "libs/an_social.jar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/twitter4j-core-3.0.5.txt", 	ANDROID_DESTANATION_PATH + "libs/twitter4j-core-3.0.5.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/an_social.txt", 	ANDROID_DESTANATION_PATH + "libs/an_social.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/twitter4j-core-4.0.4.txt", 	ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
 	}
 	
 	public static void DisableSocialAPI() {
-		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_social.jar");
-		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/twitter4j-core-3.0.5.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_social.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
 	}
 	
 	
@@ -356,14 +442,13 @@ public class PluginsInstalationUtil : MonoBehaviour {
 		
 		
 		
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "libs/android-support-v4.txt", 	ANDROID_DESTANATION_PATH + "libs/android-support-v4.jar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "androidnative.txt", 	        	ANDROID_DESTANATION_PATH + "androidnative.jar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "mobilenativepopups.txt", 	        ANDROID_DESTANATION_PATH + "mobilenativepopups.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "libs/support-v4-23.4.0.txt", 	ANDROID_DESTANATION_PATH + "libs/support-v4-23.4.0.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "androidnative.txt", 	        	ANDROID_DESTANATION_PATH + "androidnative.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "sa_analytics.txt", 	        	ANDROID_DESTANATION_PATH + "sa_analytics.jar");
 		
-		
-		
-		
+		SA_FileStaticAPI.CopyFile (ANDROID_SOURCE_PATH + "mobile-native-popups.txt",             ANDROID_DESTANATION_PATH + "mobile-native-popups.aar");
+		SA_FileStaticAPI.DeleteFile (ANDROID_SOURCE_PATH + "mobilenativepopups.txt");
+		SA_FileStaticAPI.DeleteFile (ANDROID_DESTANATION_PATH + "mobilenativepopups.jar");
 		
 		SA_FileStaticAPI.CopyFolder(ANDROID_SOURCE_PATH + "facebook", 			ANDROID_DESTANATION_PATH + "facebook");
 		

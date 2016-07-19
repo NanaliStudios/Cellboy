@@ -441,6 +441,12 @@ public class GameSDKManager : MonoBehaviour
 	public void RestoreItem()
 	{
 		m_bIsPurchasing = true;
+		if (PlayerPrefs.GetInt ("Adoff") == 1) {
+			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "you already have adoff");
+			m_bIsPurchasing = false;
+			return;
+		}
+		else
 		StorekitCellboy_RestoreItem();
 	}
 

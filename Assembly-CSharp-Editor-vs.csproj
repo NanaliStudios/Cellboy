@@ -81,6 +81,10 @@
      <Compile Include="Assets\Extensions\GooglePlayCommon\Editor\SocialPlatfromInit.cs" />
      <Compile Include="Assets\Extensions\GooglePlayCommon\Editor\SocialPlatfromSettingsEditor.cs" />
      <Compile Include="Assets\Extensions\GooglePlayCommon\Editor\SocialPlatfromSettingsHelper.cs" />
+     <Compile Include="Assets\Extensions\MobileNativePopUps\Editor\MNPInit.cs" />
+     <Compile Include="Assets\Extensions\MobileNativePopUps\Editor\MNP_PlatformMenu.cs" />
+     <Compile Include="Assets\Extensions\MobileNativePopUps\Editor\MNP_PlatformSettings.cs" />
+     <Compile Include="Assets\Extensions\MobileNativePopUps\Editor\MNP_PlatformSettingsEditor.cs" />
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\PluginsInstalationUtil.cs" />
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\SA_Bool.cs" />
      <Compile Include="Assets\Extensions\StansAssetsCommon\Editor\SA_EditorTool.cs" />
@@ -207,6 +211,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\Plugins\iOS\Resources\TapjoyResources.bundle\mraid.js.txt" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\Extensions\MobileNativePopUps\Documentation\ReadMe.txt" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\values\analytics.xml" />
      <None Include="Assets\Plugins\Android\ChartboostSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\unityads\build.xml" />
@@ -229,6 +234,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\Plugins\StansAssets\Android\social\twitter4j-core-3.0.5.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Hero\license.txt" />
+     <None Include="Assets\Plugins\StansAssets\Versions\MNP_VersionInfo.txt" />
      <None Include="Assets\Plugins\Android\AN_Res\res\values\ids.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\androidnative.txt" />
      <None Include="Assets\Extensions\AndroidManifestManager\default.xml" />
@@ -252,6 +258,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\Raggedy Spineboy\Raggedy Spineboy.atlas.txt" />
      <None Include="Assets\link.xml" />
+     <None Include="Assets\Plugins\StansAssets\Android\mobile-native-popups.txt" />
      <None Include="Assets\Plugins\StansAssets\Android\app_licensing\an_licensing_library.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\spine-unity\Shaders\Bones.shader" />
@@ -267,6 +274,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\Plugins\Android\unityads\res\drawable\unityads_icon_speaker_base.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\libs\android-support-v4.txt" />
+     <None Include="Assets\Plugins\StansAssets\IOS\ISN_NativeCore.h.txt" />
      <None Include="Assets\Extensions\StansAssetsCommon\Effetcs\Animations\Tween\Pixelplacement\iTween\ReadMe!.txt" />
      <None Include="Assets\Resources\Localization.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
@@ -285,6 +293,7 @@
      <None Include="Assets\Plugins\Android\AN_Res\res\xml\file_paths.xml" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\values\version.xml" />
+     <None Include="Assets\Plugins\StansAssets\IOS\ISN_NativeCore.mm.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\Plugins\Android\unityads\res\layout\unityads_button_pause.xml" />
      <None Include="Assets\Plugins\StansAssets\Android\AN_Res\res\xml\file_paths.xml" />
@@ -325,6 +334,9 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="WP8PopUps">
+ <HintPath>/Users/jung/Cellboy_0719/Assets/Plugins/WP8PopUps.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

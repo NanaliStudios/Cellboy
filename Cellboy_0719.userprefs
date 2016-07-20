@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/00.Header/GameSDKManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs">
     <Files>
       <File FileName="Assets/Scripts/LogoScene.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="20" Column="16" />
-      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="325" Column="30" />
-      <File FileName="Assets/Scripts/02.Objects/Player.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/02.Objects/Player.cs" Line="109" Column="25" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="652" Column="22" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="30" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

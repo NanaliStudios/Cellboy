@@ -14,29 +14,29 @@ public partial class BtnManager : MonoBehaviour {
 
 	}
 		
-	public void Buy200CoinBtn_Click()
-	{
-		Play_BtnSound ();
-		m_SdkMgr.Purcahse_Item ("cellboy_coin200");
-	}
-
 	public void Buy500CoinBtn_Click()
 	{
 		Play_BtnSound ();
-		m_SdkMgr.Purcahse_Item ("cellboy_coin500");
+		m_SdkMgr.Purcahse_Item ("cellboy_500coin");
 	}
 
 	public void Buy1000CoinBtn_Click()
 	{
 		Play_BtnSound ();
-		m_SdkMgr.Purcahse_Item ("cellboy_coin5000");
+		m_SdkMgr.Purcahse_Item ("cellboy_1000coin");
+	}
+
+	public void Buy5000CoinBtn_Click()
+	{
+		Play_BtnSound ();
+		m_SdkMgr.Purcahse_Item ("cellboy_5kcoin");
 	}
 
 	//
 	public void NoAdsBtn_Click()
 	{
 		if (PlayerPrefs.GetInt ("Adoff") == 1) {
-			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "you already have adoff");
+			MobileNativeMessage msg = new MobileNativeMessage ("buy adoff", "You've already purchased 'adoff'");
 			return;
 		} else {
 			Play_BtnSound ();

@@ -11,12 +11,11 @@ PLAYER3_NAME,Neutrong,뉴트롱
 PLAYER4_NAME,Eosing,에오싱
 PLAYER5_NAME,Boomito,부미토
 
-PLAYER1_INFO,A plain One. ,일반형입니다.
+PLAYER1_INFO,A plain One.,일반형입니다.
 PLAYER2_INFO,Fire several bullets spread at front.,앞으로 퍼지는 총알을 발사합니다.
 PLAYER3_INFO,Shoots the laser penetrate enemies.,적을 관통할 수 있는 레이저를 발사합니다.
-PLAYER4_INFO,Shoots the guided missile. ,적을 추격하는 총알을 발사합니다.
-PLAYER5_INFO,Using the most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔하는 총알을 발사합니다.
-
+PLAYER4_INFO,Shoots the guided missile.,적을 추격하는 총알을 발사합니다.
+PLAYER5_INFO,The most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔하는 총알을 발사합니다.
 
 //GAME UI
 START,Start,시작하기
@@ -27,10 +26,10 @@ LIKE,Like,좋아요
 YES,Yes,네
 NO,No,아니오
 CONTINUE,Continue?,이어하시겠습니까?
-LOCK,You should buy \nprev character first.,이전 캐릭터를\n먼저 구매해주세요.
+LOCK,Please purchase \nprev character first.,이전 캐릭터를\n먼저 구매해주세요.
 CONNECT_FAIL,No internet connection was found. \nPlease try again later.,네트워크에 연결되어있지 않습니다. \n확인 후 다시 시도해주세요.
-CHARGE_ALERT,Immediately recharge\nthe energy of,의 체력을 \n즉시 회복할까요
-RATE_INFO,Enjoying Cellboy? \nPlease Rate Cellboy!,게임이 마음에 드신다면\n평가해주세요!
+CHARGE_ALERT,immediately Recharge the energy of ***?,***의 체력을 \n즉시 회복할까요?
+RATE_INFO,Enjoying Cellboy? \nPlease Rate the game!,게임이 마음에 드신다면\n평가해주세요!
 FBLIKE_INFO,Like Cellboy? \nThen Like Us On Facebook!,게임이 마음에 드신다면\n페이스북에서 좋아요를 눌러주세요!
 BUY_ALERT,Confirm Your Purchase!,구매를 확인합니다!
 COIN_LACK,Not Enough Coins! \nWould You Like More?,코인이 부족합니다!\n상점으로 이동할까요?
@@ -65,4 +64,5 @@ FREECOIN,FREE COIN,무료 충전
 1000PRICE,$ 0.99,W 1000
 2000PRICE, $ 1.99,W 2000
 5000PRICE, $ 4.99,W 5000
+
 

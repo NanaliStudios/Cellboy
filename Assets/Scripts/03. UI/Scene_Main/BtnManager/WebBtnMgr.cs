@@ -42,9 +42,6 @@ public partial class BtnManager : MonoBehaviour {
 	public void RestoreProduct()
 	{
 		Play_BtnSound ();
-
-		if (!AdFunctions.isInitialized())
-			return;
 #if UNITY_ANDROID
 		AndroidInAppPurchaseManager.Client.RetrieveProducDetails();
 #elif UNITY_IOS

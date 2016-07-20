@@ -1,15 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/Android/AndroidManifest.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/00.Header/GameSDKManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/LogoScene.cs" Line="59" Column="4" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/BtnManager.cs" Line="674" Column="72" />
-      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="448" Column="4" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/WebBtnMgr.cs" Line="51" Column="23" />
-      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="47" Column="1" />
-      <File FileName="Assets/Extensions/MobileNativePopUps/Example/MNUseExample.cs" Line="41" Column="88" />
-      <File FileName="Assets/Plugins/Android/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LogoScene.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="20" Column="16" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="325" Column="30" />
+      <File FileName="Assets/Scripts/02.Objects/Player.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

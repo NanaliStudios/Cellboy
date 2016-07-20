@@ -47,6 +47,9 @@ public class Player : ObjectBase {
 	private bool m_bTutorialTap = true;
 	private bool m_bTapLock = false;
 	private bool m_bLastTutorial = false;
+
+	private float m_fTutorialWaitTimer = 0.0f;
+	private float m_fTutorialWaitTerm = 2.5f;
 	//<-----End
 	
 
@@ -79,6 +82,10 @@ public class Player : ObjectBase {
 		m_DieSound = Resources.Load ("Sounds/ogg(96k)/score_reset") as AudioClip;
 
 		m_Skeleton.gameObject.GetComponent<MeshRenderer> ().sortingLayerName = "Tutorial";
+
+		if(m_GameSys.m_bIsOnFirstTutorial == true)
+			m_bTapLock = true;
+
 		StartCoroutine ("Excute");
 	}
 	void FixedUpdate()
@@ -91,7 +98,7 @@ public class Player : ObjectBase {
 			m_fSwitchTimer += Time.fixedDeltaTime;
 
 		m_ScoreBoard.fillAmount = (float)m_GameSys.m_iCurrent_Point/(float)m_iCurrentMaxPoint;
-	
+
 	}
 
 	// Update is called once per frame
@@ -99,7 +106,23 @@ public class Player : ObjectBase {
 
 		do {
 
+			//Android Back button
+			if(Input.GetKeyDown(KeyCode.Escape))
+			m_GameSys.OnClickPause();
+
 			//Tutorial
+
+			//for tutorial
+			if (m_bTapLock == true) {
+				m_fTutorialWaitTimer += Time.unscaledDeltaTime;
+				if(m_fTutorialWaitTimer >= m_fTutorialWaitTerm)
+				{
+					m_bTapLock = false;
+					m_fTutorialWaitTimer = 0.0f;
+
+					m_GameSys.m_Tutorial.transform.GetChild(0).gameObject.SetActive(true);
+				}
+			}
 
 			if(m_GameSys.m_bIsOnFirstTutorial == true)
 			{
@@ -112,7 +135,7 @@ public class Player : ObjectBase {
 					m_GameSys.m_Tutorial.SetActive(true);
 					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL1");
 					m_bTutorialTap = false;
-					m_bTapLock = false;
+					//m_bTapLock = false;
 				}
 				if(m_MyTrans.position.x >= 1.8f)
 				{
@@ -122,7 +145,7 @@ public class Player : ObjectBase {
 					m_GameSys.m_Tutorial.SetActive(true);
 					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL2");
 					m_bTutorialTap = false;
-					m_bTapLock = false;
+					//m_bTapLock = false;
 					m_bLastTutorial = true;
 				}
 
@@ -141,7 +164,7 @@ public class Player : ObjectBase {
 					m_GameSys.m_bIsOnFirstTutorial = false;
 					m_GameSys.m_Tutorial.GetComponent<UILabel> ().text = Localization.Get ("TUTORIAL3");
 					m_bTutorialTap = false;
-					m_bTapLock = false;
+					//m_bTapLock = false;
 				}
 			}
 			
@@ -163,8 +186,10 @@ public class Player : ObjectBase {
 					}
 
 					if(m_GameSys.m_bIsOnFirstTutorial == true)
+					{
+						m_GameSys.m_Tutorial.transform.GetChild(0).gameObject.SetActive(false);
 						m_bTapLock = true;
-
+					}
 
 				if(m_GameSys.CheckGameStart() == false
 				   && m_GameSys.m_PauseMenu.activeSelf == false

@@ -47,9 +47,9 @@ public class GameSDKManager : MonoBehaviour
 	{
 		#if UNITY_ANDROID
 		GooglePlayConnection.Instance.Connect ();
-		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin200");
-		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin500");
-		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_coin5000");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_500coin");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_1000coin");
+		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_5kcoin");
 		AndroidInAppPurchaseManager.Client.AddProduct ("cellboy_adoff");
 		AndroidInAppPurchaseManager.Client.Connect ();
 
@@ -60,24 +60,23 @@ public class GameSDKManager : MonoBehaviour
 
 				if(obj.isSuccess)
 				{
-					if(obj.purchase.SKU == "cellboy_coin200")
-					{
-						_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin200");
-					}
-						
 					if(obj.purchase.SKU == "cellboy_coin500")
 					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin500");
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_500coin");
+					}
+						
+					if(obj.purchase.SKU == "cellboy_coin1000")
+					{
+						_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_1000coin");
 					}
 
-					if(obj.purchase.SKU == "cellboy_coin5000")
+					if(obj.purchase.SKU == "cellboy_coin5k")
 					{
 						_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
-						AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin5000");
+						AndroidInAppPurchaseManager.Client.Consume ("cellboy_5kcoin");
 					}
-
 					if(obj.purchase.SKU == "cellboy_adoff")
 					{
 						PlayerPrefs.SetInt("Adoff", 1);
@@ -101,19 +100,19 @@ public class GameSDKManager : MonoBehaviour
 		
 			PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin200")) {
-				_PlayerData.m_Gamedata.m_iHaveCoin += 200;
-				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin200");
-			}
-
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin500")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_500coin")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 500;
-				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin500");
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_500coin");
 			}
 
-			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_coin5000")) {
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_1000coin")) {
+				_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_1000coin");
+			}
+
+			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_5kcoin")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
-				AndroidInAppPurchaseManager.Client.Consume ("cellboy_coin5000");
+				AndroidInAppPurchaseManager.Client.Consume ("cellboy_5kcoin");
 			}
 
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_adoff")) {
@@ -188,6 +187,8 @@ public class GameSDKManager : MonoBehaviour
 
 				Debug.Log(Application.loadedLevelName);
 			}
+			else
+				m_bIsLoadedData = true; 
 		};
 
 		#elif UNITY_IOS
@@ -200,7 +201,6 @@ public class GameSDKManager : MonoBehaviour
 		});
 
 		StorekitCellboy_Initialize();
-
 		#endif
 	}
 
@@ -442,7 +442,7 @@ public class GameSDKManager : MonoBehaviour
 	{
 		m_bIsPurchasing = true;
 		if (PlayerPrefs.GetInt ("Adoff") == 1) {
-			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "you already have adoff");
+			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "You've already purchased 'adoff'");
 			m_bIsPurchasing = false;
 			return;
 		}
@@ -611,17 +611,16 @@ public class GameSDKManager : MonoBehaviour
 		BtnManager _BtnMgr = GameObject.Find ("BtnManager").GetComponent<BtnManager>();
 
 		int iPrice = 0;
-
 		switch (m_strCurrentItemID) {
-		case "cellboy_coin200":
-			_PlayerData.m_Gamedata.m_iHaveCoin += 200;
+		case "cellboy_500coin":
+			_PlayerData.m_Gamedata.m_iHaveCoin += 500;
 			iPrice = 1000;
 			break;
-		case "cellboy_coin500":
-			_PlayerData.m_Gamedata.m_iHaveCoin += 500;
+		case "cellboy_1000coin":
+			_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 			iPrice = 2000;
 			break;
-		case "cellboy_coin5000":
+		case "cellboy_5kcoin":
 			_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
 			iPrice = 5000;
 			break;
@@ -635,7 +634,7 @@ public class GameSDKManager : MonoBehaviour
 			break;
 		}
 
-		TapjoyManager.Instance.TrackInappPurchase_ForApple (m_strCurrentItemID, "cellboy_coin", iPrice, transactionId);
+		TapjoyManager.Instance.TrackInappPurchase_ForApple (m_strCurrentItemID,"cellboy_coin", iPrice, transactionId);
 		m_strCurrentItemID = "";
 		_PlayerData.GameData_Save ();
 		_BtnMgr.Play_BuyBtnSound ();

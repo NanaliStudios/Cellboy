@@ -297,7 +297,7 @@ public partial class BtnManager : MonoBehaviour {
 			if(m_fRewardCheckTimer >= m_fRewardCheckTerm)
 			{
 				m_fRewardCheckTimer = 0.0f;
-				TapjoyManager.Instance.m_bCheckreward = false;
+				m_SdkMgr.OffIsPurchasing();
 			}
 			else
 			m_fRewardCheckTimer += Time.deltaTime;

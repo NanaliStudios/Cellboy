@@ -665,6 +665,16 @@ public class GameSDKManager : MonoBehaviour
 	{
 		return m_bIsPurchasing;
 	}
+
+	public void OffIsPurchasing()
+	{
+		m_bIsPurchasing = false;
+	}
+
+	public void OnIsPurchasing()
+	{
+		m_bIsPurchasing = true;
+	}
 }
 
 public struct ProductInfo

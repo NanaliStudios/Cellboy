@@ -8,9 +8,12 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnFreeCharge1_Click()
 	{
-		//TapjoyManager.Instance.m_TjOfferwall.ShowContent();
+		if (TapjoyManager.Instance.m_TjOfferwall != null) {
+			TapjoyManager.Instance.m_TjOfferwall.ShowContent ();
+			m_SdkMgr.OnIsPurchasing ();
+		}
 		Play_BtnSound ();
-		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
+//		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 
 	}
 		

@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs">
+    <Files>
+      <File FileName="Assets/Extensions/AndroidManifestManager/Editor/AddPermissionDialog.cs" Line="44" Column="2" />
+      <File FileName="Assets/Resources/Localization.txt" Line="66" Column="19" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="14" Column="4" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="676" Column="25" />
+      <File FileName="Assets/Scripts/01.SingleTon/00.Managers/TapjoyManager.cs" Line="45" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

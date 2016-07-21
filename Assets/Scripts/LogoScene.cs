@@ -74,7 +74,10 @@ public class LogoScene : MonoBehaviour {
 			if(m_SdkMgr.isInitialized())
 			{
 				//if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
+
+#if !UNITY_EDITOR
 					m_SdkMgr.Do_CloudLoad ();
+#endif
 
 				m_bLateInit = true;
 			}

@@ -98,30 +98,50 @@ public class GameSDKManager : MonoBehaviour
 
 		AndroidInAppPurchaseManager.ActionRetrieveProducsFinished += delegate(BillingResult obj) {
 		
+			Debug.Log("ActionRetrieveProducsFinished");
+
 			PlayerData _PlayerData = GameObject.Find ("PlayerData(Clone)").GetComponent<PlayerData> ();
+			bool bCanRestore = false;
 
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_500coin")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 500;
 				AndroidInAppPurchaseManager.Client.Consume ("cellboy_500coin");
+				bCanRestore = true;
+				Debug.Log("cellboy_500coin:true");
 			}
 
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_1000coin")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 				AndroidInAppPurchaseManager.Client.Consume ("cellboy_1000coin");
+				bCanRestore = true;
+				Debug.Log("cellboy_1000coin:true");
 			}
 
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_5kcoin")) {
 				_PlayerData.m_Gamedata.m_iHaveCoin += 5000;
 				AndroidInAppPurchaseManager.Client.Consume ("cellboy_5kcoin");
+				bCanRestore  = true;
+				Debug.Log("cellboy_5kcoin:true");
 			}
 
 			if (AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased ("cellboy_adoff")) {
 
 				if(PlayerPrefs.GetInt("Adoff") == 1)
+				{
+					MobileNativeMessage msg = new MobileNativeMessage ("buy adoff", "You've already purchased 'adoff'");
 					return;
+				}
 
+				bCanRestore = true;
 				PlayerPrefs.SetInt("Adoff", 1);
 				Application.LoadLevel ("00_Logo");
+				Debug.Log("cellboy_adoff:true");
+			}
+
+
+			if(bCanRestore == false)
+			{
+				MobileNativeMessage msg = new MobileNativeMessage ("restore adoff", "you didn't purchased adoff");
 			}
 		};
 

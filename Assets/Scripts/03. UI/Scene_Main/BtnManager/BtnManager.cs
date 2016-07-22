@@ -308,6 +308,7 @@ public partial class BtnManager : MonoBehaviour {
 		if (iTjCoin != 0) {
 			Play_BuyBtnSound();
 			m_PlayerData.m_Gamedata.m_iHaveCoin += iTjCoin;
+			m_PlayerData.GameData_Save();
 		}
 
 		#if !UNITY_EDITOR_OSX

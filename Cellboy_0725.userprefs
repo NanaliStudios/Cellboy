@@ -1,8 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/00.Header/GameSDKManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Localization.txt">
     <Files>
-      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="203" Column="46" />
+      <File FileName="Assets/Scripts/00.Header/GameSDKManager.cs" Line="466" Column="34" />
+      <File FileName="Assets/Resources/Localization.txt" Line="34" Column="44" />
+      <File FileName="Assets/Scripts/03. UI/Scene_Main/BtnManager/ShopBtnMgr.cs" Line="35" Column="3" />
+      <File FileName="Assets/Extensions/MobileNativePopUps/Example/MNUseExample.cs" Line="51" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

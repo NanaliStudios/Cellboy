@@ -41,7 +41,7 @@ public partial class BtnManager : MonoBehaviour {
 	public void NoAdsBtn_Click()
 	{
 		if (PlayerPrefs.GetInt ("Adoff") == 1) {
-			MobileNativeMessage msg = new MobileNativeMessage ("buy adoff", "You've already purchased 'adoff'");
+			MobileNativeMessage msg = new MobileNativeMessage ("Duplicate purchases", Localization.Get("ADOFF_ERROR"));
 			return;
 		} else {
 			Play_BtnSound ();

@@ -31,6 +31,18 @@ public class LogoScene : MonoBehaviour {
 		PlayerPrefs.DeleteAll();
 		#endif
 
+		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
+			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
+			PlayerPrefs.SetInt ("Adoff", 0);
+		}
+		
+		if (PlayerPrefs.HasKey ("GameVolume") == false) {
+			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
+		} else {
+			if(PlayerPrefs.GetFloat("GameVolume") == 0.0f)
+				AudioListener.volume = 0.0f;
+		}
+
 		if (GameObject.Find ("GameSDKManager(Clone)") == null) {
 			GameObject objSdkMgr = Instantiate (m_objSDKMgr) as GameObject;
 			m_SdkMgr = objSdkMgr.GetComponent<GameSDKManager> ();
@@ -51,19 +63,6 @@ public class LogoScene : MonoBehaviour {
 
 		if(!AdFunctions.isInitialized())
 		AdFunctions.Initialize ();
-
-
-		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
-			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
-			PlayerPrefs.SetInt ("Adoff", 0);
-		}
-
-		if (PlayerPrefs.HasKey ("GameVolume") == false) {
-			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
-		} else {
-			if(PlayerPrefs.GetFloat("GameVolume") == 0.0f)
-				AudioListener.volume = 0.0f;
-		}
 	
 	}
 
@@ -71,19 +70,23 @@ public class LogoScene : MonoBehaviour {
 	void Update () {
 
 			if (m_bLateInit == false) {
-			if(m_SdkMgr.isInitialized())
-			{
 				//if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
+
+				Debug.Log("PlayerPrefs.GetInt(CurrentPlayNum):" + PlayerPrefs.GetInt("CurrentPlayNum"));
 
 #if UNITY_IOS
 				if(PlayerPrefs.GetInt("CurrentPlayNum") == 0)
 					m_SdkMgr.Do_CloudLoad ();
 				else
 					m_SdkMgr.m_bIsLoadedData = true;
+#elif UNITY_ANDROID
+				if(PlayerPrefs.GetInt("CurrentPlayNum") != 0)
+					m_SdkMgr.m_bIsLoadedData = true;
 #endif
 
+
+
 				m_bLateInit = true;
-			}
 		}
 
 			if (m_fTerm <= m_fTimer) {

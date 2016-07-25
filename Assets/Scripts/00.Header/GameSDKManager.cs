@@ -128,7 +128,7 @@ public class GameSDKManager : MonoBehaviour
 
 				if(PlayerPrefs.GetInt("Adoff") == 1)
 				{
-					MobileNativeMessage msg = new MobileNativeMessage ("buy adoff", "You've already purchased 'adoff'");
+					MobileNativeMessage msg = new MobileNativeMessage ("Duplicate purchases", Localization.Get("ADOFF_ERROR"));
 					return;
 				}
 
@@ -141,7 +141,7 @@ public class GameSDKManager : MonoBehaviour
 
 			if(bCanRestore == false)
 			{
-				MobileNativeMessage msg = new MobileNativeMessage ("restore adoff", "you didn't purchased adoff");
+				MobileNativeMessage msg = new MobileNativeMessage ("Restore Error", Localization.Get("RESTORE_ERROR"));
 			}
 		};
 
@@ -463,7 +463,7 @@ public class GameSDKManager : MonoBehaviour
 	{
 		m_bIsPurchasing = true;
 		if (PlayerPrefs.GetInt ("Adoff") == 1) {
-			MobileNativeMessage msg = new MobileNativeMessage ("Restore adoff", "You've already purchased 'adoff'");
+			MobileNativeMessage msg = new MobileNativeMessage ("Restore Error", Localization.Get("ALREADY_RESTORE_ERROR"));
 			m_bIsPurchasing = false;
 			return;
 		}
@@ -651,7 +651,6 @@ public class GameSDKManager : MonoBehaviour
 			Application.LoadLevel ("00_Logo");
 			break;
 		default:
-			_PlayerData.m_Gamedata.m_iHaveCoin += 1;
 			break;
 		}
 

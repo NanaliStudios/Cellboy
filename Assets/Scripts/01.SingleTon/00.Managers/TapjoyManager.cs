@@ -28,6 +28,7 @@ public class TapjoyManager : MonoBehaviour
 	//연결 시도 후에 연결이 완료되면 Notice를 호출, 만약 5초이상 무응답이면 호출하지않고 종료.
 	private IEnumerator Start()
 	{
+		Debug.Log("TapjoyManager:Initialize Excute");
 		DontDestroyOnLoad (this);
 
 		//콜벡관련 등록.
@@ -58,6 +59,7 @@ public class TapjoyManager : MonoBehaviour
 					m_TjNotice = ContentsReady ("Notice");
 					m_TjOfferwall = ContentsReady ("getfreecoin1");
 			
+					Debug.Log("TapjoyManager:Initialize Complete");
 					break;
 				}
 			}

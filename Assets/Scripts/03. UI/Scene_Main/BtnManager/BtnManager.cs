@@ -321,6 +321,7 @@ public partial class BtnManager : MonoBehaviour {
 		if (iTjCoin != 0) {
 			Play_BuyBtnSound();
 			m_PlayerData.m_Gamedata.m_iHaveCoin += iTjCoin;
+			m_PlayerData.GameData_Save();
 		}
 
 		#if !UNITY_EDITOR_OSX
@@ -360,18 +361,20 @@ public partial class BtnManager : MonoBehaviour {
 			}
 		}
 
-#if UNITY_IOS
 		//Purchase
-		if(m_SdkMgr.GetIsPurchasing())
+		if(m_SdkMgr.GetIsPurchasing() || TapjoyManager.Instance.m_bCheckreward == true)
 			SetObjActive(m_objWaitback, true);
-		else
-			SetObjActive(m_objWaitback, false);
-#endif
 
-		if(TapjoyManager.Instance.m_bCheckreward == true)
-			SetObjActive(m_objWaitback, true);
-		else
-			SetObjActive(m_objWaitback, false);
+		if(m_SdkMgr.GetIsPurchasing() == false &&
+		   TapjoyManager.Instance.m_bCheckreward == false)
+		SetObjActive(m_objWaitback, false);
+
+//		if (TapjoyManager.Instance.m_bCheckreward == true)
+//			SetObjActive (m_objWaitback, true);
+//		else {
+//			if(m_SdkMgr.GetIsPurchasing() != true)
+//			SetObjActive (m_objWaitback, false);
+//		}
 			
 	}
 

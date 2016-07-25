@@ -86,7 +86,7 @@ public class PlayerData : MonoBehaviour {
 	public void GameData_Load()
 	{
 		Debug.Log ("Try Gamedata Load");
-		m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
+		//m_ByteGameData = m_SdkMgr.CurrentSaveDAta;
 
 		if (m_ByteGameData == null)
 			Debug.Log ("CloudLoad Failed");

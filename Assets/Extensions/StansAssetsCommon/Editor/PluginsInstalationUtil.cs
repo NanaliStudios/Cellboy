@@ -247,99 +247,219 @@ public class PluginsInstalationUtil : MonoBehaviour {
 	
 	
 	public static void EnableGooglePlayAPI() {
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/an_googleplay.txt", 			ANDROID_DESTANATION_PATH + "libs/an_googleplay.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-base.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-base.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-basement.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-basement.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
-		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/an_googleplay.jar.txt", 					ANDROID_DESTANATION_PATH + "libs/an_googleplay.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-base.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-base.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-basement.jar.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-basement.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-ads.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.jar.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-games.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-iid.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-iid.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-gcm.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-plus.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.jar.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.jar.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-analytics.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics-impl.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-auth.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.jar.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.jar.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-drive.jar");
+		#else
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/an_googleplay.txt", 					ANDROID_DESTANATION_PATH + "libs/an_googleplay.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-base.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-base.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-basement.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-basement.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-ads.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-iid.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-iid.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics-impl.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 			ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.txt", 				ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+		#endif
 	}
 	
 	public static void DisableGooglePlayAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_googleplay.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-base.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-basement.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-iid.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_googleplay.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-base.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-basement.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-iid.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+		#endif
 	}
 
 	public static void EnableDriveAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-drive.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-drive.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+		#endif
 	}
 
 	public static void DisableDriveAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-drive.aar");
+		#endif
 	}
 
 	public static void EnableOAuthAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-auth.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-auth-base.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		#endif
 	}
 
 	public static void DisableOAuthAPI(){
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-auth-base.aar");
+		#endif
 	}
 
 	public static void EnableAnalyticsAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics-impl.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.aar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-analytics-impl.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.aar");
+		#endif
 	}
 
 	public static void DisableAnalyticsAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics.aar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-analytics-impl.aar");
+		#endif
 	}
 
 	public static void EnableAppInvitesAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-appinvite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+		#endif
 	}
 
 	public static void DisableAppInvitesAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-appinvite.aar");
+		#endif
 	}
 
 	public static void EnableGooglePlusAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-plus.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-plus.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+		#endif
 	}
 
 	public static void DisableGooglePlusAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-plus.aar");
+		#endif
 	}
 
 	public static void EnablePushNotificationsAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-iid.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-iid.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-gcm.jar");
+		#else
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-iid.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-iid.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-gcm.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+		#endif
 	}
 
 	public static void DisablePushNotificationsAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-iid.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.jar");
+		#else
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-iid.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-gcm.aar");
+		#endif
 	}
 
 	public static void EnableGoogleAdMobAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-ads.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.jar");
+		#else
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-ads.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-ads-lite.txt", 	ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+		#endif
 	}
 
 	public static void DisableGoogleAdMobAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.jar");
+		#else
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-ads-lite.aar");
+		#endif
 	}
 
 	public static void EnableGooglePlayServicesAPI () {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.jar.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-games.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "google_play/play-services-games.txt", 		ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		#endif
 	}
 
 	public static void DisableGooglePlayServicesAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/play-services-games.aar");
+		#endif
 	}
 	
 	public static void EnableAndroidCampainAPI() {
@@ -374,24 +494,42 @@ public class PluginsInstalationUtil : MonoBehaviour {
 	
 	
 	public static void EnableBillingAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "billing/an_billing.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/an_billing.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "billing/an_billing.txt", 	ANDROID_DESTANATION_PATH + "libs/an_billing.aar");
+		#endif
 	}
 	
 	public static void DisableBillingAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_billing.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_billing.aar");
+		#endif
 	}
 	
 	
 	
 	
 	public static void EnableSocialAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/an_social.jar.txt", 	ANDROID_DESTANATION_PATH + "libs/an_social.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/twitter4j-core-4.0.4.txt", 	ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/an_social.txt", 	ANDROID_DESTANATION_PATH + "libs/an_social.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "social/twitter4j-core-4.0.4.txt", 	ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
+		#endif
 	}
 	
 	public static void DisableSocialAPI() {
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_social.jar");
+		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
+		#else
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/an_social.aar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_DESTANATION_PATH + "libs/twitter4j-core-4.0.4.jar");
+		#endif
 	}
 	
 	
@@ -420,7 +558,7 @@ public class PluginsInstalationUtil : MonoBehaviour {
 		SA_FileStaticAPI.DeleteFile(ANDROID_SOURCE_PATH + "libs/signpost-commonshttp4-1.2.1.2.jar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_SOURCE_PATH + "libs/signpost-core-1.2.1.2.jar");
 		SA_FileStaticAPI.DeleteFile(ANDROID_SOURCE_PATH + "libs/libGoogleAnalyticsServices.jar");
-		
+
 		SA_FileStaticAPI.DeleteFile(ANDROID_SOURCE_PATH + "libs/android-support-v4.jar");
 
 		//Remove previous Image Chooser Library version
@@ -440,23 +578,31 @@ public class PluginsInstalationUtil : MonoBehaviour {
 		
 		SA_FileStaticAPI.DeleteFile(ANDROID_SOURCE_PATH + "billing/an_billing.jar");
 		
-		
-		
+		#if UNITY_4_6 || UNITY_4_7
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "libs/android-support-v4.txt", 	ANDROID_DESTANATION_PATH + "libs/android-support-v4.jar");
+		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "androidnative.jar.txt", 	        	ANDROID_DESTANATION_PATH + "androidnative.jar");
+		#else
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "libs/support-v4-23.4.0.txt", 	ANDROID_DESTANATION_PATH + "libs/support-v4-23.4.0.aar");
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "androidnative.txt", 	        	ANDROID_DESTANATION_PATH + "androidnative.aar");
+		#endif
+
 		SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "sa_analytics.txt", 	        	ANDROID_DESTANATION_PATH + "sa_analytics.jar");
-		
-		SA_FileStaticAPI.CopyFile (ANDROID_SOURCE_PATH + "mobile-native-popups.txt",             ANDROID_DESTANATION_PATH + "mobile-native-popups.aar");
-		SA_FileStaticAPI.DeleteFile (ANDROID_SOURCE_PATH + "mobilenativepopups.txt");
+
+#if UNITY_4_6 || UNITY_4_7
+        SA_FileStaticAPI.CopyFile (ANDROID_SOURCE_PATH + "mobile-native-popups.jar.txt",             ANDROID_DESTANATION_PATH + "mobile-native-popups.jar");
+#else
+        SA_FileStaticAPI.CopyFile(ANDROID_SOURCE_PATH + "mobile-native-popups.txt", ANDROID_DESTANATION_PATH + "mobile-native-popups.aar");
+#endif
+        SA_FileStaticAPI.DeleteFile (ANDROID_SOURCE_PATH + "mobilenativepopups.txt");
 		SA_FileStaticAPI.DeleteFile (ANDROID_DESTANATION_PATH + "mobilenativepopups.jar");
 		
 		SA_FileStaticAPI.CopyFolder(ANDROID_SOURCE_PATH + "facebook", 			ANDROID_DESTANATION_PATH + "facebook");
 		
-		#if UNITY_3_5 || UNITY_4_0 || UNITY_4_1	|| UNITY_4_2 || UNITY_4_3 || UNITY_4_5 || UNITY_4_6
+#if UNITY_3_5 || UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_5 || UNITY_4_6
 		
-		#else
+#else
 		SA_FileStaticAPI.DeleteFolder(ANDROID_SOURCE_PATH + "facebook");
-		#endif
+#endif
 		
 		if(IsFirstInstall) {
 			EnableBillingAPI();

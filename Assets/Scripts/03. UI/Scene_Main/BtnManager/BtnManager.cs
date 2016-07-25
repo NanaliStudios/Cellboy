@@ -62,6 +62,9 @@ public partial class BtnManager : MonoBehaviour {
 	private float m_fRewardCheckTimer = 0.0f;
 	private float m_fRewardCheckTerm = 3.0f;
 
+	private float m_fCheckofferwall_Term = 0.1f;
+	private float m_fCheckofferwall_Timer = 0.0f;
+
 	private bool m_bIsclickArrowBtn = false;
 	private float m_SelectTerm = 0.01f;
 	private float m_SelectTimer = 0.0f;
@@ -292,15 +295,25 @@ public partial class BtnManager : MonoBehaviour {
 
 		//Tapjoy Reward Check
 		if (TapjoyManager.Instance.m_bCheckreward == true) {
-			Tapjoy.GetCurrencyBalance ();
 
 			if(m_fRewardCheckTimer >= m_fRewardCheckTerm)
 			{
+				TapjoyManager.Instance.m_bCheckreward = false;
 				m_fRewardCheckTimer = 0.0f;
-				m_SdkMgr.OffIsPurchasing();
 			}
 			else
-			m_fRewardCheckTimer += Time.deltaTime;
+			{
+				m_fRewardCheckTimer += Time.deltaTime;
+
+				if(m_fCheckofferwall_Term <= m_fCheckofferwall_Timer)
+				{
+					Tapjoy.GetCurrencyBalance ();
+					m_fCheckofferwall_Timer = 0.0f;
+				}
+
+
+				m_fCheckofferwall_Timer += Time.deltaTime;
+			}
 
 		}
 
@@ -308,7 +321,6 @@ public partial class BtnManager : MonoBehaviour {
 		if (iTjCoin != 0) {
 			Play_BuyBtnSound();
 			m_PlayerData.m_Gamedata.m_iHaveCoin += iTjCoin;
-			m_PlayerData.GameData_Save();
 		}
 
 		#if !UNITY_EDITOR_OSX
@@ -355,6 +367,11 @@ public partial class BtnManager : MonoBehaviour {
 		else
 			SetObjActive(m_objWaitback, false);
 #endif
+
+		if(TapjoyManager.Instance.m_bCheckreward == true)
+			SetObjActive(m_objWaitback, true);
+		else
+			SetObjActive(m_objWaitback, false);
 			
 	}
 
@@ -394,11 +411,6 @@ public partial class BtnManager : MonoBehaviour {
 		GameStart ();
 		return;
 		#endif
-
-		if (TapjoyManager.Instance.m_bCheckreward == true) {
-			Debug.Log("TapjoyManager.Instance.m_bCheckreward == true");
-			return;
-		}
 
 		//show chartboost ad
 		if (PlayerPrefs.GetInt("Adoff") == 1) {

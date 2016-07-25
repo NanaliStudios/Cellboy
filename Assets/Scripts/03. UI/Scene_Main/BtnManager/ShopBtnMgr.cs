@@ -8,10 +8,12 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnFreeCharge1_Click()
 	{
-		if (TapjoyManager.Instance.m_TjOfferwall != null) {
+		if (TapjoyManager.Instance.m_TjOfferwall != null)
 			TapjoyManager.Instance.m_TjOfferwall.ShowContent ();
-			m_SdkMgr.OnIsPurchasing ();
+		else {
+			MobileNativeMessage msg = new MobileNativeMessage ("error", "Tapjoy Initialize Failed");
 		}
+
 		Play_BtnSound ();
 //		m_PlayerData.m_Gamedata.m_iHaveCoin += 1000;
 

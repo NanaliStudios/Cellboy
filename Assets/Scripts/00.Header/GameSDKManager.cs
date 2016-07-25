@@ -202,8 +202,9 @@ public class GameSDKManager : MonoBehaviour
 				Debug.Log("Connected!");
 				//Debug.Log(Application.loadedLevelName);
 
-				if(Application.loadedLevelName == "00_Logo")
-				GooglePlaySavedGamesManager.Instance.LoadAvailableSavedGames();
+				if(Application.loadedLevelName == "00_Logo"
+				   && PlayerPrefs.GetInt("CurrentPlayNum") == 0)
+					GooglePlaySavedGamesManager.Instance.LoadAvailableSavedGames();
 
 				Debug.Log(Application.loadedLevelName);
 			}

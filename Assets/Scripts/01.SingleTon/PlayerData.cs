@@ -118,8 +118,6 @@ public class PlayerData : MonoBehaviour {
 						Debug.Log("LocalSaveData more recent");
 					}
 				}
-
-				GameData_Save();
 			}
 			
 		} else {

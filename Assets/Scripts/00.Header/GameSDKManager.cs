@@ -155,7 +155,6 @@ public class GameSDKManager : MonoBehaviour
 				mResolvedSnapshot = conflictSnapshot;
 			}
 			result.Resolve(mResolvedSnapshot);
-			Do_CloudSave(result.Snapshot.bytes);
 		};
 
 		//GooglePlay CloudSave Set Delegates

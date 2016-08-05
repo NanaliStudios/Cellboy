@@ -36,7 +36,12 @@ public partial class BtnManager : MonoBehaviour {
 	public void RateBtn()
 	{
 		Play_BtnSound ();
-		Application.OpenURL ("http://www.nanali.net");
+		
+		#if UNITY_ANDROID
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.Nanali.Cellboy");
+		#elif UNITY_IOS
+		Application.OpenURL("https://itunes.apple.com/app/id1124415214?mt=8");
+		#endif
 	}
 
 	public void RestoreProduct()
@@ -53,7 +58,15 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		Play_BtnSound ();
 
-		string strMessage = string.Format ("My highscore is {0} in Cellboy!\n->http://www.nanali.net/", m_PlayerData.m_Gamedata.m_iHighScore);
+		string strStoreURL;
+
+		#if UNITY_ANDROID
+		strStoreURL = "https://goo.gl/csNq8T";
+		#elif UNITY_IOS
+		strStoreURL = "https://goo.gl/x6zgKh";
+		#endif
+
+		string strMessage = string.Format ("My highscore is {0} in Cellboy!\n->" + strStoreURL, m_PlayerData.m_Gamedata.m_iHighScore);
 
 #if UNITY_ANDROID
 		AndroidSocialGate.StartShareIntent("Share Cellboy to SNS", strMessage);

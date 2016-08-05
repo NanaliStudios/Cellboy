@@ -755,12 +755,17 @@ public partial class BtnManager : MonoBehaviour {
 
 		TapjoyManager.Instance.TrackCustomEvent ("Charge_RewardAD", strPlayerTrackID, "Coin :" + m_PlayerData.m_Gamedata.m_iHaveCoin, "");
 
+		if (Application.internetReachability == NetworkReachability.NotReachable) {
+			m_NetworkFail_Label.GetComponent<TweenAlpha> ().ResetToBeginning ();
+			m_NetworkFail_Label.GetComponent<TweenAlpha> ().enabled = true;
+			m_NetworkFail_Label.SetActive (true);
+
+			return;
+		}
 		if (!AdFunctions.Show_UnityAds ()) {
 			if (!AdFunctions.Show_VungleAds ()) {
-				m_NetworkFail_Label.GetComponent<TweenAlpha> ().ResetToBeginning ();
-				m_NetworkFail_Label.GetComponent<TweenAlpha> ().enabled = true;
-				SetObjActive(m_NetworkFail_Label, true);
-
+				MobileNativeMessage msg = new MobileNativeMessage ("Show Ads Fail", Localization.Get("ADS_OUT"));
+				
 				return;
 			}
 		}

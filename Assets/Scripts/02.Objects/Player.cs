@@ -107,7 +107,8 @@ public class Player : ObjectBase {
 		do {
 
 			//Android Back button
-			if(Input.GetKeyDown(KeyCode.Escape))
+			if(Input.GetKeyDown(KeyCode.Escape)
+			   && m_GameSys.m_GameOver.activeSelf == false)
 			m_GameSys.OnClickPause();
 
 			//Tutorial
@@ -176,7 +177,7 @@ public class Player : ObjectBase {
 				//Input
 			if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space))
 			    &&  (m_GameSys.m_GameOver.activeSelf == false && m_GameSys.m_ContinueMenu.activeSelf == false
-				    &&  m_GameSys.m_PauseMenu.activeSelf == false))
+				    &&  m_GameSys.m_bPause == false))
 			{
 					if(m_bTutorialTap == false)	//Tutorial End
 					{
@@ -192,7 +193,7 @@ public class Player : ObjectBase {
 					}
 
 				if(m_GameSys.CheckGameStart() == false
-				   && m_GameSys.m_PauseMenu.activeSelf == false
+					   && m_GameSys.m_bPause == false
 					   && m_GameSys.m_bIsOnFirstTutorial == false)
 				{
 						if(m_GameSys.m_bIsOnFirstTutorial == false)

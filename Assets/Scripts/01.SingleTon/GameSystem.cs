@@ -22,6 +22,7 @@ public partial class GameSystem : MonoBehaviour {
 	public GameObject m_GameOver = null;
 	public GameObject m_Tutorial = null;
 	public GameObject m_CoinnumLabel = null;
+	public GameObject m_WaitLabel = null;
 
 	public GameObject m_objBackColor = null;
 
@@ -41,13 +42,20 @@ public partial class GameSystem : MonoBehaviour {
 
 	private bool m_bGameover = false;
 	private bool m_bOnContinue = false;
+	public bool m_bResume = false;
+	public bool m_bPause = false;
 	private float m_fGameoverWaitTime = 2.0f;
 	private float m_fGameoverTimer = 0.0f;
+
+	public float m_fResumeTimer = 0.0f;
+	private float m_fResumeTerm = 3.0f;
 
 	private bool m_bIsGameStart = false;
 
 	private float m_fGlobalSpeed = 0.0f;
 	public float m_fCurrentGlobalSpeed = 0.0f;
+
+	public bool m_bIsFocus = true;
 
 //	public StageInfo m_ArrayStageInfo;
 
@@ -125,10 +133,37 @@ public partial class GameSystem : MonoBehaviour {
 		m_lvMgr.Progress ();
 		SetScore ();
 
+		//resume time
+		if (m_bResume == true) {
+
+			if(m_bIsOnFirstTutorial == true)
+				ToResumeState();
+			else if(m_bOnContinue == true)
+			{
+				m_bOnContinue = false;
+				ToResumeState();
+			}
+			else
+			{
+				if(m_fResumeTimer >= m_fResumeTerm)
+				{
+					ToResumeState();
+					m_fResumeTimer = 0.0f;
+				}
+				else
+				{
+					if(m_bIsFocus)
+					m_fResumeTimer += Time.unscaledDeltaTime;
+				}
+			}
+		}
+
 		//Gameover
 		if (m_bGameover == true) {
 			Time.timeScale = 0;
 			gameObject.GetComponent<AudioSource>().enabled = false;
+
+			if(m_bIsFocus)
 			m_fGameoverTimer += Time.unscaledDeltaTime;
 		}
 
@@ -173,17 +208,16 @@ public partial class GameSystem : MonoBehaviour {
 		}
 
 
-		//Esc Input
-		if (m_ContinueMenu.activeSelf == false &&
-			m_GameOver.activeSelf == false) {
-
-			if (Input.GetKeyDown (KeyCode.Escape)) {
-				m_PauseMenu.SetActive(false);
-				m_PauseBtn.SetActive(true);
-				m_GameMenu.SetActive(true);
-				Time.timeScale = 1.0f;
-			}
-		}
+//		//Esc Input
+//		if (m_PauseMenu.activeSelf == true) {
+//
+//			if (Input.GetKeyDown (KeyCode.Escape)) {
+//				m_PauseMenu.SetActive(false);
+//				m_PauseBtn.SetActive(true);
+//				m_GameMenu.SetActive(true);
+//				Time.timeScale = 1.0f;
+//			}
+//		}
 
 //		if(Input.GetKeyDown(KeyCode.R))
 //			Application.LoadLevel("00_Main");
@@ -331,6 +365,16 @@ public partial class GameSystem : MonoBehaviour {
 		m_PauseBtn.SetActive (false);
 	}
 
+	void OnApplicationPause( bool pauseStatus )
+	{
+		OnClickPause ();
+	}
+
+	void OnApplicationFocus(bool focus) {
+		Debug.Log (focus);
+		m_bIsFocus = focus;
+
+	}
 
 	//==========SingleTon==========
 	private static GameSystem instance;  

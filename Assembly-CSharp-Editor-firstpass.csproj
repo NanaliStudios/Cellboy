@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{A8675524-8B11-69A3-796C-4364B8357687}</ProjectGuid>
+	<ProjectGuid>{49A6E756-D8C3-00D2-1EB2-385E78EC49B5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -178,25 +178,25 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.1/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Prime31MenuItem">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
  </Reference>
  <Reference Include="JarResolverLib">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
  </Reference>
  <Reference Include="P31RestKit">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Plugins/P31RestKit.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="VungleSDKProxy">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Plugins/VungleSDKProxy.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/VungleSDKProxy.dll</HintPath>
  </Reference>
  <Reference Include="WP8PopUps">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Plugins/WP8PopUps.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/WP8PopUps.dll</HintPath>
  </Reference>
  <Reference Include="Tapjoy">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Tapjoy/Tapjoy.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Tapjoy/Tapjoy.dll</HintPath>
  </Reference>
  <Reference Include="TapjoyEditor">
- <HintPath>/Users/nanaliminimac/Cellboy_code0805/Assets/Tapjoy/Editor/TapjoyEditor.dll</HintPath>
+ <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Tapjoy/Editor/TapjoyEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -204,7 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{9E77474D-8F08-8B72-1152-7461BD95AC85}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{16FD4E03-891B-DABD-D731-A9584EADD8BB}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

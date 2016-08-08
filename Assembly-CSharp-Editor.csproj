@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{0B68719A-5CF0-AF05-ABFA-1A4466A3C774}</ProjectGuid>
+	<ProjectGuid>{E8BD5890-7197-272E-E087-7127AC087BCF}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_7_1;UNITY_4_7;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;NAME_YOUTUBE;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_7_2;UNITY_4_7;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_PRO_LICENSE;NAME_YOUTUBE;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -307,31 +307,31 @@
      <None Include="Assets\Plugins\StansAssets\Versions\AN_VersionInfo.txt" />
      <None Include="Assets\spine_runtime\spine-unity\Assets\Examples\Spine\FootSoldier\Equipment\Equipment.atlas.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.1/Standalone/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.2/Standalone/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.1/Editor/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.7.2/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Prime31MenuItem">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Editor/Prime31/Prime31MenuItem.dll</HintPath>
  </Reference>
  <Reference Include="JarResolverLib">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/PlayServicesResolver/Editor/JarResolverLib.dll</HintPath>
  </Reference>
  <Reference Include="P31RestKit">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/P31RestKit.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Plugins/P31RestKit.dll</HintPath>
  </Reference>
  <Reference Include="VungleSDKProxy">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/VungleSDKProxy.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Plugins/VungleSDKProxy.dll</HintPath>
  </Reference>
  <Reference Include="WP8PopUps">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Plugins/WP8PopUps.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Plugins/WP8PopUps.dll</HintPath>
  </Reference>
  <Reference Include="Tapjoy">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Tapjoy/Tapjoy.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Tapjoy/Tapjoy.dll</HintPath>
  </Reference>
  <Reference Include="TapjoyEditor">
- <HintPath>/Users/nanaliminimac/Cellboy_code0808/Assets/Tapjoy/Editor/TapjoyEditor.dll</HintPath>
+ <HintPath>/Users/jung/Cellboy_Final0808/Assets/Tapjoy/Editor/TapjoyEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -339,13 +339,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{16FD4E03-891B-DABD-D731-A9584EADD8BB}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{8DF969DA-2690-760F-5580-D448CBD4F5CC}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{7CE3630E-C8DB-E031-7FA9-731AB74ABD04}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{44EFFA2D-9E85-144B-6FC4-0D2AF016DFF2}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">
-      <Project>{D6F0867E-E202-6C1F-E2DB-36517F8DED9E}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
+      <Project>{E3BF2950-D231-BA05-4005-7D851DF5B34C}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{49A6E756-D8C3-00D2-1EB2-385E78EC49B5}</Project>      <Name>Assembly-CSharp-Editor-firstpass</Name>    </ProjectReference>
+      <Project>{B21A6402-05AF-F0E2-0D46-8A624F0BADD2}</Project>      <Name>Assembly-CSharp-Editor-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

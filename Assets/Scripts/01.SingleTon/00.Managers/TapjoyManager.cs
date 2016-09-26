@@ -5,7 +5,7 @@ using TapjoyUnity;
 public class TapjoyManager : MonoBehaviour
 {
 	private int m_iTapjoyCurrency = 0;
-	public TJPlacement m_TjNotice = null;
+	//public TJPlacement m_TjNotice = null;
 	public TJPlacement m_TjOfferwall = null;
 
 	public bool m_bCheckreward = false;
@@ -56,7 +56,7 @@ public class TapjoyManager : MonoBehaviour
 					yield return new WaitForFixedUpdate ();
 				else {
 
-					m_TjNotice = ContentsReady ("Notice");
+					//m_TjNotice = ContentsReady ("Notice");
 					m_TjOfferwall = ContentsReady ("getfreecoin1");
 			
 					Debug.Log("TapjoyManager:Initialize Complete");

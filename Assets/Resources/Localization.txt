@@ -20,7 +20,8 @@ PLAYER5_INFO,The most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔
 //GAME UI
 START,Start,시작하기
 RECHARGE,Recharge,충전하기
-WATCHAD,Watch An Ad,광고보기
+RECHARGEAD,Free Recharge,무료충전
+REVIVAD,Free Revival,무료부활
 RATE,Rate,평가하기
 LIKE,Like,좋아요
 YES,Yes,네
@@ -47,7 +48,7 @@ CREDIT_SJS,Sangji Seo,서상지
 CREDIT_MKB,Minki Bae,배민기
 CREDIT_DUL,Donguk Lee,이동욱
 CREDIT_JHG,Junho Gang,강준호
-CREDIT_MONO,Mono,모노
+CREDIT_MONO,Mono,Mono
 CREDIT_YOUTUBE,Vibe Tracks\n'Zoom',Vibe Tracks\n'Zoom'
 
 CREDIT_EP,Executive producer,제작 총괄

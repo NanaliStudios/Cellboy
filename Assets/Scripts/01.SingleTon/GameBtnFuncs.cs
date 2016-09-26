@@ -63,12 +63,10 @@ public partial class GameSystem : MonoBehaviour {
 			return;
 		}
 		if (!AdFunctions.Show_UnityAds ()) {
-			if (!AdFunctions.Show_VungleAds ()) {
 				MobileNativeMessage msg = new MobileNativeMessage ("Show Ads Fail", Localization.Get("ADS_OUT"));
 
 				return;
 			}
-		}
 		m_bAdsOn = true;
 		
 	}
@@ -106,7 +104,7 @@ public partial class GameSystem : MonoBehaviour {
 				//restart
 				Delete_AllEnemy ();
 				
-				m_objPlayer.transform.position = new Vector3(0.0f, -1.5f);
+				m_objPlayer.transform.position = new Vector3(0.0f, -2.0f);
 				m_objPlayer.GetComponent<Player>().Set_AnimIdle();
 				
 				m_bAdsOn = false;

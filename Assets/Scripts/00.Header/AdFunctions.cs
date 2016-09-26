@@ -16,7 +16,7 @@ static class AdFunctions
 		//unityad init
 		Advertisement.Initialize ("1077035", true);
 		Vungle.init ("57678f631b10f2b7140000ff", "5768c8c2d79d27ac140000e6");
-	
+
 		//google admob init
 
 		m_GoogleAD = new GoogleAdManager();
@@ -30,6 +30,11 @@ static class AdFunctions
 		//chartboost init
 		Chartboost.cacheInterstitial (CBLocation.Default);
 	
+	}
+
+	public static void CreateBanner()
+	{
+		m_GoogleAD.CreateBanner ();
 	}
 
 	public static bool isInitialized()
@@ -94,18 +99,18 @@ static class AdFunctions
 
 	}
 
-	public static bool Show_VungleAds()
-	{
-		if (Vungle.isAdvertAvailable ()) {
-			Dictionary<string, object> options = new Dictionary<string, object> ();
-			options ["incentivized"] = true;
-			Vungle.playAdWithOptions (options);
-
-			return true;
-		}
-
-		return false;
-	}
+//	public static bool Show_VungleAds()
+//	{
+//		if (Vungle.isAdvertAvailable ()) {
+//			Dictionary<string, object> options = new Dictionary<string, object> ();
+//			options ["incentivized"] = true;
+//			Vungle.playAdWithOptions (options);
+//
+//			return true;
+//		}
+//
+//		return false;
+//	}
 	
 	public static void OnShowResult(ShowResult ret)
 	{

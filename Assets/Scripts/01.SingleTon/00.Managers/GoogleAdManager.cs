@@ -31,8 +31,13 @@ public class GoogleAdManager : MonoBehaviour {
 			m_bIsLoadedPopup = true;
 		};
 
-		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
+		//banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
 
+	}
+
+	public void CreateBanner()
+	{
+		banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
 	}
 
 	public bool isInitialized()

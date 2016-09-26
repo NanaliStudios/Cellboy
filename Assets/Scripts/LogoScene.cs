@@ -4,7 +4,7 @@ using TapjoyUnity;
 public class LogoScene : MonoBehaviour {
 
 	private float m_fTimer = 0.0f;
-	public float m_fTerm  = 2.0f;
+	public float m_fTerm  = 3.0f;
 
 	public GameObject m_objPlayerData = null;
 	public GameObject m_objSDKMgr = null;
@@ -12,6 +12,8 @@ public class LogoScene : MonoBehaviour {
 	private GameSDKManager m_SdkMgr = null;
 
 	public bool m_bLateInit = false;
+
+	string m_strNextSceneName = "00_Main";
 
 	void Awake()
 	{
@@ -34,7 +36,11 @@ public class LogoScene : MonoBehaviour {
 		if (PlayerPrefs.HasKey ("CurrentPlayNum") == false) {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
 			PlayerPrefs.SetInt ("Adoff", 0);
+
+			m_strNextSceneName = "Comic";
 		}
+		else
+			m_strNextSceneName = "00_Main";
 		
 		if (PlayerPrefs.HasKey ("GameVolume") == false) {
 			PlayerPrefs.SetFloat ("GameVolume", 3.0f);
@@ -92,7 +98,7 @@ public class LogoScene : MonoBehaviour {
 			if (m_fTerm <= m_fTimer) {
 #if UNITY_EDITOR_OSX || UNITY_IOS
 			m_PlayerData.GameData_Load();
-			Application.LoadLevel ("00_MAIN");
+			Application.LoadLevel (m_strNextSceneName);
 
 			return;
 #endif
@@ -100,14 +106,14 @@ public class LogoScene : MonoBehaviour {
 			if(Application.internetReachability == NetworkReachability.NotReachable)
 			{
 				m_PlayerData.GameData_Load();
-				Application.LoadLevel ("00_MAIN");
+				Application.LoadLevel (m_strNextSceneName);
 			}
 			else
 			{
 				if(m_SdkMgr.m_bIsLoadedData == true)
 				{
 					m_PlayerData.GameData_Load();
-					Application.LoadLevel ("00_MAIN");
+					Application.LoadLevel (m_strNextSceneName);
 				}
 			}
 			return;

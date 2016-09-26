@@ -80,6 +80,10 @@ public partial class BtnManager : MonoBehaviour {
 
 	void Start()
 	{
+#if !UNITY_EDITOR_OSX
+		AdFunctions.CreateBanner ();
+#endif
+
 		//Debug.Log ("BtnManager");
 		//Load Audio
 		m_Audio = gameObject.GetComponent<AudioSource> ();
@@ -440,13 +444,13 @@ public partial class BtnManager : MonoBehaviour {
 			
 				m_bPopupAdsOn = true;
 			} else {
-				if (m_PlayerData.m_iCurrentPlayNum == 1
-				    && TapjoyManager.Instance.m_TjNotice != null)
-					TapjoyManager.Instance.m_TjNotice.ShowContent ();
-				else {
+//				if (m_PlayerData.m_iCurrentPlayNum == 1
+//				    && TapjoyManager.Instance.m_TjNotice != null)
+//					TapjoyManager.Instance.m_TjNotice.ShowContent ();
+//				else {
 					m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
 					GameStart ();
-				}
+				//}
 			}
 		}
 		//Game Start 
@@ -762,13 +766,12 @@ public partial class BtnManager : MonoBehaviour {
 
 			return;
 		}
-		if (!AdFunctions.Show_UnityAds ()) {
-			if (!AdFunctions.Show_VungleAds ()) {
+		if (!AdFunctions.Show_UnityAds ()){
+
 				MobileNativeMessage msg = new MobileNativeMessage ("Show Ads Fail", Localization.Get("ADS_OUT"));
 				
 				return;
 			}
-		}
 		m_bVideoAdsOn = true;
 		
 	}

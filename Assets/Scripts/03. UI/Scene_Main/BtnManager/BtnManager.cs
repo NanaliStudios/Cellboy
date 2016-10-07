@@ -217,7 +217,11 @@ public partial class BtnManager : MonoBehaviour {
 	{
 		//Input
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			MainBackBtn_Click();
+
+			if(m_MenuStateID == MAINMENU_STATE.MAIN)
+				OnQuitMenu();
+			else
+				MainBackBtn_Click();
 		}
 
 		if (m_MenuStateID == MAINMENU_STATE.MAIN) {
@@ -665,6 +669,23 @@ public partial class BtnManager : MonoBehaviour {
 		m_PlayerData.m_bCanShowFB = false;
 	}
 
+	public void OnQuitMenu()
+	{	
+		if (m_objEndBack.activeSelf == true)
+			return;
+		
+		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("GetFree").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Quit").gameObject.SetActive(true);
+		
+		m_MenuStateID = MAINMENU_STATE.CHARGE;
+		
+		m_PlayerData.m_bCanShowFB = false;
+	}
+
 	public void MainBackBtn_Click()
 	{
 		if (m_objEndBack.activeSelf == true)
@@ -679,6 +700,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_objUICam.transform.FindChild ("Starscore").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("GetFree").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Quit").gameObject.SetActive(false);
 
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(true);
 
@@ -896,6 +918,13 @@ public partial class BtnManager : MonoBehaviour {
 			PlayerPrefs.SetFloat("GameVolume", 0.0f);
 			AudioListener.volume = 0.0f;
 		}
+	}
+
+	public void QuitBtn_Click()
+	{
+		Play_BtnSound ();
+
+		Application.Quit();
 	}
 
 	public void Check_AdsReward()

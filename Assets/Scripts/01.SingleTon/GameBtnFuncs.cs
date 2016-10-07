@@ -50,6 +50,14 @@ public partial class GameSystem : MonoBehaviour {
 	public void OnClickNoContinue()
 	{
 		m_bOnContinue = false;
+
+		m_GameMenu.SetActive (true);
+		m_PauseMenu.SetActive (false);
+		m_ContinueMenu.SetActive (false);
+		
+		m_PauseBtn.SetActive (false);
+		m_WaitLabel.SetActive (false);
+		m_bResume = true;
 	}
 	
 	//unityads

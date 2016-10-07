@@ -26,6 +26,8 @@ public partial class GameSystem : MonoBehaviour {
 
 	public GameObject m_objBackColor = null;
 
+	public GameObject m_objEndBack = null;
+
 	//==UI_Label==
 	public GameObject m_NetworkFail_Label = null;
 
@@ -44,7 +46,7 @@ public partial class GameSystem : MonoBehaviour {
 	private bool m_bOnContinue = false;
 	public bool m_bResume = false;
 	public bool m_bPause = false;
-	private float m_fGameoverWaitTime = 2.0f;
+	private float m_fGameoverWaitTime = 1.0f;
 	private float m_fGameoverTimer = 0.0f;
 
 	public float m_fResumeTimer = 0.0f;
@@ -200,9 +202,11 @@ public partial class GameSystem : MonoBehaviour {
 				}
 				TapjoyManager.Instance.TrackCustomEvent ("Gmeover", strPlayerTrackID , "Gamescore: " + m_iCurrent_GameScore.ToString(), "Stage: " +m_lvMgr.m_iCurrentStage);
 
-				Time.timeScale = 1;
-				m_PlayerData.m_iPlayCountForAd += 1;	 
-				Application.LoadLevel("00_Main");
+				m_PlayerData.m_iPlayCountForAd += 1;
+				m_bIsFocus = false;
+				m_fGameoverTimer = 0.0f;
+				m_objEndBack.SetActive(true);
+				//Application.LoadLevel("00_Main");
 			}
 
 		}
@@ -260,6 +264,12 @@ public partial class GameSystem : MonoBehaviour {
 		m_bGameover = true;
 		m_GameOver.SetActive (true);
 		m_PauseBtn.SetActive (false);
+	}
+
+	public void MoveToMain()
+	{
+		Time.timeScale = 1;
+		Application.LoadLevel ("00_Main");
 	}
 
 	public void CanContinue()

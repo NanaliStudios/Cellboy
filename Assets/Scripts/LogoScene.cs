@@ -37,8 +37,10 @@ public class LogoScene : MonoBehaviour {
 			PlayerPrefs.SetInt ("CurrentPlayNum", 0);
 			PlayerPrefs.SetInt ("Adoff", 0);
 
-			m_strNextSceneName = "Comic";
 		}
+
+		if(PlayerPrefs.GetInt("CurrentPlayNum").Equals(0))
+			m_strNextSceneName = "Comic";
 		else
 			m_strNextSceneName = "00_Main";
 		

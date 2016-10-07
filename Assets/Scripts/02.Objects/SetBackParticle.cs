@@ -9,6 +9,10 @@ public class SetBackParticle : MonoBehaviour {
 	private ParticleSystem m_BigParticle = null;
 	private ParticleSystem m_SmallParticle = null;
 
+	public int m_iBigIdx = 0;
+
+
+
 	public bool m_bInit = false;
 
 	// Use this for initialization
@@ -24,10 +28,10 @@ public class SetBackParticle : MonoBehaviour {
 				for (int i = 0; i < transform.childCount; ++i)
 					Destroy (transform.GetChild (i).gameObject);
 
-				int iBigIdx = Random.Range (0, 5);
+				m_iBigIdx = Random.Range (0, 5);
 				int iSmallIdx = Random.Range (0, 5);
 				
-				GameObject objParti = GameObject.Instantiate (m_objBackPartis [iBigIdx]) as GameObject;
+				GameObject objParti = GameObject.Instantiate (m_objBackPartis [m_iBigIdx]) as GameObject;
 				objParti.transform.parent = gameObject.transform;
 				objParti.transform.localPosition = new Vector3 (0.0f, 0.0f);
 				m_BigParticle = objParti.GetComponent<ParticleSystem> ();

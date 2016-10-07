@@ -22,16 +22,23 @@ public class GoogleAdManager : MonoBehaviour {
 			m_AdMob.Init (strBannerID, strPopupID);
 		}
 
+		m_AdMob.LoadInterstitialAd ();
+
 		m_AdMob.OnInterstitialClosed += delegate {
 			m_bIsDismissPopup = true;
+			m_AdMob.LoadInterstitialAd ();
 			//Debug.Log("Popup Closed");
 		};
 
 		m_AdMob.OnInterstitialLoaded += delegate {
 			m_bIsLoadedPopup = true;
+
+			Debug.Log("GoogleAdmob:OnInterstitialLoaded");
 		};
 
 		//banner = m_AdMob.CreateAdBanner (TextAnchor.LowerCenter, GADBannerSize.SMART_BANNER);
+
+		Debug.Log ("Google Admob Initialized");
 
 	}
 
@@ -66,7 +73,7 @@ public class GoogleAdManager : MonoBehaviour {
 
 	public void ShowPopup()
 	{
-		m_AdMob.StartInterstitialAd();
+		m_AdMob.ShowInterstitialAd();
 	}
 	
 	public void BannerHide()
@@ -102,11 +109,10 @@ public class GoogleAdManager : MonoBehaviour
 		Debug.Log ("GoogleAdManager:Initialize");
 
 		AdRequest request = new AdRequest.Builder().Build();
-
-		bannerView = new BannerView(strBannerID, AdSize.SmartBanner, AdPosition.Bottom);
+//
+//		bannerView = new BannerView(strBannerID, AdSize.SmartBanner, AdPosition.Bottom);
 //		bannerView.OnAdLoaded += delegate {
 //		};
-		bannerView.LoadAd(request);
 
 		interstitial = new InterstitialAd(strPopupID);
 		interstitial.OnAdClosed += delegate {
@@ -123,6 +129,15 @@ public class GoogleAdManager : MonoBehaviour
 	public bool isInitialized()
 	{
 		return m_bIsInitialized;
+	}
+
+	public void CreateBanner()
+	{
+		AdRequest request = new AdRequest.Builder().Build();
+		
+		bannerView = new BannerView(strBannerID, AdSize.SmartBanner, AdPosition.Bottom);
+		bannerView.LoadAd(request);
+		return;
 	}
 	
 	public void ShowBanner()

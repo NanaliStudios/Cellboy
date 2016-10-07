@@ -14,7 +14,7 @@ static class AdFunctions
 	{
 
 		//unityad init
-		Advertisement.Initialize ("1077035", true);
+		Advertisement.Initialize ("1077035", false);
 		Vungle.init ("57678f631b10f2b7140000ff", "5768c8c2d79d27ac140000e6");
 
 		//google admob init

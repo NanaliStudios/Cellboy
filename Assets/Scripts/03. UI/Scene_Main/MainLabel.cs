@@ -43,16 +43,24 @@ public class MainLabel : TextBase {
 
 			if(iPlayerIdx > 0)
 			{
-
-				if(m_PlayerData.m_Gamedata.m_PlayerInfo [((int)m_PlayerData.m_PlayerID) -1].bIsLock == true)
+				if(iPlayerIdx != (int)PLAYER_ID.SPREAD)
 				{
-					MakeLockText();
-					return;
+					if(m_PlayerData.m_Gamedata.m_PlayerInfo [((int)m_PlayerData.m_PlayerID) -1].bIsLock == true)
+					{
+						//..facebook like
+						MakeLockText();
+						return;
+					}
 				}
 			}
 
-			m_strBuy = m_PlayerData.m_iBuyPrice.ToString ();
-			MakeBuyText ();
+			if(m_PlayerData.m_PlayerID == PLAYER_ID.SPREAD)
+				MakeGetFreeText();
+			else
+			{
+				m_strBuy = m_PlayerData.m_iBuyPrice.ToString ();
+				MakeBuyText ();
+			}
 			return;
 		}
 
@@ -78,6 +86,16 @@ public class MainLabel : TextBase {
 		m_MyText.text = Localization.Get ("RECHARGE");
 		m_MyText.color = Color.yellow;
 	
+		m_BtnUISprite.enabled = true;
+		m_objCoinIcon.SetActive (false);
+		m_objLockIcon.SetActive (false);
+	}
+
+	void MakeGetFreeText()
+	{
+		m_MyText.text = Localization.Get ("GETFREE");
+		m_MyText.color = Color.white;
+		
 		m_BtnUISprite.enabled = true;
 		m_objCoinIcon.SetActive (false);
 		m_objLockIcon.SetActive (false);

@@ -69,6 +69,8 @@ public partial class BtnManager : MonoBehaviour {
 	private float m_SelectTerm = 0.01f;
 	private float m_SelectTimer = 0.0f;
 
+	//GlobalCharge -0928
+
 
 	void Awake()
 	{
@@ -84,6 +86,7 @@ public partial class BtnManager : MonoBehaviour {
 		AdFunctions.CreateBanner ();
 #endif
 
+		Time.timeScale = 1;
 		//Debug.Log ("BtnManager");
 		//Load Audio
 		m_Audio = gameObject.GetComponent<AudioSource> ();
@@ -200,6 +203,13 @@ public partial class BtnManager : MonoBehaviour {
 		Chartboost.didDismissInterstitial += delegate {
 			m_bIsDismissAD = true;
 		};
+
+		//GlobalCharge 
+		if (System.DateTime.Now >= m_PlayerData.m_Gamedata.m_GlobalChargeTime)
+			AllCharge ();
+
+		m_PlayerData.m_Gamedata.m_GlobalChargeTime = System.DateTime.Now.AddMinutes (360);
+
 	}
 
 	//Update 
@@ -385,19 +395,33 @@ public partial class BtnManager : MonoBehaviour {
 	//Startbtn
 	public void OnStartBtnClick()
 	{
-		if (m_objStartBack.GetComponent<UISprite> ().color.a > 0)
+		if (m_objEndBack.activeSelf == true)
 			return;
+
+		if (m_objStartBack.GetComponent<UISprite> ().color.a > 0) {
+			Debug.Log("BlockNum0");
+			return;
+		}
 
 		Play_BtnSound ();
 
 		if (Mathf.Abs (m_objScrollView.transform.localPosition.x - m_SpringPanel.target.x) > 200.0f) {
 				Debug.Log(string.Format("ScrollViewX : {0}, SprinTargetX : {1}", m_objScrollView.transform.position.x, m_SpringPanel.target.x));
-
+			Debug.Log("BlockNum1");
 			return;
 		}
 
 			//Buy
 		if (m_bCurrentLock == true) {
+			Debug.Log("BlockNum2");
+
+
+			if(m_PlayerData.m_PlayerID == PLAYER_ID.SPREAD)
+			{
+				OnGetFreeMenu();
+				return;
+			}
+
 
 			if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) 
 				OnBuyMenu ();
@@ -415,41 +439,56 @@ public partial class BtnManager : MonoBehaviour {
 
 		#if UNITY_EDITOR_OSX
 		m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-		GameStart ();
+		//GameStart ();
+		m_objEndBack.SetActive (true);
 		return;
 		#endif
+
+		//m_objEndBack.SetActive (true);
 
 		//show chartboost ad
 		if (PlayerPrefs.GetInt("Adoff") == 1) {
 
+			Debug.Log("Adoff : true");
 			m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-			GameStart ();
+			//GameStart ();
+			m_objEndBack.SetActive (true);
 		} 
 		else {
 			if (m_PlayerData.m_iPlayCountForAd == 3
 			   && (Application.internetReachability != NetworkReachability.NotReachable)) {
+
+				Debug.Log("ADS_CHK");
 			
 				if (m_bPopupAdsOn == false) {
-					if (Chartboost.hasInterstitial (CBLocation.Default)
-					    && Chartboost.isInitialized())
-						Chartboost.showInterstitial (CBLocation.Default);
-					else if(AdFunctions.IsLoadedPopup())
+
+					if(AdFunctions.IsLoadedPopup())
+					{
 						AdFunctions.Show_GoogleADPopup();
+					}
+					else if(Chartboost.isInitialized())
+					{
+						Chartboost.showInterstitial (CBLocation.Default);
+					}
 					else
 					{
-						Debug.Log("NO_ADS");
-						GameStart();
+						Debug.Log("NO_ADS1");
+						//GameStart();
+						m_objEndBack.SetActive (true);
 					}
 				}
 			
 				m_bPopupAdsOn = true;
 			} else {
+				Debug.Log("NO_ADS2");
+				Debug.Log(m_PlayerData.m_iPlayCountForAd);
+
 //				if (m_PlayerData.m_iCurrentPlayNum == 1
 //				    && TapjoyManager.Instance.m_TjNotice != null)
 //					TapjoyManager.Instance.m_TjNotice.ShowContent ();
 //				else {
 					m_PlayerData.m_Gamedata.Spend_TiredVal (m_PlayerData.m_PlayerID);
-					GameStart ();
+					m_objEndBack.SetActive (true);
 				//}
 			}
 		}
@@ -461,6 +500,9 @@ public partial class BtnManager : MonoBehaviour {
 		Play_ScrollSound ();
 		if (m_iCurrnetPlayerIndex == 0 ||
 		    m_bIsclickArrowBtn == true)
+			return;
+
+		if (m_objEndBack.activeSelf == true)
 			return;
 
 		//m_SpringPanel.target = new Vector3 (m_SpringPanel.target.x + (1200 * m_iCurrnetPlayerIndex -1), 0.0f);
@@ -485,6 +527,9 @@ public partial class BtnManager : MonoBehaviour {
 		    || m_bIsclickArrowBtn == true)
 			return;
 
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		//m_SpringPanel.target = new Vector3 (m_SpringPanel.target.x - (1200 * m_iCurrnetPlayerIndex +1), 0.0f);
 		m_SpringPanel.target = new Vector3(m_SpringPanel.target.x - 1200.0f, 0.0f);
 
@@ -505,6 +550,9 @@ public partial class BtnManager : MonoBehaviour {
 	//Option
 	public void OptionBtnClick()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Option").gameObject.SetActive(true);
@@ -514,6 +562,9 @@ public partial class BtnManager : MonoBehaviour {
 	//Shop
 	public void ShopBtnClick()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		if (m_bPopupAdsOn == true)
 			return;
 
@@ -527,6 +578,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void LeaderboardBtn_Click()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_SdkMgr.Show_LeaderBoard ();
 
@@ -534,6 +588,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnBuyMenu()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Buy").gameObject.SetActive(true);
@@ -543,6 +600,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnNoMoneyMenu()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
@@ -557,6 +617,8 @@ public partial class BtnManager : MonoBehaviour {
 		    || m_PlayerData.m_iCurrentPlayNum == 0)
 			return;
 
+		if (m_objEndBack.activeSelf == true)
+			return;
 
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
@@ -574,6 +636,9 @@ public partial class BtnManager : MonoBehaviour {
 		    || m_PlayerData.m_iCurrentPlayNum == 0)
 			return;
 
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
@@ -584,8 +649,27 @@ public partial class BtnManager : MonoBehaviour {
 		m_PlayerData.m_bCanShowFB = false;
 	}
 
+	public void OnGetFreeMenu()
+	{	
+		if (m_objEndBack.activeSelf == true)
+			return;
+
+		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("GetFree").gameObject.SetActive(true);
+		
+		m_MenuStateID = MAINMENU_STATE.CHARGE;
+		
+		m_PlayerData.m_bCanShowFB = false;
+	}
+
 	public void MainBackBtn_Click()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Option").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Shop").gameObject.SetActive(false);
@@ -594,6 +678,7 @@ public partial class BtnManager : MonoBehaviour {
 		m_objUICam.transform.FindChild ("NoMoney").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Starscore").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("FBLike").gameObject.SetActive(false);
+		m_objUICam.transform.FindChild ("GetFree").gameObject.SetActive(false);
 
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(true);
 
@@ -603,6 +688,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnChargeMenu()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BtnSound ();
 		m_objUICam.transform.FindChild ("Main").gameObject.SetActive(false);
 		m_objUICam.transform.FindChild ("Charge").gameObject.SetActive(true);
@@ -611,6 +699,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnMoneyChargeBtn()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iChargePrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
@@ -652,6 +743,9 @@ public partial class BtnManager : MonoBehaviour {
 
 	public void OnClickBuyBtn()
 	{
+		if (m_objEndBack.activeSelf == true)
+			return;
+
 		Play_BuyBtnSound ();
 		if (m_PlayerData.m_iBuyPrice <= m_PlayerData.m_Gamedata.m_iHaveCoin) {
 
@@ -697,9 +791,19 @@ public partial class BtnManager : MonoBehaviour {
 		MainBackBtn_Click();
 	}
 
+	public void AllCharge()
+	{
+		for (int i = 0; i < (int)PLAYER_ID.END; ++i) {
+			m_PlayerData.m_Gamedata.m_PlayerInfo [i].fTiredPercent = 100.0f;
+			m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = false;
+		}
+	}
+
 
 	public void TiredTime_Setting()
 	{
+		if (m_objEndBack.activeSelf == true)
+		return;
 		if (!m_bTimeInit)
 			return;
 
@@ -710,7 +814,8 @@ public partial class BtnManager : MonoBehaviour {
 
 		for (int i = 0; i < m_PlayerData.m_Gamedata.m_iTotalPlayerNum; ++i) {
 			if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].fTiredPercent <= 0.0f) {
-
+				if (m_objEndBack.activeSelf == true)
+					return;
 				if (m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep == false) {		//Time Setting
 
 					m_PlayerData.m_Gamedata.m_PlayerInfo [i].bIsSleep = true;
@@ -826,11 +931,18 @@ public partial class BtnManager : MonoBehaviour {
 	public void GameStart()
 	{
 		m_objScrollView.SetActive (false);
-		m_objEndBack.SetActive (true);
+		//m_objEndBack.SetActive (true);
 		PlayerPrefs.SetInt ("CurrentPlayNum", PlayerPrefs.GetInt("CurrentPlayNum") + 1);
 		m_PlayerData.m_iCurrentPlayNum += 1;
 		Application.LoadLevel ("02_Game");
 		m_bTimeInit = false;
+	}
+
+	public void GetFreeBtn()
+	{
+		ConnectFacebook ();
+		m_PlayerData.m_Gamedata.m_PlayerInfo [((int)m_PlayerData.m_PlayerID)].bIsLock = false;
+		MainBackBtn_Click ();
 	}
 
 

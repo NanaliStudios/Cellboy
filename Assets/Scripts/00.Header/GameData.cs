@@ -23,6 +23,7 @@ public class GameData {
 	public int m_iHaveCoin = 0;
 	public PlayerInfo[] m_PlayerInfo = new PlayerInfo[5];
 	public System.DateTime m_SavedTime = new System.DateTime(2000, 1, 1);
+	public System.DateTime m_GlobalChargeTime = System.DateTime.Now;
 
 
 	public void Initialize()
@@ -49,6 +50,9 @@ public class GameData {
 		m_PlayerInfo [(int)PLAYER_ID.LASER].bIsLock = true;
 		m_PlayerInfo [(int)PLAYER_ID.HOMING].bIsLock = true;
 		m_PlayerInfo [(int)PLAYER_ID.BOOM].bIsLock = true;
+
+		m_GlobalChargeTime = System.DateTime.Now.AddMinutes (360);
+
 	}
 
 	public void Spend_TiredVal(PLAYER_ID PlayerID)

@@ -157,7 +157,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 0.0f;		//midium coin
 
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 0.3f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.5f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.0f);
 
 			Debug.Log("Stage1");
@@ -180,7 +180,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 1.0f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 0.4f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.6f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.02f);
 
 			Debug.Log("Stage2");
@@ -203,7 +203,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.8f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 0.5f; //set player speed
+			m_PlayerRigid2D.gravityScale = 0.7f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.04f);
 			break;
 		case 3:
@@ -287,7 +287,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.3f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.4f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.12f);
 			break;
 		case 7:
@@ -308,7 +308,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.4f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.6f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.14f);
 			break;
 		case 8:
@@ -329,7 +329,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.5f; //set player speed
+			m_PlayerRigid2D.gravityScale = 1.8f; //set player speed
 			m_GameSys.Change_GlobalSpeed(0.16f);
 			break;
 		case 9:
@@ -350,7 +350,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.6f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 1.8f; //set player speed
+			m_PlayerRigid2D.gravityScale = 2.0f; //set player speed
 			break;
 		case 10:
 			m_fNormalSChance = 0.0f;	//small normal
@@ -370,7 +370,7 @@ public class LevelManager : MonoBehaviour {
 			m_fCoinMChance = 1.0f;		//midium coin
 			
 			m_fEnemySpawnTerm = 0.5f;	//SpawnTerm
-			m_PlayerRigid2D.gravityScale = 2.0f; //set player speed
+			m_PlayerRigid2D.gravityScale = 2.2f; //set player speed
 			break;
 
 

@@ -20,6 +20,7 @@ PLAYER5_INFO,The most powerful weapon. \nBomb bullet.,적에게 닿으면 폭팔
 //GAME UI
 START,Start,시작하기
 RECHARGE,Recharge,충전하기
+GETFREE,Get Free,무료획득
 RECHARGEAD,Free Recharge,무료충전
 REVIVAD,Free Revival,무료부활
 RATE,Rate,평가하기
@@ -34,6 +35,7 @@ RATE_INFO,Enjoying Cellboy? \nPlease Rate the game!,게임이 마음에 드신�
 FBLIKE_INFO,Like Cellboy? \nThen Like Us On Facebook!,게임이 마음에 드신다면\n페이스북에서 좋아요를 눌러주세요!
 BUY_ALERT,Confirm Your Purchase!,구매를 확인합니다!
 COIN_LACK,Not Enough Coins! \nWould You Like More?,코인이 부족합니다!\n상점으로 이동할까요?
+GETFREE_FACEBOOK,Like Us On Facebook \nfor get free Bangocyte,페이스북 페이지 '좋아요' 하고\n뱅고사이트를 획득하세요!
 
 //TUTORIAL 
 TUTORIAL,TAP TO START,화면을 탭하면 시작합니다.
